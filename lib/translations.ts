@@ -15,13 +15,13 @@ export const translations = {
     hero: {
       subtitle: "Senior Backend Engineer • Aspiring Quant Dev",
       description:
-        "Building high-performance trading systems, AI infrastructure, and interactive economies. Experienced in backend architecture, mathematics, and intelligent system design. Passionate about turning complexity (whether it is financial, computational, or human), into elegant, scalable code.",
+        "High school student & entrepeneur building high-performance trading systems, AI infrastructure, and interactive economies. Experienced in backend architecture, mathematics, and intelligent system design. Passionate about turning complexity (whether it is financial, computational, or human), into elegant, scalable code.",
       tagline: "Code. Data. Markets.",
     },
     // About Section
     about: {
       paragraph1:
-        "Backend engineer and aspiring quantitative finance developer in progress, building the systems and infrastructure that connect computation, markets, and intelligence. I specialize in backend architecture, algorithmic design, and applied machine learning & mathematics.",
+        "High school student, entrepeneur, senior backend engineer, and aspiring quantitative finance developer in progress, building the systems and infrastructure that connect computation, markets, and intelligence. I specialize in backend architecture, algorithmic design, and applied machine learning & mathematics.",
       paragraph2:
         "Passionate about elegant, high-performance code and translating complex financial, analytical, and behavioral problems into scalable software. My current work spans quantitative modeling, AI workflow development, and simulation design for both financial and interactive environments.",
       paragraph3:
@@ -159,13 +159,13 @@ export const translations = {
     hero: {
       subtitle: "Ingeniero de Backend Senior • Desarrollador Quant Aspirante",
       description:
-        "Construyendo sistemas de trading de alto rendimiento, infraestructura de IA y economías interactivas. Experto en arquitectura backend, matemáticas y diseño de sistemas inteligentes. Apasionado por convertir la complejidad (ya sea financiera, computacional o humana) en código elegante y escalable.",
+        "Estudiante y emprendedor, construyendo sistemas de trading de alto rendimiento, infraestructura de IA y economías interactivas. Experto en arquitectura backend, matemáticas y diseño de sistemas inteligentes. Apasionado por convertir la complejidad (ya sea financiera, computacional o humana) en código elegante y escalable.",
       tagline: "Código. Datos. Mercados.",
     },
     // About Section
     about: {
       paragraph1:
-        "Ingeniero backend y desarrollador quant aspirante, construyendo los sistemas e infraestructura que conectan la computación, los mercados y la inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado y matemáticas.",
+        "Estudiante, emprendedor, ingeniero backend senior y desarrollador quant aspirante, construyendo los sistemas e infraestructura que conectan la computación, los mercados y la inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado y matemáticas.",
       paragraph2:
         "Apasionado por el código elegante y de alto rendimiento, traduciendo problemas financieros, analíticos y de comportamiento complejos en software escalable. Mi trabajo actual abarca modelado cuantitativo, desarrollo de flujos de trabajo de IA y diseño de simulación para entornos financieros e interactivos.",
       paragraph3:

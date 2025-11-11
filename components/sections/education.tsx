@@ -30,7 +30,7 @@ export default function Education() {
       school: "Tree Of Life International School",
       year: "2026",
       details:
-        "GPA: 4.0/4.0 • Accelerated Programme • Secretary General/President of MUN Team",
+        "4.0/4.0 GPA (98.2%, A*) • Accelerated Programme • Secretary General/President of the MUN Team",
     },
     {
       degree: "GCE IGCSEs",

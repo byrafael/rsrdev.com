@@ -12,7 +12,7 @@ export default function Projects() {
       description: t.projects.list[0].description,
       tags: ["Node.js", "Express", "API", "MySQL", "Virtual Economy"],
       source: "https://github.com/byrafael/EconSys",
-      preview: undefined,
+      preview: "https://econsys.rsrdev.com",
     },
     {
       title: "QuantOps",

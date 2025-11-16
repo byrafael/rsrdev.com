@@ -19,7 +19,7 @@ export default function Education() {
     //   details: "Summa Cum Laude • Minor: Physics • Dean's List all semesters",
     // },
     {
-      degree: "GCE AS & A Levels",
+      degree: "Cambridge International AS & A Levels",
       school: "Cambridge International Education",
       year: "2025 - 2026",
       details:
@@ -30,13 +30,13 @@ export default function Education() {
       school: "Tree Of Life International School",
       year: "2026",
       details:
-        "4.0/4.0 GPA (94.7%, A*) Senior Year • Accelerated Programme • Secretary General/President of the MUN Team",
+        "4.0/4.0 GPA (94.7%, A*) Senior Year • Accelerated Programme • Secretary General, Model United Nations Team",
     },
     {
-      degree: "GCE International General Certificate of Secondary Education (IGCSE)",
+      degree: "Cambridge International IGCSEs",
       school: "Cambridge International Education",
       year: "2023 - 2024",
-      details: "Mathematics, Computer Science, English Language, & History",
+      details: "International Mathematics, Computer Science, English Language, and History",
     },
   ];
 

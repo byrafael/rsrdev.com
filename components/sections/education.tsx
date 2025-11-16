@@ -30,10 +30,10 @@ export default function Education() {
       school: "Tree Of Life International School",
       year: "2026",
       details:
-        "4.0/4.0 GPA (94.7%, A*) • Accelerated Programme • Secretary General/President of the MUN Team",
+        "4.0/4.0 GPA (94.7%, A*) Senior Year • Accelerated Programme • Secretary General/President of the MUN Team",
     },
     {
-      degree: "GCE IGCSEs",
+      degree: "GCE International General Certificate of Secondary Education (IGCSE)",
       school: "Cambridge International Education",
       year: "2023 - 2024",
       details: "Mathematics, Computer Science, English Language, & History",

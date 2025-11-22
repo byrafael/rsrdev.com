@@ -13,7 +13,7 @@ export const translations = {
     },
     // Hero Section
     hero: {
-      subtitle: "Senior Backend Engineer • Aspiring Quant Dev",
+      subtitle: "Backend & AI Systems Engineer • Building Data-Driven Decision Infrastructure",
       description:
         "High school student & entrepeneur building high-performance trading systems, AI infrastructure, and interactive economies. Experienced in backend architecture, mathematics, and intelligent system design. Passionate about turning complexity (whether it is financial, computational, or human), into elegant, scalable code.",
       tagline: "Code. Data. Markets.",
@@ -21,11 +21,11 @@ export const translations = {
     // About Section
     about: {
       paragraph1:
-        "High school student, entrepeneur, senior backend engineer, and aspiring quantitative finance developer in progress, building the systems and infrastructure that connect computation, markets, and intelligence. I specialize in backend architecture, algorithmic design, and applied machine learning & mathematics.",
+        "High school student, entrepreneur, and backend & AI systems engineer building the infrastructure that connects computation, markets, and intelligence. I focus on backend architecture, algorithmic design, and applied machine learning—especially where math, data, and systems intersect.",
       paragraph2:
-        "Passionate about elegant, high-performance code and translating complex financial, analytical, and behavioral problems into scalable software. My current work spans quantitative modeling, AI workflow development, and simulation design for both financial and interactive environments.",
+        "I care about clean, high-performance code and turning complex financial, analytical, and behavioral problems into scalable software. My current work spans quantitative data processing, AI workflow engineering, and simulation design for financial and interactive systems.",
       paragraph3:
-        "With 8+ years of programming experience, I've engineered projects ranging from real-time economic APIs and scheduling engines to AI agents and Roblox game systems—all focused on one theme: using code to understand, model, and optimize complex systems.",
+        "With 8+ years of programming experience, I’ve built everything from real-time economic APIs and scheduling engines to AI agents and game simulation systems—all centered on one theme: using code to understand, model, and optimize complex systems.",
     },
     // Tech Stack Section
     techStack: {
@@ -67,7 +67,7 @@ export const translations = {
           company: "MUSCLE",
           description:
             "Building AI agents and sentiment analysis workflows inside n8n to automate high-volume support call processing (inbound + outbound). Leveraging Node.js, LangChain integrations, and Python functions to deploy real-time, production-grade systems at scale. Part of the R&D team at Muscle Innovation Labs (as a full-time intern).",
-          highlights: ["AI Systems", "Langchain / N8N", "NodeJS / Python"],
+          highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
         },
       ],
     },
@@ -75,7 +75,7 @@ export const translations = {
     projects: {
       title: "Selected Projects",
       disclaimer:
-        "Most of these systems were originally developed proprietarily. I'm currently recreating them as open-source projects, so repositories may be empty or incomplete.",
+        "Most of these systems were originally developed proprietarily. I'm currently recreating most as open-source projects, so repositories may be empty or incomplete.",
       viewProject: "View Project",
       viewCode: "View Code",
       list: [
@@ -157,19 +157,19 @@ export const translations = {
     },
     // Hero Section
     hero: {
-      subtitle: "Ingeniero de Backend Senior • Desarrollador Quant Aspirante",
+      subtitle: "Ingeniero de Backend & Sistemas de IA • Desarrollando Infrastructura de Decision basado en Datos",
       description:
-        "Estudiante y emprendedor, construyendo sistemas de trading de alto rendimiento, infraestructura de IA y economías interactivas. Experto en arquitectura backend, matemáticas y diseño de sistemas inteligentes. Apasionado por convertir la complejidad (ya sea financiera, computacional o humana) en código elegante y escalable.",
+        "Estudiante de secundaria y emprendedor que construye sistemas de trading de alto rendimiento, infraestructura de IA y economías interactivas. Con experiencia en arquitectura backend, matemáticas y diseño de sistemas inteligentes. Apasionado por convertir la complejidad —ya sea financiera, computacional o humana— en código elegante y escalable.",
       tagline: "Código. Datos. Mercados.",
     },
     // About Section
     about: {
       paragraph1:
-        "Estudiante, emprendedor, ingeniero backend senior y desarrollador quant aspirante, construyendo los sistemas e infraestructura que conectan la computación, los mercados y la inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado y matemáticas.",
+        "Estudiante de secundaria, emprendedor y backend & AI systems engineer, construyendo la infraestructura que conecta computación, mercados e inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado, especialmente donde se cruzan las matemáticas, los datos y los sistemas.",
       paragraph2:
-        "Apasionado por el código elegante y de alto rendimiento, traduciendo problemas financieros, analíticos y de comportamiento complejos en software escalable. Mi trabajo actual abarca modelado cuantitativo, desarrollo de flujos de trabajo de IA y diseño de simulación para entornos financieros e interactivos.",
+        "Me importa escribir código limpio y de alto rendimiento, y convertir problemas financieros, analíticos y de comportamiento en software escalable. Mi trabajo actual abarca procesamiento de datos cuantitativos, ingeniería de flujos de trabajo con IA y el diseño de simulaciones para entornos financieros e interactivos.",
       paragraph3:
-        "Con más de 8 años de experiencia en programación, he desarrollado proyectos que van desde APIs económicas en tiempo real y motores de programación hasta agentes de IA y sistemas de juegos de Roblox, todos enfocados en un tema: usar código para comprender, modelar y optimizar sistemas complejos.",
+        "Con más de 8 años de experiencia programando, he desarrollado proyectos que van desde APIs económicas en tiempo real y motores de programación hasta agentes de IA y sistemas de juegos en Roblox—todos unidos por un mismo objetivo: usar código para entender, modelar y optimizar sistemas complejos.",
     },
     // Tech Stack Section
     techStack: {
@@ -211,7 +211,7 @@ export const translations = {
           company: "MUSCLE",
           description:
             "Desarrollando agentes de IA y flujos de análisis de sentimiento dentro de n8n para automatizar el procesamiento de llamadas de soporte a gran escala (entrantes y salientes). Usando Node.js, integraciones con LangChain y funciones en Python para desplegar sistemas en tiempo real y de nivel productivo. Parte del equipo de I+D en Muscle Innovation Labs (pasante/miembro en formación a tiempo completo).",
-          highlights: ["Sistemas de IA", "Langchain / N8N", "NodeJS / Python"],
+          highlights: ["Sistemas de IA", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
         },
       ],
     },
@@ -219,7 +219,7 @@ export const translations = {
     projects: {
       title: "Proyectos Seleccionados",
       disclaimer:
-        "La mayoría de estos sistemas fueron desarrollados originalmente de forma privada. Actualmente los estoy recreando como proyectos de código abierto, por lo que los repositorios pueden estar vacíos o incompletos.",
+        "La mayoría de estos sistemas fueron desarrollados originalmente de forma propietaria. Actualmente estoy recreando la mayoría como proyectos de código abierto, por lo que algunos repositorios pueden estar vacíos o incompletos.",
       viewProject: "Ver Proyecto",
       viewCode: "Ver Código",
       list: [

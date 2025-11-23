@@ -62,8 +62,14 @@ function parseDate(dateStr: string): Date {
   const yearMonthMatch = dateStr.match(/^(\d{4})-(\d{1,2})$/);
   if (yearMonthMatch) {
     const year = parseInt(yearMonthMatch[1]);
-    const month = parseInt(yearMonthMatch[2]) - 1;
-    return new Date(year, month, 1);
+    const monthNum = parseInt(yearMonthMatch[2]);
+    
+    // Validate month is in range 1-12
+    if (monthNum < 1 || monthNum > 12) {
+      return new Date(year, 0, 1); // Default to January if invalid
+    }
+    
+    return new Date(year, monthNum - 1, 1);
   }
   
   return new Date();

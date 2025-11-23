@@ -2,87 +2,98 @@
 
 import Container from "@/components/container";
 import { useTranslation } from "@/hooks/use-translation";
+import { useLanguage } from "@/lib/language-context";
+import { formatDateRange, type DateRange } from "@/lib/date-formatter";
+
+interface Role {
+  title: string;
+  period: DateRange;
+  description: string;
+  highlights: string[];
+}
+
+interface Job {
+  title?: string;
+  company: string;
+  period?: DateRange;
+  description?: string;
+  highlights?: string[];
+  roles?: Role[];
+}
 
 export default function Experience() {
   const t = useTranslation();
-  const jobs = [
-    {
-      title: t.experience.jobs[0].title,
-      company: t.experience.jobs[0].company,
-      period: "2025 – Present",
-      description: t.experience.jobs[0].description,
-      highlights: t.experience.jobs[0].highlights,
-    },
-    {
-      title: t.experience.jobs[1].title,
-      company: t.experience.jobs[1].company,
-      period: "2024 - Present",
-      description: t.experience.jobs[1].description,
-      highlights: t.experience.jobs[1].highlights,
-    },
-    {
-      title: t.experience.jobs[2].title,
-      company: t.experience.jobs[2].company,
-      period: "Jul 2025",
-      description: t.experience.jobs[2].description,
-      highlights: t.experience.jobs[2].highlights,
-    },
-    // {
-    //   title: "Senior Quantitative Engineer",
-    //   company: "Citadel Securities",
-    //   period: "2022 – Present",
-    //   description:
-    //     "Led ML-powered market microstructure models. Improved trade execution by 23% through latency optimization.",
-    //   highlights: ["Machine Learning", "Market Microstructure", "Python/C++"],
-    // },
-    // {
-    //   title: "Quantitative Researcher",
-    //   company: "Two Sigma",
-    //   period: "2020 – 2022",
-    //   description:
-    //     "Researched and deployed systematic trading strategies across equity and derivatives markets. Managed $500M AUM.",
-    //   highlights: ["Statistical Arbitrage", "Research", "Backtesting"],
-    // },
-    // {
-    //   title: "Full-Stack Engineer",
-    //   company: "Goldman Sachs",
-    //   period: "2019 – 2020",
-    //   description:
-    //     "Built real-time risk management systems and trading dashboards. Reduced calculation time by 40%.",
-    //   highlights: ["System Design", "React", "Java"],
-    // },
-  ];
+  const { language } = useLanguage();
+  const jobs: Job[] = t.experience.jobs as any;
+
   return (
     <section id="experience" className="py-16 border-t border-border">
       <Container>
         <h2 className="text-lg font-semibold mb-8">{t.experience.title}</h2>
 
         <div className="space-y-8">
-          {jobs.map((job, index) => (
-            <div key={index}>
-              <div className="flex justify-between items-baseline gap-4 mb-2">
+          {jobs.map((job, jobIndex) => (
+            <div key={jobIndex}>
+              {/* Multi-role company (LinkedIn style) */}
+              {job.roles ? (
                 <div>
-                  <h3 className="font-medium">{job.title}</h3>
-                  <p className="text-sm text-muted-foreground">{job.company}</p>
+                  <h3 className="font-medium mb-4">{job.company}</h3>
+                  <div className="space-y-6">
+                    {job.roles.map((role, roleIndex) => (
+                      <div key={roleIndex} className="pl-4 border-l-2 border-border">
+                        <div className="flex justify-between items-baseline gap-4 mb-2">
+                          <div>
+                            <h4 className="font-medium text-sm">{role.title}</h4>
+                          </div>
+                          <span className="text-xs text-muted-foreground whitespace-nowrap">
+                            {formatDateRange(role.period, language, t.experience.present)}
+                          </span>
+                        </div>
+                        <p className="text-sm text-foreground/80 leading-relaxed mb-3">
+                          {role.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {role.highlights.map((highlight) => (
+                            <span
+                              key={highlight}
+                              className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded"
+                            >
+                              {highlight}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <span className="text-xs text-muted-foreground whitespace-nowrap">
-                  {job.period}
-                </span>
-              </div>
-              <p className="text-sm text-foreground/80 leading-relaxed mb-3">
-                {job.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {job.highlights.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded"
-                  >
-                    {highlight}
-                  </span>
-                ))}
-              </div>
-              {index < jobs.length - 1 && (
+              ) : (
+                /* Single-role company */
+                <div>
+                  <div className="flex justify-between items-baseline gap-4 mb-2">
+                    <div>
+                      <h3 className="font-medium">{job.title}</h3>
+                      <p className="text-sm text-muted-foreground">{job.company}</p>
+                    </div>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      {job.period && formatDateRange(job.period, language, t.experience.present)}
+                    </span>
+                  </div>
+                  <p className="text-sm text-foreground/80 leading-relaxed mb-3">
+                    {job.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {job.highlights?.map((highlight) => (
+                      <span
+                        key={highlight}
+                        className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded"
+                      >
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {jobIndex < jobs.length - 1 && (
                 <div className="mt-8 border-t border-border/50" />
               )}
             </div>

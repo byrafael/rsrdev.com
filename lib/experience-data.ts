@@ -48,16 +48,23 @@ export interface TranslationJob {
 }
 
 /**
+ * Default fallback date for experiences without a period
+ */
+const DEFAULT_FALLBACK_DATE = '1900-01-01';
+
+/**
  * Parse a date string (YYYY or YYYY-MM) to an ISO date string for sorting
  */
 function toSortDate(dateStr: string): string {
   // If it's just a year, use January 1st
-  if (dateStr.match(/^\d{4}$/)) {
+  const yearOnlyMatch = dateStr.match(/^\d{4}$/);
+  if (yearOnlyMatch) {
     return `${dateStr}-01-01`;
   }
   
   // If it's YYYY-MM, use the first day of that month
-  if (dateStr.match(/^\d{4}-\d{1,2}$/)) {
+  const yearMonthMatch = dateStr.match(/^\d{4}-\d{1,2}$/);
+  if (yearMonthMatch) {
     const [year, month] = dateStr.split('-');
     const paddedMonth = month.padStart(2, '0');
     return `${year}-${paddedMonth}-01`;
@@ -72,8 +79,11 @@ function toSortDate(dateStr: string): string {
 export function getExperienceSortDate(exp: Experience): string {
   // If it has roles, use the most recent role's start date
   if (exp.roles && exp.roles.length > 0) {
-    const sortDates = exp.roles.map(r => r.sortDate);
-    return sortDates.sort().reverse()[0]; // Most recent
+    // Find the most recent date (max) efficiently
+    return exp.roles.reduce((maxDate, role) => 
+      role.sortDate > maxDate ? role.sortDate : maxDate,
+      exp.roles[0].sortDate
+    );
   }
   
   // Otherwise use the experience's own sort date
@@ -154,7 +164,7 @@ export function transformTranslationToExperiences(jobs: TranslationJob[]): Exper
       period: job.period,
       description: job.description,
       highlights: job.highlights,
-      sortDate: job.period?.start ? toSortDate(job.period.start) : '1900-01-01',
+      sortDate: job.period?.start ? toSortDate(job.period.start) : DEFAULT_FALLBACK_DATE,
     };
     
     // Handle roles if present

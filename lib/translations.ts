@@ -47,24 +47,45 @@ export const translations = {
         {
           title: "Co-Founder & CTO",
           company: "Futuryze Consulting Group Ltd.",
+          period: { start: "2025" },
           description:
             "Futuryze builds AI infrastructure that helps private healthcare providers create and deploy their own voice agents for scheduling, triage, and patient communication—without writing code. I lead product architecture, AI systems design, and technical execution, overseeing integrations with OpenAI, Anthropic, ElevenLabs, and Deepgram. My work spans backend engineering, workflow automation, and scaling infrastructure for HIPAA-compliant, production-grade deployments across clinics in multiple countries.",
           highlights: ["Voice AI", "AI Systems", "AI Infrastructure"],
         },
         {
-          title: "Public Relations Specialist",
           company: "Global Youth Congress",
-          description:
-            "My role involves maintaining consistent communication with partner schools through email and WhatsApp, inviting both independent delegates and institutions to participate in our conferences, and managing outreach efforts across digital platforms. I also contribute to promotional content, conduct sales calls to boost registration, participate in staff meetings and community discussions, and help ensure smooth execution during conferences.",
-          highlights: [
-            "Media Relations",
-            "Content Creation",
-            "Event Coordination",
+          roles: [
+            {
+              title: "Under-Secretary General for Delegate Relations",
+              period: { start: "2025-11" },
+              description:
+                "Leading the Delegate Relations team.",
+              highlights: [
+                "Media Relations",
+                "Content Creation",
+                "Event Coordination",
+                "Leadership",
+                "Team Management",
+                "Staff Training",
+              ],
+            },
+            {
+              title: "Public Relations Specialist",
+              period: { start: "2024", end: "2025-11" },
+              description:
+                "My role involves maintaining consistent communication with partner schools through email and WhatsApp, inviting both independent delegates and institutions to participate in our conferences, and managing outreach efforts across digital platforms. I also contribute to promotional content, conduct sales calls to boost registration, participate in staff meetings and community discussions, and help ensure smooth execution during conferences.",
+              highlights: [
+                "Media Relations",
+                "Content Creation",
+                "Event Coordination",
+              ],
+            },
           ],
         },
         {
           title: "AI Systems Developer",
           company: "MUSCLE",
+          period: { start: "2025-07" },
           description:
             "Building AI agents and sentiment analysis workflows inside n8n to automate high-volume support call processing (inbound + outbound). Leveraging Node.js, LangChain integrations, and Python functions to deploy real-time, production-grade systems at scale. Part of the R&D team at Muscle Innovation Labs (as a full-time intern).",
           highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
@@ -191,24 +212,45 @@ export const translations = {
         {
           title: "Co-Fundador y CTO",
           company: "Futuryze Consulting Group Ltd.",
+          period: { start: "2025" },
           description:
             "Futuryze desarrolla infraestructura de inteligencia artificial que permite a los proveedores de salud privada crear y desplegar sus propios agentes de voz para agendamiento, triaje y comunicación con pacientes, sin necesidad de programar. Lidero la arquitectura del producto, el diseño de sistemas de IA y la ejecución técnica, supervisando integraciones con OpenAI, Anthropic, ElevenLabs y Deepgram. Mi trabajo abarca ingeniería backend, automatización de flujos de trabajo y escalamiento de infraestructura para implementaciones en producción con cumplimiento HIPAA en clínicas de varios países.",
           highlights: ["IA de Voz", "Sistemas de IA", "Infraestructura de IA"],
         },
         {
-          title: "Especialista en Relaciones Públicas",
           company: "Global Youth Congress",
-          description:
-            "Como especialista becario de Relaciones Públicas en el Global Youth Congress, trabajo bajo la Secretaría General como parte del equipo de Conferencias y Relaciones. Mi rol implica mantener una comunicación constante con escuelas asociadas a través de correo electrónico y WhatsApp, invitar tanto a delegados independientes como a instituciones a participar en nuestras conferencias, y gestionar los esfuerzos de divulgación en plataformas digitales. También colaboro en la creación de contenido promocional, realizo llamadas de ventas para impulsar la inscripción, participo en reuniones del equipo y en discusiones comunitarias, y apoyo la ejecución fluida durante las conferencias. Esta posición me permite fomentar el compromiso de los jóvenes con la diplomacia global mediante una comunicación efectiva y la construcción de relaciones sólidas.",
-          highlights: [
-            "Relaciones con Medios",
-            "Creación de Contenido",
-            "Coordinación de Eventos",
+          roles: [
+            {
+              title: "Subsecretario General para Relaciones con Delegados",
+              period: { start: "2025-11" },
+              description:
+                "Liderando el equipo de Relaciones con Delegados.",
+              highlights: [
+                "Relaciones con Medios",
+                "Creación de Contenido",
+                "Coordinación de Eventos",
+                "Liderazgo",
+                "Gestión de Equipos",
+                "Formación de Personal",
+              ],
+            },
+            {
+              title: "Especialista en Relaciones Públicas",
+              period: { start: "2024", end: "2025-11" },
+              description:
+                "Como especialista becario de Relaciones Públicas en el Global Youth Congress, trabajo bajo la Secretaría General como parte del equipo de Conferencias y Relaciones. Mi rol implica mantener una comunicación constante con escuelas asociadas a través de correo electrónico y WhatsApp, invitar tanto a delegados independientes como a instituciones a participar en nuestras conferencias, y gestionar los esfuerzos de divulgación en plataformas digitales. También colaboro en la creación de contenido promocional, realizo llamadas de ventas para impulsar la inscripción, participo en reuniones del equipo y en discusiones comunitarias, y apoyo la ejecución fluida durante las conferencias. Esta posición me permite fomentar el compromiso de los jóvenes con la diplomacia global mediante una comunicación efectiva y la construcción de relaciones sólidas.",
+              highlights: [
+                "Relaciones con Medios",
+                "Creación de Contenido",
+                "Coordinación de Eventos",
+              ],
+            },
           ],
         },
         {
           title: "Desarrollador de Sistemas de IA",
           company: "MUSCLE",
+          period: { start: "2025-07" },
           description:
             "Desarrollando agentes de IA y flujos de análisis de sentimiento dentro de n8n para automatizar el procesamiento de llamadas de soporte a gran escala (entrantes y salientes). Usando Node.js, integraciones con LangChain y funciones en Python para desplegar sistemas en tiempo real y de nivel productivo. Parte del equipo de I+D en Muscle Innovation Labs (pasante/miembro en formación a tiempo completo).",
           highlights: ["Sistemas de IA", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],

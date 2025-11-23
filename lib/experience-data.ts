@@ -26,6 +26,28 @@ export interface Experience {
 }
 
 /**
+ * Translation data structure for roles (matches structure in translations.ts)
+ */
+export interface TranslationRole {
+  title: string;
+  period: DateRange;
+  description: string;
+  highlights: string[];
+}
+
+/**
+ * Translation data structure for jobs/experiences (matches structure in translations.ts)
+ */
+export interface TranslationJob {
+  title?: string;
+  company: string;
+  period?: DateRange;
+  description?: string;
+  highlights?: string[];
+  roles?: TranslationRole[];
+}
+
+/**
  * Parse a date string (YYYY or YYYY-MM) to an ISO date string for sorting
  */
 function toSortDate(dateStr: string): string {
@@ -123,7 +145,7 @@ export function sortExperiences(
 /**
  * Transform translation data to Experience objects with sorting metadata
  */
-export function transformTranslationToExperiences(jobs: any[]): Experience[] {
+export function transformTranslationToExperiences(jobs: TranslationJob[]): Experience[] {
   return jobs.map((job, index) => {
     const exp: Experience = {
       id: `exp-${index}`,
@@ -137,7 +159,7 @@ export function transformTranslationToExperiences(jobs: any[]): Experience[] {
     
     // Handle roles if present
     if (job.roles) {
-      exp.roles = job.roles.map((role: any, roleIndex: number) => ({
+      exp.roles = job.roles.map((role: TranslationRole, roleIndex: number) => ({
         id: `role-${index}-${roleIndex}`,
         title: role.title,
         period: role.period,

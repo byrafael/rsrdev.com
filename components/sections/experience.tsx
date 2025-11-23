@@ -9,6 +9,7 @@ import {
   sortExperiences,
   type Experience as ExperienceType,
   type SortStrategy,
+  type TranslationJob,
 } from "@/lib/experience-data";
 
 export default function Experience() {
@@ -16,7 +17,7 @@ export default function Experience() {
   const { language } = useLanguage();
   
   // Transform and sort experiences dynamically
-  const rawJobs = t.experience.jobs as unknown as any[];
+  const rawJobs = t.experience.jobs as unknown as TranslationJob[];
   const experiences = transformTranslationToExperiences(rawJobs);
   const sortStrategy: SortStrategy = 'date'; // Can be 'date', 'duration', or 'custom'
   const jobs = sortExperiences(experiences, sortStrategy) as ExperienceType[];

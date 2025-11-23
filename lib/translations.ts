@@ -37,6 +37,7 @@ export const translations = {
         infrastructure: "Infrastructure",
         web: "Web",
         tools: "Tools",
+        sound: "Sound Systems"
       },
     },
     // Experience Section
@@ -224,6 +225,7 @@ export const translations = {
         infrastructure: "Infraestructura",
         web: "Web",
         tools: "Herramientas",
+        sound: "Sistemas de Sonido"
       },
     },
     // Experience Section

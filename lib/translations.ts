@@ -13,7 +13,7 @@ export const translations = {
     },
     // Hero Section
     hero: {
-      subtitle: "Backend & AI Systems Engineer • Building Data-Driven Decision Infrastructure",
+      subtitle: "Backend & AI Systems Developer",
       description:
         "High school student & entrepeneur building high-performance trading systems, AI infrastructure, and interactive economies. Experienced in backend architecture, mathematics, and intelligent system design. Passionate about turning complexity (whether it is financial, computational, or human), into elegant, scalable code.",
       tagline: "Code. Data. Markets.",
@@ -21,7 +21,7 @@ export const translations = {
     // About Section
     about: {
       paragraph1:
-        "High school student, entrepreneur, and backend & AI systems engineer building the infrastructure that connects computation, markets, and intelligence. I focus on backend architecture, algorithmic design, and applied machine learning—especially where math, data, and systems intersect.",
+        "High school student, entrepreneur, and backend & AI systems developer building the infrastructure that connects computation, markets, and intelligence. I focus on backend architecture, algorithmic design, and applied machine learning—especially where math, data, and systems intersect.",
       paragraph2:
         "I care about clean, high-performance code and turning complex financial, analytical, and behavioral problems into scalable software. My current work spans quantitative data processing, AI workflow engineering, and simulation design for financial and interactive systems.",
       paragraph3:
@@ -157,7 +157,7 @@ export const translations = {
     },
     // Hero Section
     hero: {
-      subtitle: "Ingeniero de Backend & Sistemas de IA • Desarrollando Infrastructura de Decision basado en Datos",
+      subtitle: "Desarrollador Backend y de Sistemas de IA",
       description:
         "Estudiante de secundaria y emprendedor que construye sistemas de trading de alto rendimiento, infraestructura de IA y economías interactivas. Con experiencia en arquitectura backend, matemáticas y diseño de sistemas inteligentes. Apasionado por convertir la complejidad —ya sea financiera, computacional o humana— en código elegante y escalable.",
       tagline: "Código. Datos. Mercados.",
@@ -165,7 +165,7 @@ export const translations = {
     // About Section
     about: {
       paragraph1:
-        "Estudiante de secundaria, emprendedor y backend & AI systems engineer, construyendo la infraestructura que conecta computación, mercados e inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado, especialmente donde se cruzan las matemáticas, los datos y los sistemas.",
+        "Estudiante de secundaria, emprendedor y backend & AI systems developer, construyendo la infraestructura que conecta computación, mercados e inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado, especialmente donde se cruzan las matemáticas, los datos y los sistemas.",
       paragraph2:
         "Me importa escribir código limpio y de alto rendimiento, y convertir problemas financieros, analíticos y de comportamiento en software escalable. Mi trabajo actual abarca procesamiento de datos cuantitativos, ingeniería de flujos de trabajo con IA y el diseño de simulaciones para entornos financieros e interactivos.",
       paragraph3:

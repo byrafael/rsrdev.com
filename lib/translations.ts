@@ -95,7 +95,7 @@ export const translations = {
           company: "Tree Of Life International School",
           period: { start: "2022", end: "2025" },
           description:
-            "Responsible for all audio production and technical direction across school events, including assemblies, hearings, and theatrical productions. Successfully delivered over 100 hours of professional sound engineering for dozens of assemblies and hearings, plus 3 full-scale school plays. Led and trained the entire Student Sound Tech team, managing recruitment, technical training, and operational standards. Operated and maintained professional audio systems including Yamaha DM3 Series digital mixers, Bose sound systems, wireless microphone arrays, and stage monitoring equipment. Managed live audio engineering tasks including gain staging, equalization, signal processing, and real-time troubleshooting to ensure flawless audio delivery for all school events.",
+            "Managed all audio production and technical direction for school events including assemblies, hearings, and theatrical productions. Delivered 100+ hours of professional sound engineering across dozens of events and 3 full-scale school plays. Led and trained the entire Student Sound Tech team in recruitment, technical skills, and operational standards. Operated professional audio systems including Yamaha DM3 digital mixers, Bose sound systems, wireless microphones, and stage monitors. Handled live audio engineering: gain staging, EQ, signal processing, and real-time troubleshooting.",
           highlights: [
             "Technical Direction",
             "Team Leadership & Training",
@@ -276,7 +276,7 @@ export const translations = {
           company: "Tree Of Life International School",
           period: { start: "2022", end: "2025" },
           description:
-            "Responsable de toda la producción de audio y dirección técnica en eventos escolares, incluyendo asambleas, audiencias y producciones teatrales. Entregué con éxito más de 100 horas de ingeniería de sonido profesional para docenas de asambleas y audiencias, además de 3 obras de teatro escolares a gran escala. Lideré y capacité a todo el equipo de Técnicos de Sonido Estudiantiles, gestionando el reclutamiento, la formación técnica y los estándares operacionales. Operé y mantuve sistemas de audio profesionales, incluidas mesas de mezclas digitales Yamaha serie DM3, sistemas de sonido Bose, matrices de micrófonos inalámbricos y equipos de monitoreo de escenario. Gestioné tareas de ingeniería de audio en vivo, incluyendo ajuste de ganancia, ecualización, procesamiento de señal y solución de problemas en tiempo real para garantizar una entrega de audio impecable en todos los eventos escolares.",
+            "Gestioné toda la producción de audio y dirección técnica para eventos escolares, incluyendo asambleas, audiencias y producciones teatrales. Entregué más de 100 horas de ingeniería de sonido profesional en docenas de eventos y 3 obras de teatro a gran escala. Lideré y capacité a todo el equipo de Técnicos de Sonido Estudiantiles en reclutamiento, habilidades técnicas y estándares operacionales. Operé sistemas de audio profesionales, incluidas mesas de mezclas digitales Yamaha DM3, sistemas de sonido Bose, micrófonos inalámbricos y monitores de escenario. Manejé ingeniería de audio en vivo: ajuste de ganancia, EQ, procesamiento de señal y solución de problemas en tiempo real.",
           highlights: [
             "Dirección Técnica",
             "Liderazgo y Formación de Equipos",

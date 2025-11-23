@@ -25,13 +25,13 @@ export default function Education() {
       details:
         "Mathematics (AL), Computer Science (AL), Global Perspectives and Research (AS)",
     },
-    {
-      degree: "High School Diploma (STEM Focus)",
-      school: "Tree Of Life International School",
-      year: "2026",
-      details:
-        "4.0/4.0 GPA (94.7%, A*) Senior Year • Accelerated Programme • Secretary General, Model United Nations Team",
-    },
+    // {
+    //   degree: "High School Diploma (STEM Focus)",
+    //   school: "Tree Of Life International School",
+    //   year: "2026",
+    //   details:
+    //     "4.0/4.0 GPA (94.7%, A*) Senior Year • Accelerated Programme • Secretary General, Model United Nations Team",
+    // },
     {
       degree: "Cambridge International IGCSEs",
       school: "Cambridge International Education",

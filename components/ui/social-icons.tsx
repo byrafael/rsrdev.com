@@ -2,6 +2,7 @@
 
 import React from "react";
 import { BsGithub, BsLinkedin, BsTwitterX, BsEnvelope } from "react-icons/bs";
+import { FaOrcid } from "react-icons/fa";
 import { useTranslation } from "@/hooks/use-translation";
 
 export type SocialItem = Readonly<{
@@ -37,7 +38,7 @@ export default function SocialIcons({
     },
     {
       id: "x",
-      href: "https://x.com",
+      href: "https://x.com/rsoleyyy",
       label: t.social.x,
       icon: <BsTwitterX size={size} />,
     },
@@ -46,7 +47,7 @@ export default function SocialIcons({
       href: "mailto:hello@rsrdev.com",
       label: t.social.email,
       icon: <BsEnvelope size={size} />,
-    },
+    }
   ];
 
   const list = items && items.length ? items : defaults;

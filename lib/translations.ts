@@ -90,6 +90,22 @@ export const translations = {
             "Building AI agents and sentiment analysis workflows inside n8n to automate high-volume support call processing (inbound + outbound). Leveraging Node.js, LangChain integrations, and Python functions to deploy real-time, production-grade systems at scale. Part of the R&D team at Muscle Innovation Labs (as a full-time intern).",
           highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
         },
+        {
+          title: "Student Sound Technician",
+          company: "Tree Of Life International School",
+          period: { start: "2022", end: "2025" },
+          description:
+            "Responsible for all audio production and technical direction across school events, including assemblies, hearings, and theatrical productions. Successfully delivered over 100 hours of professional sound engineering for dozens of assemblies and hearings, plus 3 full-scale school plays. Led and trained the entire Student Sound Tech team, managing recruitment, technical training, and operational standards. Operated and maintained professional audio systems including Yamaha DM3 Series digital mixers, Bose sound systems, wireless microphone arrays, and stage monitoring equipment. Managed live audio engineering tasks including gain staging, equalization, signal processing, and real-time troubleshooting to ensure flawless audio delivery for all school events.",
+          highlights: [
+            "Technical Direction",
+            "Team Leadership & Training",
+            "Yamaha Mixers",
+            "Bose Sound Systems",
+            "Live EQ, Gain, & Signal Processing",
+            "Wireless Audio Systems",
+            "Stage Audio Management",
+          ],
+        },
       ],
     },
     // Projects Section
@@ -254,6 +270,22 @@ export const translations = {
           description:
             "Desarrollando agentes de IA y flujos de análisis de sentimiento dentro de n8n para automatizar el procesamiento de llamadas de soporte a gran escala (entrantes y salientes). Usando Node.js, integraciones con LangChain y funciones en Python para desplegar sistemas en tiempo real y de nivel productivo. Parte del equipo de I+D en Muscle Innovation Labs (pasante/miembro en formación a tiempo completo).",
           highlights: ["Sistemas de IA", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
+        },
+        {
+          title: "Técnico de Sonido Estudiantil",
+          company: "Tree Of Life International School",
+          period: { start: "2022", end: "2025" },
+          description:
+            "Responsable de toda la producción de audio y dirección técnica en eventos escolares, incluyendo asambleas, audiencias y producciones teatrales. Entregué con éxito más de 100 horas de ingeniería de sonido profesional para docenas de asambleas y audiencias, además de 3 obras de teatro escolares a gran escala. Lideré y capacité a todo el equipo de Técnicos de Sonido Estudiantiles, gestionando el reclutamiento, la formación técnica y los estándares operacionales. Operé y mantuve sistemas de audio profesionales, incluidas mesas de mezclas digitales Yamaha serie DM3, sistemas de sonido Bose, matrices de micrófonos inalámbricos y equipos de monitoreo de escenario. Gestioné tareas de ingeniería de audio en vivo, incluyendo ajuste de ganancia, ecualización, procesamiento de señal y solución de problemas en tiempo real para garantizar una entrega de audio impecable en todos los eventos escolares.",
+          highlights: [
+            "Dirección Técnica",
+            "Liderazgo y Formación de Equipos",
+            "Mesas Yamaha",
+            "Sistemas de Sonido Bose",
+            "EQ en Vivo, Ganancia y Procesamiento de Señal",
+            "Sistemas de Audio Inalámbricos",
+            "Gestión de Audio de Escenario",
+          ],
         },
       ],
     },

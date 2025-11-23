@@ -39,6 +39,10 @@ export default function TechStack() {
       name: t.techStack.categories.tools,
       skills: ["Git", "Linux", "VSCode", "Jupyter", "Grafana"],
     },
+    {
+      name: t.techStack.categories.sound,
+      skills: ["Yamaha DM3 Series", "Bose Professional Sound Systems", "Surge Management", "Handheld Wireless Microphones", "Lavalier Wireless Microphones"],
+    },
   ];
 
   return (

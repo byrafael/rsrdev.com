@@ -24,7 +24,7 @@ interface Job {
 export default function Experience() {
   const t = useTranslation();
   const { language } = useLanguage();
-  const jobs: Job[] = t.experience.jobs as any;
+  const jobs = t.experience.jobs as unknown as Job[];
 
   return (
     <section id="experience" className="py-16 border-t border-border">

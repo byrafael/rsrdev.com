@@ -85,7 +85,7 @@ export const translations = {
         {
           title: "AI Systems Developer",
           company: "MUSCLE",
-          period: { start: "2025-07", end: "2025-07" },
+          period: { start: "2025-07" },
           description:
             "Building AI agents and sentiment analysis workflows inside n8n to automate high-volume support call processing (inbound + outbound). Leveraging Node.js, LangChain integrations, and Python functions to deploy real-time, production-grade systems at scale. Part of the R&D team at Muscle Innovation Labs (as a full-time intern).",
           highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
@@ -250,7 +250,7 @@ export const translations = {
         {
           title: "Desarrollador de Sistemas de IA",
           company: "MUSCLE",
-          period: { start: "2025-07", end: "2025-07" },
+          period: { start: "2025-07" },
           description:
             "Desarrollando agentes de IA y flujos de análisis de sentimiento dentro de n8n para automatizar el procesamiento de llamadas de soporte a gran escala (entrantes y salientes). Usando Node.js, integraciones con LangChain y funciones en Python para desplegar sistemas en tiempo real y de nivel productivo. Parte del equipo de I+D en Muscle Innovation Labs (pasante/miembro en formación a tiempo completo).",
           highlights: ["Sistemas de IA", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],

@@ -22,7 +22,7 @@ export default function Experience() {
   // Transform and sort experiences dynamically
   const rawJobs = t.experience.jobs as unknown as TranslationJob[];
   const experiences = transformTranslationToExperiences(rawJobs);
-  const jobs = sortExperiences(experiences, EXPERIENCE_SORT_STRATEGY) as ExperienceType[];
+  const jobs = sortExperiences(experiences, EXPERIENCE_SORT_STRATEGY);
 
   return (
     <section id="experience" className="py-16 border-t border-border">

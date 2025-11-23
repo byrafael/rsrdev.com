@@ -53,18 +53,22 @@ export interface TranslationJob {
 const DEFAULT_FALLBACK_DATE = '1900-01-01';
 
 /**
+ * Regex patterns for date parsing (cached for performance)
+ */
+const YEAR_ONLY_REGEX = /^\d{4}$/;
+const YEAR_MONTH_REGEX = /^\d{4}-\d{1,2}$/;
+
+/**
  * Parse a date string (YYYY or YYYY-MM) to an ISO date string for sorting
  */
 function toSortDate(dateStr: string): string {
   // If it's just a year, use January 1st
-  const yearOnlyMatch = dateStr.match(/^\d{4}$/);
-  if (yearOnlyMatch) {
+  if (YEAR_ONLY_REGEX.test(dateStr)) {
     return `${dateStr}-01-01`;
   }
   
   // If it's YYYY-MM, use the first day of that month
-  const yearMonthMatch = dateStr.match(/^\d{4}-\d{1,2}$/);
-  if (yearMonthMatch) {
+  if (YEAR_MONTH_REGEX.test(dateStr)) {
     const [year, month] = dateStr.split('-');
     const paddedMonth = month.padStart(2, '0');
     return `${year}-${paddedMonth}-01`;
@@ -179,9 +183,7 @@ export function transformTranslationToExperiences(jobs: TranslationJob[]): Exper
       }));
       
       // Sort roles within the experience by date (most recent first)
-      if (exp.roles) {
-        exp.roles.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
-      }
+      exp.roles.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
     }
     
     return exp;

@@ -1,0 +1,157 @@
+/**
+ * Experience data structure with sorting metadata
+ * Separates data from translations for better maintainability
+ */
+
+import { type DateRange } from "./date-formatter";
+
+export interface Role {
+  id: string;
+  title: string;
+  period: DateRange;
+  description: string;
+  highlights: string[];
+  sortDate: string; // ISO date string for sorting (YYYY-MM-DD or YYYY-01-01)
+}
+
+export interface Experience {
+  id: string;
+  company: string;
+  title?: string;
+  period?: DateRange;
+  description?: string;
+  highlights?: string[];
+  roles?: Role[];
+  sortDate: string; // ISO date string for sorting (YYYY-MM-DD or YYYY-01-01)
+}
+
+/**
+ * Parse a date string (YYYY or YYYY-MM) to an ISO date string for sorting
+ */
+function toSortDate(dateStr: string): string {
+  // If it's just a year, use January 1st
+  if (dateStr.match(/^\d{4}$/)) {
+    return `${dateStr}-01-01`;
+  }
+  
+  // If it's YYYY-MM, use the first day of that month
+  if (dateStr.match(/^\d{4}-\d{1,2}$/)) {
+    const [year, month] = dateStr.split('-');
+    const paddedMonth = month.padStart(2, '0');
+    return `${year}-${paddedMonth}-01`;
+  }
+  
+  return dateStr;
+}
+
+/**
+ * Get the sort date for an experience based on its most recent role/period
+ */
+export function getExperienceSortDate(exp: Experience): string {
+  // If it has roles, use the most recent role's start date
+  if (exp.roles && exp.roles.length > 0) {
+    const sortDates = exp.roles.map(r => r.sortDate);
+    return sortDates.sort().reverse()[0]; // Most recent
+  }
+  
+  // Otherwise use the experience's own sort date
+  return exp.sortDate;
+}
+
+/**
+ * Sort experiences by date (most recent first)
+ */
+export function sortExperiencesByDate(experiences: Experience[]): Experience[] {
+  return [...experiences].sort((a, b) => {
+    const dateA = getExperienceSortDate(a);
+    const dateB = getExperienceSortDate(b);
+    return dateB.localeCompare(dateA); // Descending (most recent first)
+  });
+}
+
+/**
+ * Sort experiences by duration (longest first)
+ */
+export function sortExperiencesByDuration(experiences: Experience[]): Experience[] {
+  const calculateDuration = (exp: Experience): number => {
+    const getDuration = (start: string, end?: string): number => {
+      const startDate = new Date(toSortDate(start));
+      const endDate = end ? new Date(toSortDate(end)) : new Date();
+      return endDate.getTime() - startDate.getTime();
+    };
+    
+    if (exp.roles && exp.roles.length > 0) {
+      // Sum all role durations
+      return exp.roles.reduce((total, role) => {
+        return total + getDuration(role.period.start, role.period.end);
+      }, 0);
+    }
+    
+    if (exp.period) {
+      return getDuration(exp.period.start, exp.period.end);
+    }
+    
+    return 0;
+  };
+  
+  return [...experiences].sort((a, b) => {
+    return calculateDuration(b) - calculateDuration(a); // Descending (longest first)
+  });
+}
+
+/**
+ * Sort experiences by custom priority order (if provided in the data)
+ */
+export type SortStrategy = 'date' | 'duration' | 'custom';
+
+export function sortExperiences(
+  experiences: Experience[],
+  strategy: SortStrategy = 'date'
+): Experience[] {
+  switch (strategy) {
+    case 'duration':
+      return sortExperiencesByDuration(experiences);
+    case 'custom':
+      // For custom sorting, maintain the original order
+      return [...experiences];
+    case 'date':
+    default:
+      return sortExperiencesByDate(experiences);
+  }
+}
+
+/**
+ * Transform translation data to Experience objects with sorting metadata
+ */
+export function transformTranslationToExperiences(jobs: any[]): Experience[] {
+  return jobs.map((job, index) => {
+    const exp: Experience = {
+      id: `exp-${index}`,
+      company: job.company,
+      title: job.title,
+      period: job.period,
+      description: job.description,
+      highlights: job.highlights,
+      sortDate: job.period?.start ? toSortDate(job.period.start) : '1900-01-01',
+    };
+    
+    // Handle roles if present
+    if (job.roles) {
+      exp.roles = job.roles.map((role: any, roleIndex: number) => ({
+        id: `role-${index}-${roleIndex}`,
+        title: role.title,
+        period: role.period,
+        description: role.description,
+        highlights: role.highlights,
+        sortDate: toSortDate(role.period.start),
+      }));
+      
+      // Sort roles within the experience by date (most recent first)
+      if (exp.roles) {
+        exp.roles.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
+      }
+    }
+    
+    return exp;
+  });
+}

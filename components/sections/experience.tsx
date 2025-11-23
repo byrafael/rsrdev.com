@@ -3,28 +3,23 @@
 import Container from "@/components/container";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLanguage } from "@/lib/language-context";
-import { formatDateRange, type DateRange } from "@/lib/date-formatter";
-
-interface Role {
-  title: string;
-  period: DateRange;
-  description: string;
-  highlights: string[];
-}
-
-interface Job {
-  title?: string;
-  company: string;
-  period?: DateRange;
-  description?: string;
-  highlights?: string[];
-  roles?: Role[];
-}
+import { formatDateRange } from "@/lib/date-formatter";
+import {
+  transformTranslationToExperiences,
+  sortExperiences,
+  type Experience as ExperienceType,
+  type SortStrategy,
+} from "@/lib/experience-data";
 
 export default function Experience() {
   const t = useTranslation();
   const { language } = useLanguage();
-  const jobs = t.experience.jobs as unknown as Job[];
+  
+  // Transform and sort experiences dynamically
+  const rawJobs = t.experience.jobs as unknown as any[];
+  const experiences = transformTranslationToExperiences(rawJobs);
+  const sortStrategy: SortStrategy = 'date'; // Can be 'date', 'duration', or 'custom'
+  const jobs = sortExperiences(experiences, sortStrategy) as ExperienceType[];
 
   return (
     <section id="experience" className="py-16 border-t border-border">

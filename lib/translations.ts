@@ -92,7 +92,7 @@ export const translations = {
         {
           title: "AI Systems Developer",
           company: "MUSCLE",
-          period: { start: "2025-07" },
+          period: { start: "2025-07", end: "2025-07" },
           description:
             "Building AI agents and sentiment analysis workflows inside n8n to automate high-volume support call processing (inbound + outbound). Leveraging Node.js, LangChain integrations, and Python functions to deploy real-time, production-grade systems at scale. Part of the R&D team at Muscle Innovation Labs (as a full-time intern).",
           highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],

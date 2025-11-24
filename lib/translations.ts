@@ -291,7 +291,7 @@ export const translations = {
           company: "Tree Of Life International School",
           period: { start: "2022", end: "2025" },
           description:
-            "Gestioné toda la producción de audio y dirección técnica para eventos escolares, incluyendo asambleas, audiencias y producciones teatrales. Entregué más de 100 horas de ingeniería de sonido profesional en docenas de eventos y 3 obras de teatro a gran escala. Lideré y capacité a todo el equipo de Técnicos de Sonido Estudiantiles en reclutamiento, habilidades técnicas y estándares operacionales. Operé sistemas de audio profesionales, incluidas mizers digitales Yamaha DM3, sistemas de sonido Bose, micrófonos inalámbricos y monitores de escenario. Manejé ingeniería de audio en vivo: ajuste de ganancia, EQ, procesamiento de señal y solución de problemas en tiempo real.",
+            "Gestioné toda la producción de audio y dirección técnica para eventos escolares, incluyendo asambleas, audiencias y producciones teatrales. Entregué más de 100 horas de ingeniería de sonido profesional en docenas de eventos y 3 obras de teatro a gran escala. Lideré y capacité a todo el equipo de Técnicos de Sonido Estudiantiles en reclutamiento, habilidades técnicas y estándares operacionales. Operé sistemas de audio profesionales, incluidas mezcladores digitales Yamaha DM3, sistemas de sonido Bose, micrófonos inalámbricos y monitores de escenario. Manejé ingeniería de audio en vivo: ajuste de ganancia, EQ, procesamiento de señal y solución de problemas en tiempo real.",
           highlights: [
             "Dirección Técnica",
             "Liderazgo y Formación de Equipos",

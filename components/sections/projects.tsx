@@ -45,7 +45,7 @@ export default function Projects() {
     {
       title: "ReconBot",
       description: t.projects.list[5].description,
-      tags: ["Node.js", "Discord.js"],
+      tags: ["Node.js", "Discord.js", "Next.js", "React", "TailwindCSS", "OAuth2"],
       source: undefined,
       preview: "https://reconbot.xyz",
     },

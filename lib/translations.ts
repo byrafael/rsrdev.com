@@ -178,6 +178,7 @@ export const translations = {
       github: "GitHub",
       x: "X",
       email: "Email",
+      orcid: "ORCiD",
     },
     // Floating Pills
     floatingPills: {
@@ -366,6 +367,7 @@ export const translations = {
       github: "GitHub",
       x: "X",
       email: "Correo",
+      orcid: "ORCiD",
     },
     // Floating Pills
     floatingPills: {

@@ -3,7 +3,7 @@
 import Container from "@/components/container";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLanguage } from "@/lib/language-context";
-import { formatDateRange } from "@/lib/date-formatter";
+import { formatDateRange, type DateRange } from "@/lib/date-formatter";
 import {
   transformTranslationToExperiences,
   sortExperiences,
@@ -14,6 +14,34 @@ import {
 
 // Default sorting strategy for experiences
 const EXPERIENCE_SORT_STRATEGY: SortStrategy = 'date';
+
+/**
+ * Calculate the overall date range for a company with multiple roles
+ * Returns the earliest start date and latest end date (or undefined if any role is current)
+ */
+function getCompanyDateRange(job: ExperienceType): DateRange | null {
+  if (!job.roles || job.roles.length === 0) {
+    return null;
+  }
+  
+  // Find earliest start date
+  const earliestStart = job.roles.reduce((earliest, role) => {
+    return role.period.start < earliest ? role.period.start : earliest;
+  }, job.roles[0].period.start);
+  
+  // Find latest end date (undefined means "Present")
+  const hasCurrentRole = job.roles.some(role => !role.period.end);
+  const latestEnd = hasCurrentRole ? undefined : job.roles.reduce((latest, role) => {
+    if (!role.period.end) return latest;
+    if (!latest) return role.period.end;
+    return role.period.end > latest ? role.period.end : latest;
+  }, job.roles[0].period.end);
+  
+  return {
+    start: earliestStart,
+    end: latestEnd
+  };
+}
 
 export default function Experience() {
   const t = useTranslation();
@@ -35,7 +63,17 @@ export default function Experience() {
               {/* Multi-role company (LinkedIn style) */}
               {job.roles ? (
                 <div>
-                  <h3 className="font-medium mb-4">{job.company}</h3>
+                  <div className="flex justify-between items-baseline gap-4 mb-4">
+                    <h3 className="font-medium">{job.company}</h3>
+                    {(() => {
+                      const companyRange = getCompanyDateRange(job);
+                      return companyRange ? (
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">
+                          {formatDateRange(companyRange, language, t.experience.present)}
+                        </span>
+                      ) : null;
+                    })()}
+                  </div>
                   <div className="space-y-6">
                     {job.roles.map((role, roleIndex) => (
                       <div key={roleIndex} className="pl-4 border-l-2 border-border">

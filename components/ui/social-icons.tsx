@@ -47,6 +47,12 @@ export default function SocialIcons({
       href: "mailto:hello@rsrdev.com",
       label: t.social.email,
       icon: <BsEnvelope size={size} />,
+    },
+    {
+      id: "orcid",
+      href: "https://orcid.org/0009-0003-0702-7601",
+      label: t.social.orcid,
+      icon: <FaOrcid size={size} />,
     }
   ];
 

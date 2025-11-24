@@ -3,7 +3,7 @@
 import Container from "@/components/container";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLanguage } from "@/lib/language-context";
-import { formatDateRange, type DateRange } from "@/lib/date-formatter";
+import { formatDateRange, normalizeDate, type DateRange } from "@/lib/date-formatter";
 import {
   transformTranslationToExperiences,
   sortExperiences,
@@ -14,26 +14,6 @@ import {
 
 // Default sorting strategy for experiences
 const EXPERIENCE_SORT_STRATEGY: SortStrategy = 'date';
-
-/**
- * Normalize date string to ISO format for comparison (YYYY-MM-DD)
- * Handles both "YYYY" and "YYYY-MM" formats
- */
-function normalizeDate(dateStr: string): string {
-  // If it's just a year, use January 1st
-  if (/^\d{4}$/.test(dateStr)) {
-    return `${dateStr}-01-01`;
-  }
-  
-  // If it's YYYY-MM, use the first day of that month
-  if (/^\d{4}-\d{1,2}$/.test(dateStr)) {
-    const [year, month] = dateStr.split('-');
-    const paddedMonth = month.padStart(2, '0');
-    return `${year}-${paddedMonth}-01`;
-  }
-  
-  return dateStr;
-}
 
 /**
  * Calculate the overall date range for a company with multiple roles

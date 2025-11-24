@@ -7,6 +7,28 @@ export interface DateRange {
   end?: string; // Format: "YYYY-MM" or "YYYY" or undefined for "Present"
 }
 
+/**
+ * Normalize date string to ISO format for comparison (YYYY-MM-DD)
+ * Handles both "YYYY" and "YYYY-MM" formats
+ * @param dateStr - Date string in format "YYYY" or "YYYY-MM"
+ * @returns Normalized date string in ISO format (YYYY-MM-DD)
+ */
+export function normalizeDate(dateStr: string): string {
+  // If it's just a year, use January 1st
+  if (/^\d{4}$/.test(dateStr)) {
+    return `${dateStr}-01-01`;
+  }
+  
+  // If it's YYYY-MM, use the first day of that month
+  if (/^\d{4}-\d{1,2}$/.test(dateStr)) {
+    const [year, month] = dateStr.split('-');
+    const paddedMonth = month.padStart(2, '0');
+    return `${year}-${paddedMonth}-01`;
+  }
+  
+  return dateStr;
+}
+
 const MONTH_NAMES = {
   en: [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",

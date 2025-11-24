@@ -51,7 +51,7 @@ export const translations = {
           period: { start: "2025" },
           description:
             "Futuryze builds AI infrastructure that helps private healthcare providers create and deploy their own voice agents for scheduling, triage, and patient communication—without writing code. I lead product architecture, AI systems design, and technical execution, overseeing integrations with OpenAI, Anthropic, ElevenLabs, and Deepgram. My work spans backend engineering, workflow automation, and scaling infrastructure for HIPAA-compliant, production-grade deployments across clinics in multiple countries.",
-          highlights: ["Voice AI", "AI Systems", "AI Infrastructure"],
+          highlights: ["Voice AI", "AI Systems", "AI Infrastructure", "Leadership", "Business Administration", "Compliance (GDPR / HIPAA)", "Team Management & Coordination"],
         },
         {
           company: "Global Youth Congress",
@@ -240,7 +240,7 @@ export const translations = {
           period: { start: "2025" },
           description:
             "Futuryze desarrolla infraestructura de inteligencia artificial que permite a los proveedores de salud privada crear y desplegar sus propios agentes de voz para agendamiento, triaje y comunicación con pacientes, sin necesidad de programar. Lidero la arquitectura del producto, el diseño de sistemas de IA y la ejecución técnica, supervisando integraciones con OpenAI, Anthropic, ElevenLabs y Deepgram. Mi trabajo abarca ingeniería backend, automatización de flujos de trabajo y escalamiento de infraestructura para implementaciones en producción con cumplimiento HIPAA en clínicas de varios países.",
-          highlights: ["IA de Voz", "Sistemas de IA", "Infraestructura de IA"],
+          highlights: ["IA de Voz", "Sistemas de IA", "Infraestructura de IA", "Liderazgo", "Administración de Empresas", "Compliance (GDPR / HIPAA)", "Coordinación y Administración de Equipos"],
         },
         {
           company: "Global Youth Congress",

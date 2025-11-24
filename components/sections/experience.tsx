@@ -16,6 +16,26 @@ import {
 const EXPERIENCE_SORT_STRATEGY: SortStrategy = 'date';
 
 /**
+ * Normalize date string to ISO format for comparison (YYYY-MM-DD)
+ * Handles both "YYYY" and "YYYY-MM" formats
+ */
+function normalizeDate(dateStr: string): string {
+  // If it's just a year, use January 1st
+  if (/^\d{4}$/.test(dateStr)) {
+    return `${dateStr}-01-01`;
+  }
+  
+  // If it's YYYY-MM, use the first day of that month
+  if (/^\d{4}-\d{1,2}$/.test(dateStr)) {
+    const [year, month] = dateStr.split('-');
+    const paddedMonth = month.padStart(2, '0');
+    return `${year}-${paddedMonth}-01`;
+  }
+  
+  return dateStr;
+}
+
+/**
  * Calculate the overall date range for a company with multiple roles
  * Returns the earliest start date and latest end date (or undefined if any role is current)
  */
@@ -24,9 +44,11 @@ function getCompanyDateRange(job: ExperienceType): DateRange | null {
     return null;
   }
   
-  // Find earliest start date
+  // Find earliest start date using normalized date comparison
   const earliestStart = job.roles.reduce((earliest, role) => {
-    return role.period.start < earliest ? role.period.start : earliest;
+    return normalizeDate(role.period.start) < normalizeDate(earliest) 
+      ? role.period.start 
+      : earliest;
   }, job.roles[0].period.start);
   
   // Find latest end date (undefined means "Present")
@@ -34,7 +56,9 @@ function getCompanyDateRange(job: ExperienceType): DateRange | null {
   const latestEnd = hasCurrentRole ? undefined : job.roles.reduce((latest, role) => {
     if (!role.period.end) return latest;
     if (!latest) return role.period.end;
-    return role.period.end > latest ? role.period.end : latest;
+    return normalizeDate(role.period.end) > normalizeDate(latest) 
+      ? role.period.end 
+      : latest;
   }, job.roles[0].period.end);
   
   return {

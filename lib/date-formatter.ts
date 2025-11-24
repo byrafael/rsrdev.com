@@ -156,6 +156,11 @@ export function formatDateRange(
   if (!range.end) {
     return `${startFormatted} – ${presentLabel} • ${duration}`;
   }
+
+  if(range.start == range.end) {
+    return `${startFormatted} • ${duration}`;
+  }
+    
   
   const endFormatted = formatDate(range.end, locale);
   return `${startFormatted} – ${endFormatted} • ${duration}`;

@@ -61,17 +61,19 @@ export default function Navigation() {
 
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-border">
-          <Container className="py-4 space-y-3">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block text-sm text-muted-foreground hover:text-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <Container className="py-2">
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-xs text-muted-foreground hover:text-accent transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </Container>
         </div>
       )}

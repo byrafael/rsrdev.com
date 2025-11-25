@@ -10,6 +10,7 @@ export default function Navigation() {
   const t = useTranslation();
 
   const links = [
+    { label: t.nav.techStack, href: "#tech-stack" },
     { label: t.nav.experience, href: "#experience" },
     { label: t.nav.projects, href: "#projects" },
     { label: t.nav.education, href: "#education" },
@@ -61,8 +62,8 @@ export default function Navigation() {
 
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-border">
-          <Container className="py-2">
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <Container className="py-3">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 px-1">
               {links.map((link) => (
                 <Link
                   key={link.href}

@@ -46,7 +46,7 @@ export default function TechStack() {
   ];
 
   return (
-    <section className="py-16 border-t border-border">
+    <section id="tech-stack" className="py-16 border-t border-border">
       <Container>
         <h2 className="text-lg font-semibold mb-8">{t.techStack.title}</h2>
 

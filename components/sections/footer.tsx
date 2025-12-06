@@ -21,8 +21,8 @@ export default function Footer() {
 
           <div className="border-t border-border pt-6 text-xs text-muted-foreground">
             <p>
-              {t.footer.copyright}{" "}
-              <Heart className="inline-block h-3 w-3 align-middle mx-1" />{" "}
+              {t.footer.copyright}{""}
+              <Heart className="inline-block h-3 w-3 align-middle mx-1" />{""}
               {t.footer.and} {t.footer.nextjs}.
             </p>
           </div>

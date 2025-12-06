@@ -36,12 +36,12 @@ export default function SocialIcons({
       label: t.social.github,
       icon: <BsGithub size={size} />,
     },
-    {
-      id: "x",
-      href: "https://x.com/rsoleyyy",
-      label: t.social.x,
-      icon: <BsTwitterX size={size} />,
-    },
+    // {
+    //   id: "x",
+    //   href: "https://x.com/rsoleyyy",
+    //   label: t.social.x,
+    //   icon: <BsTwitterX size={size} />,
+    // },
     {
       id: "email",
       href: "mailto:hello@rsrdev.com",

@@ -8,7 +8,7 @@ export const translations = {
       projects: "Projects",
       education: "Education",
       certificates: "Certificates",
-      blog: "Research",
+      research: "Research",
       contact: "Contact",
     },
     // Hero Section
@@ -37,7 +37,7 @@ export const translations = {
         infrastructure: "Infrastructure",
         web: "Web",
         tools: "Tools",
-        sound: "Sound Systems"
+        sound: "Sound Systems",
       },
     },
     // Experience Section
@@ -51,7 +51,15 @@ export const translations = {
           period: { start: "2025" },
           description:
             "Futuryze builds AI infrastructure that helps private healthcare providers create and deploy their own voice agents for scheduling, triage, and patient communication—without writing code. I lead product architecture, AI systems design, and technical execution, overseeing integrations with OpenAI, Anthropic, ElevenLabs, and Deepgram. My work spans backend engineering, workflow automation, and scaling infrastructure for HIPAA-compliant, production-grade deployments across clinics in multiple countries.",
-          highlights: ["Voice AI", "AI Systems", "AI Infrastructure", "Leadership", "Business Administration", "Compliance (GDPR / HIPAA)", "Team Management & Coordination"],
+          highlights: [
+            "Voice AI",
+            "AI Systems",
+            "AI Infrastructure",
+            "Leadership",
+            "Business Administration",
+            "Compliance (GDPR / HIPAA)",
+            "Team Management & Coordination",
+          ],
         },
         {
           company: "Global Youth Congress",
@@ -90,12 +98,33 @@ export const translations = {
           ],
         },
         {
+          title: "Contract Software Developer",
+          company: "Independent Contractor",
+          period: { start: "2019", end: "2025" },
+          description:
+            "Delivered full-stack software development services to online communities and small businesses across Costa Rica. Built backend systems integrated with the Discord Bot API for community management and automation, and developed custom websites for local companies and clients. Handled end-to-end project delivery from requirements gathering to deployment, working directly with clients to translate business needs into technical solutions.",
+          highlights: [
+            "Full-Stack Web Development",
+            "Backend Systems Design",
+            "Discord Bot API Integration",
+            "Client Communication",
+            "Project Management",
+            "Requirements Analysis",
+            "Node.js / JavaScript",
+          ],
+        },
+        {
           title: "AI Systems Developer",
           company: "MUSCLE",
           period: { start: "2025-07", end: "2025-07" },
           description:
             "Building AI agents and sentiment analysis workflows inside n8n to automate high-volume support call processing (inbound + outbound). Leveraging Node.js, LangChain integrations, and Python functions to deploy real-time, production-grade systems at scale. Part of the R&D team at Muscle Innovation Labs (as a full-time intern).",
-          highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
+          highlights: [
+            "AI Systems",
+            "Langchain / N8N",
+            "JS / Python",
+            "Hubspot / Aircall",
+          ],
         },
         {
           title: "Student Sound Technician",
@@ -124,46 +153,119 @@ export const translations = {
       viewCode: "View Code",
       list: [
         {
+          title: "EconSys",
           description:
             "Modular economic-simulation API platform powering virtual economies: models users, assets, markets and policy effects in real time.",
+          tags: ["Node.js", "Express", "API", "MySQL", "Virtual Economy"],
+          source: "https://github.com/byrafael/EconSys",
+          preview: "https://econsys.rsrdev.com",
         },
         {
+          title: "QuantOps",
           description:
             "Python-based quantitative research and trading framework with CLI and built-in interactive dashboard: covers data ingestion, backtesting, portfolio optimisation.",
+          tags: ["Python", "Quantitative Trading", "Backtesting", "CLI"],
+          source: "https://github.com/byrafael/QuantOps",
         },
         {
+          title: "Schedulr",
           description:
             "Intelligent scheduling system that dynamically orchestrates classes, blocks, and teachers across multiple days.",
+          tags: ["Next.js", "MySQL", "Education Tech"],
+          source: "https://github.com/byrafael/Schedulr",
         },
         {
+          title: "Mosaic",
           description:
             "Your smarter operations platform — a unified tool for managing and automating operational workflows across your infrastructure and product stack.",
+          tags: ["Node.js", "Microservices", "Operations Automation", "SaaS"],
+          source: "https://github.com/byrafael/Mosaic",
         },
         {
+          title: "EconDash",
           description:
             "Interactive analytics & visualization dashboard built atop EconSys—delivers real-time insights into market/user behaviour, policies and outcomes.",
+          tags: ["React", "D3.js", "Dashboard", "Data Visualization"],
+          source: "https://github.com/byrafael/EconDash",
         },
         {
+          title: "ReconBot",
           description:
             "A comprehensive economy engine built specifically for Emergency Response: Liberty County (ER:LC) role-play servers. Manages player banking, purchase-only vehicle ownership, business structures with revenue sharing, and real-time economy analytics.",
+          tags: [
+            "Node.js",
+            "Discord.js",
+            "Next.js",
+            "React",
+            "TailwindCSS",
+            "OAuth2",
+          ],
+          preview: "https://reconbot.xyz",
         },
       ],
     },
     // Education Section
     education: {
       title: "Formal Education",
+      list: [
+        {
+          degree: "Cambridge International AS & A Levels",
+          school: "Cambridge International Education",
+          year: "2025 - 2026",
+          details:
+            "Mathematics (AL), Computer Science (AL), Global Perspectives and Research (AS)",
+        },
+        {
+          degree: "Cambridge International IGCSEs",
+          school: "Cambridge International Education",
+          year: "2023 - 2024",
+          details:
+            "International Mathematics, Computer Science, English Language, and History",
+        },
+      ],
     },
     // Certificates Section
     certificates: {
       title: "Certifications",
       view: "View",
+      list: [
+        {
+          title: "Next Gen Data Science",
+          issuer: "INCAE Business School",
+          year: "2025",
+        },
+        {
+          title: "ISC2 Candidate",
+          issuer: "ISC2",
+          year: "2025",
+        },
+        {
+          title: "Data Visualization with Python",
+          issuer: "IBM's Cognitive Class",
+          year: "2024",
+        },
+        {
+          title: "Python & Statistics for Financial Analysis",
+          issuer: "The Hong Kong University of Science and Technology",
+          year: "2024",
+        },
+      ],
     },
-    // Blog Section
-    blog: {
+    // Research Section
+    research: {
       title: "My Research",
       readMore: "Read More",
       noResearch: "No published research at this time.",
       description: "Thoughts on systems, markets, and code.",
+      list: [
+        // {
+        //   title: "Building Low-Latency Trading Systems in 2024",
+        //   excerpt:
+        //     "A deep dive into modern approaches to sub-millisecond order execution and the trade-offs between latency and complexity.",
+        //   date: "Nov 15, 2024",
+        //   link: "https://cdn.rsrdev.com/papers/low-latency-trading-2024.pdf",
+        // },
+      ],
     },
     // Footer
     footer: {
@@ -197,7 +299,7 @@ export const translations = {
       projects: "Proyectos",
       education: "Educación",
       certificates: "Certificados",
-      blog: "Investigación",
+      research: "Investigación",
       contact: "Contacto",
     },
     // Hero Section
@@ -226,7 +328,7 @@ export const translations = {
         infrastructure: "Infraestructura",
         web: "Web",
         tools: "Herramientas",
-        sound: "Sistemas de Sonido"
+        sound: "Sistemas de Sonido",
       },
     },
     // Experience Section
@@ -240,7 +342,15 @@ export const translations = {
           period: { start: "2025" },
           description:
             "Futuryze desarrolla infraestructura de inteligencia artificial que permite a los proveedores de salud privada crear y desplegar sus propios agentes de voz para agendamiento, triaje y comunicación con pacientes, sin necesidad de programar. Lidero la arquitectura del producto, el diseño de sistemas de IA y la ejecución técnica, supervisando integraciones con OpenAI, Anthropic, ElevenLabs y Deepgram. Mi trabajo abarca ingeniería backend, automatización de flujos de trabajo y escalamiento de infraestructura para implementaciones en producción con cumplimiento HIPAA en clínicas de varios países.",
-          highlights: ["IA de Voz", "Sistemas de IA", "Infraestructura de IA", "Liderazgo", "Administración de Empresas", "Compliance (GDPR / HIPAA)", "Coordinación y Administración de Equipos"],
+          highlights: [
+            "IA de Voz",
+            "Sistemas de IA",
+            "Infraestructura de IA",
+            "Liderazgo",
+            "Administración de Empresas",
+            "Compliance (GDPR / HIPAA)",
+            "Coordinación y Administración de Equipos",
+          ],
         },
         {
           company: "Global Youth Congress",
@@ -279,12 +389,33 @@ export const translations = {
           ],
         },
         {
+          title: "Desarrollador de Software por Contrato",
+          company: "Contratista Independiente",
+          period: { start: "2019", end: "2025" },
+          description:
+            "Ofrecí servicios de desarrollo de software full-stack a comunidades en línea y pequeñas empresas en Costa Rica. Construí sistemas backend integrados con la API de Discord Bot para gestión y automatización de comunidades, y desarrollé sitios web personalizados para empresas y clientes locales. Manejé la entrega de proyectos de principio a fin, desde la recopilación de requisitos hasta el despliegue, trabajando directamente con los clientes para traducir necesidades empresariales en soluciones técnicas.",
+          highlights: [
+            "Desarrollo Web Full-Stack",
+            "Diseño de Sistemas Backend",
+            "Integración API Discord Bot",
+            "Comunicación con Clientes",
+            "Gestión de Proyectos",
+            "Análisis de Requisitos",
+            "Node.js / JavaScript",
+          ],
+        },
+        {
           title: "Desarrollador de Sistemas de IA",
           company: "MUSCLE",
           period: { start: "2025-07" },
           description:
             "Desarrollando agentes de IA y flujos de análisis de sentimiento dentro de n8n para automatizar el procesamiento de llamadas de soporte a gran escala (entrantes y salientes). Usando Node.js, integraciones con LangChain y funciones en Python para desplegar sistemas en tiempo real y de nivel productivo. Parte del equipo de I+D en Muscle Innovation Labs (pasante/miembro en formación a tiempo completo).",
-          highlights: ["Sistemas de IA", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
+          highlights: [
+            "Sistemas de IA",
+            "Langchain / N8N",
+            "JS / Python",
+            "Hubspot / Aircall",
+          ],
         },
         {
           title: "Técnico de Sonido Estudiantil",
@@ -313,46 +444,129 @@ export const translations = {
       viewCode: "Ver Código",
       list: [
         {
+          title: "EconSys",
           description:
             "Plataforma API modular de simulación económica que impulsa economías virtuales: modela usuarios, activos, mercados y efectos de políticas en tiempo real.",
+          tags: ["Node.js", "Express", "API", "MySQL", "Economía Virtual"],
+          source: "https://github.com/byrafael/EconSys",
+          preview: "https://econsys.rsrdev.com",
         },
         {
+          title: "QuantOps",
           description:
             "Marco de investigación cuantitativa y trading basado en Python con CLI y panel interactivo integrado: cubre ingesta de datos, backtesting y optimización de cartera.",
+          tags: ["Python", "Trading Cuantitativo", "Backtesting", "CLI"],
+          source: "https://github.com/byrafael/QuantOps",
         },
         {
+          title: "Schedulr",
           description:
             "Sistema de programación inteligente que orquesta dinámicamente clases, bloques y profesores a través de múltiples días.",
+          tags: ["Next.js", "MySQL", "Tecnología Educativa"],
+          source: "https://github.com/byrafael/Schedulr",
         },
         {
+          title: "Mosaic",
           description:
             "Tu plataforma de operaciones más inteligente: una herramienta unificada para gestionar y automatizar flujos de trabajo operacionales en tu infraestructura y pila de productos.",
+          tags: [
+            "Node.js",
+            "Microservicios",
+            "Automatización de Operaciones",
+            "SaaS",
+          ],
+          source: "https://github.com/byrafael/Mosaic",
         },
         {
+          title: "EconDash",
           description:
             "Panel de análisis y visualización interactivo construido sobre EconSys—entrega información en tiempo real sobre comportamiento de mercado/usuario, políticas y resultados.",
+          tags: [
+            "React",
+            "D3.js",
+            "Panel de Control",
+            "Visualización de Datos",
+          ],
+          source: "https://github.com/byrafael/EconDash",
         },
         {
+          title: "ReconBot",
           description:
             "Un motor económico integral construido específicamente para servidores de juego de rol de Emergency Response: Liberty County (ER:LC). Gestiona banca de jugadores, propiedad de vehículos solo por compra, estructuras comerciales con reparto de ingresos y análisis económico en tiempo real.",
+          tags: [
+            "Node.js",
+            "Discord.js",
+            "Next.js",
+            "React",
+            "TailwindCSS",
+            "OAuth2",
+          ],
+          preview: "https://reconbot.xyz",
         },
       ],
     },
     // Education Section
     education: {
       title: "Educación Formal",
+      list: [
+        {
+          degree: "Cambridge International AS & A Levels",
+          school: "Cambridge International Education",
+          year: "2025 - 2026",
+          details:
+            "Matemáticas (AL), Ciencias de la Computación (AL), Perspectivas Globales e Investigación (AS)",
+        },
+        {
+          degree: "Cambridge International IGCSEs",
+          school: "Cambridge International Education",
+          year: "2023 - 2024",
+          details:
+            "Matemáticas Internacionales, Ciencias de la Computación, Idioma Inglés e Historia",
+        },
+      ],
     },
     // Certificates Section
     certificates: {
       title: "Certificaciones",
       view: "Ver",
+      list: [
+        {
+          title: "Next Gen Data Science",
+          issuer: "INCAE Business School",
+          year: "2025",
+        },
+        {
+          title: "ISC2 Candidate",
+          issuer: "ISC2",
+          year: "2025",
+        },
+        {
+          title: "Data Visualization with Python",
+          issuer: "IBM's Cognitive Class",
+          year: "2024",
+        },
+        {
+          title: "Python & Statistics for Financial Analysis",
+          issuer: "The Hong Kong University of Science and Technology",
+          year: "2024",
+        },
+      ],
     },
-    // Blog Section
-    blog: {
+    // Research Section
+    research: {
       title: "Mi Investigación",
       readMore: "Leer Más",
       noResearch: "No hay investigación publicada en este momento.",
       description: "Reflexiones sobre sistemas, mercados y código.",
+      list: [
+        // {
+        //   title: "Construyendo Sistemas de Trading de Baja Latencia en 2024",
+        //   excerpt:
+        //     "Una inmersión profunda en enfoques modernos para la ejecución de órdenes submilisegundos y las compensaciones entre latencia y complejidad.",
+        //   date: "Nov 15, 2024",
+        //   link: "https://cdn.rsrdev.com/papers/low-latency-trading-2024.pdf",
+        // },
+      ],
     },
     // Footer
     footer: {

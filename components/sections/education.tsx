@@ -2,43 +2,19 @@
 
 import Container from "@/components/container";
 import { useTranslation } from "@/hooks/use-translation";
+import {
+  transformTranslationToEducation,
+  sortEducationByDate,
+  type TranslationEducation,
+} from "@/lib/content-data";
 
 export default function Education() {
   const t = useTranslation();
-  const education = [
-    // {
-    //   degree: "Master of Science in Financial Engineering",
-    //   school: "Carnegie Mellon University",
-    //   year: "2019",
-    //   details: "GPA: 3.9/4.0 • Thesis: Machine Learning in Options Pricing",
-    // },
-    // {
-    //   degree: "Bachelor of Science in Computer Science & Mathematics",
-    //   school: "MIT",
-    //   year: "2017",
-    //   details: "Summa Cum Laude • Minor: Physics • Dean's List all semesters",
-    // },
-    {
-      degree: "Cambridge International AS & A Levels",
-      school: "Cambridge International Education",
-      year: "2025 - 2026",
-      details:
-        "Mathematics (AL), Computer Science (AL), Global Perspectives and Research (AS)",
-    },
-    // {
-    //   degree: "High School Diploma (STEM Focus)",
-    //   school: "Tree Of Life International School",
-    //   year: "2026",
-    //   details:
-    //     "4.0/4.0 GPA (94.7%, A*) Senior Year • Accelerated Programme • Secretary General, Model United Nations Team",
-    // },
-    {
-      degree: "Cambridge International IGCSEs",
-      school: "Cambridge International Education",
-      year: "2023 - 2024",
-      details: "International Mathematics, Computer Science, English Language, and History",
-    },
-  ];
+
+  // Transform and sort education dynamically
+  const rawEducation = t.education.list as unknown as TranslationEducation[];
+  const educationData = transformTranslationToEducation(rawEducation);
+  const education = sortEducationByDate(educationData);
 
   return (
     <section id="education" className="py-16 border-t border-border">

@@ -3,53 +3,17 @@
 import Container from "@/components/container";
 import { BsGithub, BsBoxArrowUpRight } from "react-icons/bs";
 import { useTranslation } from "@/hooks/use-translation";
+import {
+  transformTranslationToProjects,
+  type TranslationProject,
+} from "@/lib/content-data";
 
 export default function Projects() {
   const t = useTranslation();
-  const projects = [
-    {
-      title: "EconSys",
-      description: t.projects.list[0].description,
-      tags: ["Node.js", "Express", "API", "MySQL", "Virtual Economy"],
-      source: "https://github.com/byrafael/EconSys",
-      preview: "https://econsys.rsrdev.com",
-    },
-    {
-      title: "QuantOps",
-      description: t.projects.list[1].description,
-      tags: ["Python", "Quantitative Trading", "Backtesting", "CLI"],
-      source: "https://github.com/byrafael/QuantOps",
-      preview: undefined,
-    },
-    {
-      title: "Schedulr",
-      description: t.projects.list[2].description,
-      tags: ["Next.js", "MySQL", "Education Tech"],
-      source: "https://github.com/byrafael/Schedulr",
-      preview: undefined,
-    },
-    {
-      title: "Mosaic",
-      description: t.projects.list[3].description,
-      tags: ["Node.js", "Microservices", "Operations Automation", "SaaS"],
-      source: "https://github.com/byrafael/Mosaic",
-      preview: undefined,
-    },
-    {
-      title: "EconDash",
-      description: t.projects.list[4].description,
-      tags: ["React", "D3.js", "Dashboard", "Data Visualization"],
-      source: "https://github.com/byrafael/EconDash",
-      preview: undefined,
-    },
-    {
-      title: "ReconBot",
-      description: t.projects.list[5].description,
-      tags: ["Node.js", "Discord.js", "Next.js", "React", "TailwindCSS", "OAuth2"],
-      source: undefined,
-      preview: "https://reconbot.xyz",
-    },
-  ];
+
+  // Transform and get projects dynamically
+  const rawProjects = t.projects.list as unknown as TranslationProject[];
+  const projects = transformTranslationToProjects(rawProjects);
 
   return (
     <section id="projects" className="py-16 border-t border-border">

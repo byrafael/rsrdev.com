@@ -14,7 +14,7 @@ export default function Navigation() {
     { label: t.nav.experience, href: "#experience" },
     { label: t.nav.projects, href: "#projects" },
     { label: t.nav.education, href: "#education" },
-    { label: t.nav.blog, href: "#blog" },
+    // { label: t.nav.research, href: "#research" },
     { label: t.nav.contact, href: "#contact" },
   ];
 

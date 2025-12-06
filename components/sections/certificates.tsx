@@ -2,31 +2,20 @@
 
 import Container from "@/components/container";
 import { useTranslation } from "@/hooks/use-translation";
+import {
+  transformTranslationToCertificates,
+  sortCertificatesByDate,
+  type TranslationCertificate,
+} from "@/lib/content-data";
 
 export default function Certificates() {
   const t = useTranslation();
-  const certs = [
-    {
-      title: "Next Gen Data Science",
-      issuer: "INCAE Business School",
-      year: "2025",
-    },
-    {
-      title: "ISC2 Candidate",
-      issuer: "ISC2",
-      year: "2025",
-    },
-    {
-      title: "Data Visualization with Python",
-      issuer: "IBM's Cognitive Class",
-      year: "2024",
-    },
-    {
-      title: "Python & Statistics for Financial Analysis",
-      issuer: "The Hong Kong University of Science and Technology",
-      year: "2024",
-    },
-  ];
+
+  // Transform and sort certificates dynamically
+  const rawCertificates = t.certificates
+    .list as unknown as TranslationCertificate[];
+  const certificatesData = transformTranslationToCertificates(rawCertificates);
+  const certs = sortCertificatesByDate(certificatesData);
 
   return (
     <section className="py-16 border-t border-border">

@@ -6,7 +6,7 @@ import Experience from "@/components/sections/experience";
 import Projects from "@/components/sections/projects";
 import Education from "@/components/sections/education";
 import Certificates from "@/components/sections/certificates";
-import Blog from "@/components/sections/blog";
+import Research from "@/components/sections/research";
 import Footer from "@/components/sections/footer";
 import FloatingPills from "@/components/floating-pills";
 
@@ -21,7 +21,7 @@ export default function Home() {
       <Projects />
       <Education />
       <Certificates />
-      <Blog />
+      {/* <Research /> */}
       <Footer />
       <FloatingPills />
     </main>

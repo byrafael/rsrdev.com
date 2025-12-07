@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@/components/container";
+import { GraduationCap } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   transformTranslationToEducation,
@@ -17,9 +18,12 @@ export default function Education() {
   const education = sortEducationByDate(educationData);
 
   return (
-    <section id="education" className="py-16 border-t border-border">
+    <section id="education" className="py-16">
       <Container>
-        <h2 className="text-lg font-semibold mb-8">{t.education.title}</h2>
+        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+          <GraduationCap className="w-8 h-8 text-primary" />
+          {t.education.title}
+        </h2>
 
         <div className="space-y-6">
           {education.map((edu, index) => (

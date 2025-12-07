@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@/components/container";
+import { Award } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   transformTranslationToCertificates,
@@ -18,9 +19,12 @@ export default function Certificates() {
   const certs = sortCertificatesByDate(certificatesData);
 
   return (
-    <section className="py-16 border-t border-border">
+    <section id="certificates" className="py-16">
       <Container>
-        <h2 className="text-lg font-semibold mb-8">{t.certificates.title}</h2>
+        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+          <Award className="w-8 h-8 text-primary" />
+          {t.certificates.title}
+        </h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           {certs.map((cert, index) => (

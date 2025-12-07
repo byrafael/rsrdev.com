@@ -15,17 +15,30 @@ export const translations = {
     hero: {
       subtitle: "Backend & AI Systems Developer",
       description:
-        "High school student & entrepeneur building high-performance trading systems, AI infrastructure, and interactive economies. Experienced in backend architecture, mathematics, and intelligent system design. Passionate about turning complexity (whether it is financial, computational, or human), into elegant, scalable code.",
+        "I’m a backend developer, AI systems engineer, and early-stage quant trader and developer. I have over eight years of programming experience and six years of contractor work developing backend systems, AI workflows, and quantitative tooling. I build quantitative trading tools, research pipelines, and algorithmic analysis systems in Python, with a focus on backend architecture, data engineering, and the infrastructure that supports real trading strategies.",
       tagline: "Code. Data. Markets.",
     },
     // About Section
     about: {
-      paragraph1:
-        "High school student, entrepreneur, and backend & AI systems developer building the infrastructure that connects computation, markets, and intelligence. I focus on backend architecture, algorithmic design, and applied machine learning—especially where math, data, and systems intersect.",
-      paragraph2:
-        "I care about clean, high-performance code and turning complex financial, analytical, and behavioral problems into scalable software. My current work spans quantitative data processing, AI workflow engineering, and simulation design for financial and interactive systems.",
-      paragraph3:
-        "With 8+ years of programming experience, I’ve built everything from real-time economic APIs and scheduling engines to AI agents and game simulation systems—all centered on one theme: using code to understand, model, and optimize complex systems.",
+      paragraph:
+        "I build software systems that model, analyze, and optimize complex environments, whether the complexity comes from markets, people, or large-scale operational constraints. I have eight years of programming experience and six years of contractor work developing backend systems, AI workflows, and quantitative tooling. Across all of my projects and work, my focus is the same: using code as a way to understand, simulate, and improve complex systems.",
+      stats: [
+        {
+          value: 6,
+          suffix: "+",
+          label: "Years Work Experience",
+        },
+        {
+          value: 8,
+          suffix: "+",
+          label: "Years Programming Experience",
+        },
+        {
+          value: 20,
+          suffix: "+",
+          label: "Technologies",
+        },
+      ],
     },
     // Tech Stack Section
     techStack: {
@@ -209,14 +222,22 @@ export const translations = {
       title: "Formal Education",
       list: [
         {
-          degree: "Cambridge International AS & A Levels",
+          degree: "High School Diploma",
+          school:
+            "Ministerio de Educación Pública de Costa Rica (Costa Rican Ministry of Education)",
+          year: "Expected 2026",
+          details:
+            "Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program.",
+        },
+        {
+          degree: "AS & A Levels",
           school: "Cambridge International Education",
           year: "2025 - 2026",
           details:
             "Mathematics (AL), Computer Science (AL), Global Perspectives and Research (AS)",
         },
         {
-          degree: "Cambridge International IGCSEs",
+          degree: "IGCSEs",
           school: "Cambridge International Education",
           year: "2023 - 2024",
           details:
@@ -306,17 +327,30 @@ export const translations = {
     hero: {
       subtitle: "Desarrollador Backend y de Sistemas de IA",
       description:
-        "Estudiante de secundaria y emprendedor que construye sistemas de trading de alto rendimiento, infraestructura de IA y economías interactivas. Con experiencia en arquitectura backend, matemáticas y diseño de sistemas inteligentes. Apasionado por convertir la complejidad —ya sea financiera, computacional o humana— en código elegante y escalable.",
+        "Soy desarrollador backend, ingeniero de sistemas de IA y desarrollador y operador cuantitativo en fase inicial. Tengo más de ocho años de experiencia en programación y seis años trabajando como contratista desarrollando sistemas backend, flujos de trabajo de IA y herramientas cuantitativas. Desarrollo herramientas de trading cuantitativo, pipelines de investigación y sistemas de análisis algorítmico en Python, con especial atención a la arquitectura backend, la ingeniería de datos y la infraestructura que sustenta las estrategias de trading reales.",
       tagline: "Código. Datos. Mercados.",
     },
     // About Section
     about: {
-      paragraph1:
-        "Estudiante de secundaria, emprendedor y backend & AI systems developer, construyendo la infraestructura que conecta computación, mercados e inteligencia. Me especializo en arquitectura backend, diseño algorítmico y aprendizaje automático aplicado, especialmente donde se cruzan las matemáticas, los datos y los sistemas.",
-      paragraph2:
-        "Me importa escribir código limpio y de alto rendimiento, y convertir problemas financieros, analíticos y de comportamiento en software escalable. Mi trabajo actual abarca procesamiento de datos cuantitativos, ingeniería de flujos de trabajo con IA y el diseño de simulaciones para entornos financieros e interactivos.",
-      paragraph3:
-        "Con más de 8 años de experiencia programando, he desarrollado proyectos que van desde APIs económicas en tiempo real y motores de programación hasta agentes de IA y sistemas de juegos en Roblox—todos unidos por un mismo objetivo: usar código para entender, modelar y optimizar sistemas complejos.",
+      paragraph:
+        "Construyo sistemas de software que modelan, analizan y optimizan entornos complejos, ya sea que la complejidad provenga de mercados, personas o restricciones operacionales a gran escala. Tengo ocho años de experiencia en programación y seis años de trabajo por contrato desarrollando sistemas backend, flujos de trabajo de IA y herramientas cuantitativas. En todos mis proyectos y trabajos, mi enfoque es el mismo: usar código como una forma de entender, simular y mejorar sistemas complejos.",
+      stats: [
+        {
+          value: 6,
+          suffix: "+",
+          label: "Años de Experiencia Laboral",
+        },
+        {
+          value: 8,
+          suffix: "+",
+          label: "Años de Experiencia en Programación",
+        },
+        {
+          value: 20,
+          suffix: "+",
+          label: "Tecnologías",
+        },
+      ],
     },
     // Tech Stack Section
     techStack: {
@@ -510,18 +544,26 @@ export const translations = {
       title: "Educación Formal",
       list: [
         {
-          degree: "Cambridge International AS & A Levels",
+          degree: "Bachiller en la Educación Media",
+          school:
+            "Ministerio de Educación Pública de Costa Rica (Costa Rican Ministry of Education)",
+          year: "Graduación Esperada 2026",
+          details:
+            "Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program.",
+        },
+        {
+          degree: "AS & A Levels",
           school: "Cambridge International Education",
           year: "2025 - 2026",
           details:
-            "Matemáticas (AL), Ciencias de la Computación (AL), Perspectivas Globales e Investigación (AS)",
+            "Mathematics (AL), Computer Science (AL), Global Perspectives and Research (AS)",
         },
         {
-          degree: "Cambridge International IGCSEs",
+          degree: "IGCSEs",
           school: "Cambridge International Education",
           year: "2023 - 2024",
           details:
-            "Matemáticas Internacionales, Ciencias de la Computación, Idioma Inglés e Historia",
+            "Matemáticas, Ciencias de la Computación, Idioma Inglés e Historia",
         },
       ],
     },

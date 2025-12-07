@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@/components/container";
+import { FlaskConical } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   transformTranslationToResearchPosts,
@@ -17,9 +18,12 @@ export default function Research() {
   const posts = sortResearchByDate(postsData);
 
   return (
-    <section id="research" className="py-16 border-t border-border">
+    <section id="research" className="py-16">
       <Container>
-        <h2 className="text-lg font-semibold mb-8">{t.research.title}</h2>
+        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+          <FlaskConical className="w-8 h-8 text-primary" />
+          {t.research.title}
+        </h2>
 
         {posts.length === 0 ? (
           <p className="text-sm text-muted-foreground">

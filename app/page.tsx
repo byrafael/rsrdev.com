@@ -7,6 +7,7 @@ import Projects from "@/components/sections/projects";
 import Education from "@/components/sections/education";
 import Certificates from "@/components/sections/certificates";
 import Research from "@/components/sections/research";
+import Contact from "@/components/sections/contact";
 import Footer from "@/components/sections/footer";
 import FloatingPills from "@/components/floating-pills";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Education />
       <Certificates />
       {/* <Research /> */}
+      {/* <Contact /> */}
       <Footer />
       <FloatingPills />
     </main>

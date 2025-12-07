@@ -1,9 +1,14 @@
 "use client";
 
 import Container from "@/components/container";
+import { Briefcase } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLanguage } from "@/lib/language-context";
-import { formatDateRange, normalizeDate, type DateRange } from "@/lib/date-formatter";
+import {
+  formatDateRange,
+  normalizeDate,
+  type DateRange,
+} from "@/lib/date-formatter";
 import {
   transformTranslationToExperiences,
   sortExperiences,
@@ -13,7 +18,7 @@ import {
 } from "@/lib/experience-data";
 
 // Default sorting strategy for experiences
-const EXPERIENCE_SORT_STRATEGY: SortStrategy = 'date';
+const EXPERIENCE_SORT_STRATEGY: SortStrategy = "date";
 
 /**
  * Calculate the overall date range for a company with multiple roles
@@ -23,43 +28,48 @@ function getCompanyDateRange(job: ExperienceType): DateRange | null {
   if (!job.roles || job.roles.length === 0) {
     return null;
   }
-  
+
   // Find earliest start date using normalized date comparison
   const earliestStart = job.roles.reduce((earliest, role) => {
-    return normalizeDate(role.period.start) < normalizeDate(earliest) 
-      ? role.period.start 
+    return normalizeDate(role.period.start) < normalizeDate(earliest)
+      ? role.period.start
       : earliest;
   }, job.roles[0].period.start);
-  
+
   // Find latest end date (undefined means "Present")
-  const hasCurrentRole = job.roles.some(role => !role.period.end);
-  const latestEnd = hasCurrentRole ? undefined : job.roles.reduce((latest, role) => {
-    if (!role.period.end) return latest;
-    if (!latest) return role.period.end;
-    return normalizeDate(role.period.end) > normalizeDate(latest) 
-      ? role.period.end 
-      : latest;
-  }, job.roles[0].period.end);
-  
+  const hasCurrentRole = job.roles.some((role) => !role.period.end);
+  const latestEnd = hasCurrentRole
+    ? undefined
+    : job.roles.reduce((latest, role) => {
+        if (!role.period.end) return latest;
+        if (!latest) return role.period.end;
+        return normalizeDate(role.period.end) > normalizeDate(latest)
+          ? role.period.end
+          : latest;
+      }, job.roles[0].period.end);
+
   return {
     start: earliestStart,
-    end: latestEnd
+    end: latestEnd,
   };
 }
 
 export default function Experience() {
   const t = useTranslation();
   const { language } = useLanguage();
-  
+
   // Transform and sort experiences dynamically
   const rawJobs = t.experience.jobs as unknown as TranslationJob[];
   const experiences = transformTranslationToExperiences(rawJobs);
   const jobs = sortExperiences(experiences, EXPERIENCE_SORT_STRATEGY);
 
   return (
-    <section id="experience" className="py-16 border-t border-border">
+    <section id="experience" className="py-16">
       <Container>
-        <h2 className="text-lg font-semibold mb-8">{t.experience.title}</h2>
+        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+          <Briefcase className="w-8 h-8 text-primary" />
+          {t.experience.title}
+        </h2>
 
         <div className="space-y-8">
           {jobs.map((job, jobIndex) => (
@@ -73,20 +83,33 @@ export default function Experience() {
                       const companyRange = getCompanyDateRange(job);
                       return companyRange ? (
                         <span className="text-xs text-muted-foreground whitespace-nowrap">
-                          {formatDateRange(companyRange, language, t.experience.present)}
+                          {formatDateRange(
+                            companyRange,
+                            language,
+                            t.experience.present
+                          )}
                         </span>
                       ) : null;
                     })()}
                   </div>
                   <div className="space-y-6">
                     {job.roles.map((role, roleIndex) => (
-                      <div key={roleIndex} className="pl-4 border-l-2 border-border">
+                      <div
+                        key={roleIndex}
+                        className="pl-4 border-l-2 border-border"
+                      >
                         <div className="flex justify-between items-baseline gap-4 mb-2">
                           <div>
-                            <h4 className="font-medium text-sm">{role.title}</h4>
+                            <h4 className="font-medium text-sm">
+                              {role.title}
+                            </h4>
                           </div>
                           <span className="text-xs text-muted-foreground whitespace-nowrap">
-                            {formatDateRange(role.period, language, t.experience.present)}
+                            {formatDateRange(
+                              role.period,
+                              language,
+                              t.experience.present
+                            )}
                           </span>
                         </div>
                         <p className="text-sm text-foreground/80 leading-relaxed mb-3">
@@ -112,10 +135,17 @@ export default function Experience() {
                   <div className="flex justify-between items-baseline gap-4 mb-2">
                     <div>
                       <h3 className="font-medium">{job.title}</h3>
-                      <p className="text-sm text-muted-foreground">{job.company}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {job.company}
+                      </p>
                     </div>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">
-                      {job.period && formatDateRange(job.period, language, t.experience.present)}
+                      {job.period &&
+                        formatDateRange(
+                          job.period,
+                          language,
+                          t.experience.present
+                        )}
                     </span>
                   </div>
                   <p className="text-sm text-foreground/80 leading-relaxed mb-3">

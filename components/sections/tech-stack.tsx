@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@/components/container";
+import { Terminal } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 
 export default function TechStack() {
@@ -41,14 +42,23 @@ export default function TechStack() {
     },
     {
       name: t.techStack.categories.sound,
-      skills: ["Yamaha DM3 Series", "Bose Professional Sound Systems", "Surge Management", "Handheld Wireless Microphones", "Lavalier Wireless Microphones"],
+      skills: [
+        "Yamaha DM3 Series",
+        "Bose Professional Sound Systems",
+        "Surge Management",
+        "Handheld Wireless Microphones",
+        "Lavalier Wireless Microphones",
+      ],
     },
   ];
 
   return (
-    <section id="tech-stack" className="py-16 border-t border-border">
+    <section id="tech-stack" className="py-16">
       <Container>
-        <h2 className="text-lg font-semibold mb-8">{t.techStack.title}</h2>
+        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+          <Terminal className="w-8 h-8 text-primary" />
+          {t.techStack.title}
+        </h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           {categories.map((category) => (

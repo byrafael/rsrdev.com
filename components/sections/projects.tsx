@@ -2,6 +2,7 @@
 
 import Container from "@/components/container";
 import { BsGithub, BsBoxArrowUpRight } from "react-icons/bs";
+import { Code } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   transformTranslationToProjects,
@@ -16,9 +17,12 @@ export default function Projects() {
   const projects = transformTranslationToProjects(rawProjects);
 
   return (
-    <section id="projects" className="py-16 border-t border-border">
+    <section id="projects" className="py-16">
       <Container>
-        <h2 className="text-lg font-semibold mb-8">{t.projects.title}</h2>
+        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+          <Code className="w-8 h-8 text-primary" />
+          {t.projects.title}
+        </h2>
         <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
           {t.projects.disclaimer}
         </p>

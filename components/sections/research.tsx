@@ -1,61 +1,55 @@
-"use client";
+"use client"
 
-import Container from "@/components/container";
-import { FlaskConical } from "lucide-react";
-import { useTranslation } from "@/hooks/use-translation";
+import { FlaskConical } from "lucide-react"
+import Container from "@/components/container"
+import { useTranslation } from "@/hooks/use-translation"
 import {
-  transformTranslationToResearchPosts,
-  sortResearchByDate,
-  type TranslationResearchPost,
-} from "@/lib/content-data";
+	sortResearchByDate,
+	type TranslationResearchPost,
+	transformTranslationToResearchPosts,
+} from "@/lib/content-data"
 
 export default function Research() {
-  const t = useTranslation();
+	const t = useTranslation()
 
-  // Transform and sort research posts dynamically
-  const rawPosts = t.research.list as unknown as TranslationResearchPost[];
-  const postsData = transformTranslationToResearchPosts(rawPosts);
-  const posts = sortResearchByDate(postsData);
+	// Transform and sort research posts dynamically
+	const rawPosts = t.research.list as unknown as TranslationResearchPost[]
+	const postsData = transformTranslationToResearchPosts(rawPosts)
+	const posts = sortResearchByDate(postsData)
 
-  return (
-    <section id="research" className="py-16">
-      <Container>
-        <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-          <FlaskConical className="w-8 h-8 text-primary" />
-          {t.research.title}
-        </h2>
+	return (
+		<section id="research" className="py-16">
+			<Container>
+				<h2 className="mb-8 flex items-center gap-3 font-bold text-3xl">
+					<FlaskConical className="h-8 w-8 text-brand-accent" />
+					{t.research.title}
+				</h2>
 
-        {posts.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            {t.research.noResearch}
-          </p>
-        ) : (
-          <div className="space-y-6">
-            {posts.map((post, index) => (
-              <a
-                key={index}
-                href={post.link}
-                className="block group hover:opacity-75 transition-opacity"
-              >
-                <div className="flex justify-between items-baseline gap-4 mb-2">
-                  <h3 className="font-medium group-hover:text-accent transition-colors">
-                    {post.title}
-                  </h3>
-                  <span className="text-xs text-muted-foreground whitespace-nowrap">
-                    {post.date}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {post.excerpt}
-                </p>
-                {index < posts.length - 1 && (
-                  <div className="mt-6 border-t border-border/50" />
-                )}
-              </a>
-            ))}
-          </div>
-        )}
-      </Container>
-    </section>
-  );
+				{posts.length === 0 ? (
+					<p className="text-muted-foreground text-sm">{t.research.noResearch}</p>
+				) : (
+					<div className="space-y-6">
+						{posts.map((post) => (
+							<a
+								key={post.link}
+								href={post.link}
+								className="group block transition-opacity hover:opacity-75"
+							>
+								<div className="mb-2 flex items-baseline justify-between gap-4">
+									<h3 className="font-medium transition-colors group-hover:text-accent">
+										{post.title}
+									</h3>
+									<span className="whitespace-nowrap text-muted-foreground text-xs">
+										{post.date}
+									</span>
+								</div>
+								<p className="text-muted-foreground text-sm leading-relaxed">{post.excerpt}</p>
+								{index < posts.length - 1 && <div className="mt-6 border-border/50 border-t" />}
+							</a>
+						))}
+					</div>
+				)}
+			</Container>
+		</section>
+	)
 }

@@ -1,0 +1,90 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"a11y": {
+				"recommended": true
+			},
+			"complexity": {
+				"recommended": true,
+				"noExtraBooleanCast": "error",
+				"noUselessCatch": "error",
+				"noUselessConstructor": "error",
+				"noUselessLoneBlockStatements": "error",
+				"noUselessRename": "error",
+				"useArrowFunction": "warn"
+			},
+			"correctness": {
+				"recommended": true,
+				"noUnusedVariables": "error",
+				"useExhaustiveDependencies": "warn",
+				"useHookAtTopLevel": "error"
+			},
+			"nursery": {
+				"useSortedClasses": "warn"
+			},
+			"performance": {
+				"recommended": true
+			},
+			"security": {
+				"recommended": true
+			},
+			"style": {
+				"recommended": true,
+				"noNegationElse": "warn",
+				"noParameterAssign": "error",
+				"useBlockStatements": "warn",
+				"useCollapsedElseIf": "warn",
+				"useConsistentArrayType": {
+					"level": "warn",
+					"options": {
+						"syntax": "shorthand"
+					}
+				},
+				"useConst": "error",
+				"useForOf": "warn",
+				"useSingleVarDeclarator": "warn",
+				"useTemplate": "warn"
+			},
+			"suspicious": {
+				"recommended": true,
+				"noArrayIndexKey": "warn",
+				"noConsole": "warn",
+				"noExplicitAny": "warn"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"semicolons": "asNeeded",
+			"trailingCommas": "es5",
+			"arrowParentheses": "always"
+		}
+	},
+	"css": {
+		"parser": {
+			"cssModules": false,
+			"allowWrongLineComments": true,
+			"tailwindDirectives": true
+		},
+		"formatter": {
+			"enabled": false
+		}
+	}
+}

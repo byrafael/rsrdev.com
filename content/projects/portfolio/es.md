@@ -6,6 +6,7 @@ tags: ["Typescript", "React", "Next.js", "Tailwind CSS", "Framer Motion"]
 image: "/banners/Portfolio.png"
 github: "byrafael/rsrdev.com"
 demo: "rsrdev.com"
+order: 4
 ---
 
 # Portafolio

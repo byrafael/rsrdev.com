@@ -150,17 +150,46 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 					</p>
 
 					<div className="mt-auto flex items-center justify-between border-border/50 border-t pt-4">
-						<div className="flex flex-wrap gap-2">
-							{project.tags?.map((tag) => (
-								<Badge
-									key={tag}
-									variant="secondary"
-									className="bg-secondary/50 px-2 py-0.5 font-mono text-[hsl(var(--tag-hue),70%,35%)] text-xs hover:bg-secondary/70 dark:text-[hsl(var(--tag-hue),70%,75%)]"
-									style={getTagStyles(tag)}
-								>
-									{tag.toLowerCase()}
-								</Badge>
-							))}
+						<div className="flex flex-nowrap gap-2 items-center min-w-0">
+							{(() => {
+								const MAX_CHARS = 32
+								let currentChars = 0
+								const visibleTags: string[] = []
+
+								if (project.tags) {
+									for (const tag of project.tags) {
+										if (currentChars + tag.length <= MAX_CHARS) {
+											visibleTags.push(tag)
+											currentChars += tag.length
+										} else break
+									}
+								}
+
+								const hiddenCount = (project.tags?.length || 0) - visibleTags.length
+
+								return (
+									<>
+										{visibleTags.map((tag) => (
+											<Badge
+												key={tag}
+												variant="secondary"
+												className="bg-secondary/50 px-2 py-0.5 font-mono text-[hsl(var(--tag-hue),70%,35%)] text-xs hover:bg-secondary/70 dark:text-[hsl(var(--tag-hue),70%,75%)]"
+												style={getTagStyles(tag)}
+											>
+												{tag.toLowerCase()}
+											</Badge>
+										))}
+										{hiddenCount > 0 && (
+											<Badge
+												variant="outline"
+												className="px-2 py-0.5 font-normal text-xs align-middle"
+											>
+												+{hiddenCount}
+											</Badge>
+										)}
+									</>
+								)
+							})()}
 						</div>
 					</div>
 				</div>

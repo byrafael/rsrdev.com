@@ -1,7 +1,7 @@
 "use client"
 
 import { Check, Paintbrush, RotateCcw } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"

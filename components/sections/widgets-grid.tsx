@@ -25,6 +25,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useTranslation } from "@/hooks/use-translation"
 import { useLanguage } from "@/lib/language-context"
 import { cn } from "@/lib/utils"
+import { useWidgetData } from "@/lib/widget-data-context"
 
 interface WidgetProps {
 	className?: string
@@ -33,32 +34,10 @@ interface WidgetProps {
 // WakaTime Widget
 function WakaTimeWidget({ className }: WidgetProps) {
 	const t = useTranslation()
-	const [hours, setHours] = useState<string>("0h 0m")
-	const [loading, setLoading] = useState(true)
-	const [range, setRange] = useState("last_30_days")
+	const { wakatime, loading } = useWidgetData()
 
-	useEffect(() => {
-		const fetchWakaTime = async () => {
-			try {
-				const response = await fetch("/api/wakatime")
-				if (response.ok) {
-					const data = await response.json()
-					if (data?.text) {
-						setHours(data.text)
-					}
-					if (data?.range) {
-						setRange(data.range)
-					}
-				}
-				setLoading(false)
-			} catch (_error) {
-				setLoading(false)
-			}
-		}
-
-		fetchWakaTime()
-	}, [])
-
+	const hours = wakatime?.text || "0h 0m"
+	const range = wakatime?.range || "last_30_days"
 	const rangeLabel = range === "last_30_days" ? t.wakatime.last30Days : t.wakatime.last7Days
 
 	return (
@@ -69,7 +48,7 @@ function WakaTimeWidget({ className }: WidgetProps) {
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-1 flex-col items-center justify-center">
-				{loading ? (
+				{loading.wakatime ? (
 					<div className="h-8 w-24 animate-pulse rounded bg-muted" />
 				) : (
 					<>
@@ -89,7 +68,10 @@ function LocationWidget({ className }: WidgetProps) {
 	const pointerInteractionMovement = useRef(0)
 	const [time, setTime] = useState<string>("")
 	const [isNight, setIsNight] = useState(false)
-	const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null)
+	const { weather: weatherData } = useWidgetData()
+	const weather = weatherData
+		? { temp: weatherData.temperature, code: weatherData.weatherCode }
+		: null
 	const phi = useRef(0)
 
 	useEffect(() => {
@@ -111,20 +93,6 @@ function LocationWidget({ className }: WidgetProps) {
 		}
 		updateTime()
 		const timer = setInterval(updateTime, 1000)
-
-		// Weather
-		const fetchWeather = async () => {
-			try {
-				const response = await fetch("/api/weather")
-				if (response.ok) {
-					const data = await response.json()
-					if (data) {
-						setWeather({ temp: data.temperature, code: data.weatherCode })
-					}
-				}
-			} catch (_e) {}
-		}
-		fetchWeather()
 
 		// Globe
 		// biome-ignore lint/suspicious/noExplicitAny: cobe types
@@ -328,34 +296,8 @@ function LocationWidget({ className }: WidgetProps) {
 // GitHub Widget
 function GithubWidget({ className }: WidgetProps) {
 	const t = useTranslation()
-	interface Commit {
-		id: string
-		url: string
-		repo: string
-		message: string
-		additions?: number
-		deletions?: number
-	}
-	const [commits, setCommits] = useState<Commit[]>([])
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		const fetchCommits = async () => {
-			try {
-				const response = await fetch("/api/github")
-				if (response.ok) {
-					const data = await response.json()
-					if (data) {
-						setCommits(data)
-					}
-				}
-			} catch (_error) {
-			} finally {
-				setLoading(false)
-			}
-		}
-		fetchCommits()
-	}, [])
+	const { commits, loading } = useWidgetData()
+	const commitsList = commits || []
 
 	return (
 		<Card className={cn("flex h-full flex-col", className)}>
@@ -392,15 +334,15 @@ function GithubWidget({ className }: WidgetProps) {
 					</Popover>
 				</div>
 
-				{loading ? (
+				{loading.commits ? (
 					<div className="space-y-3">
 						{[1, 2, 3, 4, 5].map((i) => (
 							<div key={i} className="h-6 animate-pulse rounded-md bg-muted/50" />
 						))}
 					</div>
-				) : commits.length > 0 ? (
+				) : commitsList.length > 0 ? (
 					<ul className="flex-1 space-y-2 text-sm">
-						{commits.slice(0, 6).map((commit) => (
+						{commitsList.slice(0, 6).map((commit) => (
 							<li key={commit.id}>
 								<a
 									href={commit.url}
@@ -440,30 +382,8 @@ function GithubWidget({ className }: WidgetProps) {
 function BuildStatusWidget({ className }: WidgetProps) {
 	const t = useTranslation()
 	const { language } = useLanguage()
-	const [status, setStatus] = useState<{
-		status: string
-		conclusion: string | null
-		branch: string
-		updated_at: string
-	} | null>(null)
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		const fetchStatus = async () => {
-			try {
-				const response = await fetch("/api/github/status")
-				if (response.ok) {
-					const data = await response.json()
-					setStatus(data)
-				}
-				setLoading(false)
-			} catch (_error) {
-				setLoading(false)
-			}
-		}
-
-		fetchStatus()
-	}, [])
+	const { buildStatus, loading } = useWidgetData()
+	const status = buildStatus
 
 	const isSuccess = status?.conclusion === "success"
 	const isFailure = status?.conclusion === "failure"
@@ -477,7 +397,7 @@ function BuildStatusWidget({ className }: WidgetProps) {
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-1 flex-col items-center justify-center">
-				{loading ? (
+				{loading.buildStatus ? (
 					<div className="flex flex-col items-center gap-2">
 						<div className="h-3 w-3 animate-pulse rounded-full bg-muted" />
 						<div className="h-2 w-24 animate-pulse rounded bg-muted" />
@@ -518,34 +438,8 @@ function BuildStatusWidget({ className }: WidgetProps) {
 function UptimeWidget({ className }: WidgetProps) {
 	const t = useTranslation()
 	const { language } = useLanguage()
-	const [stats, setStats] = useState<{
-		connections: number
-		ping: number
-		status: string
-		statusText?: string
-		statusTextEs?: string
-		uptime?: string
-	} | null>(null)
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		const fetchStats = async () => {
-			try {
-				const response = await fetch("/api/ops/stats")
-				if (response.ok) {
-					const data = await response.json()
-					setStats(data)
-				}
-				setLoading(false)
-			} catch (_error) {
-				setLoading(false)
-			}
-		}
-
-		fetchStats()
-		const interval = setInterval(fetchStats, 10000) // Update every 10 seconds
-		return () => clearInterval(interval)
-	}, [])
+	const { opsStats, loading } = useWidgetData()
+	const stats = opsStats
 
 	const isOperational = stats?.status === "ok"
 
@@ -609,7 +503,7 @@ function UptimeWidget({ className }: WidgetProps) {
 				<div className="grid grid-cols-3 gap-4">
 					<div className="flex flex-col gap-1">
 						<span className="text-muted-foreground text-xs">{t.widgets.connections}</span>
-						{loading ? (
+						{loading.opsStats ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
 							<span className="font-bold text-xl">{stats?.connections || 0}</span>
@@ -617,20 +511,17 @@ function UptimeWidget({ className }: WidgetProps) {
 					</div>
 					<div className="flex flex-col gap-1">
 						<span className="text-muted-foreground text-xs">{t.widgets.uptime}</span>
-						{loading ? (
+						{loading.opsStats ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
 							<span className="font-bold text-xl">
-								<span className="hidden sm:inline">{stats?.uptime || "0%"}</span>
-								<span className="sm:hidden">
-									{stats?.uptime ? `${Math.round(Number.parseFloat(stats.uptime))}%` : "0%"}
-								</span>
+								{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : "0%"}
 							</span>
 						)}
 					</div>
 					<div className="flex flex-col gap-1">
 						<span className="text-muted-foreground text-xs">{t.widgets.latency}</span>
-						{loading ? (
+						{loading.opsStats ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
 							<span className="font-bold text-xl">{stats?.ping || 0}ms</span>

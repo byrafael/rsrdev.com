@@ -1,15 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTranslation } from "@/hooks/use-translation"
 import { cn } from "@/lib/utils"
-
-interface Language {
-	name: string
-	percent: number
-	seconds: number
-}
+import { useWidgetData } from "@/lib/widget-data-context"
 
 const LANGUAGE_COLORS: Record<string, string> = {
 	Python: "bg-[#3572A5]",
@@ -51,26 +45,12 @@ const FALLBACK_COLORS = [
 
 export default function LanguageBar() {
 	const t = useTranslation()
-	const [languages, setLanguages] = useState<Language[]>([])
-	const [loading, setLoading] = useState(true)
-	const [range, setRange] = useState("last_30_days")
+	const { wakatime, loading } = useWidgetData()
 
-	useEffect(() => {
-		fetch("/api/wakatime")
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.languages) {
-					setLanguages(data.languages)
-				}
-				if (data.range) {
-					setRange(data.range)
-				}
-			})
-			.catch((_err) => {})
-			.finally(() => setLoading(false))
-	}, [])
+	const languages = wakatime?.languages || []
+	const range = wakatime?.range || "last_30_days"
 
-	if (loading) {
+	if (loading.wakatime) {
 		return <div className="h-2 w-full animate-pulse rounded-full bg-muted" />
 	}
 

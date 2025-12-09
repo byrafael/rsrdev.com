@@ -1,17 +1,13 @@
-import React from "react";
+import type React from "react"
 
 export default function Container({
-  children,
-  className = "",
+	children,
+	className = "",
 }: Readonly<{
-  children: React.ReactNode;
-  className?: string;
+	children: React.ReactNode
+	className?: string
 }>) {
-  return (
-    <div
-      className={`max-w-6xl w-full mx-auto px-8 sm:px-6 ${className}`.trim()}
-    >
-      {children}
-    </div>
-  );
+	return (
+		<div className={`mx-auto w-full max-w-6xl px-8 sm:px-6 ${className}`.trim()}>{children}</div>
+	)
 }

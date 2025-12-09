@@ -1,101 +1,105 @@
-"use client";
+"use client"
 
-import { useEffect, useState, useRef } from "react";
-import { GitCommit, Heart } from "lucide-react";
-import Link from "next/link";
-import Container from "@/components/container";
+import { GitCommit, Heart } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
+import Container from "@/components/container"
+import { useTranslation } from "@/hooks/use-translation"
 
 export default function Footer() {
-  const [commit, setCommit] = useState<{ sha: string; url: string } | null>(
-    null
-  );
-  const [views, setViews] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const initialized = useRef(false);
+	const t = useTranslation()
+	const [commit, setCommit] = useState<{ sha: string; url: string } | null>(null)
+	const [views, setViews] = useState<number | null>(null)
+	const [mounted, setMounted] = useState(false)
+	const initialized = useRef(false)
 
-  useEffect(() => {
-    setMounted(true);
+	useEffect(() => {
+		setMounted(true)
 
-    if (initialized.current) return;
-    initialized.current = true;
+		if (initialized.current) {
+			return
+		}
+		initialized.current = true
 
-    // Fetch latest commit
-    fetch("https://api.github.com/repos/byrafael/rsrdev.com/commits?per_page=1")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setCommit({
-            sha: data[0].sha.substring(0, 7),
-            url: data[0].html_url,
-          });
-        }
-      })
-      .catch((err) => console.error("Failed to fetch commit", err));
+		// Fetch latest commit
+		fetch("https://api.github.com/repos/byrafael/rsrdev.com/commits?per_page=1")
+			.then((res) => res.json())
+			.then((data) => {
+				if (Array.isArray(data) && data.length > 0) {
+					setCommit({
+						sha: data[0].sha.substring(0, 7),
+						url: data[0].html_url,
+					})
+				}
+			})
+			.catch((_err) => {})
 
-    // Fetch page views
-    fetch("https://abacus.jasoncameron.dev/hit/rsrdev.com/main")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && typeof data.value === "number") {
-          setViews(data.value);
-        }
-      })
-      .catch((err) => console.error("Failed to fetch views", err));
-  }, []);
+		// Fetch page views
+		fetch("https://abacus.jasoncameron.dev/hit/rsrdev.com/main")
+			.then((res) => res.json())
+			.then((data) => {
+				if (data && typeof data.value === "number") {
+					setViews(data.value)
+				}
+			})
+			.catch((_err) => {})
+	}, [])
 
-  if (!mounted) return null;
+	if (!mounted) {
+		return null
+	}
 
-  return (
-    <footer className="w-full py-8 mt-12">
-      <Container>
-        <div className="bg-muted/50 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          {/* Left: Copyright */}
-          <div className="flex items-center order-2 md:order-1">
-            <span>&copy; {new Date().getFullYear()} Rafael Soley.</span>
-          </div>
+	return (
+		<footer className="mt-12 w-full py-8">
+			<Container>
+				<div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-muted/50 p-6 text-muted-foreground text-sm md:flex-row">
+					{/* Left: Copyright */}
+					<div className="order-1 flex items-center">
+						<span>{t.footer.copyright}</span>
+					</div>
 
-          {/* Center: Made with */}
-          <div className="flex items-center gap-1.5 order-1 md:order-2">
-            <span>Made with</span>
-            <Heart className="h-3.5 w-3.5" />
-            <span>and Next.js</span>
-          </div>
+					{/* Center: Made with */}
+					<div className="order-2 flex items-center gap-1.5">
+						<span>{t.footer.madeWith}</span>
+						<Heart className="h-3.5 w-3.5" />
+						<span>
+							{t.footer.and} {t.footer.nextjs}
+						</span>
+					</div>
 
-          {/* Right: Stats */}
-          <div className="flex items-center gap-3 order-3">
-            <div className="flex items-center gap-1">
-              {views !== null ? (
-                <Link
-                  href="https://abacus.jasoncameron.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  <span>{views.toLocaleString("en-US")} views</span>
-                </Link>
-              ) : (
-                <span className="animate-pulse">...</span>
-              )}
-            </div>
+					{/* Right: Stats */}
+					<div className="order-3 flex items-center gap-3">
+						<div className="flex items-center gap-1">
+							{views !== null ? (
+								<Link
+									href="https://abacus.jasoncameron.dev/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="transition-colors hover:text-foreground"
+								>
+									<span>{views.toLocaleString("en-US")} views</span>
+								</Link>
+							) : (
+								<span className="animate-pulse">...</span>
+							)}
+						</div>
 
-            {commit && views !== null && (
-              <div className="h-4 w-px bg-border hidden md:block" />
-            )}
+						{commit && views !== null && <div className="hidden h-4 w-px bg-border md:block" />}
 
-            {commit && (
-              <Link
-                href={commit.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 hover:text-foreground transition-colors"
-              >
-                <GitCommit className="h-3.5 w-3.5" />
-                <span className="font-mono text-xs">{commit.sha}</span>
-              </Link>
-            )}
-          </div>
-        </div>
-      </Container>
-    </footer>
-  );
+						{commit && (
+							<Link
+								href={commit.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex items-center gap-1 transition-colors hover:text-foreground"
+							>
+								<GitCommit className="h-3.5 w-3.5" />
+								<span className="font-mono text-xs">{commit.sha}</span>
+							</Link>
+						)}
+					</div>
+				</div>
+			</Container>
+		</footer>
+	)
 }

@@ -1,13 +1,19 @@
-# My Portfolio
-<sub>© 2025 Rafael Soley. All Rights Reserved.</sub>
+<center>
+<h1>My Portfolio</h1>
+<sub>© 2025 Rafael Soley. All Rights Reserved.<br/>v3.0 | Dec 9th, 2025</sub><br/><br/>
 
-This is my personal portfolio website, available at [rsrdev.com](https://rsrdev.com). It showcases my work, experience, and ongoing projects. While I initially built the site fully on my own, updates are now mostly handled through coding agents that keep sections like my experience, my education, and my project listings up to date.
+<img src="https://r2.e-z.host/6346c606-bcaf-419e-988b-b0df8a37d6c4/v5u16p9g.png" alt="Screenshot" style="max-width: 80%; border-radius: 8px;" /><br/>
+</center>
 
-Made with Next.js (v16) and TailwindCSS v4. Icons are provided by lucide-react and react-icons. Base colors and layout by v0.
+This is the source code for my personal portfolio website, available at [rsrdev.com](https://rsrdev.com).
 
-### Design Note
-Frontend design is *not* my focus area. I rarely fine-tune the visuals manually. Design iterations are typically handled by external designers or AI tools, which keeps the site clean without pulling my attention from backend, systems, and product work.
+For a detailed breakdown of the project, tech stack, features, and credits, see the portfolio project page [here](https://rsrdev.com/projects/portfolio/).
+
+You can also check out my design notes, the roadmap, and my future plans for this project [here](https://rsrdev.fibery.io/PAS/rsrdev.com-68?sharing-key=d088b3ed-e58b-4103-af41-d8e43f8e23a3).
+
+Built with Next.js (v16), Tailwind CSS v4, and a lot of caffeine.
 
 ### License
 **All Rights Reserved.**
 No part of this codebase may be copied, reused, or redistributed without explicit permission.
+For more info, see the [LICENSE](LICENSE).

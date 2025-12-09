@@ -1,0 +1,25 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["eslint:recommended"],
+	"plugins": ["unused-imports"],
+	"rules": {
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"error",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+		]
+	},
+	"overrides": [
+		{
+			"files": ["lib/translations.ts", "components/**/*.ts", "components/**/*.tsx"],
+			"rules": {
+				"no-unused-vars": "error",
+				"no-unused-imports": "error"
+			}
+		}
+	]
+}

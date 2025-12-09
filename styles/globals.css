@@ -123,3 +123,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Force left-align for KaTeX block math in markdown/project pages */
+.markdown .katex-display, .markdown .katex-display > .katex {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+  justify-content: flex-start;
+}

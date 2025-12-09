@@ -46,7 +46,7 @@ export async function GET() {
 			chunks.map((chunk) => fetchSummariesRange(apiKey, chunk.start, chunk.end))
 		)
 
-		let combinedData: any[] = []
+		let combinedData: unknown[] = []
 		let hasData = false
 
 		for (const response of responses) {

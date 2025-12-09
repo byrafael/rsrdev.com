@@ -115,6 +115,7 @@ export function ExperienceList() {
 													{Array.isArray(role.description) ? (
 														<ul className="mb-4 list-disc space-y-1 pl-4 text-muted-foreground leading-relaxed">
 															{role.description.map((item, i) => (
+																// biome-ignore lint/suspicious/noArrayIndexKey: List is static and order doesn't change
 																<li key={i}>{item}</li>
 															))}
 														</ul>
@@ -158,6 +159,7 @@ export function ExperienceList() {
 										{Array.isArray(job.description) ? (
 											<ul className="mb-4 list-disc space-y-1 pl-4 text-muted-foreground leading-relaxed">
 												{job.description.map((item, i) => (
+													// biome-ignore lint/suspicious/noArrayIndexKey: List is static and order doesn't change
 													<li key={i}>{item}</li>
 												))}
 											</ul>

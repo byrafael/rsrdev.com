@@ -1,7 +1,6 @@
 "use client"
 
 import { Check, Paintbrush, RotateCcw } from "lucide-react"
-import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -31,10 +30,20 @@ const BACKGROUND_PRESETS = [
 
 export function ThemeCustomizer() {
 	const [mounted, setMounted] = useState(false)
-	const { theme } = useTheme()
 	const t = useTranslation()
 	const [accentHue, setAccentHue] = useState("260")
 	const [bgConfig, setBgConfig] = useState({ hue: "0", chroma: "0" })
+
+	const updateAccent = useCallback((hue: string) => {
+		const root = document.documentElement
+		root.style.setProperty("--brand-accent-hue", hue)
+	}, [])
+
+	const updateBackground = useCallback((config: { hue: string; chroma: string }) => {
+		const root = document.documentElement
+		root.style.setProperty("--bg-hue", config.hue)
+		root.style.setProperty("--bg-chroma", config.chroma)
+	}, [])
 
 	useEffect(() => {
 		setMounted(true)
@@ -55,17 +64,6 @@ export function ThemeCustomizer() {
 			} catch (_e) {}
 		}
 	}, [updateAccent, updateBackground])
-
-	const updateAccent = (hue: string) => {
-		const root = document.documentElement
-		root.style.setProperty("--brand-accent-hue", hue)
-	}
-
-	const updateBackground = (config: { hue: string; chroma: string }) => {
-		const root = document.documentElement
-		root.style.setProperty("--bg-hue", config.hue)
-		root.style.setProperty("--bg-chroma", config.chroma)
-	}
 
 	const handleAccentChange = (hue: string) => {
 		setAccentHue(hue)
@@ -117,6 +115,7 @@ export function ThemeCustomizer() {
 						<div className="grid grid-cols-7 gap-2">
 							{ACCENT_COLORS.map((color) => (
 								<button
+									type="button"
 									key={color.id}
 									onClick={() => handleAccentChange(color.hue)}
 									className={cn(

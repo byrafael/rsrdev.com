@@ -44,6 +44,7 @@ export function EducationList() {
 						{Array.isArray(edu.details) ? (
 							<ul className="list-disc space-y-1 pl-4 text-muted-foreground leading-relaxed">
 								{edu.details.map((item, i) => (
+									// biome-ignore lint/suspicious/noArrayIndexKey: List is static and order doesn't change
 									<li key={i}>{item}</li>
 								))}
 							</ul>

@@ -20,6 +20,7 @@ export default function Hero() {
 
 					<p
 						className="mb-6 max-w-2xl text-foreground/80 text-lg leading-relaxed"
+						// biome-ignore lint/security/noDangerouslySetInnerHtml: Translation contains HTML
 						dangerouslySetInnerHTML={{ __html: t.hero.description }}
 					/>
 

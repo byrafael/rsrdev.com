@@ -47,7 +47,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 		>
 			<Card className="group hover:-translate-y-1 relative flex h-full flex-col overflow-hidden border border-border/50 bg-card/30 p-0 backdrop-blur-sm transition-all duration-300 hover:bg-card/50 hover:shadow-lg">
 				{/* Image Section */}
-				<div className="relative aspect-[1200/630] w-full overflow-hidden bg-background">
+				<div className="relative aspect-1200/630 w-full overflow-hidden bg-background">
 					{project.image ? (
 						<Image
 							src={project.image}
@@ -68,7 +68,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 								variant="ghost"
 								size="icon"
 								asChild
-								className="group/btn hover:!bg-transparent focus:!bg-transparent active:!bg-transparent h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
+								className="group/btn hover:bg-transparent! focus:bg-transparent! active:bg-transparent! h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
 							>
 								<Link
 									href={project.github}
@@ -86,7 +86,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 								variant="ghost"
 								size="icon"
 								asChild
-								className="group/btn hover:!bg-transparent focus:!bg-transparent active:!bg-transparent h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
+								className="group/btn hover:bg-transparent! focus:bg-transparent! active:bg-transparent! h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
 							>
 								<Link
 									href={project.demo}
@@ -113,7 +113,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 							{project.pinned && (
 								<Pin
 									title="Pinned project"
-									className="mr-1 h-4 w-4 shrink-0 text-yellow-500"
+									className="mr-1 h-4 w-4 shrink-0 text-brand-accent"
 									strokeWidth={2.2}
 									aria-label="Pinned"
 								/>
@@ -129,9 +129,10 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 					</p>
 
 					<div className="mt-auto flex items-center justify-between border-border/50 border-t pt-4">
-						<div className="flex flex-wrap gap-2">
+						<div className="flex flex-nowrap gap-2 items-center min-w-0">
 							{(() => {
-								const MAX_CHARS = 25
+								// Allow a bit more tags to fit in one line
+								const MAX_CHARS = 32
 								let currentChars = 0
 								const visibleTags: string[] = []
 
@@ -161,7 +162,10 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 											</Badge>
 										))}
 										{hiddenCount > 0 && (
-											<Badge variant="outline" className="px-2 py-0.5 font-normal text-xs">
+											<Badge
+												variant="outline"
+												className="px-2 py-0.5 font-normal text-xs align-middle"
+											>
 												+{hiddenCount}
 											</Badge>
 										)}

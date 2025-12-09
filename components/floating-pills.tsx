@@ -3,6 +3,7 @@
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import { ThemeCustomizer } from "@/components/theme-customizer"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
 import { translations } from "@/lib/translations"
@@ -29,7 +30,7 @@ export default function FloatingPills() {
 				<Button
 					variant="outline"
 					size="icon"
-					className="h-9 w-9 rounded-l-full border-none bg-transparent shadow-none transition-all duration-200 hover:bg-gray-100 active:scale-95 dark:hover:bg-zinc-800"
+					className="h-9 w-9 rounded-r-none rounded-l-full border-none bg-transparent shadow-none transition-all duration-200 hover:bg-gray-100 active:scale-95 dark:hover:bg-zinc-800"
 					onClick={() => {
 						setLanguage(language === "en" ? "es" : "en")
 					}}
@@ -49,11 +50,17 @@ export default function FloatingPills() {
 				{/* Separator */}
 				<div className="h-6 w-px bg-gray-200 dark:bg-zinc-600" aria-hidden="true" />
 
+				{/* Theme Customizer (middle) */}
+				<ThemeCustomizer />
+
+				{/* Separator */}
+				<div className="h-6 w-px bg-gray-200 dark:bg-zinc-600" aria-hidden="true" />
+
 				{/* Theme Toggle (right half) */}
 				<Button
 					variant="outline"
 					size="icon"
-					className="h-9 w-9 rounded-r-full border-none bg-transparent shadow-none transition-all duration-200 hover:bg-gray-100 active:scale-95 dark:hover:bg-zinc-800"
+					className="h-9 w-9 rounded-r-full rounded-l-none border-none bg-transparent shadow-none transition-all duration-200 hover:bg-gray-100 active:scale-95 dark:hover:bg-zinc-800"
 					onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 					title={theme === "dark" ? t.floatingPills.lightMode : t.floatingPills.darkMode}
 				>

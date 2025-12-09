@@ -8,7 +8,7 @@ export default function Hero() {
 	const t = useTranslation()
 
 	return (
-		<section id="hero" className="flex items-center justify-center py-24">
+		<section id="hero" className="flex items-center justify-center py-16 md:py-32">
 			<Container>
 				<div className="space-y-6">
 					<div className="mb-4">
@@ -18,9 +18,10 @@ export default function Hero() {
 						<p className="text-muted-foreground">{t.hero.subtitle}</p>
 					</div>
 
-					<p className="mb-6 max-w-2xl text-foreground/80 text-lg leading-relaxed">
-						{t.hero.description}
-					</p>
+					<p
+						className="mb-6 max-w-2xl text-foreground/80 text-lg leading-relaxed"
+						dangerouslySetInnerHTML={{ __html: t.hero.description }}
+					/>
 
 					<div className="text-sm">
 						<SocialIcons />

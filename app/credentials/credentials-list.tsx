@@ -20,7 +20,7 @@ export function CredentialsList() {
 	const certs = sortCertificatesByDate(certificatesData)
 
 	return (
-		<Container className="py-12">
+		<Container className="py-6 md:py-12">
 			<h1 className="mb-12 flex items-center gap-3 font-bold text-3xl">
 				<Award className="h-8 w-8 text-brand-accent" />
 				{t.certificates.title}

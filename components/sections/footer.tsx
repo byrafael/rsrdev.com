@@ -4,8 +4,10 @@ import { GitCommit, Heart } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import Container from "@/components/container"
+import { useTranslation } from "@/hooks/use-translation"
 
 export default function Footer() {
+	const t = useTranslation()
 	const [commit, setCommit] = useState<{ sha: string; url: string } | null>(null)
 	const [views, setViews] = useState<number | null>(null)
 	const [mounted, setMounted] = useState(false)
@@ -52,15 +54,17 @@ export default function Footer() {
 			<Container>
 				<div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-muted/50 p-6 text-muted-foreground text-sm md:flex-row">
 					{/* Left: Copyright */}
-					<div className="order-2 flex items-center md:order-1">
-						<span>&copy; {new Date().getFullYear()} Rafael Soley.</span>
+					<div className="order-1 flex items-center">
+						<span>{t.footer.copyright}</span>
 					</div>
 
 					{/* Center: Made with */}
-					<div className="order-1 flex items-center gap-1.5 md:order-2">
-						<span>Made with</span>
+					<div className="order-2 flex items-center gap-1.5">
+						<span>{t.footer.madeWith}</span>
 						<Heart className="h-3.5 w-3.5" />
-						<span>and Next.js</span>
+						<span>
+							{t.footer.and} {t.footer.nextjs}
+						</span>
 					</div>
 
 					{/* Right: Stats */}

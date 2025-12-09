@@ -5,7 +5,11 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0 0);
+  --brand-accent-hue: 260;
+  --bg-hue: 0;
+  --bg-chroma: 0;
+
+  --background: oklch(0.98 var(--bg-chroma) var(--bg-hue));
   --foreground: oklch(0.15 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0 0);
@@ -39,11 +43,11 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --brand-accent: oklch(0.55 0.2 260);
+  --brand-accent: oklch(0.55 0.2 var(--brand-accent-hue));
 }
 
 .dark {
-  --background: oklch(0.09 0 0);
+  --background: oklch(0.09 calc(var(--bg-chroma) * 3) var(--bg-hue));
   --foreground: oklch(0.93 0 0);
   --card: oklch(0.13 0 0);
   --card-foreground: oklch(0.93 0 0);
@@ -76,7 +80,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
-  --brand-accent: oklch(0.65 0.2 260);
+  --brand-accent: oklch(0.65 0.2 var(--brand-accent-hue));
 }
 
 @theme inline {

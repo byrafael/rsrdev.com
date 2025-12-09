@@ -61,7 +61,7 @@ export function ExperienceList() {
 	const jobs = sortExperiences(experiences, EXPERIENCE_SORT_STRATEGY)
 
 	return (
-		<Container className="py-12">
+		<Container className="py-6 md:py-12">
 			<h1 className="mb-8 flex items-center gap-3 font-bold text-3xl">
 				<Briefcase className="h-8 w-8 text-brand-accent" />
 				{t.experience.title}
@@ -113,7 +113,7 @@ export function ExperienceList() {
 														</span>
 													</div>
 													{Array.isArray(role.description) ? (
-														<ul className="mb-4 list-disc pl-4 space-y-1 text-muted-foreground leading-relaxed">
+														<ul className="mb-4 list-disc space-y-1 pl-4 text-muted-foreground leading-relaxed">
 															{role.description.map((item, i) => (
 																<li key={i}>{item}</li>
 															))}
@@ -156,7 +156,7 @@ export function ExperienceList() {
 											)}
 										</div>
 										{Array.isArray(job.description) ? (
-											<ul className="mb-4 list-disc pl-4 space-y-1 text-muted-foreground leading-relaxed">
+											<ul className="mb-4 list-disc space-y-1 pl-4 text-muted-foreground leading-relaxed">
 												{job.description.map((item, i) => (
 													<li key={i}>{item}</li>
 												))}

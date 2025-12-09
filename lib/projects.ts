@@ -71,6 +71,26 @@ export function getAllProjects(language: "en" | "es" = "en"): ProjectData[] {
 	const projects = slugs
 		.map((slug) => getProjectData(slug, language))
 		.filter((project): project is ProjectData => project !== null)
-		.sort((a, b) => (a.date > b.date ? -1 : 1))
+		.sort((a, b) => {
+			// Prioritize pinned projects
+			if (a.pinned && !b.pinned) {
+				return -1
+			}
+			if (!a.pinned && b.pinned) {
+				return 1
+			}
+
+			// If both are pinned, sort by order
+			if (a.pinned && b.pinned) {
+				const orderA = a.order ?? 99
+				const orderB = b.order ?? 99
+				if (orderA !== orderB) {
+					return orderA - orderB
+				}
+			}
+
+			// Sort by date (most recent first)
+			return a.date > b.date ? -1 : 1
+		})
 	return projects
 }

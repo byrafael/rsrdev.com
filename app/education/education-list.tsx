@@ -18,7 +18,7 @@ export function EducationList() {
 	const education = sortEducationByDate(educationData)
 
 	return (
-		<Container className="py-12">
+		<Container className="py-6 md:py-12">
 			<h1 className="mb-12 flex items-center gap-3 font-bold text-3xl">
 				<GraduationCap className="h-8 w-8 text-brand-accent" />
 				{t.education.title}
@@ -42,7 +42,7 @@ export function EducationList() {
 						</div>
 						<p className="mb-2 font-medium text-foreground/90 text-lg">{edu.school}</p>
 						{Array.isArray(edu.details) ? (
-							<ul className="list-disc pl-4 space-y-1 text-muted-foreground leading-relaxed">
+							<ul className="list-disc space-y-1 pl-4 text-muted-foreground leading-relaxed">
 								{edu.details.map((item, i) => (
 									<li key={i}>{item}</li>
 								))}

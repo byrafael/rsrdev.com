@@ -7,7 +7,7 @@ export default function ProjectsPage() {
 
 	return (
 		<main className="flex flex-1 flex-col bg-background">
-			<div className="grow pt-20">
+			<div className="grow pt-10 md:pt-20">
 				<ProjectList projectsEn={projectsEn} projectsEs={projectsEs} />
 			</div>
 		</main>

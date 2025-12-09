@@ -43,7 +43,9 @@ const AsciiRocket = () => {
 		const particles: { x: number; y: number; life: number }[] = []
 
 		const render = () => {
-			if (!preRef.current) return
+			if (!preRef.current) {
+				return
+			}
 
 			const b: string[] = new Array(width * height).fill(" ")
 
@@ -55,7 +57,9 @@ const AsciiRocket = () => {
 					star.x = Math.random() * width
 				}
 				const idx = Math.floor(star.x) + Math.floor(star.y) * width
-				if (idx >= 0 && idx < b.length) b[idx] = "."
+				if (idx >= 0 && idx < b.length) {
+					b[idx] = "."
+				}
 			})
 
 			// Calculate rocket position
@@ -121,7 +125,7 @@ const AsciiRocket = () => {
 		<div className="flex items-center justify-center overflow-hidden rounded-lg bg-black/80 p-8 backdrop-blur-sm">
 			<pre
 				ref={preRef}
-				className="font-[family-name:var(--font-mono)] text-[12px] leading-[12px] whitespace-pre text-[#00ff41] select-none"
+				className="select-none whitespace-pre font-[family-name:var(--font-mono)] text-[#00ff41] text-[12px] leading-[12px]"
 				aria-hidden="true"
 			/>
 		</div>
@@ -133,10 +137,10 @@ export default function NotFound() {
 		<Container className="grid min-h-[calc(100vh-200px)] grid-cols-1 items-center gap-12 py-20 md:grid-cols-2">
 			<div className="flex flex-col items-start space-y-6 text-left">
 				<div className="space-y-2">
-					<h1 className="text-8xl font-bold tracking-tighter text-foreground">404</h1>
-					<h2 className="text-3xl font-medium text-muted-foreground">Page Not Found</h2>
+					<h1 className="font-bold text-8xl text-foreground tracking-tighter">404</h1>
+					<h2 className="font-medium text-3xl text-muted-foreground">Page Not Found</h2>
 				</div>
-				<p className="text-lg text-muted-foreground max-w-[400px]">
+				<p className="max-w-[400px] text-lg text-muted-foreground">
 					The page you are looking for doesn't exist or has been moved.
 				</p>
 				<Button asChild size="lg" className="rounded-full px-8">

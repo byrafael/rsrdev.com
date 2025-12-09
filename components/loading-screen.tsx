@@ -31,7 +31,9 @@ export default function LoadingScreen() {
 		}
 	}, [])
 
-	if (!isLoading) return null
+	if (!isLoading) {
+		return null
+	}
 
 	return (
 		<div
@@ -41,10 +43,10 @@ export default function LoadingScreen() {
 			<AsciiCanvas />
 
 			{/* Main Content */}
-			<div className="absolute bottom-8 left-8 right-8 flex items-end justify-between">
+			<div className="absolute right-8 bottom-8 left-8 flex items-end justify-between">
 				{/* Status Text */}
-				<div className="font-mono text-sm font-medium text-muted-foreground uppercase tracking-widest">
-					<span className="inline-block w-2 h-2 bg-primary rounded-full mr-3 animate-pulse" />
+				<div className="font-medium font-mono text-muted-foreground text-sm uppercase tracking-widest">
+					<span className="mr-3 inline-block h-2 w-2 animate-pulse rounded-full bg-primary" />
 					SYSTEM_LOADING
 				</div>
 			</div>
@@ -59,10 +61,14 @@ function AsciiCanvas() {
 
 	useEffect(() => {
 		const canvas = canvasRef.current
-		if (!canvas) return
+		if (!canvas) {
+			return
+		}
 
 		const ctx = canvas.getContext("2d")
-		if (!ctx) return
+		if (!ctx) {
+			return
+		}
 
 		// Use hex characters for a more "data" feel
 		const chars = "0123456789ABCDEF"
@@ -92,7 +98,9 @@ function AsciiCanvas() {
 			}
 
 			draw() {
-				if (!ctx) return
+				if (!ctx) {
+					return
+				}
 				ctx.font = `${this.size}px "JetBrains Mono", monospace`
 				// Even lower opacity for background effect
 				ctx.fillStyle = theme === "dark" ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.15)"

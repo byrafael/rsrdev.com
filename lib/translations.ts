@@ -14,10 +14,10 @@ export const translations = {
 		},
 		// Hero Section
 		hero: {
-			greeting: "Hello! I'm",
+			greeting: "Hey! I'm",
 			subtitle: "Backend & AI Systems Developer",
 			description:
-				"I’m a backend developer, AI systems engineer, and early-stage quant trader and developer. I have over eight years of programming experience and six years of contractor work developing backend systems, AI workflows, and quantitative tooling. I build quantitative trading tools, research pipelines, and algorithmic analysis systems in Python, with a focus on backend architecture, data engineering, and the infrastructure that supports real trading strategies.",
+				"I'm an <span class='text-foreground font-medium'>AI Systems Developer</span> with a focus on <span class='text-foreground font-medium'>Quant Trading</span>, <span class='text-foreground font-medium'>back-end architecture</span>, and <span class='text-foreground font-medium'>DevOps</span>. I bring over eight years of programming experience and six years of contractor work, during which I have developed high-performance systems including videogames, automation platforms, and discord bots trusted by over <span class='text-foreground font-medium'>1,000 online communities</span> and <span class='text-foreground font-medium'>half a million users</span>. My current focus is on building quantitative trading tools, research pipelines, and algorithmic analysis systems in Python, emphasizing robust backend architecture, data engineering, and the infrastructure that supports real-time trading strategies.",
 			tagline: "Code. Data. Markets.",
 		},
 		// About Section
@@ -54,6 +54,13 @@ export const translations = {
 				tools: "Tools",
 				sound: "Sound Systems",
 			},
+		},
+		// WakaTime Section
+		wakatime: {
+			mostUsedLanguages: "Most used languages",
+			last30Days: "Last 30 days",
+			last7Days: "Last 7 days",
+			noData: "No language data available for this period.",
 		},
 		// Experience Section
 		experience: {
@@ -342,7 +349,8 @@ export const translations = {
 		// Footer
 		footer: {
 			contactTitle: "Let's Get in Touch",
-			copyright: "© 2025 Rafael Soley. Made with",
+			copyright: "© 2025 Rafael Soley.",
+			madeWith: "Made with",
 			and: "and",
 			nextjs: "NextJS",
 		},
@@ -360,12 +368,42 @@ export const translations = {
 			switchToEnglish: "Switch to English",
 			lightMode: "Switch to light mode",
 			darkMode: "Switch to dark mode",
+			customize: "Customize look and feel",
+			accentColor: "Accent Color",
+			backgroundTint: "Background Tint",
+			reset: "Reset to Defaults",
+			colors: {
+				purple: "Purple",
+				blue: "Blue",
+				cyan: "Cyan",
+				green: "Green",
+				orange: "Orange",
+				red: "Red",
+				pink: "Pink",
+			},
+			tints: {
+				white: "Modern",
+				ocean: "Ocean",
+				forest: "Forest",
+				rose: "Rose",
+				slate: "Slate",
+			},
 		},
 		// Widgets
 		widgets: {
 			recentCommits: "Recent Commits",
-			poweredBy: "Powered by",
+			inspiredBy: "Inspired by",
 			noCommits: "No recent public commits.",
+			poweredBy: "Uptime powered by",
+			codingTime: "Coding Time",
+			last7Days: "Last 7 Days",
+			latestBuild: "Latest Build",
+			systemStatus: "System Status",
+			connections: "Connections",
+			uptime: "Uptime",
+			latency: "Latency",
+			allSystemsOperational: "All systems operational",
+			systemIssuesDetected: "System issues detected",
 		},
 	},
 	es: {
@@ -386,7 +424,7 @@ export const translations = {
 			greeting: "¡Hola! Soy",
 			subtitle: "Desarrollador Backend y de Sistemas de IA",
 			description:
-				"Soy desarrollador backend, ingeniero de sistemas de IA y desarrollador y operador cuantitativo en fase inicial. Tengo más de ocho años de experiencia en programación y seis años trabajando como contratista desarrollando sistemas backend, flujos de trabajo de IA y herramientas cuantitativas. Desarrollo herramientas de trading cuantitativo, pipelines de investigación y sistemas de análisis algorítmico en Python, con especial atención a la arquitectura backend, la ingeniería de datos y la infraestructura que sustenta las estrategias de trading reales.",
+				"Soy un <span class='text-foreground font-medium'>Desarrollador de Sistemas de IA</span> con enfoque en <span class='text-foreground font-medium'>Trading Cuantitativo</span>, <span class='text-foreground font-medium'>arquitectura back-end</span> y <span class='text-foreground font-medium'>DevOps</span>. Aporto más de ocho años de experiencia en programación y seis años de trabajo como contratista, durante los cuales he desarrollado sistemas de alto rendimiento, incluyendo videojuegos, plataformas de automatización y bots de discord en los que confían más de <span class='text-foreground font-medium'>1.000 comunidades en línea</span> y <span class='text-foreground font-medium'>medio millón de usuarios</span>. Mi enfoque actual está en la construcción de herramientas de trading cuantitativo, pipelines de investigación y sistemas de análisis algorítmico en Python, enfatizando una arquitectura backend robusta, ingeniería de datos y la infraestructura que soporta estrategias de trading en tiempo real.",
 			tagline: "Código. Datos. Mercados.",
 		},
 		// About Section
@@ -423,6 +461,13 @@ export const translations = {
 				tools: "Herramientas",
 				sound: "Sistemas de Sonido",
 			},
+		},
+		// WakaTime Section
+		wakatime: {
+			mostUsedLanguages: "Lenguajes más usados",
+			last30Days: "Últimos 30 días",
+			last7Days: "Últimos 7 días",
+			noData: "No hay datos de lenguajes disponibles para este período.",
 		},
 		// Experience Section
 		experience: {
@@ -715,7 +760,8 @@ export const translations = {
 		// Footer
 		footer: {
 			contactTitle: "Pongámonos en Contacto",
-			copyright: "© 2025 Rafael Soley. Hecho con",
+			copyright: "© 2025 Rafael Soley.",
+			madeWith: "Hecho con",
 			and: "y",
 			nextjs: "NextJS",
 		},
@@ -733,12 +779,42 @@ export const translations = {
 			switchToEnglish: "Cambiar a inglés",
 			lightMode: "Cambiar a modo claro",
 			darkMode: "Cambiar a modo oscuro",
+			customize: "Personalizar apariencia",
+			accentColor: "Color de Acento",
+			backgroundTint: "Tinte de Fondo",
+			reset: "Restablecer valores",
+			colors: {
+				purple: "Púrpura",
+				blue: "Azul",
+				cyan: "Cian",
+				green: "Verde",
+				orange: "Naranja",
+				red: "Rojo",
+				pink: "Rosa",
+			},
+			tints: {
+				white: "Moderno",
+				ocean: "Océano",
+				forest: "Bosque",
+				rose: "Rosa",
+				slate: "Pizarra",
+			},
 		},
 		// Widgets
 		widgets: {
 			recentCommits: "Commits Recientes",
-			poweredBy: "Desarrollado por",
+			inspiredBy: "Inspirado por",
 			noCommits: "No hay commits públicos recientes.",
+			poweredBy: "Uptime impulsado por",
+			codingTime: "Tiempo Programando",
+			last7Days: "Últimos 7 Días",
+			latestBuild: "Última Build",
+			systemStatus: "Estado del Sistema",
+			connections: "Conexiones",
+			uptime: "Uptime",
+			latency: "Latencia",
+			allSystemsOperational: "Todos los sistemas operativos",
+			systemIssuesDetected: "Problemas del sistema detectados",
 		},
 	},
 } as const

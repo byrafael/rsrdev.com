@@ -1,15 +1,24 @@
+import { translate } from "google-translate-api-x"
 import { NextResponse } from "next/server"
 
+export const revalidate = 300 // Cache for 5 minutes
+
 export async function GET() {
+	const controller = new AbortController()
+	const timeoutId = setTimeout(() => controller.abort(), 25000)
+
 	try {
 		const [opsResponse, betterStackResponse] = await Promise.all([
 			fetch("https://cdn.rsrdev.com/ops/core/status", {
-				next: { revalidate: 60 },
+				next: { revalidate: 300 },
+				signal: controller.signal,
 			}),
 			fetch("https://rsrdev.betteruptime.com", {
-				next: { revalidate: 60 },
+				next: { revalidate: 300 },
+				signal: controller.signal,
 			}),
 		])
+		clearTimeout(timeoutId)
 
 		let opsData = { connections: 0, ping: 0 }
 		if (opsResponse.ok) {
@@ -17,19 +26,23 @@ export async function GET() {
 		}
 
 		let status = "issue"
-		let statusText = "System issues detected"
+		let statusText: string | undefined
+		let statusTextEs: string | undefined
 		let uptime = "0%"
 
 		if (betterStackResponse.ok) {
 			const text = await betterStackResponse.text()
 			if (text.includes("All services are online")) {
 				status = "ok"
-				statusText = "All systems operational"
 			} else {
 				// Try to extract the actual status message from the H1 tag
 				const h1Match = text.match(/<h1[^>]*class='[^']*heading-large[^']*'[^>]*>(.*?)<\/h1>/)
 				if (h1Match?.[1]) {
 					statusText = h1Match[1].trim()
+					try {
+						const res = await translate(statusText, { to: "es" })
+						statusTextEs = res.text
+					} catch (_e) {}
 				}
 			}
 
@@ -54,6 +67,7 @@ export async function GET() {
 			ping: opsData.ping,
 			status,
 			statusText,
+			statusTextEs,
 			uptime,
 		})
 	} catch (_error) {

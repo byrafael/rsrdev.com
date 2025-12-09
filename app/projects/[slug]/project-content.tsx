@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import ReactMarkdown from "react-markdown"
+import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
 import Container from "@/components/container"
 import { Badge } from "@/components/ui/badge"
@@ -40,16 +41,22 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 				<Link href="/projects">
 					<Button
 						variant="ghost"
-						className="group mb-8 text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+						className="group mb-8 text-muted-foreground hover:bg-primary/5 hover:text-primary dark:hover:bg-muted dark:hover:text-primary"
 					>
 						<ArrowLeft className="group-hover:-translate-x-1 mr-2 h-4 w-4 transition-transform" />
 						{language === "en" ? "Back to Projects" : "Volver a Proyectos"}
 					</Button>
 				</Link>
 
-				<div className="relative mb-8 h-[400px] w-full overflow-hidden rounded-xl border border-border/50 shadow-lg">
+				<div className="relative mb-8 aspect-1200/630 w-full overflow-hidden rounded-xl border border-border/50 bg-background shadow-lg">
 					{project.image ? (
-						<Image src={project.image} alt={project.title} fill className="object-cover" priority />
+						<Image
+							src={project.image}
+							alt={project.title}
+							fill
+							className="object-cover dark:brightness-75"
+							priority
+						/>
 					) : (
 						<div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
 							No Image
@@ -108,6 +115,7 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 				<div className="text-foreground">
 					<ReactMarkdown
 						remarkPlugins={[remarkGfm]}
+						rehypePlugins={[rehypeRaw]}
 						components={{
 							h1: ({ node, ...props }) => (
 								<h1 className="mt-8 mb-4 font-bold text-3xl text-brand-accent" {...props} />

@@ -1,13 +1,16 @@
 "use client"
 
+import { Menu } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import Container from "@/components/container"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useTranslation } from "@/hooks/use-translation"
 
 export default function Navigation() {
-	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+	const [isOpen, setIsOpen] = useState(false)
 	const t = useTranslation()
 	const pathname = usePathname()
 
@@ -60,42 +63,32 @@ export default function Navigation() {
 					))}
 				</div>
 
-				<button
-					type="button"
-					className="text-muted-foreground hover:text-brand-accent md:hidden"
-					onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-					aria-label="Toggle menu"
-				>
-					<svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<title>Menu</title>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth={2}
-							d="M4 6h16M4 12h16M4 18h16"
-						/>
-					</svg>
-				</button>
-			</Container>
-
-			{mobileMenuOpen && (
-				<div className="border-border border-t md:hidden">
-					<Container className="py-3">
-						<div className="flex flex-wrap gap-x-5 gap-y-2 px-1">
+				<Sheet open={isOpen} onOpenChange={setIsOpen}>
+					<SheetTrigger asChild>
+						<Button variant="ghost" size="icon" className="md:hidden">
+							<Menu className="h-5 w-5" />
+							<span className="sr-only">Toggle menu</span>
+						</Button>
+					</SheetTrigger>
+					<SheetContent side="right">
+						<SheetHeader>
+							<SheetTitle>Menu</SheetTitle>
+						</SheetHeader>
+						<div className="mt-8 flex flex-col gap-4 px-4">
 							{links.map((link) => (
 								<Link
 									key={link.href}
 									href={link.href}
-									className="text-muted-foreground text-xs transition-colors hover:text-brand-accent"
-									onClick={() => setMobileMenuOpen(false)}
+									className="font-medium text-lg text-muted-foreground transition-colors hover:text-brand-accent"
+									onClick={() => setIsOpen(false)}
 								>
 									{link.label}
 								</Link>
 							))}
 						</div>
-					</Container>
-				</div>
-			)}
+					</SheetContent>
+				</Sheet>
+			</Container>
 		</nav>
 	)
 }

@@ -2,14 +2,17 @@
 
 import createGlobe from "cobe"
 import { formatDistanceToNow } from "date-fns"
+import { es } from "date-fns/locale"
 import {
 	Activity,
 	Clock,
 	Cloud,
+	CloudMoon,
 	CloudRain,
 	CloudSun,
 	Info,
 	MapPin,
+	Moon,
 	Snowflake,
 	Sun,
 	Thermometer,
@@ -20,6 +23,7 @@ import Container from "@/components/container"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useTranslation } from "@/hooks/use-translation"
+import { useLanguage } from "@/lib/language-context"
 import { cn } from "@/lib/utils"
 
 interface WidgetProps {
@@ -28,8 +32,11 @@ interface WidgetProps {
 
 // WakaTime Widget
 function WakaTimeWidget({ className }: WidgetProps) {
+	const t = useTranslation()
 	const [hours, setHours] = useState<string>("0h 0m")
 	const [loading, setLoading] = useState(true)
+	const [range, setRange] = useState("last_30_days")
+
 	useEffect(() => {
 		const fetchWakaTime = async () => {
 			try {
@@ -38,6 +45,9 @@ function WakaTimeWidget({ className }: WidgetProps) {
 					const data = await response.json()
 					if (data?.text) {
 						setHours(data.text)
+					}
+					if (data?.range) {
+						setRange(data.range)
 					}
 				}
 				setLoading(false)
@@ -49,11 +59,13 @@ function WakaTimeWidget({ className }: WidgetProps) {
 		fetchWakaTime()
 	}, [])
 
+	const rangeLabel = range === "last_30_days" ? t.wakatime.last30Days : t.wakatime.last7Days
+
 	return (
 		<Card className={cn("flex h-full flex-col", className)}>
 			<CardHeader className="pb-2">
 				<CardTitle className="flex items-center gap-2 font-medium text-sm">
-					<Clock className="h-4 w-4" /> Coding Time
+					<Clock className="h-4 w-4" /> {t.widgets.codingTime}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-1 flex-col items-center justify-center">
@@ -62,7 +74,7 @@ function WakaTimeWidget({ className }: WidgetProps) {
 				) : (
 					<>
 						<div className="font-bold text-2xl">{hours}</div>
-						<p className="mt-1 text-muted-foreground text-xs">Last 7 Days</p>
+						<p className="mt-1 text-muted-foreground text-xs">{rangeLabel}</p>
 					</>
 				)}
 			</CardContent>
@@ -76,6 +88,7 @@ function LocationWidget({ className }: WidgetProps) {
 	const pointerInteracting = useRef<number | null>(null)
 	const pointerInteractionMovement = useRef(0)
 	const [time, setTime] = useState<string>("")
+	const [isNight, setIsNight] = useState(false)
 	const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null)
 	const phi = useRef(0)
 
@@ -83,6 +96,10 @@ function LocationWidget({ className }: WidgetProps) {
 		// Time
 		const updateTime = () => {
 			const now = new Date()
+			const crTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Costa_Rica" }))
+			const hour = crTime.getHours()
+			setIsNight(hour >= 17 || hour < 5)
+
 			setTime(
 				now.toLocaleTimeString("en-US", {
 					hour: "numeric",
@@ -177,6 +194,15 @@ function LocationWidget({ className }: WidgetProps) {
 	}, [])
 
 	const getWeatherIcon = (code: number) => {
+		if (isNight) {
+			if (code <= 1) {
+				return <Moon className="h-4 w-4 text-blue-200" />
+			}
+			if (code <= 3) {
+				return <CloudMoon className="h-4 w-4 text-blue-200" />
+			}
+		}
+
 		if (code <= 1) {
 			return <Sun className="h-4 w-4 text-yellow-500" />
 		}
@@ -229,7 +255,7 @@ function LocationWidget({ className }: WidgetProps) {
 
 	return (
 		<Card className={cn("relative flex h-full flex-row gap-0 overflow-hidden p-0", className)}>
-			<div className="relative aspect-square h-full shrink-0 overflow-hidden">
+			<div className="relative aspect-square h-3/4 shrink-0 self-center overflow-hidden md:h-full">
 				<div className="absolute inset-0 h-full w-full">
 					<canvas
 						ref={canvasRef}
@@ -275,7 +301,11 @@ function LocationWidget({ className }: WidgetProps) {
 					<span className="inline sm:hidden md:inline lg:hidden">San José, CR</span>
 				</div>
 				<div className="flex items-center gap-2 font-bold text-xs tabular-nums">
-					<Clock className="h-4 w-4 text-blue-500" />
+					{isNight ? (
+						<Moon className="h-4 w-4 text-blue-200" />
+					) : (
+						<Sun className="h-4 w-4 text-yellow-500" />
+					)}
 					{time}
 				</div>
 				{weather && (
@@ -347,14 +377,14 @@ function GithubWidget({ className }: WidgetProps) {
 						</PopoverTrigger>
 						<PopoverContent className="w-auto p-2 text-xs" align="end">
 							<p>
-								{t.widgets.poweredBy}{" "}
+								{t.widgets.inspiredBy}{" "}
 								<a
-									href="https://katib.jasoncameron.dev"
+									href="https://jasoncameron.dev"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="underline hover:text-primary"
 								>
-									Katib
+									Jason Cameron
 								</a>
 								.
 							</p>
@@ -379,14 +409,14 @@ function GithubWidget({ className }: WidgetProps) {
 									className="group flex items-center gap-2.5"
 									title={`${commit.repo}: ${commit.message}`}
 								>
-									<span className="flex-shrink-0 rounded bg-muted/50 px-1.5 py-0.5 font-medium text-foreground/80 text-xs transition-colors group-hover:text-primary">
+									<span className="shrink-0 rounded bg-muted/50 px-1.5 py-0.5 font-medium text-foreground/80 text-xs transition-colors group-hover:text-primary">
 										{commit.repo.includes("/") ? commit.repo.split("/")[1] : commit.repo}
 									</span>
 									<span className="flex-1 truncate text-muted-foreground text-xs transition-colors group-hover:text-foreground">
 										{commit.message}
 									</span>
 									{commit.additions !== undefined && commit.deletions !== undefined && (
-										<span className="flex-shrink-0 whitespace-nowrap font-mono text-[10px] opacity-70 transition-opacity group-hover:opacity-100">
+										<span className="shrink-0 whitespace-nowrap font-mono text-[10px] opacity-70 transition-opacity group-hover:opacity-100">
 											<span className="text-green-500">+{commit.additions}</span>
 											<span className="mx-1 text-muted-foreground">/</span>
 											<span className="text-red-500">-{commit.deletions}</span>
@@ -408,6 +438,8 @@ function GithubWidget({ className }: WidgetProps) {
 
 // Build Status Widget
 function BuildStatusWidget({ className }: WidgetProps) {
+	const t = useTranslation()
+	const { language } = useLanguage()
 	const [status, setStatus] = useState<{
 		status: string
 		conclusion: string | null
@@ -441,7 +473,7 @@ function BuildStatusWidget({ className }: WidgetProps) {
 		<Card className={cn("flex h-full flex-col", className)}>
 			<CardHeader className="pb-2">
 				<CardTitle className="flex items-center gap-2 font-medium text-sm">
-					<Activity className="h-4 w-4" /> Latest Build
+					<Activity className="h-4 w-4" /> {t.widgets.latestBuild}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-1 flex-col items-center justify-center">
@@ -467,7 +499,10 @@ function BuildStatusWidget({ className }: WidgetProps) {
 						<div className="flex flex-col gap-1 text-center text-xs">
 							<span className="font-medium text-muted-foreground">{status.branch}</span>
 							<span className="text-muted-foreground/80">
-								{formatDistanceToNow(new Date(status.updated_at), { addSuffix: true })}
+								{formatDistanceToNow(new Date(status.updated_at), {
+									addSuffix: true,
+									locale: language === "es" ? es : undefined,
+								})}
 							</span>
 						</div>
 					</div>
@@ -481,11 +516,14 @@ function BuildStatusWidget({ className }: WidgetProps) {
 
 // Uptime Widget
 function UptimeWidget({ className }: WidgetProps) {
+	const t = useTranslation()
+	const { language } = useLanguage()
 	const [stats, setStats] = useState<{
 		connections: number
 		ping: number
 		status: string
 		statusText?: string
+		statusTextEs?: string
 		uptime?: string
 	} | null>(null)
 	const [loading, setLoading] = useState(true)
@@ -514,9 +552,36 @@ function UptimeWidget({ className }: WidgetProps) {
 	return (
 		<Card className={cn("flex h-full flex-col", className)}>
 			<CardHeader className="pb-2">
-				<CardTitle className="flex items-center gap-2 font-medium text-sm">
-					<Activity className="h-4 w-4" /> System Status
-				</CardTitle>
+				<div className="flex items-center justify-between">
+					<CardTitle className="flex items-center gap-2 font-medium text-sm">
+						<Activity className="h-4 w-4" /> {t.widgets.systemStatus}
+					</CardTitle>
+					<Popover>
+						<PopoverTrigger asChild>
+							<button
+								type="button"
+								className="text-muted-foreground transition-colors hover:text-primary"
+							>
+								<Info className="h-4 w-4" />
+								<span className="sr-only">Info</span>
+							</button>
+						</PopoverTrigger>
+						<PopoverContent className="w-auto max-w-[220px] p-2 text-xs" align="end">
+							<p>
+								{t.widgets.poweredBy}{" "}
+								<a
+									href="https://betterstack.com/uptime"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="underline hover:text-primary"
+								>
+									BetterStack
+								</a>
+								.
+							</p>
+						</PopoverContent>
+					</Popover>
+				</div>
 			</CardHeader>
 			<CardContent className="flex flex-1 flex-col justify-between gap-4">
 				<div className="flex items-center gap-2">
@@ -535,14 +600,15 @@ function UptimeWidget({ className }: WidgetProps) {
 						/>
 					</div>
 					<span className="font-medium text-sm">
-						{stats?.statusText ||
-							(isOperational ? "All systems operational" : "System issues detected")}
+						{(language === "es" ? stats?.statusTextEs : stats?.statusText) ||
+							stats?.statusText ||
+							(isOperational ? t.widgets.allSystemsOperational : t.widgets.systemIssuesDetected)}
 					</span>
 				</div>
 
 				<div className="grid grid-cols-3 gap-4">
 					<div className="flex flex-col gap-1">
-						<span className="text-muted-foreground text-xs">Connections</span>
+						<span className="text-muted-foreground text-xs">{t.widgets.connections}</span>
 						{loading ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
@@ -550,15 +616,20 @@ function UptimeWidget({ className }: WidgetProps) {
 						)}
 					</div>
 					<div className="flex flex-col gap-1">
-						<span className="text-muted-foreground text-xs">Uptime</span>
+						<span className="text-muted-foreground text-xs">{t.widgets.uptime}</span>
 						{loading ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
-							<span className="font-bold text-xl">{stats?.uptime || "0%"}</span>
+							<span className="font-bold text-xl">
+								<span className="hidden sm:inline">{stats?.uptime || "0%"}</span>
+								<span className="sm:hidden">
+									{stats?.uptime ? `${Math.round(Number.parseFloat(stats.uptime))}%` : "0%"}
+								</span>
+							</span>
 						)}
 					</div>
 					<div className="flex flex-col gap-1">
-						<span className="text-muted-foreground text-xs">Latency</span>
+						<span className="text-muted-foreground text-xs">{t.widgets.latency}</span>
 						{loading ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
@@ -631,7 +702,7 @@ export default function WidgetsGrid() {
 	}
 
 	return (
-		<section className="py-16">
+		<section className="py-8 md:py-16">
 			<Container>
 				<div ref={gridRef} className="-m-2 min-h-[400px] w-full">
 					{/* Grid Sizer for Packery - 25% width (4 columns) */}

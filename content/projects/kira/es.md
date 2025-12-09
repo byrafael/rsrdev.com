@@ -4,8 +4,6 @@ description: "Un bot de economía y utilidades para Discord, financiado por la c
 date: "2025-12-09"
 tags: ["TypeScript", "Node.js", "Discord.js", "Yarn", "PM2", "Canvas"]
 image: "/banners/Kira.png"
-pinned: true
-order: 2
 ---
 
 # Kira

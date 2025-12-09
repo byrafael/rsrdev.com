@@ -72,7 +72,7 @@ export function getAllProjects(language: "en" | "es" = "en"): ProjectData[] {
 		.map((slug) => getProjectData(slug, language))
 		.filter((project): project is ProjectData => project !== null)
 		.sort((a, b) => {
-			// Prioritize pinned projects
+			// 1. Pinned projects first, sorted by order
 			if (a.pinned && !b.pinned) {
 				return -1
 			}
@@ -80,7 +80,7 @@ export function getAllProjects(language: "en" | "es" = "en"): ProjectData[] {
 				return 1
 			}
 
-			// If both are pinned, sort by order
+			// 2. If both are pinned, sort by order
 			if (a.pinned && b.pinned) {
 				const orderA = a.order ?? 99
 				const orderB = b.order ?? 99
@@ -89,7 +89,24 @@ export function getAllProjects(language: "en" | "es" = "en"): ProjectData[] {
 				}
 			}
 
-			// Sort by date (most recent first)
+			// 3. If both are unpinned, but one or both have an explicit order, sort those next
+			const aHasOrder = !a.pinned && typeof a.order === "number" && a.order !== 99
+			const bHasOrder = !b.pinned && typeof b.order === "number" && b.order !== 99
+			if (aHasOrder && !bHasOrder) {
+				return -1
+			}
+			if (!aHasOrder && bHasOrder) {
+				return 1
+			}
+			if (aHasOrder && bHasOrder) {
+				const orderA = a.order ?? 99
+				const orderB = b.order ?? 99
+				if (orderA !== orderB) {
+					return orderA - orderB
+				}
+			}
+
+			// 4. Otherwise, sort by date (most recent first)
 			return a.date > b.date ? -1 : 1
 		})
 	return projects

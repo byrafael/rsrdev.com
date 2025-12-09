@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Github, Globe } from "lucide-react"
+import { Code, Github, Globe, Pin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import Container from "@/components/container"
@@ -107,9 +107,18 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 					<div className="mb-2">
 						<Link
 							href={`/projects/${project.slug}`}
-							className="decoration-primary underline-offset-4 after:absolute after:inset-0 hover:underline"
+							className="group flex items-center gap-1 decoration-primary underline-offset-4 after:absolute after:inset-0"
+							style={{ position: "relative" }}
 						>
-							<h3 className="line-clamp-1 font-bold text-foreground text-lg tracking-tight transition-colors">
+							{project.pinned && (
+								<Pin
+									title="Pinned project"
+									className="mr-1 h-4 w-4 shrink-0 text-yellow-500"
+									strokeWidth={2.2}
+									aria-label="Pinned"
+								/>
+							)}
+							<h3 className="line-clamp-1 font-bold text-foreground text-lg tracking-tight transition-colors group-hover:underline">
 								{project.title}
 							</h3>
 						</Link>

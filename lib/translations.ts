@@ -17,7 +17,7 @@ export const translations = {
 			greeting: "Hey! I'm",
 			subtitle: "Backend & AI Systems Developer",
 			description:
-				"I'm an <span class='text-foreground font-medium'>AI Systems Developer</span> with a focus on <span class='text-foreground font-medium'>Quant Trading</span>, <span class='text-foreground font-medium'>back-end architecture</span>, and <span class='text-foreground font-medium'>DevOps</span>. I bring over eight years of programming experience and six years of contractor work, during which I have developed high-performance systems including videogames, automation platforms, and discord bots trusted by over <span class='text-foreground font-medium'>1,000 online communities</span> and <span class='text-foreground font-medium'>half a million users</span>. My current focus is on building quantitative trading tools, research pipelines, and algorithmic analysis systems in Python, emphasizing robust backend architecture, data engineering, and the infrastructure that supports real-time trading strategies.",
+				"I am an <span class='font-bold'>AI Systems Developer</span> specializing in <span class='font-bold'>Quantitative Trading</span>, <span class='font-bold'>backend architecture</span>, and <span class='font-bold'>robust DevOps</span>. For the last <span class='font-bold'>eight years</span>—<span class='font-bold'>six of them as a specialist contractor</span>—I have engineered <span class='font-bold'>high-performance systems</span>, ranging from automation platforms and videogames to large-scale Discord bots that successfully scaled to serve <span class='font-bold'>over half a million users</span> across <span class='font-bold'>1,000 communities</span>. I now channel that expertise into the financial sector, focusing on building <span class='font-bold'>quantitative trading tools</span>, <span class='font-bold'>research pipelines</span>, and <span class='font-bold'>algorithmic analysis systems</span> in Python, emphasizing <span class='font-bold'>data engineering</span>, <span class='font-bold'>resilient backend architecture</span>, and the <span class='font-bold'>high-performance infrastructure</span> required to execute real-time trading strategies.",
 			tagline: "Code. Data. Markets.",
 		},
 		// About Section
@@ -324,9 +324,9 @@ export const translations = {
 			title: "About Me",
 			subtitle: "I operate at the intersection of code, data, and markets.",
 			paragraph1:
-				"I am a backend developer and AI systems engineer with a deep focus on building robust, scalable systems. My work spans from architecting complex backend infrastructure to developing sophisticated AI workflows that solve real-world problems. I don't just write code; I engineer solutions that stand up to the rigors of production environments and market dynamics.",
+				"I am Rafael Soley. Based in San José, Costa Rica (and holding dual EU citizenship), I spend my days building high-performance systems, but my time away from the keyboard is dedicated to high-performance living. I’m deeply invested in the science of physical training, spending hours studying biomechanics and nutrition to fine-tune my own strength and calisthenics routines.",
 			paragraph2:
-				"My long-term vision is to build systems that are not only functional but also resilient and adaptive. I bring a unique combination of technical depth and operational mindset, making me dangerous in the best way possible—capable of executing on ambitious visions with precision and reliability.",
+				"Beyond the self-improvement, I focus heavily on my circle. I’m a dedicated dog dad to six pups, and I’m passionate about animal rescue work. Whether I’m reading up on the latest health research or spending time with my friends and dogs, I prioritize the offline connections that keep me grounded.",
 			outsideTerminal: {
 				title: "Outside the Terminal",
 				sound: {
@@ -424,7 +424,7 @@ export const translations = {
 			greeting: "¡Hola! Soy",
 			subtitle: "Desarrollador Backend y de Sistemas de IA",
 			description:
-				"Soy un <span class='text-foreground font-medium'>Desarrollador de Sistemas de IA</span> con enfoque en <span class='text-foreground font-medium'>Trading Cuantitativo</span>, <span class='text-foreground font-medium'>arquitectura back-end</span> y <span class='text-foreground font-medium'>DevOps</span>. Aporto más de ocho años de experiencia en programación y seis años de trabajo como contratista, durante los cuales he desarrollado sistemas de alto rendimiento, incluyendo videojuegos, plataformas de automatización y bots de discord en los que confían más de <span class='text-foreground font-medium'>1.000 comunidades en línea</span> y <span class='text-foreground font-medium'>medio millón de usuarios</span>. Mi enfoque actual está en la construcción de herramientas de trading cuantitativo, pipelines de investigación y sistemas de análisis algorítmico en Python, enfatizando una arquitectura backend robusta, ingeniería de datos y la infraestructura que soporta estrategias de trading en tiempo real.",
+				"Soy un <span class='font-bold'>Desarrollador de Sistemas de IA</span> especializado en <span class='font-bold'>Trading Cuantitativo</span>, <span class='font-bold'>arquitectura backend</span> y <span class='font-bold'>DevOps robusto</span>. Durante los <span class='font-bold'>últimos ocho años</span>—<span class='font-bold'>seis de ellos como contratista especialista</span>—he diseñado <span class='font-bold'>sistemas de alto rendimiento</span>, desde plataformas de automatización y videojuegos hasta bots de Discord a gran escala que lograron servir exitosamente a <span class='font-bold'>más de medio millón de usuarios</span> en <span class='font-bold'>1,000 comunidades</span>. Ahora canalizo esa experiencia hacia el sector financiero, enfocándome en construir <span class='font-bold'>herramientas de trading cuantitativo</span>, <span class='font-bold'>pipelines de investigación</span> y <span class='font-bold'>sistemas de análisis algorítmico</span> en Python, con énfasis en <span class='font-bold'>ingeniería de datos</span>, <span class='font-bold'>arquitectura backend resiliente</span> y la <span class='font-bold'>infraestructura de alto rendimiento</span> necesaria para ejecutar estrategias de trading en tiempo real.",
 			tagline: "Código. Datos. Mercados.",
 		},
 		// About Section
@@ -735,9 +735,9 @@ export const translations = {
 			title: "Sobre Mí",
 			subtitle: "Opero en la intersección de código, datos y mercados.",
 			paragraph1:
-				"Soy un desarrollador backend e ingeniero de sistemas de IA con un profundo enfoque en la construcción de sistemas robustos y escalables. Mi trabajo abarca desde la arquitectura de infraestructura backend compleja hasta el desarrollo de flujos de trabajo de IA sofisticados que resuelven problemas del mundo real. No solo escribo código; diseño soluciones que resisten los rigores de los entornos de producción y la dinámica del mercado.",
+				"Mi nombre es Rafael Soley. Desde San José, Costa Rica (y con doble ciudadanía europea), dedico mis días a construir sistemas de alto rendimiento, pero mi tiempo fuera del teclado está dedicado a vivir con alto rendimiento. Me involucro profundamente en la ciencia del entrenamiento físico, pasando horas estudiando biomecánica y nutrición para perfeccionar mis rutinas de fuerza y calistenia.",
 			paragraph2:
-				"Mi visión a largo plazo es construir sistemas que no solo sean funcionales, sino también resilientes y adaptables. Aporto una combinación única de profundidad técnica y mentalidad operativa, lo que me hace peligroso de la mejor manera posible: capaz de ejecutar visiones ambiciosas con precisión y fiabilidad.",
+				"Más allá de la mejora personal, pongo mucho énfasis en mi círculo cercano. Soy un dedicado papá de seis perros y me apasiona el trabajo de rescate animal. Ya sea leyendo sobre las últimas investigaciones en salud o compartiendo tiempo con mis amigos y perros, priorizo las conexiones fuera de línea que me mantienen centrado.",
 			outsideTerminal: {
 				title: "Fuera de la Terminal",
 				sound: {

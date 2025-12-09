@@ -6,8 +6,7 @@ tags: ["Typescript", "Express", "YFinance", "Prisma", "MySQL"]
 image: "/banners/EconSys.png"
 github: "byrafael/EconSys"
 demo: "econsys.rsrdev.com"
-pinned: true
-order: 1
+order: 3
 ---
 
 # EconSys

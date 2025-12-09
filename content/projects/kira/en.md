@@ -4,8 +4,6 @@ description: "A community-funded Discord economy and server utility bot that ran
 date: "2025-12-09"
 tags: ["TypeScript", "Node.js", "Discord.js", "Yarn", "PM2", "Canvas"]
 image: "/banners/Kira.png"
-pinned: true
-order: 2
 ---
 
 # Kira

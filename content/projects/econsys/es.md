@@ -6,8 +6,7 @@ tags: ["Typescript", "Express", "YFinance", "Prisma", "MySQL"]
 image: "/banners/EconSys.png"
 github: "byrafael/EconSys"
 demo: "econsys.rsrdev.com"
-pinned: true
-order: 1
+order: 3
 ---
 
 # EconSys
@@ -29,4 +28,4 @@ A medida que me distancio poco a poco del desarrollo diario de bots de Discord y
 La hoja de ruta viva y el progreso se seguirán [aquí](https://rsrdev.fibery.io/FOSS/Roadmap-71?sharing-key=c55de8f6-269d-49ee-8c23-6604632f2b3b).
 
 ## Cómo contribuir
-Los issues y PRs son bienvenidos y podrán enviarse al repositorio de Github una vez que esta tenga código. También puedes enviarme sugerencias por correo electrónico a `hello[at]rsrdev[dot]com`.
+Los issues y PRs son bienvenidos y podrán enviarse al repositorio de Github una vez que esta tenga código. También puedes enviarme sugerencias por correo electrónico a `hello[arroba]rsrdev[punto]com`.

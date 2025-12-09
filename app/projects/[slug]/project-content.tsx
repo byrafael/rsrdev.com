@@ -5,8 +5,10 @@ import { ArrowLeft, Calendar, ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import ReactMarkdown from "react-markdown"
+import rehypeKatex from "rehype-katex"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
+import remarkMath from "remark-math"
 import Container from "@/components/container"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -96,7 +98,6 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 						)}
 					</div>
 				</div>
-
 				<div className="mb-8 flex flex-wrap gap-2">
 					{project.tags.map((tag) => (
 						<Badge
@@ -109,13 +110,11 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 						</Badge>
 					))}
 				</div>
-
 				<Separator className="my-8" />
-
 				<div className="text-foreground">
 					<ReactMarkdown
-						remarkPlugins={[remarkGfm]}
-						rehypePlugins={[rehypeRaw]}
+						remarkPlugins={[remarkGfm, remarkMath]}
+						rehypePlugins={[rehypeRaw, rehypeKatex]}
 						components={{
 							h1: ({ node, ...props }) => (
 								<h1 className="mt-8 mb-4 font-bold text-3xl text-brand-accent" {...props} />
@@ -123,7 +122,9 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 							h2: ({ node, ...props }) => (
 								<h2 className="mt-6 mb-3 font-bold text-2xl text-brand-accent" {...props} />
 							),
-							h3: ({ node, ...props }) => <h3 className="mt-4 mb-2 font-bold text-xl" {...props} />,
+							h3: ({ node, ...props }) => (
+								<h3 className="mt-4 mb-2 font-bold text-brand-accent text-xl" {...props} />
+							),
 							p: ({ node, ...props }) => (
 								<p className="mb-4 text-muted-foreground leading-relaxed" {...props} />
 							),

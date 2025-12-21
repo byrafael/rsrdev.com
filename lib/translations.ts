@@ -58,7 +58,7 @@ export const translations = {
 		// WakaTime Section
 		wakatime: {
 			mostUsedLanguages: "Most used languages",
-			last30Days: "Last 30 days",
+			last30Days: "This month",
 			last7Days: "Last 7 days",
 			noData: "No language data available for this period.",
 		},

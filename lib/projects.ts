@@ -24,7 +24,10 @@ export function getProjectSlugs() {
 		return []
 	}
 	return fs.readdirSync(projectsDirectory).filter((file) => {
-		return fs.statSync(path.join(projectsDirectory, file)).isDirectory()
+		return (
+			!file.startsWith(".") && // Ignore hidden directories
+			fs.statSync(path.join(projectsDirectory, file)).isDirectory()
+		)
 	})
 }
 

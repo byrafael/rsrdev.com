@@ -36,7 +36,7 @@ function WakaTimeWidget({ className }: WidgetProps) {
 	const t = useTranslation()
 	const { wakatime, loading } = useWidgetData()
 
-	const hours = "37hrs 19mins" //wakatime?.text || "0hrs 0mins"
+	const hours = wakatime?.text || "0hrs 0mins" // "37hrs 19mins"
 	const range = wakatime?.range || "last_30_days"
 	const rangeLabel = range === "last_30_days" ? t.wakatime.last30Days : t.wakatime.last7Days
 

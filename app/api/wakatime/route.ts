@@ -27,7 +27,7 @@ export async function GET() {
 		const data = await response.json()
 
 		// Debug: Log the raw response to see the structure
-		console.log("Raw API Response:", JSON.stringify(data, null, 2))
+		// console.log("Raw API Response:", JSON.stringify(data, null, 2))
 
 		// Calculate total seconds from languages array
 		const totalSeconds = (data.languages || []).reduce(

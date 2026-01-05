@@ -15,9 +15,9 @@ export const translations = {
 		// Hero Section
 		hero: {
 			greeting: "Hey! I'm",
-			subtitle: "Backend & AI Systems Developer",
+			subtitle: "AI Systems & Backend Engineer",
 			description:
-				"I am an AI Systems Developer specializing in <span class='font-bold'>quantitative trading</span>, <span class='font-bold'>backend architecture</span>, and <span class='font-bold'>DevOps</span>. Over the last eight years—including six as a specialist contractor—I’ve built high-performance systems ranging from automation platforms and videogames to large-scale Discord bots that served more than half a million users across 1,000 communities. I now apply that experience to the financial sector, developing quantitative trading tools, research pipelines, and algorithmic analysis systems in Python, with a focus on data engineering, resilient backend design, and the infrastructure required for real-time trading strategies.",
+				"I'm an <span class='font-bold'>AI Systems Engineer</span> with 8+ years of programming experience and 6+ years of independent contractor work building high-performance infra. After scaling bots and software for 1,000+ Discord online communities and <span class='font-bold'>500k+ active users</span>, I now develop AI solutions at <span class='font-bold'>MUSCLE</span> to optimize CX and support efficiency for their global clients. I am currently also applying my systems-first background to <span class='font-bold'>quantitative finance</span>, creating mathematical models to predict market movements.",
 			tagline: "Code. Data. Markets.",
 		},
 		// About Section
@@ -324,9 +324,9 @@ export const translations = {
 			title: "About Me",
 			subtitle: "I operate at the intersection of code, data, and markets.",
 			paragraph1:
-				"I am Rafael Soley. Based in San José, Costa Rica (and holding dual EU citizenship), I spend my days building high-performance systems, but my time away from the keyboard is dedicated to high-performance living. I’m deeply invested in the science of physical training, spending hours studying biomechanics and nutrition to fine-tune my own strength and calisthenics routines.",
+				"Based in San José, Costa Rica (and holding dual EU citizenship), I spend my days building high-performance systems, but my time away from the keyboard is dedicated to high-performance living. I’m deeply invested in the science of physical training, spending hours studying biomechanics and nutrition to fine-tune my own strength and calisthenics routines.",
 			paragraph2:
-				"Beyond the self-improvement, I focus heavily on my circle. I’m a dedicated dog dad to six pups, and I’m passionate about animal rescue work. Whether I’m reading up on the latest health research or spending time with my friends and dogs, I prioritize the offline connections that keep me grounded.",
+				"Beyond the self-improvement, I focus heavily on my circle. I’m a dedicated dog dad to six, and I’m passionate about animal rescue work. Whether I’m reading up on the latest health research or spending time with my friends and dogs, I prioritize the offline connections that keep me grounded.",
 			outsideTerminal: {
 				title: "Outside the Terminal",
 				sound: {
@@ -422,9 +422,9 @@ export const translations = {
 		// Hero Section
 		hero: {
 			greeting: "¡Hola! Soy",
-			subtitle: "Desarrollador Backend y de Sistemas de IA",
+			subtitle: "Ingeniero de Sistemas de IA y Backend",
 			description:
-				"Soy un Desarrollador de Sistemas de IA especializado en <span class='font-bold'>trading cuantitativo</span>, <span class='font-bold'>arquitectura backend</span> y <span class='font-bold'>DevOps</span>. Durante los últimos ocho años—seis de ellos como contratista especialista—he construido sistemas de alto rendimiento, desde plataformas de automatización y videojuegos hasta bots de Discord a gran escala que atendieron a más de medio millón de usuarios en 1,000 comunidades. Ahora aplico esa experiencia al sector financiero, desarrollando herramientas de trading cuantitativo, pipelines de investigación y sistemas de análisis algorítmico en Python, con enfoque en ingeniería de datos, backend resiliente y la infraestructura necesaria para ejecutar estrategias de trading en tiempo real.",
+				"Soy <span class='font-bold'>Ingeniero de Sistemas de IA</span> con más de 8 años de experiencia en programación y 6+ años como contratista independiente desarrollando infraestructura de alto rendimiento. Tras escalar software y bots para más de 1,000 comunidades de Discord y <span class='font-bold'>500k+ usuarios activos</span>, actualmente desarrollo soluciones de IA en <span class='font-bold'>MUSCLE</span> para optimizar la experiencia del cliente (CX) y la eficiencia de soporte. Además, aplico mi enfoque centrado en sistemas a las <span class='font-bold'>finanzas cuantitativas</span>, creando modelos matemáticos para predecir movimientos del mercado.",
 			tagline: "Código. Datos. Mercados.",
 		},
 		// About Section
@@ -735,9 +735,9 @@ export const translations = {
 			title: "Sobre Mí",
 			subtitle: "Opero en la intersección de código, datos y mercados.",
 			paragraph1:
-				"Mi nombre es Rafael Soley. Desde San José, Costa Rica (y con doble ciudadanía europea), dedico mis días a construir sistemas de alto rendimiento, pero mi tiempo fuera del teclado está dedicado a vivir con alto rendimiento. Me involucro profundamente en la ciencia del entrenamiento físico, pasando horas estudiando biomecánica y nutrición para perfeccionar mis rutinas de fuerza y calistenia.",
+				"Basado en San José, Costa Rica (y con doble ciudadanía europea), dedico mis días a construir sistemas de alto rendimiento, pero mi tiempo fuera del teclado está dedicado a vivir con alto rendimiento. Me involucro profundamente en la ciencia del entrenamiento físico, pasando horas estudiando biomecánica y nutrición para perfeccionar mis rutinas de fuerza y calistenia.",
 			paragraph2:
-				"Más allá de la mejora personal, pongo mucho énfasis en mi círculo cercano. Soy un dedicado papá de seis perros y me apasiona el trabajo de rescate animal. Ya sea leyendo sobre las últimas investigaciones en salud o compartiendo tiempo con mis amigos y perros, priorizo las conexiones fuera de línea que me mantienen centrado.",
+				"Más allá de la mejora personal, pongo mucho énfasis en mi círculo cercano. Soy un dedicado 'papá' de seis perros y me apasiona el trabajo de rescate animal. Ya sea leyendo sobre las últimas investigaciones en salud o compartiendo tiempo con mis amigos y perros, priorizo las conexiones fuera de línea que me mantienen centrado.",
 			outsideTerminal: {
 				title: "Fuera de la Terminal",
 				sound: {

@@ -3,7 +3,7 @@
 import katex from "katex"
 import { Terminal } from "lucide-react"
 import Container from "@/components/container"
-// import LanguageBar from "@/components/sections/language-bar"
+import LanguageBar from "@/components/sections/language-bar"
 import { useTranslation } from "@/hooks/use-translation"
 
 interface TechStackProps {
@@ -103,7 +103,7 @@ export default function TechStack({ excludeCategories = [] }: TechStackProps) {
 					))}
 				</div>
 
-				{/* <LanguageBar /> */}
+				<LanguageBar />
 			</Container>
 		</section>
 	)

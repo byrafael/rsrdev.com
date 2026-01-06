@@ -39,7 +39,7 @@ Over its lifetime, Kira reached a scale that I’m still proud of:
 - **~700 servers** used Kira at some point.
 - Several of those servers had **2,000+ members** each.
 - Overall, Kira reached roughly **50,000 distinct users**.
-- It routinely handled **over 100,000 transactions and 150,000 interactions per day** across all guilds.
+- It routinely handled **over 150,000 interactions per day** (of which around 100,000 were individual "transactions") across all guilds.
 - It was **verified by Discord**, which both helped discoverability and pushed me to hold it to a higher bar of reliability.
 
 One of the larger servers that ran Kira reported that they believed it had a **clear, positive impact on activity and retention**. The economy layer became a background heartbeat for the community: something that nudged people to come back, participate, and stick around, without ever being the only reason they were there.

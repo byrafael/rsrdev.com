@@ -39,7 +39,7 @@ A lo largo de su vida útil, Kira llegó a una escala de la que todavía me sien
 - **~700 servidores** usaron Kira en algún momento.
 - Varios de esos servidores tenían **más de 2.000 miembros** cada uno.
 - En total, Kira llegó a **unas 50.000 personas usuarias distintas**.
-- Manejaba de forma rutinaria **más de 100.000 transacciones y 150.000 interacciones al día** entre todos los servidores.
+- Manejaba de forma rutinaria **más de 150.000 interacciones al día** (de lo cual al rededor de 100.000 eran "transacciones" individuales) entre todos los servidores.
 - Fue **verificado por Discord**, lo que ayudó con la visibilidad y, al mismo tiempo, me obligó a mantener un estándar alto de confiabilidad.
 
 Uno de los servidores grandes que usaba Kira comentó que sentían que el bot tenía un **impacto claro y positivo en la actividad y la retención**. La capa de economía se convirtió en una especie de pulso de fondo para la comunidad: algo que empujaba a la gente a volver, participar y quedarse, sin que esa fuera la única razón para estar ahí.

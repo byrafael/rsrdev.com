@@ -349,7 +349,7 @@ export const translations = {
 		// Footer
 		footer: {
 			contactTitle: "Let's Get in Touch",
-			copyright: "© 2025 Rafael Soley.",
+			copyright: `© ${new Date().getFullYear()} Rafael Soley.`,
 			madeWith: "Made with",
 			and: "and",
 			nextjs: "NextJS",
@@ -760,7 +760,7 @@ export const translations = {
 		// Footer
 		footer: {
 			contactTitle: "Pongámonos en Contacto",
-			copyright: "© 2025 Rafael Soley.",
+			copyright: `© ${new Date().getFullYear()} Rafael Soley.`,
 			madeWith: "Hecho con",
 			and: "y",
 			nextjs: "NextJS",

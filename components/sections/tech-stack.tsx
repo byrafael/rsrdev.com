@@ -41,7 +41,7 @@ export default function TechStack({ excludeCategories = [] }: TechStackProps) {
 		{
 			id: "trading",
 			name: t.techStack.categories.trading,
-			skills: ["Backtrader", "YFinance", "Real-time feeds"],
+			skills: ["Backtrader", "YFinance", "MASSIVE / Polygon.io", "TA-Lib"],
 		},
 		{
 			id: "infrastructure",
@@ -51,12 +51,12 @@ export default function TechStack({ excludeCategories = [] }: TechStackProps) {
 		{
 			id: "web",
 			name: t.techStack.categories.web,
-			skills: ["React", "Tailwind", "Next.js", "Node.js", "Express", "Django"],
+			skills: ["Bun", "React", "Tailwind", "Next.js", "Node.js", "Express", "Django"],
 		},
 		{
 			id: "tools",
 			name: t.techStack.categories.tools,
-			skills: ["Git", "Linux", "VSCode", "Jupyter", "Grafana"],
+			skills: ["Git", "Linux", "VSCode", "Jupyter", "Grafana", "Cursor"],
 		},
 		{
 			id: "sound",

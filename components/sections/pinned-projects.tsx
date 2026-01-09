@@ -152,7 +152,7 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 					<div className="mt-auto flex items-center justify-between border-border/50 border-t pt-4">
 						<div className="flex flex-nowrap gap-2 items-center min-w-0">
 							{(() => {
-								const MAX_CHARS = 64
+								const MAX_CHARS = 52
 								let currentChars = 0
 								const visibleTags: string[] = []
 
@@ -161,7 +161,7 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 										if (currentChars + tag.length <= MAX_CHARS) {
 											visibleTags.push(tag)
 											currentChars += tag.length
-										} else break
+										} else { break }
 									}
 								}
 

@@ -132,7 +132,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 						<div className="flex flex-nowrap gap-2 items-center min-w-0">
 							{(() => {
 								// Allow a bit more tags to fit in one line
-								const MAX_CHARS = 32
+								const MAX_CHARS = 28
 								let currentChars = 0
 								const visibleTags: string[] = []
 

@@ -102,6 +102,10 @@ export default function LanguageBar() {
 				<TooltipProvider>
 					{languages.map((lang, index) => {
 						const color = getColor(lang.name, index)
+						const totalMinutes = Math.round((lang.seconds || 0) / 60)
+						const hours = Math.floor(totalMinutes / 60)
+						const minutes = totalMinutes % 60
+
 						return (
 							<Tooltip key={lang.name} delayDuration={0}>
 								<TooltipTrigger asChild>
@@ -129,7 +133,7 @@ export default function LanguageBar() {
 												{lang.percent.toFixed(1)}%
 												{lang.seconds && (
 													<span className="ml-1 opacity-70">
-														({Math.round(lang.seconds / 3600)}h)
+														({hours}h {minutes}m)
 													</span>
 												)}
 											</span>

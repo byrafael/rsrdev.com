@@ -13,6 +13,7 @@ import {
 	transformTranslationToExperiences,
 } from "@/lib/experience-data"
 import { useLanguage } from "@/lib/language-context"
+import { cn } from "@/lib/utils"
 
 // Default sorting strategy for experiences
 const EXPERIENCE_SORT_STRATEGY: SortStrategy = "date"
@@ -76,8 +77,17 @@ export function ExperienceList() {
 					>
 						<div className="flex flex-col gap-6 md:flex-row md:items-start">
 							<div className="shrink-0">
-								<Avatar className="h-16 w-16 bg-background shadow-sm">
-									<AvatarImage src={job.logo} alt={job.company} className="object-contain p-1" />
+								<Avatar className={cn("h-16 w-16 bg-background shadow-sm border-2 border-border")}>
+									<AvatarImage
+										src={job.logo}
+										alt={job.company}
+										className={cn(
+											"object-contain",
+											job.company === "MUSCLE"
+												? "border-[6px] border-transparent bg-white bg-clip-padding rounded-full p-1"
+												: "p-1"
+										)}
+									/>
 									<AvatarFallback className="font-bold text-lg text-muted-foreground">
 										{job.company.substring(0, 2).toUpperCase()}
 									</AvatarFallback>

@@ -1,6 +1,7 @@
 "use client"
 
 import Container from "@/components/container"
+import ExperienceTimeline from "@/components/sections/experience-timeline"
 import SocialIcons from "@/components/ui/social-icons"
 import { useTranslation } from "@/hooks/use-translation"
 
@@ -27,6 +28,8 @@ export default function Hero() {
 					<div className="text-sm">
 						<SocialIcons />
 					</div>
+
+					<ExperienceTimeline />
 				</div>
 			</Container>
 		</section>

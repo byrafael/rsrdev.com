@@ -280,16 +280,6 @@ export const translations = {
 						"Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program.",
 				},
 				{
-					degree: "AS & A Levels",
-					school: "Cambridge International Education",
-					year: "2025 - 2026",
-					details: [
-						"Mathematics (AL)",
-						"Computer Science (AL)",
-						"Global Perspectives and Research (AS)",
-					],
-				},
-				{
 					degree: "IGCSEs",
 					school: "Cambridge International Education",
 					year: "2023 - 2024",
@@ -705,16 +695,6 @@ export const translations = {
 					year: "Graduación Esperada 2026",
 					details:
 						"Cursando independientemente el bachillerato a través del programa de Educación Diversificada a Distancia (EDAD).",
-				},
-				{
-					degree: "AS & A Levels",
-					school: "Cambridge International Education",
-					year: "2025 - 2026",
-					details: [
-						"Matemáticas (AL)",
-						"Ciencias de la Computación (AL)",
-						"Perspectivas Globales e Investigación (AS)",
-					],
 				},
 				{
 					degree: "IGCSEs",

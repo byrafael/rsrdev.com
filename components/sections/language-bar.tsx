@@ -48,9 +48,33 @@ export default function LanguageBar() {
 	const t = useTranslation()
 	const { wakatime, loading } = useWidgetData()
 
-	const languages = wakatime?.languages || []
+	let languages = wakatime?.languages || []
 	const range = wakatime?.range || "last_30_days"
 	const totalTime = wakatime?.text
+
+	// Merge Unknown language time with C++
+	const unknownIndex = languages.findIndex((lang) => lang.name === "Unknown")
+	if (unknownIndex !== -1) {
+		const unknown = languages[unknownIndex]
+		const cppIndex = languages.findIndex((lang) => lang.name === "C++")
+
+		if (cppIndex !== -1) {
+			// Merge Unknown into C++
+			languages[cppIndex] = {
+				...languages[cppIndex],
+				percent: (languages[cppIndex].percent || 0) + (unknown.percent || 0),
+				seconds: (languages[cppIndex].seconds || 0) + (unknown.seconds || 0),
+			}
+			// Remove Unknown from the array
+			languages = languages.filter((lang) => lang.name !== "Unknown")
+		} else {
+			// No C++ entry, rename Unknown to C++
+			languages[unknownIndex] = {
+				...languages[unknownIndex],
+				name: "C++",
+			}
+		}
+	}
 
 	if (loading.wakatime) {
 		return (

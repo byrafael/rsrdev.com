@@ -31,6 +31,9 @@ interface BuildStatus {
 	conclusion: string | null
 	branch: string
 	updated_at: string
+	name?: string
+	url?: string
+	commit_message?: string
 }
 
 interface OpsStats {

@@ -5,17 +5,20 @@ import { formatDistanceToNow } from "date-fns"
 import { es } from "date-fns/locale"
 import {
 	Activity,
+	CheckCircle2,
 	Clock,
 	Cloud,
 	CloudMoon,
 	CloudRain,
 	CloudSun,
+	ExternalLink,
 	Info,
 	MapPin,
 	Moon,
 	Snowflake,
 	Sun,
 	Thermometer,
+	XCircle,
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 // import { fetchGithubCommits, fetchWakaTimeStats, fetchWeatherData } from "@/app/actions/widget-data"
@@ -396,34 +399,44 @@ function BuildStatusWidget({ className }: WidgetProps) {
 					<Activity className="h-4 w-4" /> {t.widgets.latestBuild}
 				</CardTitle>
 			</CardHeader>
-			<CardContent className="flex flex-1 flex-col items-center justify-center">
+			<CardContent className="flex flex-1 flex-col items-center justify-center pt-2">
 				{loading.buildStatus ? (
-					<div className="flex flex-col items-center gap-2">
-						<div className="h-3 w-3 animate-pulse rounded-full bg-muted" />
-						<div className="h-2 w-24 animate-pulse rounded bg-muted" />
+					<div className="flex flex-col items-center gap-3">
+						<div className="h-4 w-4 animate-pulse rounded-full bg-muted" />
+						<div className="h-3 w-32 animate-pulse rounded bg-muted" />
 					</div>
 				) : status ? (
-					<div className="flex flex-col items-center gap-4">
-						<div className="relative flex h-4 w-4">
+					<div className="flex w-full flex-col items-center gap-3">
+						<div className="relative flex">
 							{isInProgress && (
-								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-400 opacity-75" />
+								<span className="absolute -inset-1 inline-flex h-6 w-6 animate-ping rounded-full bg-yellow-400 opacity-75" />
 							)}
-							<span
+							<div
 								className={cn(
-									"relative inline-flex h-4 w-4 rounded-full",
+									"h-4 w-4 rounded-full",
 									isSuccess ? "bg-green-500" : isFailure ? "bg-red-500" : "bg-yellow-500"
 								)}
 							/>
 						</div>
 
-						<div className="flex flex-col gap-1 text-center text-xs">
-							<span className="font-medium text-muted-foreground">{status.branch}</span>
-							<span className="text-muted-foreground/80">
-								{formatDistanceToNow(new Date(status.updated_at), {
-									addSuffix: true,
-									locale: language === "es" ? es : undefined,
-								})}
-							</span>
+						<div className="flex flex-col items-center gap-1.5">
+							<a
+								href={status.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="font-mono text-[10px] text-muted-foreground transition-colors hover:text-primary"
+							>
+								{status.name || "unknown-build"}
+							</a>
+
+							<div className="flex flex-col gap-0.5 text-center">
+								<span className="text-muted-foreground/60 text-[11px]">
+									{formatDistanceToNow(new Date(status.updated_at), {
+										addSuffix: true,
+										locale: language === "es" ? es : undefined,
+									})}
+								</span>
+							</div>
 						</div>
 					</div>
 				) : (

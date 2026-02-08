@@ -1,6 +1,6 @@
 ---
 title: "Schedulr"
-description: "Un sistema de horarios resiliente que reemplaza una legendaria (y frágil) hoja de cálculo de Google en mi colegio."
+description: "Un sistema de horarios resiliente que reemplaza una legendaria (y frágil) hoja de cálculo de Google en el colegio del que me retiré."
 date: "2025-02-15"
 tags: ["TypeScript", "Next.js", "Express", "MySQL", "Prisma ORM", "Bun"]
 image: "/banners/Schedulr.png"

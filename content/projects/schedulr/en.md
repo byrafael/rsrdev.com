@@ -1,6 +1,6 @@
 ---
 title: "Schedulr"
-description: "A resilient scheduling system replacing a legendary, fragile Google Sheet at my high school."
+description: "A resilient scheduling system replacing a legendary, fragile Google Sheet at the high school I dropped out of."
 date: "2025-02-15"
 tags: ["TypeScript", "Next.js", "Express", "MySQL", "Prisma ORM", "Bun"]
 image: "/banners/Schedulr.png"

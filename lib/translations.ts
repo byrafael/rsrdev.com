@@ -17,7 +17,7 @@ export const translations = {
 			greeting: "Hey! I'm",
 			subtitle: "AI Systems & Backend Engineer",
 			description:
-				"I'm an <span class='font-bold'>AI Systems Engineer</span> with 8+ years of programming experience and 6+ years of independent contractor work building high-performance infra. After scaling bots and software for 1,000+ Discord online communities and <span class='font-bold'>500k+ active users</span>, I now develop AI solutions at <span class='font-bold'>MUSCLE</span> to optimize CX and support efficiency for their global clients. I am currently also applying my systems-first background to <span class='font-bold'>quantitative finance</span>, creating mathematical models to predict market movements.",
+				"I'm an <span class='font-bold'>AI Systems Engineer</span> with 8+ years of programming experience and 6+ years of independent contractor work building high-performance infra. After scaling bots and software for 1,000+ online communities and <span class='font-bold'>500k+ active users</span>, I now develop AI solutions at <span class='font-bold'>MUSCLE</span> to optimize CX and support efficiency for their global clients. I am currently also applying my systems-first background to <span class='font-bold'>quantitative finance</span>, creating mathematical models to predict market movements.",
 			tagline: "Code. Data. Markets.",
 		},
 		// About Section
@@ -141,7 +141,7 @@ export const translations = {
 					description: [
 						"Delivered full-stack software solutions for online communities and small businesses across Costa Rica.",
 						"Built backend systems integrated with the Discord Bot API for automation and community management.",
-						"Lead the development and/or owned Discord bots, many with over 500,000 unique users, and over 1,000 guilds each. Many have even passed the Discord verification (both the legacy and modern verification).",
+						"Lead the development and/or owned online bots, many with over 500,000 unique users, and over 1,000 guilds each. Many have even passed the Discord verification (both the legacy and modern verification).",
 						"Scripted advanced systems for games in Roblox's LuaU as a senior scripter for independent clients and game studios, including GEN Interactive, Versify Studios, Mizal's Studio, and more.",
 						"Developed custom websites and tools tailored to individual client needs.",
 						"Managed the full development lifecycle including requirements, design, implementation, and deployment.",
@@ -435,7 +435,7 @@ export const translations = {
 			greeting: "¡Hola! Soy",
 			subtitle: "Ingeniero de Sistemas de IA y Backend",
 			description:
-				"Soy <span class='font-bold'>Ingeniero de Sistemas de IA</span> con más de 8 años de experiencia en programación y 6+ años como contratista independiente desarrollando infraestructura de alto rendimiento. Tras escalar software y bots para más de 1,000 comunidades de Discord y <span class='font-bold'>500k+ usuarios activos</span>, actualmente desarrollo soluciones de IA en <span class='font-bold'>MUSCLE</span> para optimizar la experiencia del cliente (CX) y la eficiencia de soporte. Además, aplico mi enfoque centrado en sistemas a las <span class='font-bold'>finanzas cuantitativas</span>, creando modelos matemáticos para predecir movimientos del mercado.",
+				"Soy <span class='font-bold'>Ingeniero de Sistemas de IA</span> con más de 8 años de experiencia en programación y 6+ años como contratista independiente desarrollando infraestructura de alto rendimiento. Tras escalar software y bots para más de 1,000 comunidades en línea y <span class='font-bold'>500k+ usuarios activos</span>, actualmente desarrollo soluciones de IA en <span class='font-bold'>MUSCLE</span> para optimizar la experiencia del cliente (CX) y la eficiencia de soporte. Además, aplico mi enfoque centrado en sistemas a las <span class='font-bold'>finanzas cuantitativas</span>, creando modelos matemáticos para predecir movimientos del mercado.",
 			tagline: "Código. Datos. Mercados.",
 		},
 		// About Section
@@ -559,7 +559,7 @@ export const translations = {
 					description: [
 						"Entregué soluciones de software full-stack para comunidades en línea y pequeñas empresas en Costa Rica.",
 						"Construí sistemas backend integrados con la API de Discord para automatización y gestión comunitaria.",
-						"Lideré el desarrollo, y fuí dueño de bots de Discord, varios con más de 500,000 usuarios únicos y más de 1,000 servidores. Muchos incluso han pasado la verificación de Discord (tanto la verificación legacy como la moderna).",
+						"Lideré el desarrollo, y fuí dueño de bots en línea, varios con más de 500,000 usuarios únicos y más de 1,000 servidores. Muchos incluso han pasado la verificación de Discord (tanto la verificación legacy como la moderna).",
 						"Programé sistemas avanzados para juegos en LuaU de Roblox como scripter senior para clientes independientes y estudios de juegos, incluyendo GEN Interactive, Versify Studios, Mizal's Studio, y más.",
 						"Desarrollé sitios web y herramientas personalizadas según las necesidades del cliente.",
 						"Gestioné el ciclo completo de desarrollo: requisitos, diseño, implementación y despliegue.",

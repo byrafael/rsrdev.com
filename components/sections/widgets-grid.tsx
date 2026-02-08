@@ -5,20 +5,17 @@ import { formatDistanceToNow } from "date-fns"
 import { es } from "date-fns/locale"
 import {
 	Activity,
-	CheckCircle2,
 	Clock,
 	Cloud,
 	CloudMoon,
 	CloudRain,
 	CloudSun,
-	ExternalLink,
 	Info,
 	MapPin,
 	Moon,
 	Snowflake,
 	Sun,
 	Thermometer,
-	XCircle,
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 // import { fetchGithubCommits, fetchWakaTimeStats, fetchWeatherData } from "@/app/actions/widget-data"
@@ -629,12 +626,12 @@ export default function WidgetsGrid() {
 					</div>
 
 					{/* GitHub - 2 units */}
-					<div className="grid-item mb-0 h-[236px] w-full p-2 md:w-1/2">
+					<div className="grid-item mb-0 h-59 w-full p-2 md:w-1/2">
 						<GithubWidget />
 					</div>
 
 					{/* Uptime - 2 units */}
-					<div className="grid-item mb-0 h-[236px] w-full p-2 md:w-1/2">
+					<div className="grid-item mb-0 h-59 w-full p-2 md:w-1/2">
 						<UptimeWidget />
 					</div>
 				</div>

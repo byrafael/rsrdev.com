@@ -16,6 +16,7 @@ import { Separator } from "@/components/ui/separator"
 import { useLanguage } from "@/lib/language-context"
 import type { ProjectData } from "@/lib/projects"
 import { formatDate, getTagStyles } from "@/lib/utils"
+import type { ReactNode, HTMLAttributes } from "react"
 
 interface ProjectContentProps {
 	projectEn: ProjectData | null
@@ -45,7 +46,7 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 						variant="ghost"
 						className="group mb-8 text-muted-foreground hover:bg-primary/5 hover:text-primary dark:hover:bg-muted dark:hover:text-primary"
 					>
-						<ArrowLeft className="group-hover:-translate-x-1 mr-2 h-4 w-4 transition-transform" />
+						<ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
 						{language === "en" ? "Back to Projects" : "Volver a Proyectos"}
 					</Button>
 				</Link>
@@ -116,53 +117,52 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 						remarkPlugins={[remarkGfm, remarkMath]}
 						rehypePlugins={[rehypeRaw, rehypeKatex]}
 						components={{
-							h1: ({ node, ...props }) => (
+							h1: ({ ...props }) => (
 								<h1 className="mt-8 mb-4 font-bold text-3xl text-brand-accent" {...props} />
 							),
-							h2: ({ node, ...props }) => (
+							h2: ({ ...props }) => (
 								<h2 className="mt-6 mb-3 font-bold text-2xl text-brand-accent" {...props} />
 							),
-							h3: ({ node, ...props }) => (
+							h3: ({ ...props }) => (
 								<h3 className="mt-4 mb-2 font-bold text-brand-accent text-xl" {...props} />
 							),
-							p: ({ node, ...props }) => (
+							p: ({ ...props }) => (
 								<p className="mb-4 text-muted-foreground leading-relaxed" {...props} />
 							),
-							ul: ({ node, ...props }) => (
+							ul: ({ ...props }) => (
 								<ul
 									className="mb-4 list-inside list-disc space-y-1 text-muted-foreground"
 									{...props}
 								/>
 							),
-							ol: ({ node, ...props }) => (
+							ol: ({ ...props }) => (
 								<ol
 									className="mb-4 list-inside list-decimal space-y-1 text-muted-foreground"
 									{...props}
 								/>
 							),
-							li: ({ node, ...props }) => <li className="" {...props} />,
-							a: ({ node, ...props }) => (
+							li: ({ ...props }) => <li className="" {...props} />,
+							a: ({ ...props }) => (
 								<a
 									className="font-medium text-brand-accent underline-offset-4 hover:underline"
 									{...props}
 								/>
 							),
-							blockquote: ({ node, ...props }) => (
+							blockquote: ({ ...props }) => (
 								<blockquote
 									className="my-4 border-brand-accent border-l-4 pl-4 text-muted-foreground italic"
 									{...props}
 								/>
 							),
 							code: ({
-								node,
 								className,
 								children,
 								...props
 							}: {
 								node?: unknown
 								className?: string
-								children?: React.ReactNode
-							} & React.HTMLAttributes<HTMLElement>) => {
+								children?: ReactNode
+							} & HTMLAttributes<HTMLElement>) => {
 								const match = /language-(\w+)/.exec(className || "")
 								return match ? (
 									<code className={`${className} font-mono`} {...props}>
@@ -177,7 +177,7 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 									</code>
 								)
 							},
-							pre: ({ node, ...props }) => (
+							pre: ({ ...props }) => (
 								<pre
 									className="mb-4 overflow-x-auto rounded-lg bg-muted p-4 font-mono text-foreground text-sm"
 									{...props}

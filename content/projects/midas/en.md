@@ -27,7 +27,7 @@ The core of Midas was its real-time market. Unlike other bots where stock prices
 
 Midas reached a significant scale:
 
-- **5,000+ servers** active.
+- **5,000+ servers**.
 - **460,000+ unique users**.
 - **2.5 million daily transactions**.
 - **Thousands of commands pushed every hour**.

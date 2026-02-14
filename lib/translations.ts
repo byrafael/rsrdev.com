@@ -17,7 +17,7 @@ export const translations = {
 			greeting: "Hey! I'm",
 			subtitle: "AI Systems & Backend Engineer",
 			description:
-				"I'm an <span class='font-bold'>AI Systems Engineer</span> with 8+ years of programming experience and 6+ years of independent contractor work building high-performance infra. After scaling bots and software for 1,000+ online communities and <span class='font-bold'>500k+ active users</span>, I now develop AI solutions at <span class='font-bold'>MUSCLE</span> to optimize CX and support efficiency for their global clients. I am currently also applying my systems-first background to <span class='font-bold'>quantitative finance</span>, creating mathematical models to predict market movements.",
+				"I'm an <span class='font-bold'>AI Systems Engineer</span> with 8+ years of programming experience and 6+ years of independent contractor work building high-performance infra. After scaling bots and software for <span class='font-bold'>thousands of online communities</span> and <span class='font-bold'>over half a million active users</span>, I now develop AI solutions at <span class='font-bold'>MUSCLE</span> to optimize CX and support efficiency for their global clients. I am currently also applying my systems-first background to <span class='font-bold'>quantitative finance</span>, creating mathematical models to predict market movements.",
 			tagline: "Code. Data. Markets.",
 		},
 		// About Section
@@ -435,7 +435,7 @@ export const translations = {
 			greeting: "¡Hola! Soy",
 			subtitle: "Ingeniero de Sistemas de IA y Backend",
 			description:
-				"Soy <span class='font-bold'>Ingeniero de Sistemas de IA</span> con más de 8 años de experiencia en programación y 6+ años como contratista independiente desarrollando infraestructura de alto rendimiento. Tras escalar software y bots para más de 1,000 comunidades en línea y <span class='font-bold'>500k+ usuarios activos</span>, actualmente desarrollo soluciones de IA en <span class='font-bold'>MUSCLE</span> para optimizar la experiencia del cliente (CX) y la eficiencia de soporte. Además, aplico mi enfoque centrado en sistemas a las <span class='font-bold'>finanzas cuantitativas</span>, creando modelos matemáticos para predecir movimientos del mercado.",
+				"Soy un <span class='font-bold'>Ingeniero de Sistemas de IA</span> con más de 8 años de experiencia en programación y 6+ años como contratista independiente desarrollando infraestructura de alto rendimiento. Tras escalar software y bots para <span class='font=bold'>miles de comunidades en línea</span> y <span class='font-bold'>más de medio millón de usuarios activos</span>, actualmente desarrollo soluciones de IA en <span class='font-bold'>MUSCLE</span> para optimizar la experiencia del cliente (CX) y la eficiencia de soporte. Además, aplico mi enfoque centrado en sistemas a las <span class='font-bold'>finanzas cuantitativas</span>, creando modelos matemáticos para predecir movimientos del mercado.",
 			tagline: "Código. Datos. Mercados.",
 		},
 		// About Section

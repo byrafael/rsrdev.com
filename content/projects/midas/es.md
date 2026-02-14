@@ -1,9 +1,11 @@
 ---
 title: "Midas"
-description: "Un bot de economía de alto rendimiento para Discord, centrado en mercados de valores y empresas de usuarios que cotizan en bolsa."
+description: "Un bot de economía de alto rendimiento para comunidades en Discord, centrado en mercados de valores y empresas públicas."
 date: "2026-02-13"
 tags: ["TypeScript", "Node.js", "PostgreSQL", "Discord.js", "Redis"]
 image: "/banners/Midas.png"
+pinned: true
+order: 1
 ---
 
 # Midas

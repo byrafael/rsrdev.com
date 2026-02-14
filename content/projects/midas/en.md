@@ -1,9 +1,11 @@
 ---
 title: "Midas"
-description: "A high-performance Discord economy bot focused on stock markets and publicly traded user businesses."
+description: "A high-performance Discord economy bot focused on stock markets and publicly traded businesses."
 date: "2026-02-13"
 tags: ["TypeScript", "Node.js", "MySQL", "Discord.js"]
 image: "/banners/Midas.png"
+pinned: true
+order: 1
 ---
 
 # Midas

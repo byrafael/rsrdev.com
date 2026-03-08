@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { useLanguage } from "@/lib/language-context"
 import type { ProjectData } from "@/lib/projects"
-import { getTagStyles } from "@/lib/utils"
+import { getProjectDemoUrl, getProjectGithubUrl, getTagStyles } from "@/lib/utils"
 
 interface ProjectListProps {
 	projectsEn: ProjectData[]
@@ -37,6 +37,9 @@ export function ProjectList({ projectsEn, projectsEs }: ProjectListProps) {
 }
 
 function ProjectCard({ project, index }: { project: ProjectData; index: number }) {
+	const githubUrl = getProjectGithubUrl(project.github)
+	const demoUrl = getProjectDemoUrl(project.demo)
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -45,7 +48,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 			transition={{ duration: 0.4, delay: index * 0.05 }}
 			className="h-full"
 		>
-			<Card className="group hover:-translate-y-1 relative flex h-full flex-col overflow-hidden border border-border/50 bg-card/30 p-0 backdrop-blur-sm transition-all duration-300 hover:bg-card/50 hover:shadow-lg">
+			<Card className="group relative flex h-full flex-col overflow-hidden border border-border/50 bg-card/30 p-0 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-card/50 hover:shadow-lg">
 				{/* Image Section */}
 				<div className="relative aspect-1200/630 w-full overflow-hidden bg-background">
 					{project.image ? (
@@ -63,40 +66,30 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 
 					{/* Floating Action Buttons */}
 					<div className="absolute top-3 right-3 z-20 flex translate-y-2 transform gap-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-						{project.github && (
+						{githubUrl && (
 							<Button
 								variant="ghost"
 								size="icon"
 								asChild
-								className="group/btn hover:bg-transparent! focus:bg-transparent! active:bg-transparent! h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
+								className="group/btn h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:bg-transparent! hover:text-brand-accent focus:bg-transparent! active:bg-transparent!"
 							>
-								<Link
-									href={project.github}
-									target="_blank"
-									rel="noopener noreferrer"
-									title="View Source"
-								>
+								<a href={githubUrl} target="_blank" rel="noopener noreferrer" title="View Source">
 									<Github className="h-4 w-4 transition-all duration-300" />
 									<span className="sr-only">GitHub</span>
-								</Link>
+								</a>
 							</Button>
 						)}
-						{project.demo && (
+						{demoUrl && (
 							<Button
 								variant="ghost"
 								size="icon"
 								asChild
-								className="group/btn hover:bg-transparent! focus:bg-transparent! active:bg-transparent! h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
+								className="group/btn h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:bg-transparent! hover:text-brand-accent focus:bg-transparent! active:bg-transparent!"
 							>
-								<Link
-									href={project.demo}
-									target="_blank"
-									rel="noopener noreferrer"
-									title="View Demo"
-								>
+								<a href={demoUrl} target="_blank" rel="noopener noreferrer" title="View Demo">
 									<Globe className="h-4 w-4 transition-all duration-300" />
 									<span className="sr-only">Demo</span>
-								</Link>
+								</a>
 							</Button>
 						)}
 					</div>
@@ -129,7 +122,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 					</p>
 
 					<div className="mt-auto flex items-center justify-between border-border/50 border-t pt-4">
-						<div className="flex flex-nowrap gap-2 items-center min-w-0">
+						<div className="flex min-w-0 flex-nowrap items-center gap-2">
 							{(() => {
 								// Allow a bit more tags to fit in one line
 								const MAX_CHARS = 28
@@ -164,7 +157,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
 										{hiddenCount > 0 && (
 											<Badge
 												variant="outline"
-												className="px-2 py-0.5 font-normal text-xs align-middle"
+												className="px-2 py-0.5 align-middle font-normal text-xs"
 											>
 												+{hiddenCount}
 											</Badge>

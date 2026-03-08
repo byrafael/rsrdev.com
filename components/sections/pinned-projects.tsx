@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/card"
 import { useTranslation } from "@/hooks/use-translation"
 import { useLanguage } from "@/lib/language-context"
 import type { ProjectData } from "@/lib/projects"
-import { getTagStyles } from "@/lib/utils"
+import { getProjectDemoUrl, getProjectGithubUrl, getTagStyles } from "@/lib/utils"
 
 interface PinnedProjectsProps {
 	projectsEn: ProjectData[]
@@ -31,7 +31,7 @@ export default function PinnedProjects({ projectsEn, projectsEs }: PinnedProject
 	return (
 		<section className="relative overflow-hidden py-8 md:py-16">
 			{/* Background decoration */}
-			<div className="-z-10 pointer-events-none absolute top-0 left-0 h-full w-full overflow-hidden">
+			<div className="pointer-events-none absolute top-0 left-0 -z-10 h-full w-full overflow-hidden">
 				<div className="absolute top-1/4 right-0 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
 				<div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-blue-500/5 blur-3xl" />
 			</div>
@@ -67,6 +67,9 @@ export default function PinnedProjects({ projectsEn, projectsEs }: PinnedProject
 }
 
 function FeaturedProjectCard({ project, index }: { project: ProjectData; index: number }) {
+	const githubUrl = getProjectGithubUrl(project.github)
+	const demoUrl = getProjectDemoUrl(project.demo)
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -75,7 +78,7 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 			transition={{ duration: 0.4, delay: index * 0.1 }}
 			className="h-full"
 		>
-			<Card className="group hover:-translate-y-1 relative flex h-full flex-col overflow-hidden border-border/50 bg-card/30 p-0 backdrop-blur-sm transition-all duration-300 hover:bg-card/50 hover:shadow-lg">
+			<Card className="group relative flex h-full flex-col overflow-hidden border-border/50 bg-card/30 p-0 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-card/50 hover:shadow-lg">
 				{/* Image Section */}
 				<div className="relative aspect-[1200/630] w-full overflow-hidden bg-background">
 					{project.image ? (
@@ -93,40 +96,30 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 
 					{/* Floating Action Buttons */}
 					<div className="absolute top-3 right-3 z-20 flex translate-y-2 transform gap-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-						{project.github && (
+						{githubUrl && (
 							<Button
 								variant="ghost"
 								size="icon"
 								asChild
 								className="group/btn hover:!bg-transparent focus:!bg-transparent active:!bg-transparent h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
 							>
-								<Link
-									href={project.github}
-									target="_blank"
-									rel="noopener noreferrer"
-									title="View Source"
-								>
+								<a href={githubUrl} target="_blank" rel="noopener noreferrer" title="View Source">
 									<Github className="h-4 w-4 transition-all duration-300" />
 									<span className="sr-only">GitHub</span>
-								</Link>
+								</a>
 							</Button>
 						)}
-						{project.demo && (
+						{demoUrl && (
 							<Button
 								variant="ghost"
 								size="icon"
 								asChild
 								className="group/btn hover:!bg-transparent focus:!bg-transparent active:!bg-transparent h-8 w-8 rounded-full bg-transparent text-brand-accent hover:scale-110 hover:text-brand-accent"
 							>
-								<Link
-									href={project.demo}
-									target="_blank"
-									rel="noopener noreferrer"
-									title="View Demo"
-								>
+								<a href={demoUrl} target="_blank" rel="noopener noreferrer" title="View Demo">
 									<Globe className="h-4 w-4 transition-all duration-300" />
 									<span className="sr-only">Demo</span>
-								</Link>
+								</a>
 							</Button>
 						)}
 					</div>
@@ -150,7 +143,7 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 					</p>
 
 					<div className="mt-auto flex items-center justify-between border-border/50 border-t pt-4">
-						<div className="flex flex-nowrap gap-2 items-center min-w-0">
+						<div className="flex min-w-0 flex-nowrap items-center gap-2">
 							{(() => {
 								const MAX_CHARS = 52
 								let currentChars = 0
@@ -161,7 +154,9 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 										if (currentChars + tag.length <= MAX_CHARS) {
 											visibleTags.push(tag)
 											currentChars += tag.length
-										} else { break }
+										} else {
+											break
+										}
 									}
 								}
 
@@ -182,7 +177,7 @@ function FeaturedProjectCard({ project, index }: { project: ProjectData; index: 
 										{hiddenCount > 0 && (
 											<Badge
 												variant="outline"
-												className="px-2 py-0.5 font-normal text-xs align-middle"
+												className="px-2 py-0.5 align-middle font-normal text-xs"
 											>
 												+{hiddenCount}
 											</Badge>

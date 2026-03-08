@@ -51,3 +51,31 @@ export function formatDate(dateString: string, locale: string = "en") {
 
 	return `${month} ${day}${suffix(day)}, ${year}`
 }
+
+export function getProjectGithubUrl(github?: string | null) {
+	if (!github) {
+		return null
+	}
+
+	if (github.startsWith("http://") || github.startsWith("https://")) {
+		return github
+	}
+
+	if (github.startsWith("github.com/")) {
+		return `https://${github}`
+	}
+
+	return `https://github.com/${github.replace(/^\/+/, "")}`
+}
+
+export function getProjectDemoUrl(demo?: string | null) {
+	if (!demo) {
+		return null
+	}
+
+	if (demo.startsWith("http://") || demo.startsWith("https://")) {
+		return demo
+	}
+
+	return `https://${demo.replace(/^\/+/, "")}`
+}

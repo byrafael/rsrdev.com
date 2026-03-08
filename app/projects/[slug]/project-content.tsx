@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowLeft, Calendar, ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import type { HTMLAttributes, ReactNode } from "react"
 import ReactMarkdown from "react-markdown"
 import rehypeKatex from "rehype-katex"
 import rehypeRaw from "rehype-raw"
@@ -15,8 +16,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useLanguage } from "@/lib/language-context"
 import type { ProjectData } from "@/lib/projects"
-import { formatDate, getTagStyles } from "@/lib/utils"
-import type { ReactNode, HTMLAttributes } from "react"
+import { formatDate, getProjectDemoUrl, getProjectGithubUrl, getTagStyles } from "@/lib/utils"
 
 interface ProjectContentProps {
 	projectEn: ProjectData | null
@@ -32,6 +32,9 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 	if (!project) {
 		return <Container className="py-20 text-center">Project not found</Container>
 	}
+
+	const githubUrl = getProjectGithubUrl(project.github)
+	const demoUrl = getProjectDemoUrl(project.demo)
 
 	return (
 		<Container className="py-12">
@@ -75,9 +78,9 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 						<time dateTime={project.date}>{formatDate(project.date, language)}</time>
 					</div>
 					<div className="flex gap-4">
-						{project.github && (
+						{githubUrl && (
 							<a
-								href={`https://github.com/${project.github}`}
+								href={githubUrl}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-brand-accent transition-transform hover:scale-110"
@@ -86,9 +89,9 @@ export function ProjectContent({ projectEn, projectEs }: ProjectContentProps) {
 								<Github className="h-4 w-4" />
 							</a>
 						)}
-						{project.demo && (
+						{demoUrl && (
 							<a
-								href={`https://${project.demo}`}
+								href={demoUrl}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-brand-accent transition-transform hover:scale-110"

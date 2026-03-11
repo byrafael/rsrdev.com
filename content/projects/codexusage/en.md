@@ -3,7 +3,7 @@ title: "CodexUsage"
 description: "A Bun-based Codex usage monitor with live web dashboards, a terminal CLI, and Picture-in-Picture recorder views."
 date: "2026-03-08"
 tags: ["TypeScript", "Bun", "CLI", "Observability", "HTML/CSS"]
-image: "/banners/CodexUsage.svg"
+image: "/banners/CodexUsage.png"
 github: "byrafael/CodexUsage"
 ---
 

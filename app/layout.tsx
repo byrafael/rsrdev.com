@@ -20,6 +20,9 @@ export const metadata: Metadata = {
 	title: "Rafael Soley",
 	description:
 		"Senior Backend Engineer, Aspiring Quant Developer, Game Scripter (LuaU), & an enthusiast for Applied Mathematics.",
+	icons: {
+		icon: "/favicon.svg",
+	},
 }
 
 export default function RootLayout({

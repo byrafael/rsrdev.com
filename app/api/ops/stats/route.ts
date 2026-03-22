@@ -13,7 +13,7 @@ export async function GET() {
 				next: { revalidate: 300 },
 				signal: controller.signal,
 			}),
-			fetch("https://rsrdev.betteruptime.com", {
+			fetch("https://status.rsrdev.com", {
 				next: { revalidate: 300 },
 				signal: controller.signal,
 			}),

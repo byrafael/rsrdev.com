@@ -8,8 +8,12 @@ export async function GET() {
 	const timeoutId = setTimeout(() => controller.abort(), 25000)
 
 	try {
-		const [opsResponse, betterStackResponse] = await Promise.all([
+		const [opsResponse, betterStackOverviewResponse, betterStackPageResponse] = await Promise.all([
 			fetch("https://cdn.rsrdev.com/ops/core/status", {
+				next: { revalidate: 300 },
+				signal: controller.signal,
+			}),
+			fetch("https://status.rsrdev.com/overview", {
 				next: { revalidate: 300 },
 				signal: controller.signal,
 			}),
@@ -30,13 +34,13 @@ export async function GET() {
 		let statusTextEs: string | undefined
 		let uptime = "0%"
 
-		if (betterStackResponse.ok) {
-			const text = await betterStackResponse.text()
-			if (text.includes("All services are online")) {
+		if (betterStackOverviewResponse.ok) {
+			const overviewText = await betterStackOverviewResponse.text()
+			if (overviewText.includes("All services are online")) {
 				status = "ok"
 			} else {
 				// Try to extract the actual status message from the H1 tag
-				const h1Match = text.match(/<h1[^>]*class='[^']*heading-large[^']*'[^>]*>(.*?)<\/h1>/)
+				const h1Match = overviewText.match(/<h1[^>]*class='[^']*heading-large[^']*'[^>]*>(.*?)<\/h1>/)
 				if (h1Match?.[1]) {
 					statusText = h1Match[1].trim()
 					try {
@@ -45,14 +49,18 @@ export async function GET() {
 					} catch (_e) {}
 				}
 			}
+		}
 
-			// Extract uptime percentages
-			const uptimeRegex = /(\d{1,3}\.\d+)% uptime/g
+		if (betterStackPageResponse.ok) {
+			const pageText = await betterStackPageResponse.text()
+
+			// Match both "100% uptime" and "99.995% uptime".
+			const uptimeRegex = /(\d{1,3}(?:\.\d+)?)% uptime/g
 			let match: RegExpExecArray | null
 			let totalUptime = 0
 			let count = 0
 			// biome-ignore lint/suspicious/noAssignInExpressions: regex loop
-			while ((match = uptimeRegex.exec(text)) !== null) {
+			while ((match = uptimeRegex.exec(pageText)) !== null) {
 				totalUptime += parseFloat(match[1])
 				count++
 			}

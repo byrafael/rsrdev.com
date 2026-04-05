@@ -103,7 +103,7 @@ export default function TechStack({ excludeCategories = [] }: TechStackProps) {
 					))}
 				</div>
 
-				<LanguageBar />
+				{/* <LanguageBar /> */}
 			</Container>
 		</section>
 	)

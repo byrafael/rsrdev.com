@@ -108,19 +108,33 @@ export function getExperienceSortDate(exp: Experience): string {
 }
 
 /**
- * Companies that should be pinned to the top of the experience list
+ * Specific experiences that should be pinned to the top of the list
  */
-const PINNED_COMPANIES = ["Futuryze Consulting Group Ltd."]
+const PINNED_EXPERIENCES: ReadonlyArray<{ company: string; start: string }> = [
+	{ company: "MUSCLE", start: "2026-01" },
+]
+
+function isPinnedExperience(exp: Experience): boolean {
+	if (!exp.period?.start) {
+		return false
+	}
+
+	const start = exp.period.start
+
+	return PINNED_EXPERIENCES.some(
+		(pinned) => pinned.company === exp.company && pinned.start === start
+	)
+}
 
 /**
  * Sort experiences by date (most recent first)
- * Pinned companies will always appear at the top, regardless of date
+ * Pinned experiences will always appear at the top, regardless of date
  */
 export function sortExperiencesByDate(experiences: Experience[]): Experience[] {
 	return [...experiences].sort((a, b) => {
 		// Check if either experience is pinned
-		const aIsPinned = PINNED_COMPANIES.includes(a.company)
-		const bIsPinned = PINNED_COMPANIES.includes(b.company)
+		const aIsPinned = isPinnedExperience(a)
+		const bIsPinned = isPinnedExperience(b)
 
 		// If one is pinned and the other isn't, pinned comes first
 		if (aIsPinned && !bIsPinned) {

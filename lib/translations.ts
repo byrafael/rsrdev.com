@@ -70,7 +70,7 @@ export const translations = {
 				{
 					title: "Co-Founder & CTO",
 					company: "Futuryze Consulting Group Ltd.",
-					period: { start: "2025", end: "2025-03" },
+					period: { start: "2025", end: "2026-03" },
 					description: [
 						"Architected and deployed AI voice-agent infrastructure for healthcare scheduling, triage, and patient communication across multiple countries.",
 						"Led product vision, systems design, and technical execution for HIPAA-compliant, production-grade deployments.",

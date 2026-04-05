@@ -4,7 +4,7 @@ description: "Un sistema de horarios resiliente que reemplaza una legendaria (y 
 date: "2025-02-15"
 tags: ["TypeScript", "Next.js", "Express", "MySQL", "Prisma ORM", "Bun"]
 image: "/banners/Schedulr.png"
-pinned: true
+pinned: false
 order: 2
 ---
 
@@ -80,14 +80,3 @@ Schedulr se sienta justo en la intersección de varias cosas que me gustan:
 - **Herramientas que sobreviven a las personas:** La hoja de Lisa era brillante, pero vivía en la cabeza de una sola persona. Schedulr es mi intento de codificar ese genio en algo mantenible, documentado y compartible.
 
 Y, bueno, hay algo medio poético en que este sea mi proyecto de A Level: un curso que literalmente existía *solo para mí*, produciendo un sistema que existe en gran parte **porque** yo (junto con otros estudiantes) era un caso extremo en el horario.
-
-## Palabras finales
-
-Schedulr sigue en desarrollo activo, pero sus objetivos están clarísimos:
-
-- Respetar la genialidad de la hoja original de Google.
-- Cambiar su fragilidad por algo resiliente.
-- Hacerle la vida más fácil a la gente que corre un colegio, no más difícil.
-
-Y si en el camino me toca escribir demasiados joins en SQL, obsesionarme con diagramas relacionales y hacer un par de chistes autocríticos sobre “ese estudiante que arruinó el horario”, para mí eso ya es ganancia.
-

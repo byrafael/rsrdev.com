@@ -4,7 +4,7 @@ description: "A resilient scheduling system replacing a legendary, fragile Googl
 date: "2025-02-15"
 tags: ["TypeScript", "Next.js", "Express", "MySQL", "Prisma ORM", "Bun"]
 image: "/banners/Schedulr.png"
-pinned: true
+pinned: false
 order: 2
 ---
 
@@ -80,13 +80,3 @@ Schedulr sits at the intersection of a few things I care about:
 - **Tooling that outlives people:** Lisa’s sheet was brilliant, but it lived in one person’s head. Schedulr is my attempt to encode that brilliance into something maintainable, documented, and shareable.
 
 Also, there’s a bit of poetic humor in this being my A Level CS project: a class that literally existed *just for me*, producing a system that exists largely **because** I (along with some other students) was such a scheduling edge case.
-
-## Final Thoughts
-
-Schedulr is still in active development, but its goals are clear:
-
-- Respect the ingenuity of the original Google Sheet.
-- Replace its fragility with something resilient.
-- Make life easier for the people running a school, not harder.
-
-And if along the way I get to write too many SQL joins, obsess over relational diagrams, and make a few self‑deprecating developer jokes about “that one student who ruined the schedule,” I’d call that a win.

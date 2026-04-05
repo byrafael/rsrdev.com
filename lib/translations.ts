@@ -280,6 +280,13 @@ export const translations = {
 						"Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program.",
 				},
 				{
+					degree: "Next Gen Data Science",
+					school: "INCAE Business School",
+					year: "2025",
+					details:
+						"Participated in an INCAE Next Gen program, focused on data science and modelling in business contexts.",
+				},
+				{
 					degree: "IGCSEs",
 					school: "Cambridge International Education",
 					year: "2023 - 2024",

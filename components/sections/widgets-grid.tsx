@@ -10,6 +10,7 @@ import {
 	CloudMoon,
 	CloudRain,
 	CloudSun,
+	Github,
 	Info,
 	MapPin,
 	Moon,
@@ -307,31 +308,42 @@ function GithubWidget({ className }: WidgetProps) {
 						<Activity className="h-4 w-4 text-primary" />
 						<span>{t.widgets.recentCommits}</span>
 					</h3>
-					<Popover>
-						<PopoverTrigger asChild>
-							<button
-								type="button"
-								className="text-muted-foreground transition-colors hover:text-primary"
-							>
-								<Info className="h-4 w-4" />
-								<span className="sr-only">Info</span>
-							</button>
-						</PopoverTrigger>
-						<PopoverContent className="w-auto p-2 text-xs" align="end">
-							<p>
-								{t.widgets.inspiredBy}{" "}
-								<a
-									href="https://jasoncameron.dev"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="underline hover:text-primary"
+					<div className="flex items-center gap-2">
+						<a
+							href="https://github.com/byrafael"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-muted-foreground transition-colors hover:text-primary"
+						>
+							<Github className="h-4 w-4" />
+							<span className="sr-only">{t.social.github}</span>
+						</a>
+						<Popover>
+							<PopoverTrigger asChild>
+								<button
+									type="button"
+									className="text-muted-foreground transition-colors hover:text-primary"
 								>
-									Jason Cameron
-								</a>
-								.
-							</p>
-						</PopoverContent>
-					</Popover>
+									<Info className="h-4 w-4" />
+									<span className="sr-only">Info</span>
+								</button>
+							</PopoverTrigger>
+							<PopoverContent className="w-auto p-2 text-xs" align="end">
+								<p>
+									{t.widgets.inspiredBy}{" "}
+									<a
+										href="https://jasoncameron.dev"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="underline hover:text-primary"
+									>
+										Jason Cameron
+									</a>
+									.
+								</p>
+							</PopoverContent>
+						</Popover>
+					</div>
 				</div>
 
 				{loading.commits ? (

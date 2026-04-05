@@ -5,6 +5,8 @@ date: "2026-04-03"
 tags: ["TypeScript", "Bun", "Node.js", "CLI", "Bitwarden"]
 image: "/banners/BWSM.png"
 github: "byrafael/bwsm"
+pinned: true
+order: 2
 ---
 
 # bwsm

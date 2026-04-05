@@ -3,7 +3,7 @@ title: "bwsm"
 description: "Un CLI liviano que inyecta secretos de Bitwarden Secrets Manager en procesos de apps dentro de monorepos."
 date: "2026-04-03"
 tags: ["TypeScript", "Bun", "Node.js", "CLI", "Bitwarden"]
-image: "/banners/BWSM.svg"
+image: "/banners/BWSM.png"
 github: "byrafael/bwsm"
 ---
 

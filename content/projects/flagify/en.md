@@ -3,7 +3,7 @@ title: "Flagify"
 description: "A self-hosted feature management API built in plain PHP, with identities, targeting, analytics, and runtime snapshots."
 date: "2026-03-23"
 tags: ["PHP", "MySQL", "REST API", "OpenAPI", "Feature Flags"]
-image: "/banners/Flagify.svg"
+image: "/banners/Flagify.png"
 github: "byrafael/Flagify"
 demo: "flagify.rsrdev.com"
 ---

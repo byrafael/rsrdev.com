@@ -3,6 +3,7 @@ title: "FlagifyTS"
 description: "Un SDK en TypeScript para la API self-hosted de Flagify, con recursos tipados, clientes por proyecto y soporte de snapshots runtime."
 date: "2026-03-23"
 tags: ["TypeScript", "Bun", "SDK", "Feature Flags", "Zod"]
+image: "/banners/FlagifyTS.png"
 github: "byrafael/FlagifyTS"
 ---
 

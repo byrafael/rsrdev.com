@@ -58,7 +58,13 @@ export default function LanguageBar() {
 		const unknown = languages[unknownIndex]
 		const cppIndex = languages.findIndex((lang) => lang.name === "C++")
 
-		if (cppIndex !== -1) {
+		if (cppIndex === -1) {
+			// No C++ entry, rename Unknown to C++
+			languages[unknownIndex] = {
+				...languages[unknownIndex],
+				name: "C++",
+			}
+		} else {
 			// Merge Unknown into C++
 			languages[cppIndex] = {
 				...languages[cppIndex],
@@ -67,12 +73,6 @@ export default function LanguageBar() {
 			}
 			// Remove Unknown from the array
 			languages = languages.filter((lang) => lang.name !== "Unknown")
-		} else {
-			// No C++ entry, rename Unknown to C++
-			languages[unknownIndex] = {
-				...languages[unknownIndex],
-				name: "C++",
-			}
 		}
 	}
 

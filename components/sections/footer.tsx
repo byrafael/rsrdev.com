@@ -70,7 +70,9 @@ export default function Footer() {
 					{/* Right: Stats */}
 					<div className="order-3 flex items-center gap-3">
 						<div className="flex items-center gap-1">
-							{views !== null ? (
+							{views === null ? (
+								<span className="animate-pulse">...</span>
+							) : (
 								<Link
 									href="https://abacus.jasoncameron.dev/"
 									target="_blank"
@@ -79,8 +81,6 @@ export default function Footer() {
 								>
 									<span>{views.toLocaleString("en-US")} views</span>
 								</Link>
-							) : (
-								<span className="animate-pulse">...</span>
 							)}
 						</div>
 

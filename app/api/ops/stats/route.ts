@@ -40,7 +40,9 @@ export async function GET() {
 				status = "ok"
 			} else {
 				// Try to extract the actual status message from the H1 tag
-				const h1Match = overviewText.match(/<h1[^>]*class='[^']*heading-large[^']*'[^>]*>(.*?)<\/h1>/)
+				const h1Match = overviewText.match(
+					/<h1[^>]*class='[^']*heading-large[^']*'[^>]*>(.*?)<\/h1>/
+				)
 				if (h1Match?.[1]) {
 					statusText = h1Match[1].trim()
 					try {

@@ -77,7 +77,7 @@ export function ExperienceList() {
 						<div className="flex flex-col gap-6 md:flex-row md:items-start">
 							<div className="shrink-0">
 								<Avatar className="h-16 w-16 bg-background shadow-sm">
-									<AvatarImage src={job.logo} alt={job.company} className="object-contain p-1" />
+									<AvatarImage src={job.logo} alt={job.company} className="object-cover" />
 									<AvatarFallback className="font-bold text-lg text-muted-foreground">
 										{job.company.substring(0, 2).toUpperCase()}
 									</AvatarFallback>

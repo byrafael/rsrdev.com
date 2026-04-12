@@ -1,6 +1,7 @@
 "use client"
 
 import Container from "@/components/container"
+import EmployerBar from "@/components/ui/employer-bar"
 import SocialIcons from "@/components/ui/social-icons"
 import { useTranslation } from "@/hooks/use-translation"
 
@@ -26,6 +27,10 @@ export default function Hero() {
 
 					<div className="text-sm">
 						<SocialIcons />
+					</div>
+
+					<div className="pt-2">
+						<EmployerBar />
 					</div>
 				</div>
 			</Container>

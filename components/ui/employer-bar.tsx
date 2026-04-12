@@ -49,13 +49,111 @@ function getCompanyLogo(companyName: string): string {
 }
 
 function getShortName(companyName: string): string {
-	// Map long names to short versions
-	const shortNames: Record<string, string> = {
-		"Global Youth Congress": "GYC",
-		"Futuryze Consulting Group Ltd.": "Futuryze",
-		"Tree Of Life International School": "Tree of Life",
+	const normalizedName = companyName.trim().replace(/\s+/g, " ")
+	if (!normalizedName) {
+		return normalizedName
 	}
-	return shortNames[companyName] || companyName
+
+	const normalizeToken = (token: string) => token.toLowerCase().replace(/[^a-z0-9]/g, "")
+	const getTokenInitial = (token: string) => {
+		const match = token.match(/[A-Za-z0-9]/)
+		return match?.[0]?.toUpperCase() ?? ""
+	}
+
+	const STOPWORDS = new Set([
+		"a",
+		"an",
+		"and",
+		"at",
+		"de",
+		"del",
+		"for",
+		"in",
+		"la",
+		"of",
+		"on",
+		"the",
+		"to",
+		"y",
+	])
+
+	const LEGAL_SUFFIXES = new Set([
+		"co",
+		"corp",
+		"corporation",
+		"inc",
+		"incorporated",
+		"llc",
+		"ltd",
+		"limited",
+		"plc",
+	])
+
+	const GENERIC_TAIL_WORDS = new Set([
+		"agency",
+		"associates",
+		"consulting",
+		"company",
+		"group",
+		"holdings",
+		"partners",
+		"services",
+		"solutions",
+		"studio",
+		"studios",
+	])
+
+	const EDUCATION_TAIL_WORDS = new Set(["academy", "college", "institute", "school", "university"])
+
+	const titleizeStopwords = (tokens: string[]) =>
+		tokens.map((token, index) => {
+			const normalized = normalizeToken(token)
+			const isMiddle = index > 0 && index < tokens.length - 1
+			if (isMiddle && STOPWORDS.has(normalized)) {
+				return token.toLowerCase()
+			}
+			return token
+		})
+
+	const originalTokens = normalizedName.split(" ").filter(Boolean)
+	if (originalTokens.length <= 1) {
+		return normalizedName
+	}
+
+	const tokens = [...originalTokens]
+
+	// Strip legal suffixes at the end (Ltd., Inc., LLC, ...)
+	while (tokens.length > 1 && LEGAL_SUFFIXES.has(normalizeToken(tokens[tokens.length - 1]))) {
+		tokens.pop()
+	}
+
+	// Strip education-type tails (e.g., "International School" -> drop both)
+	if (tokens.length > 1 && EDUCATION_TAIL_WORDS.has(normalizeToken(tokens[tokens.length - 1]))) {
+		tokens.pop()
+		if (tokens.length > 1 && normalizeToken(tokens[tokens.length - 1]) === "international") {
+			tokens.pop()
+		}
+	}
+
+	// Strip generic company descriptor tails (e.g., "Consulting Group" -> drop both)
+	while (tokens.length > 1 && GENERIC_TAIL_WORDS.has(normalizeToken(tokens[tokens.length - 1]))) {
+		tokens.pop()
+	}
+
+	if (tokens.length === 1) {
+		return tokens[0]
+	}
+
+	const hasStopwords = tokens.some((t) => STOPWORDS.has(normalizeToken(t)))
+	const formatted = titleizeStopwords(tokens).join(" ")
+
+	// Acronymize longer, multi-word names without stopwords (e.g., "Global Youth Congress" -> "GYC")
+	if (tokens.length >= 3 && !hasStopwords && formatted.length > 18) {
+		const acronym = tokens.map(getTokenInitial).filter(Boolean).join("").slice(0, 5)
+		return acronym || formatted
+	}
+
+	return formatted
 }
 
 function EmployerItem({ employer }: { employer: Employer }) {

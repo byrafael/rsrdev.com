@@ -2,6 +2,7 @@
 	"name": "rsrdev.com",
 	"version": "1.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"build": "next build",
 		"dev": "next dev",
@@ -9,7 +10,7 @@
 		"lint:fix": "biome check --write .",
 		"lint:unsafe": "biome check --write --unsafe .",
 		"format": "biome format --write .",
-		"start": "next start"
+		"start": "NODE_ENV=production node server.js"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.10.0",

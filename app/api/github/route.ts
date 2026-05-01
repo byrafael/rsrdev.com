@@ -10,9 +10,10 @@ export async function GET() {
 	try {
 		const username = "byrafael"
 
-		// Get recent events from the user
-		const eventsResponse = await fetch(
-			`https://api.github.com/users/${username}/events/public?per_page=100`,
+		// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits 
+		// (Events API truncates past 90 days and often merges commits in payloads).
+		const searchResponse = await fetch(
+			`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -22,31 +23,33 @@ export async function GET() {
 			}
 		)
 
-		if (!eventsResponse.ok) {
-			const _errorText = await eventsResponse.text()
+		if (!searchResponse.ok) {
+			const _errorText = await searchResponse.text()
 			return NextResponse.json(
-				{ error: "Failed to fetch events from GitHub" },
-				{ status: eventsResponse.status }
+				{ error: "Failed to search commits from GitHub" },
+				{ status: searchResponse.status }
 			)
 		}
 
-		const events = await eventsResponse.json()
+		const searchResult = await searchResponse.json()
 
-		// Extract unique commits from push events
+		if (!searchResult.items || searchResult.items.length === 0) {
+			return NextResponse.json([])
+		}
+
+		// Extract the 10 commits with tracking
 		const commitMap = new Map<string, { repo: string; sha: string }>()
 
-		for (const event of events) {
-			if (event.type === "PushEvent" && event.payload?.head) {
-				const sha = event.payload.head
-				if (!commitMap.has(sha)) {
-					commitMap.set(sha, {
-						repo: event.repo.name,
-						sha: sha,
-					})
-				}
-				if (commitMap.size >= 10) {
-					break
-				}
+		for (const item of searchResult.items) {
+			const sha = item.sha
+			if (!commitMap.has(sha) && item.repository?.full_name) {
+				commitMap.set(sha, {
+					repo: item.repository.full_name,
+					sha: sha,
+				})
+			}
+			if (commitMap.size >= 10) {
+				break
 			}
 		}
 
@@ -91,7 +94,7 @@ export async function GET() {
 
 		const formattedCommits = commitDetails
 			.filter((commit): commit is GitHubCommit => commit?.sha)
-			.slice(0, 5)
+			.slice(0, 10)
 			.map((commit) => ({
 				id: commit.sha,
 				repo: commit.repoName.split("/")[1] || commit.repoName,

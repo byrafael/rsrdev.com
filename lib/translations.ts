@@ -303,9 +303,40 @@ export const translations = {
 			view: "View",
 			list: [
 				{
-					title: "Next Gen Data Science",
-					issuer: "INCAE Business School",
-					year: "2025",
+					title: "Building with the Claude API",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/nymygpgu9cig",
+				},
+				{
+					title: "Claude Code 101",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/dcnjpdo32tg9",
+				},
+				{
+					title: "Claude Code in Action",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/jred5n9av5rb",
+				},
+				{
+					title: "Introduction to agent skills",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/p29d2pxngtvg",
+				},
+				{
+					title: "Model Context Protocol: Advanced Topics",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/fg2tydsas2mz",
+				},
+				{
+					title: "Introduction to Model Context Protocol",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/q52ckhpxd9tz",
 				},
 				{
 					title: "ISC2 Candidate",
@@ -313,9 +344,37 @@ export const translations = {
 					year: "2025",
 				},
 				{
+					title: "Next Gen Data Science",
+					issuer: "INCAE Business School",
+					year: "2025",
+					link: "https://www.credential.net/72c6488a-1a25-42f1-a271-964157db0ae1",
+				},
+				{
+					title: "IGCSE Computer Science",
+					issuer: "University of Cambridge",
+					year: "2024",
+				},
+				{
+					title: "IGCSE International Mathematics",
+					issuer: "University of Cambridge",
+					year: "2024",
+				},
+				{
+					title: "IGCSE First Language English",
+					issuer: "University of Cambridge",
+					year: "2024",
+				},
+				{
+					title: "Prompt Engineering Fundamentals for Everyone",
+					issuer: "IBM's Cognitive Class",
+					year: "2024",
+					link: "https://courses.cognitiveclass.ai/certificates/c1dee773b7174a78967dd85f6ccff5da",
+				},
+				{
 					title: "Data Visualization with Python",
 					issuer: "IBM's Cognitive Class",
 					year: "2024",
+					link: "https://courses.cognitiveclass.ai/certificates/b650fefa28cb41d88a9baa2c0af0ea1f",
 				},
 				{
 					title: "Python & Statistics for Financial Analysis",
@@ -728,9 +787,40 @@ export const translations = {
 			view: "Ver",
 			list: [
 				{
-					title: "Next Gen Data Science",
-					issuer: "INCAE Business School",
-					year: "2025",
+					title: "Building with the Claude API",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/nymygpgu9cig",
+				},
+				{
+					title: "Claude Code 101",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/dcnjpdo32tg9",
+				},
+				{
+					title: "Claude Code in Action",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/jred5n9av5rb",
+				},
+				{
+					title: "Introduction to agent skills",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/p29d2pxngtvg",
+				},
+				{
+					title: "Model Context Protocol: Advanced Topics",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/fg2tydsas2mz",
+				},
+				{
+					title: "Introduction to Model Context Protocol",
+					issuer: "Anthropic",
+					year: "2026",
+					link: "https://verify.skilljar.com/c/q52ckhpxd9tz",
 				},
 				{
 					title: "ISC2 Candidate",
@@ -738,9 +828,37 @@ export const translations = {
 					year: "2025",
 				},
 				{
+					title: "Next Gen Data Science",
+					issuer: "INCAE Business School",
+					year: "2025",
+					link: "https://www.credential.net/72c6488a-1a25-42f1-a271-964157db0ae1",
+				},
+				{
+					title: "IGCSE Computer Science",
+					issuer: "University of Cambridge",
+					year: "2024",
+				},
+				{
+					title: "IGCSE International Mathematics",
+					issuer: "University of Cambridge",
+					year: "2024",
+				},
+				{
+					title: "IGCSE First Language English",
+					issuer: "University of Cambridge",
+					year: "2024",
+				},
+				{
+					title: "Prompt Engineering Fundamentals for Everyone",
+					issuer: "IBM's Cognitive Class",
+					year: "2024",
+					link: "https://courses.cognitiveclass.ai/certificates/c1dee773b7174a78967dd85f6ccff5da",
+				},
+				{
 					title: "Data Visualization with Python",
 					issuer: "IBM's Cognitive Class",
 					year: "2024",
+					link: "https://courses.cognitiveclass.ai/certificates/b650fefa28cb41d88a9baa2c0af0ea1f",
 				},
 				{
 					title: "Python & Statistics for Financial Analysis",

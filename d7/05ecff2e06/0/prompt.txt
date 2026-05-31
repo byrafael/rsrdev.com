@@ -1,0 +1,1 @@
+The github api handler for the Recent Commits widget in the home screen should be limited to 5 commits.

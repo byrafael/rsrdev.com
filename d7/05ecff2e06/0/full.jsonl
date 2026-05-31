@@ -1,0 +1,1449 @@
+{
+  "info": {
+    "id": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+    "slug": "calm-comet",
+    "projectID": "68f6b696b6e6971f82430bf9895e03fe566aad1f",
+    "directory": "/Users/rsoley/Dev/personal/rsrdev.com",
+    "path": "",
+    "title": "Recent Commits widget limited to 5 GitHub commits",
+    "agent": "build",
+    "model": {
+      "id": "kimi-k2.5",
+      "providerID": "opencode-go"
+    },
+    "version": "1.15.13",
+    "summary": {
+      "additions": 2,
+      "deletions": 2,
+      "files": 2
+    },
+    "cost": 0.07113309999999999,
+    "tokens": {
+      "input": 45339,
+      "output": 2681,
+      "reasoning": 0,
+      "cache": {
+        "read": 358867,
+        "write": 0
+      }
+    },
+    "time": {
+      "created": 1780271490920,
+      "updated": 1780271570877
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1780271490941
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "opencode-go",
+          "modelID": "kimi-k2.5"
+        },
+        "summary": {
+          "diffs": [
+            {
+              "file": "app/api/github/route.ts",
+              "patch": "Index: app/api/github/route.ts\n===================================================================\n--- app/api/github/route.ts\t\n+++ app/api/github/route.ts\t\n@@ -1,112 +1,112 @@\n import { NextResponse } from \"next/server\"\n \n export async function GET() {\n \tconst token = process.env.GITHUB\n \n \tif (!token) {\n \t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n \t}\n \n \ttry {\n \t\tconst username = \"byrafael\"\n \n-\t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n+\t\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n \t\t// (Events API truncates past 90 days and often merges commits in payloads).\n \t\tconst searchResponse = await fetch(\n-\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n+\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n \t\t\t{\n \t\t\t\theaders: {\n \t\t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n \t\t\t\t},\n \t\t\t\tcache: \"no-store\",\n \t\t\t}\n \t\t)\n \n \t\tif (!searchResponse.ok) {\n \t\t\tconst _errorText = await searchResponse.text()\n \t\t\treturn NextResponse.json(\n \t\t\t\t{ error: \"Failed to search commits from GitHub\" },\n \t\t\t\t{ status: searchResponse.status }\n \t\t\t)\n \t\t}\n \n \t\tconst searchResult = await searchResponse.json()\n \n \t\tif (!searchResult.items || searchResult.items.length === 0) {\n \t\t\treturn NextResponse.json([])\n \t\t}\n \n-\t\t// Extract the 10 commits with tracking\n+\t\t// Extract the 5 commits with tracking\n \t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n \n \t\tfor (const item of searchResult.items) {\n \t\t\tconst sha = item.sha\n \t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n \t\t\t\tcommitMap.set(sha, {\n \t\t\t\t\trepo: item.repository.full_name,\n \t\t\t\t\tsha: sha,\n \t\t\t\t})\n \t\t\t}\n-\t\t\tif (commitMap.size >= 10) {\n+\t\t\tif (commitMap.size >= 5) {\n \t\t\t\tbreak\n \t\t\t}\n \t\t}\n \n \t\tif (commitMap.size === 0) {\n \t\t\treturn NextResponse.json([])\n \t\t}\n \n \t\t// Fetch detailed commit information with stats\n \t\tconst commitPromises = Array.from(commitMap.values()).map(({ repo, sha }) =>\n \t\t\tfetch(`https://api.github.com/repos/${repo}/commits/${sha}`, {\n \t\t\t\theaders: {\n \t\t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n \t\t\t\t},\n \t\t\t\tcache: \"no-store\",\n \t\t\t})\n \t\t\t\t.then((res) => res.json())\n \t\t\t\t.then((data) => ({ ...data, repoName: repo }))\n \t\t\t\t.catch((_err) => {\n \t\t\t\t\treturn null\n \t\t\t\t})\n \t\t)\n \n \t\tconst commitDetails = await Promise.all(commitPromises)\n \n \t\tinterface GitHubCommit {\n \t\t\tsha: string\n \t\t\tcommit: {\n \t\t\t\tmessage: string\n \t\t\t\tauthor: {\n \t\t\t\t\tdate: string\n \t\t\t\t}\n \t\t\t}\n \t\t\thtml_url: string\n \t\t\tstats: {\n \t\t\t\tadditions: number\n \t\t\t\tdeletions: number\n \t\t\t\ttotal: number\n \t\t\t}\n \t\t\trepoName: string\n \t\t}\n \n \t\tconst formattedCommits = commitDetails\n \t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n-\t\t\t.slice(0, 10)\n+\t\t\t.slice(0, 5)\n \t\t\t.map((commit) => ({\n \t\t\t\tid: commit.sha,\n \t\t\t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n \t\t\t\tmessage: commit.commit.message.split(\"\\n\")[0],\n \t\t\t\tdate: new Date(commit.commit.author.date).toLocaleDateString(),\n \t\t\t\turl: commit.html_url,\n \t\t\t\tadditions: commit.stats?.additions || 0,\n \t\t\t\tdeletions: commit.stats?.deletions || 0,\n \t\t\t}))\n \n \t\treturn NextResponse.json(formattedCommits)\n \t} catch (_error) {\n \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n \t}\n }\n",
+              "additions": 5,
+              "deletions": 5,
+              "status": "modified"
+            },
+            {
+              "file": "components/sections/widgets-grid.tsx",
+              "patch": "Index: components/sections/widgets-grid.tsx\n===================================================================\n--- components/sections/widgets-grid.tsx\t\n+++ components/sections/widgets-grid.tsx\t\n@@ -1,653 +1,653 @@\n \"use client\"\n \n import createGlobe from \"cobe\"\n import { formatDistanceToNow } from \"date-fns\"\n import { es } from \"date-fns/locale\"\n import {\n \tActivity,\n \tClock,\n \tCloud,\n \tCloudMoon,\n \tCloudRain,\n \tCloudSun,\n \tGithub,\n \tInfo,\n \tMapPin,\n \tMoon,\n \tSnowflake,\n \tSun,\n \tThermometer,\n } from \"lucide-react\"\n import { useEffect, useRef, useState } from \"react\"\n // import { fetchGithubCommits, fetchWakaTimeStats, fetchWeatherData } from \"@/app/actions/widget-data\"\n import Container from \"@/components/container\"\n import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\n import { Popover, PopoverContent, PopoverTrigger } from \"@/components/ui/popover\"\n import { useTranslation } from \"@/hooks/use-translation\"\n import { useLanguage } from \"@/lib/language-context\"\n import { cn } from \"@/lib/utils\"\n import { useWidgetData } from \"@/lib/widget-data-context\"\n \n interface WidgetProps {\n \tclassName?: string\n }\n \n // WakaTime Widget\n function WakaTimeWidget({ className }: WidgetProps) {\n \tconst t = useTranslation()\n \tconst { wakatime, loading } = useWidgetData()\n \n \tconst hours = wakatime?.text || \"0hrs 0mins\" // \"37hrs 19mins\"\n \tconst range = wakatime?.range || \"last_30_days\"\n \tconst rangeLabel = range === \"last_30_days\" ? t.wakatime.last30Days : t.wakatime.last7Days\n \n \treturn (\n \t\t<Card className={cn(\"flex h-full flex-col\", className)}>\n \t\t\t<CardHeader className=\"pb-2\">\n \t\t\t\t<CardTitle className=\"flex items-center gap-2 font-medium text-sm\">\n \t\t\t\t\t<Clock className=\"h-4 w-4\" /> {t.widgets.codingTime}\n \t\t\t\t</CardTitle>\n \t\t\t</CardHeader>\n \t\t\t<CardContent className=\"flex flex-1 flex-col items-center justify-center\">\n \t\t\t\t{loading.wakatime ? (\n \t\t\t\t\t<div className=\"h-8 w-24 animate-pulse rounded bg-muted\" />\n \t\t\t\t) : (\n \t\t\t\t\t<>\n \t\t\t\t\t\t<div className=\"font-bold text-2xl\">{hours}</div>\n \t\t\t\t\t\t<p className=\"mt-1 text-muted-foreground text-xs\">{rangeLabel}</p>\n \t\t\t\t\t</>\n \t\t\t\t)}\n \t\t\t</CardContent>\n \t\t</Card>\n \t)\n }\n \n // Location Widget with Globe\n function LocationWidget({ className }: WidgetProps) {\n \tconst canvasRef = useRef<HTMLCanvasElement>(null)\n \tconst pointerInteracting = useRef<number | null>(null)\n \tconst pointerInteractionMovement = useRef(0)\n \tconst [time, setTime] = useState<string>(\"\")\n \tconst [isNight, setIsNight] = useState(false)\n \tconst { weather: weatherData } = useWidgetData()\n \tconst weather = weatherData\n \t\t? { temp: weatherData.temperature, code: weatherData.weatherCode }\n \t\t: null\n \tconst phi = useRef(0)\n \n \tuseEffect(() => {\n \t\t// Time\n \t\tconst updateTime = () => {\n \t\t\tconst now = new Date()\n \t\t\tconst crTime = new Date(now.toLocaleString(\"en-US\", { timeZone: \"America/Costa_Rica\" }))\n \t\t\tconst hour = crTime.getHours()\n \t\t\tsetIsNight(hour >= 17 || hour < 5)\n \n \t\t\tsetTime(\n \t\t\t\tnow.toLocaleTimeString(\"en-US\", {\n \t\t\t\t\thour: \"numeric\",\n \t\t\t\t\tminute: \"2-digit\",\n \t\t\t\t\thour12: false,\n \t\t\t\t\ttimeZone: \"America/Costa_Rica\",\n \t\t\t\t})\n \t\t\t)\n \t\t}\n \t\tupdateTime()\n \t\tconst timer = setInterval(updateTime, 1000)\n \n \t\t// Globe\n \t\t// biome-ignore lint/suspicious/noExplicitAny: cobe types\n \t\tlet globe: any\n \n \t\tif (!canvasRef.current) {\n \t\t\treturn\n \t\t}\n \n \t\tconst onResize = () => {\n \t\t\tif (globe) {\n \t\t\t\tglobe.destroy()\n \t\t\t}\n \n \t\t\tif (!canvasRef.current) {\n \t\t\t\treturn\n \t\t\t}\n \n \t\t\t// Use offsetWidth/Height for better accuracy or fallback to a default\n \t\t\tconst width = canvasRef.current.offsetWidth || 200\n \t\t\tconst height = canvasRef.current.offsetHeight || 200\n \n \t\t\tglobe = createGlobe(canvasRef.current, {\n \t\t\t\tdevicePixelRatio: 2,\n \t\t\t\twidth: width * 2,\n \t\t\t\theight: height * 2,\n \t\t\t\tphi: 0,\n \t\t\t\ttheta: 0.25,\n \t\t\t\tdark: 1,\n \t\t\t\tdiffuse: 1.2,\n \t\t\t\tmapSamples: 16000,\n \t\t\t\tmapBrightness: 6,\n \t\t\t\tbaseColor: [0.3, 0.3, 0.3],\n \t\t\t\tmarkerColor: [0.1, 0.8, 1],\n \t\t\t\tglowColor: [1, 1, 1],\n \t\t\t\tmarkers: [{ location: [9.9281, -84.0907], size: 0.1 }],\n \t\t\t\tonRender: (state) => {\n \t\t\t\t\t// Called on every animation frame.\n \t\t\t\t\tif (!pointerInteracting.current) {\n \t\t\t\t\t\tphi.current += 0.005\n \t\t\t\t\t}\n \t\t\t\t\tstate.phi = phi.current + pointerInteractionMovement.current\n \t\t\t\t},\n \t\t\t})\n \t\t}\n \n \t\t// Initial resize with a slight delay to ensure layout is computed\n \t\tconst timeoutId = setTimeout(onResize, 100)\n \n \t\tconst resizeObserver = new ResizeObserver(() => {\n \t\t\t// Debounce resize\n \t\t\tif (globe) {\n \t\t\t\tglobe.destroy()\n \t\t\t}\n \t\t\tonResize()\n \t\t})\n \t\tresizeObserver.observe(canvasRef.current)\n \n \t\treturn () => {\n \t\t\tclearInterval(timer)\n \t\t\tclearTimeout(timeoutId)\n \t\t\tif (globe) {\n \t\t\t\tglobe.destroy()\n \t\t\t}\n \t\t\tresizeObserver.disconnect()\n \t\t}\n \t}, [])\n \n \tconst getWeatherIcon = (code: number) => {\n \t\tif (isNight) {\n \t\t\tif (code <= 1) {\n \t\t\t\treturn <Moon className=\"h-4 w-4 text-blue-200\" />\n \t\t\t}\n \t\t\tif (code <= 3) {\n \t\t\t\treturn <CloudMoon className=\"h-4 w-4 text-blue-200\" />\n \t\t\t}\n \t\t}\n \n \t\tif (code <= 1) {\n \t\t\treturn <Sun className=\"h-4 w-4 text-yellow-500\" />\n \t\t}\n \t\tif (code <= 3) {\n \t\t\treturn <CloudSun className=\"h-4 w-4 text-yellow-500\" />\n \t\t}\n \t\tif (code <= 48) {\n \t\t\treturn <Cloud className=\"h-4 w-4 text-gray-400\" />\n \t\t}\n \t\tif (code <= 67) {\n \t\t\treturn <CloudRain className=\"h-4 w-4 text-blue-400\" />\n \t\t}\n \t\tif (code <= 77) {\n \t\t\treturn <Snowflake className=\"h-4 w-4 text-white\" />\n \t\t}\n \t\treturn <Cloud className=\"h-4 w-4 text-gray-400\" />\n \t}\n \n \tconst getWeatherLabel = (code: number) => {\n \t\tif (code <= 1) {\n \t\t\treturn \"Clear\"\n \t\t}\n \t\tif (code <= 3) {\n \t\t\treturn \"Partly Cloudy\"\n \t\t}\n \t\tif (code <= 48) {\n \t\t\treturn \"Cloudy\"\n \t\t}\n \t\tif (code <= 67) {\n \t\t\treturn \"Rain\"\n \t\t}\n \t\tif (code <= 77) {\n \t\t\treturn \"Snow\"\n \t\t}\n \t\treturn \"Cloudy\"\n \t}\n \n \tconst getTemperatureColor = (temp: number) => {\n \t\tif (temp < 15) {\n \t\t\treturn \"text-blue-500\"\n \t\t}\n \t\tif (temp < 22) {\n \t\t\treturn \"text-green-500\"\n \t\t}\n \t\tif (temp < 28) {\n \t\t\treturn \"text-orange-500\"\n \t\t}\n \t\treturn \"text-red-500\"\n \t}\n \n \treturn (\n \t\t<Card className={cn(\"relative flex h-full flex-row gap-0 overflow-hidden p-0\", className)}>\n \t\t\t<div className=\"relative aspect-square h-3/4 shrink-0 self-center overflow-hidden md:h-full\">\n \t\t\t\t<div className=\"absolute inset-0 h-full w-full\">\n \t\t\t\t\t<canvas\n \t\t\t\t\t\tref={canvasRef}\n \t\t\t\t\t\tstyle={{ width: \"100%\", height: \"100%\", cursor: \"grab\" }}\n \t\t\t\t\t\tclassName=\"opacity-100\"\n \t\t\t\t\t\tonPointerDown={(e) => {\n \t\t\t\t\t\t\tpointerInteracting.current = e.clientX - pointerInteractionMovement.current\n \t\t\t\t\t\t\tif (canvasRef.current) {\n \t\t\t\t\t\t\t\tcanvasRef.current.style.cursor = \"grabbing\"\n \t\t\t\t\t\t\t}\n \t\t\t\t\t\t}}\n \t\t\t\t\t\tonPointerUp={() => {\n \t\t\t\t\t\t\tpointerInteracting.current = null\n \t\t\t\t\t\t\tif (canvasRef.current) {\n \t\t\t\t\t\t\t\tcanvasRef.current.style.cursor = \"grab\"\n \t\t\t\t\t\t\t}\n \t\t\t\t\t\t}}\n \t\t\t\t\t\tonPointerOut={() => {\n \t\t\t\t\t\t\tpointerInteracting.current = null\n \t\t\t\t\t\t\tif (canvasRef.current) {\n \t\t\t\t\t\t\t\tcanvasRef.current.style.cursor = \"grab\"\n \t\t\t\t\t\t\t}\n \t\t\t\t\t\t}}\n \t\t\t\t\t\tonMouseMove={(e) => {\n \t\t\t\t\t\t\tif (pointerInteracting.current !== null) {\n \t\t\t\t\t\t\t\tconst delta = e.clientX - pointerInteracting.current\n \t\t\t\t\t\t\t\tpointerInteractionMovement.current = delta\n \t\t\t\t\t\t\t}\n \t\t\t\t\t\t}}\n \t\t\t\t\t\tonTouchMove={(e) => {\n \t\t\t\t\t\t\tif (pointerInteracting.current !== null && e.touches[0]) {\n \t\t\t\t\t\t\t\tconst delta = e.touches[0].clientX - pointerInteracting.current\n \t\t\t\t\t\t\t\tpointerInteractionMovement.current = delta\n \t\t\t\t\t\t\t}\n \t\t\t\t\t\t}}\n \t\t\t\t\t/>\n \t\t\t\t</div>\n \t\t\t</div>\n \t\t\t<div className=\"flex flex-1 flex-col justify-center gap-4 bg-card p-4 font-mono\">\n \t\t\t\t<div className=\"flex items-center gap-2 font-bold text-xs\">\n \t\t\t\t\t<MapPin className=\"h-4 w-4 shrink-0 text-red-500\" />\n \t\t\t\t\t<span className=\"hidden sm:inline md:hidden lg:inline\">San José, Costa Rica</span>\n \t\t\t\t\t<span className=\"inline sm:hidden md:inline lg:hidden\">San José, CR</span>\n \t\t\t\t</div>\n \t\t\t\t<div className=\"flex items-center gap-2 font-bold text-xs tabular-nums\">\n \t\t\t\t\t{isNight ? (\n \t\t\t\t\t\t<Moon className=\"h-4 w-4 text-blue-200\" />\n \t\t\t\t\t) : (\n \t\t\t\t\t\t<Sun className=\"h-4 w-4 text-yellow-500\" />\n \t\t\t\t\t)}\n \t\t\t\t\t{time}\n \t\t\t\t</div>\n \t\t\t\t{weather && (\n \t\t\t\t\t<div className=\"flex flex-col gap-4\">\n \t\t\t\t\t\t<div className=\"flex items-center gap-2 font-bold text-xs\">\n \t\t\t\t\t\t\t<Thermometer className={cn(\"h-4 w-4\", getTemperatureColor(weather.temp))} />\n \t\t\t\t\t\t\t<span>{weather.temp}°C</span>\n \t\t\t\t\t\t</div>\n \t\t\t\t\t\t<div className=\"flex items-center gap-2 font-bold text-xs\">\n \t\t\t\t\t\t\t{getWeatherIcon(weather.code)}\n \t\t\t\t\t\t\t<span>{getWeatherLabel(weather.code)}</span>\n \t\t\t\t\t\t</div>\n \t\t\t\t\t</div>\n \t\t\t\t)}\n \t\t\t</div>\n \t\t</Card>\n \t)\n }\n \n // GitHub Widget\n function GithubWidget({ className }: WidgetProps) {\n \tconst t = useTranslation()\n \tconst { commits, loading } = useWidgetData()\n \tconst commitsList = commits || []\n \n \treturn (\n \t\t<Card className={cn(\"flex h-full flex-col\", className)}>\n \t\t\t<div className=\"flex h-full flex-col px-4\">\n \t\t\t\t<div className=\"mb-4 flex items-center justify-between\">\n \t\t\t\t\t<h3 className=\"flex items-center gap-2 font-semibold text-sm\">\n \t\t\t\t\t\t<Activity className=\"h-4 w-4 text-primary\" />\n \t\t\t\t\t\t<span>{t.widgets.recentCommits}</span>\n \t\t\t\t\t</h3>\n \t\t\t\t\t<div className=\"flex items-center gap-2\">\n \t\t\t\t\t\t<a\n \t\t\t\t\t\t\thref=\"https://github.com/byrafael\"\n \t\t\t\t\t\t\ttarget=\"_blank\"\n \t\t\t\t\t\t\trel=\"noopener noreferrer\"\n \t\t\t\t\t\t\tclassName=\"text-muted-foreground transition-colors hover:text-primary\"\n \t\t\t\t\t\t>\n \t\t\t\t\t\t\t<Github className=\"h-4 w-4\" />\n \t\t\t\t\t\t\t<span className=\"sr-only\">{t.social.github}</span>\n \t\t\t\t\t\t</a>\n \t\t\t\t\t\t<Popover>\n \t\t\t\t\t\t\t<PopoverTrigger asChild>\n \t\t\t\t\t\t\t\t<button\n \t\t\t\t\t\t\t\t\ttype=\"button\"\n \t\t\t\t\t\t\t\t\tclassName=\"text-muted-foreground transition-colors hover:text-primary\"\n \t\t\t\t\t\t\t\t>\n \t\t\t\t\t\t\t\t\t<Info className=\"h-4 w-4\" />\n \t\t\t\t\t\t\t\t\t<span className=\"sr-only\">Info</span>\n \t\t\t\t\t\t\t\t</button>\n \t\t\t\t\t\t\t</PopoverTrigger>\n \t\t\t\t\t\t\t<PopoverContent className=\"w-auto p-2 text-xs\" align=\"end\">\n \t\t\t\t\t\t\t\t<p>\n \t\t\t\t\t\t\t\t\t{t.widgets.inspiredBy}{\" \"}\n \t\t\t\t\t\t\t\t\t<a\n \t\t\t\t\t\t\t\t\t\thref=\"https://jasoncameron.dev\"\n \t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n \t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer\"\n \t\t\t\t\t\t\t\t\t\tclassName=\"underline hover:text-primary\"\n \t\t\t\t\t\t\t\t\t>\n \t\t\t\t\t\t\t\t\t\tJason Cameron\n \t\t\t\t\t\t\t\t\t</a>\n \t\t\t\t\t\t\t\t\t.\n \t\t\t\t\t\t\t\t</p>\n \t\t\t\t\t\t\t</PopoverContent>\n \t\t\t\t\t\t</Popover>\n \t\t\t\t\t</div>\n \t\t\t\t</div>\n \n \t\t\t\t{loading.commits ? (\n \t\t\t\t\t<div className=\"space-y-3\">\n \t\t\t\t\t\t{[1, 2, 3, 4, 5].map((i) => (\n \t\t\t\t\t\t\t<div key={i} className=\"h-6 animate-pulse rounded-md bg-muted/50\" />\n \t\t\t\t\t\t))}\n \t\t\t\t\t</div>\n \t\t\t\t) : commitsList.length > 0 ? (\n \t\t\t\t\t<ul className=\"flex-1 space-y-2 text-sm\">\n-\t\t\t\t\t\t{commitsList.slice(0, 6).map((commit) => (\n+\t\t\t\t\t\t{commitsList.slice(0, 5).map((commit) => (\n \t\t\t\t\t\t\t<li key={commit.id}>\n \t\t\t\t\t\t\t\t<a\n \t\t\t\t\t\t\t\t\thref={commit.url}\n \t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n \t\t\t\t\t\t\t\t\trel=\"noopener noreferrer\"\n \t\t\t\t\t\t\t\t\tclassName=\"group flex items-center gap-2.5\"\n \t\t\t\t\t\t\t\t\ttitle={`${commit.repo}: ${commit.message}`}\n \t\t\t\t\t\t\t\t>\n \t\t\t\t\t\t\t\t\t<span className=\"shrink-0 rounded bg-muted/50 px-1.5 py-0.5 font-medium text-foreground/80 text-xs transition-colors group-hover:text-primary\">\n \t\t\t\t\t\t\t\t\t\t{commit.repo.includes(\"/\") ? commit.repo.split(\"/\")[1] : commit.repo}\n \t\t\t\t\t\t\t\t\t</span>\n \t\t\t\t\t\t\t\t\t<span className=\"flex-1 truncate text-muted-foreground text-xs transition-colors group-hover:text-foreground\">\n \t\t\t\t\t\t\t\t\t\t{commit.message}\n \t\t\t\t\t\t\t\t\t</span>\n \t\t\t\t\t\t\t\t\t{commit.additions !== undefined && commit.deletions !== undefined && (\n \t\t\t\t\t\t\t\t\t\t<span className=\"shrink-0 whitespace-nowrap font-mono text-[10px] opacity-70 transition-opacity group-hover:opacity-100\">\n \t\t\t\t\t\t\t\t\t\t\t<span className=\"text-green-500\">+{commit.additions}</span>\n \t\t\t\t\t\t\t\t\t\t\t<span className=\"mx-1 text-muted-foreground\">/</span>\n \t\t\t\t\t\t\t\t\t\t\t<span className=\"text-red-500\">-{commit.deletions}</span>\n \t\t\t\t\t\t\t\t\t\t</span>\n \t\t\t\t\t\t\t\t\t)}\n \t\t\t\t\t\t\t\t</a>\n \t\t\t\t\t\t\t</li>\n \t\t\t\t\t\t))}\n \t\t\t\t\t</ul>\n \t\t\t\t) : (\n \t\t\t\t\t<div className=\"flex flex-1 items-center justify-center text-muted-foreground text-sm italic\">\n \t\t\t\t\t\t{t.widgets.noCommits}\n \t\t\t\t\t</div>\n \t\t\t\t)}\n \t\t\t</div>\n \t\t</Card>\n \t)\n }\n \n // Build Status Widget\n function BuildStatusWidget({ className }: WidgetProps) {\n \tconst t = useTranslation()\n \tconst { language } = useLanguage()\n \tconst { buildStatus, loading } = useWidgetData()\n \tconst status = buildStatus\n \n \tconst isSuccess = status?.conclusion === \"success\"\n \tconst isFailure = status?.conclusion === \"failure\"\n \tconst isInProgress = status?.status === \"in_progress\" || status?.status === \"queued\"\n \n \treturn (\n \t\t<Card className={cn(\"flex h-full flex-col\", className)}>\n \t\t\t<CardHeader className=\"pb-2\">\n \t\t\t\t<CardTitle className=\"flex items-center gap-2 font-medium text-sm\">\n \t\t\t\t\t<Activity className=\"h-4 w-4\" /> {t.widgets.latestBuild}\n \t\t\t\t</CardTitle>\n \t\t\t</CardHeader>\n \t\t\t<CardContent className=\"flex flex-1 flex-col items-center justify-center pt-2\">\n \t\t\t\t{loading.buildStatus ? (\n \t\t\t\t\t<div className=\"flex flex-col items-center gap-3\">\n \t\t\t\t\t\t<div className=\"h-4 w-4 animate-pulse rounded-full bg-muted\" />\n \t\t\t\t\t\t<div className=\"h-3 w-32 animate-pulse rounded bg-muted\" />\n \t\t\t\t\t</div>\n \t\t\t\t) : status ? (\n \t\t\t\t\t<div className=\"flex w-full flex-col items-center gap-3\">\n \t\t\t\t\t\t<div className=\"relative flex\">\n \t\t\t\t\t\t\t{isInProgress && (\n \t\t\t\t\t\t\t\t<span className=\"absolute -inset-1 inline-flex h-6 w-6 animate-ping rounded-full bg-yellow-400 opacity-75\" />\n \t\t\t\t\t\t\t)}\n \t\t\t\t\t\t\t<div\n \t\t\t\t\t\t\t\tclassName={cn(\n \t\t\t\t\t\t\t\t\t\"h-4 w-4 rounded-full\",\n \t\t\t\t\t\t\t\t\tisSuccess ? \"bg-green-500\" : isFailure ? \"bg-red-500\" : \"bg-yellow-500\"\n \t\t\t\t\t\t\t\t)}\n \t\t\t\t\t\t\t/>\n \t\t\t\t\t\t</div>\n \n \t\t\t\t\t\t<div className=\"flex flex-col items-center gap-1.5\">\n \t\t\t\t\t\t\t<a\n \t\t\t\t\t\t\t\thref={status.url}\n \t\t\t\t\t\t\t\ttarget=\"_blank\"\n \t\t\t\t\t\t\t\trel=\"noopener noreferrer\"\n \t\t\t\t\t\t\t\tclassName=\"font-mono text-[10px] text-muted-foreground transition-colors hover:text-primary\"\n \t\t\t\t\t\t\t>\n \t\t\t\t\t\t\t\t{status.name || \"unknown-build\"}\n \t\t\t\t\t\t\t</a>\n \n \t\t\t\t\t\t\t<div className=\"flex flex-col gap-0.5 text-center\">\n \t\t\t\t\t\t\t\t<span className=\"text-muted-foreground/60 text-[11px]\">\n \t\t\t\t\t\t\t\t\t{formatDistanceToNow(new Date(status.updated_at), {\n \t\t\t\t\t\t\t\t\t\taddSuffix: true,\n \t\t\t\t\t\t\t\t\t\tlocale: language === \"es\" ? es : undefined,\n \t\t\t\t\t\t\t\t\t})}\n \t\t\t\t\t\t\t\t</span>\n \t\t\t\t\t\t\t</div>\n \t\t\t\t\t\t</div>\n \t\t\t\t\t</div>\n \t\t\t\t) : (\n \t\t\t\t\t<div className=\"text-muted-foreground text-sm\">No build data</div>\n \t\t\t\t)}\n \t\t\t</CardContent>\n \t\t</Card>\n \t)\n }\n \n // Uptime Widget\n function UptimeWidget({ className }: WidgetProps) {\n \tconst t = useTranslation()\n \tconst { language } = useLanguage()\n \tconst { opsStats, loading } = useWidgetData()\n \tconst stats = opsStats\n \n \tconst isOperational = stats?.status === \"ok\"\n \n \treturn (\n \t\t<Card className={cn(\"flex h-full flex-col\", className)}>\n \t\t\t<CardHeader className=\"pb-2\">\n \t\t\t\t<div className=\"flex items-center justify-between\">\n \t\t\t\t\t<CardTitle className=\"flex items-center gap-2 font-medium text-sm\">\n \t\t\t\t\t\t<Activity className=\"h-4 w-4\" /> {t.widgets.systemStatus}\n \t\t\t\t\t</CardTitle>\n \t\t\t\t\t<Popover>\n \t\t\t\t\t\t<PopoverTrigger asChild>\n \t\t\t\t\t\t\t<button\n \t\t\t\t\t\t\t\ttype=\"button\"\n \t\t\t\t\t\t\t\tclassName=\"text-muted-foreground transition-colors hover:text-primary\"\n \t\t\t\t\t\t\t>\n \t\t\t\t\t\t\t\t<Info className=\"h-4 w-4\" />\n \t\t\t\t\t\t\t\t<span className=\"sr-only\">Info</span>\n \t\t\t\t\t\t\t</button>\n \t\t\t\t\t\t</PopoverTrigger>\n \t\t\t\t\t\t<PopoverContent className=\"w-auto max-w-[220px] p-2 text-xs\" align=\"end\">\n \t\t\t\t\t\t\t<p>\n \t\t\t\t\t\t\t\t{t.widgets.poweredBy}{\" \"}\n \t\t\t\t\t\t\t\t<a\n \t\t\t\t\t\t\t\t\thref=\"https://betterstack.com/uptime\"\n \t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n \t\t\t\t\t\t\t\t\trel=\"noopener noreferrer\"\n \t\t\t\t\t\t\t\t\tclassName=\"underline hover:text-primary\"\n \t\t\t\t\t\t\t\t>\n \t\t\t\t\t\t\t\t\tBetterStack\n \t\t\t\t\t\t\t\t</a>\n \t\t\t\t\t\t\t\t.\n \t\t\t\t\t\t\t</p>\n \t\t\t\t\t\t</PopoverContent>\n \t\t\t\t\t</Popover>\n \t\t\t\t</div>\n \t\t\t</CardHeader>\n \t\t\t<CardContent className=\"flex flex-1 flex-col justify-between gap-4\">\n \t\t\t\t<div className=\"flex items-center gap-2\">\n \t\t\t\t\t<div className=\"relative flex h-3 w-3\">\n \t\t\t\t\t\t<span\n \t\t\t\t\t\t\tclassName={cn(\n \t\t\t\t\t\t\t\t\"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75\",\n \t\t\t\t\t\t\t\tisOperational ? \"bg-green-400\" : \"bg-red-400\"\n \t\t\t\t\t\t\t)}\n \t\t\t\t\t\t/>\n \t\t\t\t\t\t<span\n \t\t\t\t\t\t\tclassName={cn(\n \t\t\t\t\t\t\t\t\"relative inline-flex h-3 w-3 rounded-full\",\n \t\t\t\t\t\t\t\tisOperational ? \"bg-green-500\" : \"bg-red-500\"\n \t\t\t\t\t\t\t)}\n \t\t\t\t\t\t/>\n \t\t\t\t\t</div>\n \t\t\t\t\t<span className=\"font-medium text-sm\">\n \t\t\t\t\t\t{(language === \"es\" ? stats?.statusTextEs : stats?.statusText) ||\n \t\t\t\t\t\t\tstats?.statusText ||\n \t\t\t\t\t\t\t(isOperational ? t.widgets.allSystemsOperational : t.widgets.systemIssuesDetected)}\n \t\t\t\t\t</span>\n \t\t\t\t</div>\n \n \t\t\t\t<div className=\"grid grid-cols-3 gap-4\">\n \t\t\t\t\t<div className=\"flex flex-col gap-1\">\n \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.connections}</span>\n \t\t\t\t\t\t{loading.opsStats ? (\n \t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n \t\t\t\t\t\t) : (\n \t\t\t\t\t\t\t<span className=\"font-bold text-xl\">{stats?.connections || 0}</span>\n \t\t\t\t\t\t)}\n \t\t\t\t\t</div>\n \t\t\t\t\t<div className=\"flex flex-col gap-1\">\n \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.uptime}</span>\n \t\t\t\t\t\t{loading.opsStats ? (\n \t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n \t\t\t\t\t\t) : (\n \t\t\t\t\t\t\t<span className=\"font-bold text-xl\">\n \t\t\t\t\t\t\t\t{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : \"0%\"}\n \t\t\t\t\t\t\t</span>\n \t\t\t\t\t\t)}\n \t\t\t\t\t</div>\n \t\t\t\t\t<div className=\"flex flex-col gap-1\">\n \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.latency}</span>\n \t\t\t\t\t\t{loading.opsStats ? (\n \t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n \t\t\t\t\t\t) : (\n \t\t\t\t\t\t\t<span className=\"font-bold text-xl\">{stats?.ping || 0}ms</span>\n \t\t\t\t\t\t)}\n \t\t\t\t\t</div>\n \t\t\t\t</div>\n \t\t\t</CardContent>\n \t\t</Card>\n \t)\n }\n \n export default function WidgetsGrid() {\n \tconst gridRef = useRef<HTMLDivElement>(null)\n \tconst [isMounted, setIsMounted] = useState(false)\n \n \tuseEffect(() => {\n \t\tsetIsMounted(true)\n \t}, [])\n \n \tuseEffect(() => {\n \t\tif (!isMounted) {\n \t\t\treturn\n \t\t}\n \n \t\t// biome-ignore lint/suspicious/noExplicitAny: packery types\n \t\tlet pckry: any\n \t\t// biome-ignore lint/suspicious/noExplicitAny: draggabilly types\n \t\tconst draggie: any[] = []\n \n \t\tconst initPackery = async () => {\n \t\t\tif (!gridRef.current) {\n \t\t\t\treturn\n \t\t\t}\n \n \t\t\t// Dynamic import to avoid SSR issues\n \t\t\tconst Packery = (await import(\"packery\")).default\n \t\t\tconst Draggabilly = (await import(\"draggabilly\")).default\n \n \t\t\tpckry = new Packery(gridRef.current, {\n \t\t\t\titemSelector: \".grid-item\",\n \t\t\t\tcolumnWidth: \".grid-sizer\",\n \t\t\t\tpercentPosition: true,\n \t\t\t\tgutter: 0,\n \t\t\t})\n \n \t\t\t// Initialize Draggabilly for each item\n \t\t\tconst gridItems = gridRef.current.querySelectorAll(\".grid-item\")\n \t\t\tgridItems.forEach((item) => {\n \t\t\t\tconst d = new Draggabilly(item)\n \t\t\t\tdraggie.push(d)\n \t\t\t\tpckry.bindDraggabillyEvents(d)\n \t\t\t})\n \t\t}\n \n \t\tinitPackery()\n \n \t\treturn () => {\n \t\t\tif (pckry) {\n \t\t\t\tpckry.destroy()\n \t\t\t}\n \t\t\tdraggie.forEach((d) => {\n \t\t\t\td.destroy()\n \t\t\t})\n \t\t}\n \t})\n \n \tif (!isMounted) {\n \t\treturn null\n \t}\n \n \treturn (\n \t\t<section className=\"py-8 md:py-16\">\n \t\t\t<Container>\n \t\t\t\t<div ref={gridRef} className=\"-m-2 min-h-[400px] w-full\">\n \t\t\t\t\t{/* Grid Sizer for Packery - 25% width (4 columns) */}\n \t\t\t\t\t<div className=\"grid-sizer w-full md:w-1/4\" />\n \n \t\t\t\t\t{/* Widgets */}\n \t\t\t\t\t{/* WakaTime - 1 unit */}\n \t\t\t\t\t<div className=\"grid-item mb-0 h-[236px] w-full p-2 md:w-1/4\">\n \t\t\t\t\t\t<WakaTimeWidget />\n \t\t\t\t\t</div>\n \n \t\t\t\t\t{/* Location - 2 units */}\n \t\t\t\t\t<div className=\"grid-item mb-0 h-[236px] w-full p-2 md:w-1/2\">\n \t\t\t\t\t\t<LocationWidget />\n \t\t\t\t\t</div>\n \n \t\t\t\t\t{/* Build Status - 1 unit */}\n \t\t\t\t\t<div className=\"grid-item mb-0 h-[236px] w-full p-2 md:w-1/4\">\n \t\t\t\t\t\t<BuildStatusWidget />\n \t\t\t\t\t</div>\n \n \t\t\t\t\t{/* GitHub - 2 units */}\n \t\t\t\t\t<div className=\"grid-item mb-0 h-59 w-full p-2 md:w-1/2\">\n \t\t\t\t\t\t<GithubWidget />\n \t\t\t\t\t</div>\n \n \t\t\t\t\t{/* Uptime - 2 units */}\n \t\t\t\t\t<div className=\"grid-item mb-0 h-59 w-full p-2 md:w-1/2\">\n \t\t\t\t\t\t<UptimeWidget />\n \t\t\t\t\t</div>\n \t\t\t\t</div>\n \t\t\t</Container>\n \t\t</section>\n \t)\n }\n",
+              "additions": 1,
+              "deletions": 1,
+              "status": "modified"
+            }
+          ]
+        },
+        "id": "msg_e80732772001KBZgPUdh1a5NGx",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "<system-reminder>Note: The user opened the file \"/Users/rsoley/Dev/personal/rsrdev.com/.gitignore\". This may or may not be relevant to the current task.</system-reminder>\n",
+          "synthetic": true,
+          "metadata": {
+            "kind": "editor_context",
+            "source": "websocket",
+            "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/.gitignore",
+            "ranges": [
+              {
+                "text": "",
+                "selection": {
+                  "start": {
+                    "line": 33,
+                    "character": 0
+                  },
+                  "end": {
+                    "line": 33,
+                    "character": 0
+                  }
+                }
+              }
+            ]
+          },
+          "id": "prt_e80732772002vA3AdwlzClRtV6",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80732772001KBZgPUdh1a5NGx"
+        },
+        {
+          "type": "text",
+          "text": "The github api handler for the Recent Commits widget in the home screen should be limited to 5 commits.",
+          "id": "prt_e80732772003YRbYd3tJ0QyiFt",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80732772001KBZgPUdh1a5NGx"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.016716,
+        "tokens": {
+          "total": 27282,
+          "input": 27007,
+          "output": 167,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 108
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271491087,
+          "completed": 1780271494222
+        },
+        "finish": "tool-calls",
+        "id": "msg_e8073280f001sjAfY77RJK9LVq",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-start",
+          "id": "prt_e80732f60001Ga4ctpj6CaRSib",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073280f001sjAfY77RJK9LVq"
+        },
+        {
+          "type": "reasoning",
+          "text": "The user wants to modify the GitHub API handler for the Recent Commits widget on the home screen to limit the results to 5 commits.\n\nI need to:\n1. Find the GitHub API handler related to Recent Commits\n2. Find where the limit is currently set (or add a limit if not present)\n3. Change it to 5 commits\n\nLet me search for relevant files in the codebase.",
+          "time": {
+            "start": 1780271492962,
+            "end": 1780271493569
+          },
+          "id": "prt_e80732f62001P4HdJuk0HVu5O5",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073280f001sjAfY77RJK9LVq"
+        },
+        {
+          "type": "tool",
+          "tool": "grep",
+          "callID": "functions.grep:0",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "github|commit|recent",
+              "path": "/Users/rsoley/Dev/personal/rsrdev.com"
+            },
+            "output": "Found 163 matches (showing first 100)\n/Users/rsoley/Dev/personal/rsrdev.com/.gitignore:\n  Line 1: # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts:\n  Line 237: \t\t\t\t\tsource: \"https://github.com/byrafael/EconSys\",\n\n  Line 245: \t\t\t\t\tsource: \"https://github.com/byrafael/QuantOps\",\n\n  Line 252: \t\t\t\t\tsource: \"https://github.com/byrafael/Schedulr\",\n\n  Line 259: \t\t\t\t\tsource: \"https://github.com/byrafael/Mosaic\",\n\n  Line 266: \t\t\t\t\tsource: \"https://github.com/byrafael/EconDash\",\n\n  Line 424: \t\t\t\t\t\t\"Strength training, and more recently, calisthenics, form the core of my physical improvement. While I'm still new to calisthenics, the progression and skill work push me in ways that weight lifting just doesn't. Strength training built my foundation of discipline and consistency, while calisthenics challenges my coordination and body control.\",\n\n  Line 429: \t\t\t\t\t\t\"Community service is a long-term commitment for me, not a checkbox. I've accumulated more than 360 hours of volunteer work, focusing on creating visible, measurable improvements in the communities I serve.\",\n\n  Line 444: \t\t\tgithub: \"GitHub\",\n\n  Line 478: \t\t\trecentCommits: \"Recent Commits\",\n\n  Line 480: \t\t\tnoCommits: \"No recent public commits.\",\n\n  Line 728: \t\t\t\t\tsource: \"https://github.com/byrafael/EconSys\",\n\n  Line 736: \t\t\t\t\tsource: \"https://github.com/byrafael/QuantOps\",\n\n  Line 743: \t\t\t\t\tsource: \"https://github.com/byrafael/Schedulr\",\n\n  Line 750: \t\t\t\t\tsource: \"https://github.com/byrafael/Mosaic\",\n\n  Line 757: \t\t\t\t\tsource: \"https://github.com/byrafael/EconDash\",\n\n  Line 932: \t\t\tgithub: \"GitHub\",\n\n  Line 966: \t\t\trecentCommits: \"Commits Recientes\",\n\n  Line 968: \t\t\tnoCommits: \"No hay commits públicos recientes.\",\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/.opencode/plugins/entire.ts:\n  Line 13:   // Track the model used by the most recent assistant message\n\n  Line 52:    * fast mid-turn commit can hit git hooks, and `turn-end` / `session-end` must\n\n  Line 120:             // Fallback: some opencode run flows commit before any message.part.updated\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/.codex/agents/entire-search.toml:\n  Line 3: description = \"Search Entire checkpoint history and transcripts with `entire search --json`. Use when the user asks about previous work, commits, sessions, prompts, or historical context in this repository.\"\n\n  Line 20: 5. Summarize the strongest matches with the relevant commit, session, file, and prompt details available in the results.\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/.claude/agents/entire-search.md:\n  Line 3: description: Search Entire checkpoint history and transcripts with `entire search --json`. Use proactively when the user asks about previous work, commits, sessions, prompts, or historical context in this repository.\n\n  Line 23: 5. Summarize the strongest matches with the relevant commit, session, file, and prompt details available in the results.\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts:\n  Line 13: \t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n\n  Line 14: \t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\n  Line 16: \t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n\n  Line 20: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n\n  Line 29: \t\t\t\t{ error: \"Failed to search commits from GitHub\" },\n\n  Line 40: \t\t// Extract the 10 commits with tracking\n\n  Line 41: \t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n\n  Line 45: \t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n\n  Line 46: \t\t\t\tcommitMap.set(sha, {\n\n  Line 51: \t\t\tif (commitMap.size >= 10) {\n\n  Line 56: \t\tif (commitMap.size === 0) {\n\n  Line 60: \t\t// Fetch detailed commit information with stats\n\n  Line 61: \t\tconst commitPromises = Array.from(commitMap.values()).map(({ repo, sha }) =>\n\n  Line 62: \t\t\tfetch(`https://api.github.com/repos/${repo}/commits/${sha}`, {\n\n  Line 65: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n\n  Line 76: \t\tconst commitDetails = await Promise.all(commitPromises)\n\n  Line 80: \t\t\tcommit: {\n\n  Line 95: \t\tconst formattedCommits = commitDetails\n\n  Line 96: \t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n\n  Line 98: \t\t\t.map((commit) => ({\n\n  Line 99: \t\t\t\tid: commit.sha,\n\n  Line 100: \t\t\t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n\n  Line 101: \t\t\t\tmessage: commit.commit.message.split(\"\\n\")[0],\n\n  Line 102: \t\t\t\tdate: new Date(commit.commit.author.date).toLocaleDateString(),\n\n  Line 103: \t\t\t\turl: commit.html_url,\n\n  Line 104: \t\t\t\tadditions: commit.stats?.additions || 0,\n\n  Line 105: \t\t\t\tdeletions: commit.stats?.deletions || 0,\n\n  Line 110: \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/employer-bar.tsx:\n  Line 258: \t// Deduplicate by company - keep only the first (most recent) occurrence\n\n  Line 273: \t\t// Handle multi-role companies (use most recent role)\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/footer.tsx:\n  Line 11: \tconst [commit, setCommit] = useState<{ sha: string; url: string } | null>(null)\n\n  Line 24: \t\t// Fetch latest commit\n\n  Line 25: \t\tfetch(\"https://api.github.com/repos/byrafael/rsrdev.com/commits?per_page=1\")\n\n  Line 87: \t\t\t\t\t\t{commit && views !== null && <div className=\"hidden h-4 w-px bg-border md:block\" />}\n\n  Line 89: \t\t\t\t\t\t{commit && (\n\n  Line 91: \t\t\t\t\t\t\t\thref={commit.url}\n\n  Line 97: \t\t\t\t\t\t\t\t<span className=\"font-mono text-xs\">{commit.sha}</span>\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/bwsm/en.md:\n  Line 7: github: \"byrafael/bwsm\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/bwsm/es.md:\n  Line 7: github: \"byrafael/bwsm\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/lib/experience-data.ts:\n  Line 94:  * Get the sort date for an experience based on its most recent role/period\n\n  Line 97: \t// If it has roles, use the most recent role's start date\n\n  Line 99: \t\t// Find the most recent date (max) efficiently\n\n  Line 130:  * Sort experiences by date (most recent first)\n\n  Line 150: \t\treturn dateB.localeCompare(dateA) // Descending (most recent first)\n\n  Line 231: \t\t\t// Sort roles within the experience by date (most recent first)\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/flagifyts/en.md:\n  Line 7: github: \"byrafael/FlagifyTS\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/flagifyts/es.md:\n  Line 7: github: \"byrafael/FlagifyTS\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/flagify/en.md:\n  Line 7: github: \"byrafael/Flagify\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/flagify/es.md:\n  Line 7: github: \"byrafael/Flagify\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/[slug]/project-content.tsx:\n  Line 36: \tconst githubUrl = getProjectGithubUrl(project.github)\n\n  Line 81: \t\t\t\t\t\t{githubUrl && (\n\n  Line 83: \t\t\t\t\t\t\t\thref={githubUrl}\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx:\n  Line 300: \tconst { commits, loading } = useWidgetData()\n\n  Line 301: \tconst commitsList = commits || []\n\n  Line 309: \t\t\t\t\t\t<span>{t.widgets.recentCommits}</span>\n\n  Line 313: \t\t\t\t\t\t\thref=\"https://github.com/byrafael\"\n\n  Line 319: \t\t\t\t\t\t\t<span className=\"sr-only\">{t.social.github}</span>\n\n  Line 349: \t\t\t\t{loading.commits ? (\n\n  Line 355: \t\t\t\t) : commitsList.length > 0 ? (\n\n  Line 357: \t\t\t\t\t\t{commitsList.slice(0, 6).map((commit) => (\n\n  Line 358: \t\t\t\t\t\t\t<li key={commit.id}>\n\n  Line 360: \t\t\t\t\t\t\t\t\thref={commit.url}\n\n  Line 364: \t\t\t\t\t\t\t\t\ttitle={`${commit.repo}: ${commit.message}`}\n\n  Line 367: \t\t\t\t\t\t\t\t\t\t{commit.repo.includes(\"/\") ? commit.repo.split(\"/\")[1] : commit.repo}\n\n  Line 370: \t\t\t\t\t\t\t\t\t\t{commit.message}\n\n  Line 372: \t\t\t\t\t\t\t\t\t{commit.additions !== undefined && commit.deletions !== undefined && (\n\n  Line 374: \t\t\t\t\t\t\t\t\t\t\t<span className=\"text-green-500\">+{commit.additions}</span>\n\n  Line 376: \t\t\t\t\t\t\t\t\t\t\t<span className=\"text-red-500\">-{commit.deletions}</span>\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/codexusage/en.md:\n  Line 7: github: \"byrafael/CodexUsage\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/content/projects/codexusage/es.md:\n  Line 7: github: \"byrafael/CodexUsage\"\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/scripts/translations-unused.json:\n  Line 160: \t\t\"experience.jobs.description.roles.description.description.description.projects.disclaimer.list.description.description.description.description.aboutPage.paragraph1.paragraph2.outsideTerminal.sound.social.github\",\n\n  Line 188: \t\t\"experience.jobs.description.roles.description.description.description.projects.disclaimer.list.description.description.description.description.aboutPage.paragraph1.paragraph2.outsideTerminal.sound.widgets.recentCommits\",\n\n  Line 356: \t\t\"experience.jobs.description.roles.description.description.description.projects.disclaimer.list.description.description.description.description.aboutPage.paragraph1.paragraph2.outsideTerminal.sound.social.github\",\n\n  Line 384: \t\t\"experience.jobs.description.roles.description.description.description.projects.disclaimer.list.description.description.description.description.aboutPage.paragraph1.paragraph2.outsideTerminal.sound.widgets.recentCommits\",\n\n\n(Results truncated: showing 100 of 163 matches (63 hidden). Consider using a more specific path or pattern.)",
+            "metadata": {
+              "matches": 163,
+              "truncated": true
+            },
+            "title": "github|commit|recent",
+            "time": {
+              "start": 1780271493745,
+              "end": 1780271493769
+            }
+          },
+          "id": "prt_e807331c2001SSASDxAhfMiKso",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073280f001sjAfY77RJK9LVq"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "functions.glob:1",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/*.{js,ts,jsx,tsx,vue,py,go,rs}",
+              "path": "/Users/rsoley/Dev/personal/rsrdev.com"
+            },
+            "output": "/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts\n/Users/rsoley/Dev/personal/rsrdev.com/.opencode/plugins/entire.ts\n/Users/rsoley/Dev/personal/rsrdev.com/next-env.d.ts\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/employer-bar.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/experience/experience-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/hooks/use-toast.ts\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/use-toast.ts\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/toast.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/table.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/tabs.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/tooltip.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/resizable.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/popover.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/sheet.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/pagination.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/menubar.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/navigation-menu.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/item.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/form.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/chart.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/input-otp.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/dropdown-menu.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/field.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/input-group.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/hover-card.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/carousel.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/empty.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/command.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/drawer.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/context-menu.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/collapsible.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/breadcrumb.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/card.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/alert-dialog.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/avatar.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/alert.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/accordion.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/language-bar.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/footer.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/hero.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/lib/experience-data.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/layout.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/[slug]/project-content.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/tech-stack.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/lib/language-context.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/lib/date-formatter.ts\n/Users/rsoley/Dev/personal/rsrdev.com/lib/utils.ts\n/Users/rsoley/Dev/personal/rsrdev.com/lib/content-data.ts\n/Users/rsoley/Dev/personal/rsrdev.com/lib/projects.ts\n/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/hooks/use-translation.ts\n/Users/rsoley/Dev/personal/rsrdev.com/hooks/use-mobile.ts\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/toggle.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/toggle-group.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/use-mobile.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/skeleton.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/textarea.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/spinner.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/separator.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/sidebar.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/social-icons.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/switch.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/sonner.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/toaster.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/slider.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/input.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/select.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/kbd.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/radio-group.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/label.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/scroll-area.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/progress.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/dialog.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/checkbox.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/button.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/badge.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/calendar.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/button-group.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/theme-customizer.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/pinned-projects.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/ui/aspect-ratio.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/theme-provider.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/loading-screen.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/floating-pills.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/container.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/navigation.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/project-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/not-found.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/experience/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/education/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/education/education-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/[slug]/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/apple-icon.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/credentials/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/credentials/credentials-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/weather/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/about/page.tsx\n\n(Results are truncated: showing first 100 results. Consider using a more specific path or pattern.)",
+            "metadata": {
+              "count": 100,
+              "truncated": true
+            },
+            "title": "",
+            "time": {
+              "start": 1780271494064,
+              "end": 1780271494084
+            }
+          },
+          "id": "prt_e8073329e001ndLVqYtp2ETIf3",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073280f001sjAfY77RJK9LVq"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 27282,
+            "input": 27007,
+            "output": 167,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 108
+            }
+          },
+          "cost": 0.016716,
+          "id": "prt_e80733424001Dv1Bo9nKH37I37",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073280f001sjAfY77RJK9LVq"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0056424,
+        "tokens": {
+          "total": 31687,
+          "input": 4495,
+          "output": 78,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 27114
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271494224,
+          "completed": 1780271495642
+        },
+        "finish": "tool-calls",
+        "id": "msg_e8073345000124MvpdyD2j7kOs",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-start",
+          "id": "prt_e807337d8001V3WRDQM2RDIYVB",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073345000124MvpdyD2j7kOs"
+        },
+        {
+          "type": "reasoning",
+          "text": "I found the relevant file: `/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts`. Let me read it to see the current implementation and change the limit from 10 to 5 commits.",
+          "time": {
+            "start": 1780271495130,
+            "end": 1780271495397
+          },
+          "id": "prt_e807337da001YHd8pdcpL2LgB7",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073345000124MvpdyD2j7kOs"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:2",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts</path>\n<type>file</type>\n<content>\n1: import { NextResponse } from \"next/server\"\n2: \n3: export async function GET() {\n4: \tconst token = process.env.GITHUB\n5: \n6: \tif (!token) {\n7: \t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n8: \t}\n9: \n10: \ttry {\n11: \t\tconst username = \"byrafael\"\n12: \n13: \t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n14: \t\t// (Events API truncates past 90 days and often merges commits in payloads).\n15: \t\tconst searchResponse = await fetch(\n16: \t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n17: \t\t\t{\n18: \t\t\t\theaders: {\n19: \t\t\t\t\tAuthorization: `Bearer ${token}`,\n20: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n21: \t\t\t\t},\n22: \t\t\t\tcache: \"no-store\",\n23: \t\t\t}\n24: \t\t)\n25: \n26: \t\tif (!searchResponse.ok) {\n27: \t\t\tconst _errorText = await searchResponse.text()\n28: \t\t\treturn NextResponse.json(\n29: \t\t\t\t{ error: \"Failed to search commits from GitHub\" },\n30: \t\t\t\t{ status: searchResponse.status }\n31: \t\t\t)\n32: \t\t}\n33: \n34: \t\tconst searchResult = await searchResponse.json()\n35: \n36: \t\tif (!searchResult.items || searchResult.items.length === 0) {\n37: \t\t\treturn NextResponse.json([])\n38: \t\t}\n39: \n40: \t\t// Extract the 10 commits with tracking\n41: \t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n42: \n43: \t\tfor (const item of searchResult.items) {\n44: \t\t\tconst sha = item.sha\n45: \t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n46: \t\t\t\tcommitMap.set(sha, {\n47: \t\t\t\t\trepo: item.repository.full_name,\n48: \t\t\t\t\tsha: sha,\n49: \t\t\t\t})\n50: \t\t\t}\n51: \t\t\tif (commitMap.size >= 10) {\n52: \t\t\t\tbreak\n53: \t\t\t}\n54: \t\t}\n55: \n56: \t\tif (commitMap.size === 0) {\n57: \t\t\treturn NextResponse.json([])\n58: \t\t}\n59: \n60: \t\t// Fetch detailed commit information with stats\n61: \t\tconst commitPromises = Array.from(commitMap.values()).map(({ repo, sha }) =>\n62: \t\t\tfetch(`https://api.github.com/repos/${repo}/commits/${sha}`, {\n63: \t\t\t\theaders: {\n64: \t\t\t\t\tAuthorization: `Bearer ${token}`,\n65: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n66: \t\t\t\t},\n67: \t\t\t\tcache: \"no-store\",\n68: \t\t\t})\n69: \t\t\t\t.then((res) => res.json())\n70: \t\t\t\t.then((data) => ({ ...data, repoName: repo }))\n71: \t\t\t\t.catch((_err) => {\n72: \t\t\t\t\treturn null\n73: \t\t\t\t})\n74: \t\t)\n75: \n76: \t\tconst commitDetails = await Promise.all(commitPromises)\n77: \n78: \t\tinterface GitHubCommit {\n79: \t\t\tsha: string\n80: \t\t\tcommit: {\n81: \t\t\t\tmessage: string\n82: \t\t\t\tauthor: {\n83: \t\t\t\t\tdate: string\n84: \t\t\t\t}\n85: \t\t\t}\n86: \t\t\thtml_url: string\n87: \t\t\tstats: {\n88: \t\t\t\tadditions: number\n89: \t\t\t\tdeletions: number\n90: \t\t\t\ttotal: number\n91: \t\t\t}\n92: \t\t\trepoName: string\n93: \t\t}\n94: \n95: \t\tconst formattedCommits = commitDetails\n96: \t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n97: \t\t\t.slice(0, 10)\n98: \t\t\t.map((commit) => ({\n99: \t\t\t\tid: commit.sha,\n100: \t\t\t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n101: \t\t\t\tmessage: commit.commit.message.split(\"\\n\")[0],\n102: \t\t\t\tdate: new Date(commit.commit.author.date).toLocaleDateString(),\n103: \t\t\t\turl: commit.html_url,\n104: \t\t\t\tadditions: commit.stats?.additions || 0,\n105: \t\t\t\tdeletions: commit.stats?.deletions || 0,\n106: \t\t\t}))\n107: \n108: \t\treturn NextResponse.json(formattedCommits)\n109: \t} catch (_error) {\n110: \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n111: \t}\n112: }\n\n(End of file - total 112 lines)\n</content>",
+            "metadata": {
+              "preview": "import { NextResponse } from \"next/server\"\n\nexport async function GET() {\n\tconst token = process.env.GITHUB\n\n\tif (!token) {\n\t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n\t}\n\n\ttry {\n\t\tconst username = \"byrafael\"\n\n\t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n\t\t\t{\n\t\t\t\theaders: {\n\t\t\t\t\tAuthorization: `Bearer ${token}`,\n\t\t\t\t\tAccept: \"application/vnd.github.v3+json\",",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271495482,
+              "end": 1780271495491
+            }
+          },
+          "id": "prt_e807338e6001cN3wne2FH1SNX4",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073345000124MvpdyD2j7kOs"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 31687,
+            "input": 4495,
+            "output": 78,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27114
+            }
+          },
+          "cost": 0.0056424,
+          "id": "prt_e807339b2001r7WjaP4wjVvrB4",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073345000124MvpdyD2j7kOs"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0052524,
+        "tokens": {
+          "total": 33254,
+          "input": 1186,
+          "output": 460,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 31608
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271495644,
+          "completed": 1780271500624
+        },
+        "finish": "tool-calls",
+        "id": "msg_e807339dc001tXeTN6qytF3mCu",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-start",
+          "id": "prt_e80733d7c001tDBoMC5Knd79j0",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807339dc001tXeTN6qytF3mCu"
+        },
+        {
+          "type": "reasoning",
+          "text": "I can see there are multiple places where the number 10 is hardcoded. I need to change all of them to 5:\n\n1. Line 13: Comment says \"guarantee 10 recent public commits\" -> change to 5\n2. Line 16: `per_page=10` in the API URL -> change to `per_page=5`\n3. Line 40: Comment says \"Extract the 10 commits\" -> change to 5\n4. Line 51: `commitMap.size >= 10` -> change to `commitMap.size >= 5`\n5. Line 97: `.slice(0, 10)` -> change to `.slice(0, 5)`\n\nAlso in the widget component at `/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx` line 357: `{commitsList.slice(0, 6).map(...)` — this slices to 6 but since the API will now return 5, this is fine (or could be changed to 5 for consistency, but not strictly necessary). However, to be safe and consistent, I should probably change it to 5 as well.\n\nLet me make the changes.",
+          "time": {
+            "start": 1780271496574,
+            "end": 1780271499015
+          },
+          "id": "prt_e80733d7e001e3Q724PuE0O08e",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807339dc001tXeTN6qytF3mCu"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:3",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+              "oldString": "\t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,",
+              "newString": "\t\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -9,12 +9,12 @@\n \n try {\n \tconst username = \"byrafael\"\n \n-\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n+\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n \t// (Events API truncates past 90 days and often merges commits in payloads).\n \tconst searchResponse = await fetch(\n-\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n+\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n \t\t{\n \t\t\theaders: {\n \t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\tAccept: \"application/vnd.github.v3+json\",\n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -9,12 +9,12 @@\n \n try {\n \tconst username = \"byrafael\"\n \n-\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits \n+\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n \t// (Events API truncates past 90 days and often merges commits in payloads).\n \tconst searchResponse = await fetch(\n-\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n+\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n \t\t{\n \t\t\theaders: {\n \t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\tAccept: \"application/vnd.github.v3+json\",\n",
+                "additions": 2,
+                "deletions": 2
+              },
+              "truncated": false
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271500427,
+              "end": 1780271500430
+            }
+          },
+          "id": "prt_e807347090013C9jC6XnyozvMF",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807339dc001tXeTN6qytF3mCu"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "f9d23d1dbe248cd38a5b136c20da7b145771ed91",
+          "type": "step-finish",
+          "tokens": {
+            "total": 33254,
+            "input": 1186,
+            "output": 460,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 31608
+            }
+          },
+          "cost": 0.0052524,
+          "id": "prt_e80734d1c001k5k7xy1dlpqa2y",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807339dc001tXeTN6qytF3mCu"
+        },
+        {
+          "type": "patch",
+          "hash": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+          ],
+          "id": "prt_e80734d4f001Uy2G350dCCfTGp",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807339dc001tXeTN6qytF3mCu"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0046401,
+        "tokens": {
+          "total": 33629,
+          "input": 478,
+          "output": 358,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 32793
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271500626,
+          "completed": 1780271504258
+        },
+        "finish": "tool-calls",
+        "id": "msg_e80734d52001OQ0LU0SQJ9PQo8",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "f9d23d1dbe248cd38a5b136c20da7b145771ed91",
+          "type": "step-start",
+          "id": "prt_e80735026001F1U57q6WQMBSVP",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80734d52001OQ0LU0SQJ9PQo8"
+        },
+        {
+          "type": "reasoning",
+          "text": "Let me continue editing the other occurrences of 10 in the file.",
+          "time": {
+            "start": 1780271501354,
+            "end": 1780271501440
+          },
+          "id": "prt_e8073502a0011FW4R8KmHuhzff",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80734d52001OQ0LU0SQJ9PQo8"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:4",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+              "oldString": "\t\t// Extract the 10 commits with tracking\n\t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n\n\t\tfor (const item of searchResult.items) {\n\t\t\tconst sha = item.sha\n\t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n\t\t\t\tcommitMap.set(sha, {\n\t\t\t\t\trepo: item.repository.full_name,\n\t\t\t\t\tsha: sha,\n\t\t\t\t})\n\t\t\t}\n\t\t\tif (commitMap.size >= 10) {\n\t\t\t\tbreak\n\t\t\t}\n\t\t}",
+              "newString": "\t\t// Extract the 5 commits with tracking\n\t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n\n\t\tfor (const item of searchResult.items) {\n\t\t\tconst sha = item.sha\n\t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n\t\t\t\tcommitMap.set(sha, {\n\t\t\t\t\trepo: item.repository.full_name,\n\t\t\t\t\tsha: sha,\n\t\t\t\t})\n\t\t\t}\n\t\t\tif (commitMap.size >= 5) {\n\t\t\t\tbreak\n\t\t\t}\n\t\t}"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -36,9 +36,9 @@\n if (!searchResult.items || searchResult.items.length === 0) {\n \treturn NextResponse.json([])\n }\n \n-// Extract the 10 commits with tracking\n+// Extract the 5 commits with tracking\n const commitMap = new Map<string, { repo: string; sha: string }>()\n \n for (const item of searchResult.items) {\n \tconst sha = item.sha\n@@ -47,9 +47,9 @@\n \t\t\trepo: item.repository.full_name,\n \t\t\tsha: sha,\n \t\t})\n \t}\n-\tif (commitMap.size >= 10) {\n+\tif (commitMap.size >= 5) {\n \t\tbreak\n \t}\n }\n \n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -36,9 +36,9 @@\n if (!searchResult.items || searchResult.items.length === 0) {\n \treturn NextResponse.json([])\n }\n \n-// Extract the 10 commits with tracking\n+// Extract the 5 commits with tracking\n const commitMap = new Map<string, { repo: string; sha: string }>()\n \n for (const item of searchResult.items) {\n \tconst sha = item.sha\n@@ -47,9 +47,9 @@\n \t\t\trepo: item.repository.full_name,\n \t\t\tsha: sha,\n \t\t})\n \t}\n-\tif (commitMap.size >= 10) {\n+\tif (commitMap.size >= 5) {\n \t\tbreak\n \t}\n }\n \n",
+                "additions": 2,
+                "deletions": 2
+              },
+              "truncated": false
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271504055,
+              "end": 1780271504058
+            }
+          },
+          "id": "prt_e80735082001Ik7yfL1xm9flpz",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80734d52001OQ0LU0SQJ9PQo8"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "0385f14f74405058b2da4a987a6bc215952634cd",
+          "type": "step-finish",
+          "tokens": {
+            "total": 33629,
+            "input": 478,
+            "output": 358,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 32793
+            }
+          },
+          "cost": 0.0046401,
+          "id": "prt_e80735b4800157tX8Tdq2hhdBM",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80734d52001OQ0LU0SQJ9PQo8"
+        },
+        {
+          "type": "patch",
+          "hash": "f9d23d1dbe248cd38a5b136c20da7b145771ed91",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+          ],
+          "id": "prt_e80735b810013xfIhSE5ceEBhN",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80734d52001OQ0LU0SQJ9PQo8"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0040056,
+        "tokens": {
+          "total": 33797,
+          "input": 376,
+          "output": 151,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 33270
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271504260,
+          "completed": 1780271506283
+        },
+        "finish": "tool-calls",
+        "id": "msg_e80735b84001gE7WC7bNj5McrB",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "0385f14f74405058b2da4a987a6bc215952634cd",
+          "type": "step-start",
+          "id": "prt_e80735e4f001l9bnQ1JW4HqRBR",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80735b84001gE7WC7bNj5McrB"
+        },
+        {
+          "type": "reasoning",
+          "text": "Now I need to change the slice at the end of the file.",
+          "time": {
+            "start": 1780271504978,
+            "end": 1780271505167
+          },
+          "id": "prt_e80735e520011cQYuZvAhEleRk",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80735b84001gE7WC7bNj5McrB"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:5",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+              "oldString": "\t\tconst formattedCommits = commitDetails\n\t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n\t\t\t.slice(0, 10)\n\t\t\t.map((commit) => ({",
+              "newString": "\t\tconst formattedCommits = commitDetails\n\t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n\t\t\t.slice(0, 5)\n\t\t\t.map((commit) => ({"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -93,9 +93,9 @@\n }\n \n const formattedCommits = commitDetails\n \t.filter((commit): commit is GitHubCommit => commit?.sha)\n-\t.slice(0, 10)\n+\t.slice(0, 5)\n \t.map((commit) => ({\n \t\tid: commit.sha,\n \t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n \t\tmessage: commit.commit.message.split(\"\\n\")[0],\n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -93,9 +93,9 @@\n }\n \n const formattedCommits = commitDetails\n \t.filter((commit): commit is GitHubCommit => commit?.sha)\n-\t.slice(0, 10)\n+\t.slice(0, 5)\n \t.map((commit) => ({\n \t\tid: commit.sha,\n \t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n \t\tmessage: commit.commit.message.split(\"\\n\")[0],\n",
+                "additions": 1,
+                "deletions": 1
+              },
+              "truncated": false
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271506079,
+              "end": 1780271506082
+            }
+          },
+          "id": "prt_e80735f110017LS2el3TiM6nm3",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80735b84001gE7WC7bNj5McrB"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "df7e64f67a2c8647d2dc482a18815d11e4afc613",
+          "type": "step-finish",
+          "tokens": {
+            "total": 33797,
+            "input": 376,
+            "output": 151,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 33270
+            }
+          },
+          "cost": 0.0040056,
+          "id": "prt_e807363360010JI1bCVnuuTaUf",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80735b84001gE7WC7bNj5McrB"
+        },
+        {
+          "type": "patch",
+          "hash": "0385f14f74405058b2da4a987a6bc215952634cd",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+          ],
+          "id": "prt_e8073636a001yMWh8PYithqbI7",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80735b84001gE7WC7bNj5McrB"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0037017,
+        "tokens": {
+          "total": 33895,
+          "input": 172,
+          "output": 78,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 33645
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271506285,
+          "completed": 1780271507703
+        },
+        "finish": "tool-calls",
+        "id": "msg_e8073636d0011wAQ45gTQAdwNF",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "df7e64f67a2c8647d2dc482a18815d11e4afc613",
+          "type": "step-start",
+          "id": "prt_e807366c5001OEuC2mvWhb2Kmg",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073636d0011wAQ45gTQAdwNF"
+        },
+        {
+          "type": "reasoning",
+          "text": "Now let me also update the widgets-grid.tsx to slice to 5 instead of 6 for consistency, even though the API will now return only 5.",
+          "time": {
+            "start": 1780271507143,
+            "end": 1780271507354
+          },
+          "id": "prt_e807366c7001028B9kuYlV8G7G",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073636d0011wAQ45gTQAdwNF"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:6",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx",
+              "limit": 10,
+              "offset": 350
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx</path>\n<type>file</type>\n<content>\n350: \t\t\t\t\t<div className=\"space-y-3\">\n351: \t\t\t\t\t\t{[1, 2, 3, 4, 5].map((i) => (\n352: \t\t\t\t\t\t\t<div key={i} className=\"h-6 animate-pulse rounded-md bg-muted/50\" />\n353: \t\t\t\t\t\t))}\n354: \t\t\t\t\t</div>\n355: \t\t\t\t) : commitsList.length > 0 ? (\n356: \t\t\t\t\t<ul className=\"flex-1 space-y-2 text-sm\">\n357: \t\t\t\t\t\t{commitsList.slice(0, 6).map((commit) => (\n358: \t\t\t\t\t\t\t<li key={commit.id}>\n359: \t\t\t\t\t\t\t\t<a\n\n(Showing lines 350-359 of 653. Use offset=360 to continue.)\n</content>",
+            "metadata": {
+              "preview": "\t\t\t\t\t<div className=\"space-y-3\">\n\t\t\t\t\t\t{[1, 2, 3, 4, 5].map((i) => (\n\t\t\t\t\t\t\t<div key={i} className=\"h-6 animate-pulse rounded-md bg-muted/50\" />\n\t\t\t\t\t\t))}\n\t\t\t\t\t</div>\n\t\t\t\t) : commitsList.length > 0 ? (\n\t\t\t\t\t<ul className=\"flex-1 space-y-2 text-sm\">\n\t\t\t\t\t\t{commitsList.slice(0, 6).map((commit) => (\n\t\t\t\t\t\t\t<li key={commit.id}>\n\t\t\t\t\t\t\t\t<a",
+              "truncated": true,
+              "loaded": []
+            },
+            "title": "components/sections/widgets-grid.tsx",
+            "time": {
+              "start": 1780271507552,
+              "end": 1780271507558
+            }
+          },
+          "id": "prt_e8073679b001fYRL3IWOtZz9Xm",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073636d0011wAQ45gTQAdwNF"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "df7e64f67a2c8647d2dc482a18815d11e4afc613",
+          "type": "step-finish",
+          "tokens": {
+            "total": 33895,
+            "input": 172,
+            "output": 78,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 33645
+            }
+          },
+          "cost": 0.0037017,
+          "id": "prt_e807368d1001wSDrmywtRhQIC8",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8073636d0011wAQ45gTQAdwNF"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0038796,
+        "tokens": {
+          "total": 34218,
+          "input": 295,
+          "output": 107,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 33816
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271507706,
+          "completed": 1780271509280
+        },
+        "finish": "tool-calls",
+        "id": "msg_e807368fa001OCDPDhqPXSnQdw",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "df7e64f67a2c8647d2dc482a18815d11e4afc613",
+          "type": "step-start",
+          "id": "prt_e80736bf5001w9nT1BilNyLqdR",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807368fa001OCDPDhqPXSnQdw"
+        },
+        {
+          "type": "reasoning",
+          "text": "I should update the slice in widgets-grid.tsx from 6 to 5 as well for consistency.",
+          "time": {
+            "start": 1780271508471,
+            "end": 1780271508600
+          },
+          "id": "prt_e80736bf7001wDrwDED51jEC0j",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807368fa001OCDPDhqPXSnQdw"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:7",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx",
+              "oldString": "\t\t\t\t\t\t{commitsList.slice(0, 6).map((commit) => (",
+              "newString": "\t\t\t\t\t\t{commitsList.slice(0, 5).map((commit) => ("
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n+++ /Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n@@ -353,9 +353,9 @@\n \t\t))}\n \t</div>\n ) : commitsList.length > 0 ? (\n \t<ul className=\"flex-1 space-y-2 text-sm\">\n-\t\t{commitsList.slice(0, 6).map((commit) => (\n+\t\t{commitsList.slice(0, 5).map((commit) => (\n \t\t\t<li key={commit.id}>\n \t\t\t\t<a\n \t\t\t\t\thref={commit.url}\n \t\t\t\t\ttarget=\"_blank\"\n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n+++ /Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx\n@@ -353,9 +353,9 @@\n \t\t))}\n \t</div>\n ) : commitsList.length > 0 ? (\n \t<ul className=\"flex-1 space-y-2 text-sm\">\n-\t\t{commitsList.slice(0, 6).map((commit) => (\n+\t\t{commitsList.slice(0, 5).map((commit) => (\n \t\t\t<li key={commit.id}>\n \t\t\t\t<a\n \t\t\t\t\thref={commit.url}\n \t\t\t\t\ttarget=\"_blank\"\n",
+                "additions": 1,
+                "deletions": 1
+              },
+              "truncated": false
+            },
+            "title": "components/sections/widgets-grid.tsx",
+            "time": {
+              "start": 1780271509068,
+              "end": 1780271509071
+            }
+          },
+          "id": "prt_e80736c7a001HAFloHszCFoKWP",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807368fa001OCDPDhqPXSnQdw"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "type": "step-finish",
+          "tokens": {
+            "total": 34218,
+            "input": 295,
+            "output": 107,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 33816
+            }
+          },
+          "cost": 0.0038796,
+          "id": "prt_e80736eec0017EDQMsUrUn4we7",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807368fa001OCDPDhqPXSnQdw"
+        },
+        {
+          "type": "patch",
+          "hash": "df7e64f67a2c8647d2dc482a18815d11e4afc613",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx"
+          ],
+          "id": "prt_e80736f1f0011jPggQNWOQ4kPp",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e807368fa001OCDPDhqPXSnQdw"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0036258,
+        "tokens": {
+          "total": 34284,
+          "input": 128,
+          "output": 46,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 34110
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271509282,
+          "completed": 1780271510382
+        },
+        "finish": "tool-calls",
+        "id": "msg_e80736f22001isgDVQaP54v63E",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "type": "step-start",
+          "id": "prt_e80737224001Qt2tI28v9NyoNx",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80736f22001isgDVQaP54v63E"
+        },
+        {
+          "type": "reasoning",
+          "text": "I should verify the changes look correct by reading the updated files.",
+          "time": {
+            "start": 1780271510054,
+            "end": 1780271510151
+          },
+          "id": "prt_e80737226001IJoZpyuWbKL0d6",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80736f22001isgDVQaP54v63E"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:8",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts</path>\n<type>file</type>\n<content>\n1: import { NextResponse } from \"next/server\"\n2: \n3: export async function GET() {\n4: \tconst token = process.env.GITHUB\n5: \n6: \tif (!token) {\n7: \t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n8: \t}\n9: \n10: \ttry {\n11: \t\tconst username = \"byrafael\"\n12: \n13: \t\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n14: \t\t// (Events API truncates past 90 days and often merges commits in payloads).\n15: \t\tconst searchResponse = await fetch(\n16: \t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n17: \t\t\t{\n18: \t\t\t\theaders: {\n19: \t\t\t\t\tAuthorization: `Bearer ${token}`,\n20: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n21: \t\t\t\t},\n22: \t\t\t\tcache: \"no-store\",\n23: \t\t\t}\n24: \t\t)\n25: \n26: \t\tif (!searchResponse.ok) {\n27: \t\t\tconst _errorText = await searchResponse.text()\n28: \t\t\treturn NextResponse.json(\n29: \t\t\t\t{ error: \"Failed to search commits from GitHub\" },\n30: \t\t\t\t{ status: searchResponse.status }\n31: \t\t\t)\n32: \t\t}\n33: \n34: \t\tconst searchResult = await searchResponse.json()\n35: \n36: \t\tif (!searchResult.items || searchResult.items.length === 0) {\n37: \t\t\treturn NextResponse.json([])\n38: \t\t}\n39: \n40: \t\t// Extract the 5 commits with tracking\n41: \t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n42: \n43: \t\tfor (const item of searchResult.items) {\n44: \t\t\tconst sha = item.sha\n45: \t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n46: \t\t\t\tcommitMap.set(sha, {\n47: \t\t\t\t\trepo: item.repository.full_name,\n48: \t\t\t\t\tsha: sha,\n49: \t\t\t\t})\n50: \t\t\t}\n51: \t\t\tif (commitMap.size >= 5) {\n52: \t\t\t\tbreak\n53: \t\t\t}\n54: \t\t}\n55: \n56: \t\tif (commitMap.size === 0) {\n57: \t\t\treturn NextResponse.json([])\n58: \t\t}\n59: \n60: \t\t// Fetch detailed commit information with stats\n61: \t\tconst commitPromises = Array.from(commitMap.values()).map(({ repo, sha }) =>\n62: \t\t\tfetch(`https://api.github.com/repos/${repo}/commits/${sha}`, {\n63: \t\t\t\theaders: {\n64: \t\t\t\t\tAuthorization: `Bearer ${token}`,\n65: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n66: \t\t\t\t},\n67: \t\t\t\tcache: \"no-store\",\n68: \t\t\t})\n69: \t\t\t\t.then((res) => res.json())\n70: \t\t\t\t.then((data) => ({ ...data, repoName: repo }))\n71: \t\t\t\t.catch((_err) => {\n72: \t\t\t\t\treturn null\n73: \t\t\t\t})\n74: \t\t)\n75: \n76: \t\tconst commitDetails = await Promise.all(commitPromises)\n77: \n78: \t\tinterface GitHubCommit {\n79: \t\t\tsha: string\n80: \t\t\tcommit: {\n81: \t\t\t\tmessage: string\n82: \t\t\t\tauthor: {\n83: \t\t\t\t\tdate: string\n84: \t\t\t\t}\n85: \t\t\t}\n86: \t\t\thtml_url: string\n87: \t\t\tstats: {\n88: \t\t\t\tadditions: number\n89: \t\t\t\tdeletions: number\n90: \t\t\t\ttotal: number\n91: \t\t\t}\n92: \t\t\trepoName: string\n93: \t\t}\n94: \n95: \t\tconst formattedCommits = commitDetails\n96: \t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n97: \t\t\t.slice(0, 5)\n98: \t\t\t.map((commit) => ({\n99: \t\t\t\tid: commit.sha,\n100: \t\t\t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n101: \t\t\t\tmessage: commit.commit.message.split(\"\\n\")[0],\n102: \t\t\t\tdate: new Date(commit.commit.author.date).toLocaleDateString(),\n103: \t\t\t\turl: commit.html_url,\n104: \t\t\t\tadditions: commit.stats?.additions || 0,\n105: \t\t\t\tdeletions: commit.stats?.deletions || 0,\n106: \t\t\t}))\n107: \n108: \t\treturn NextResponse.json(formattedCommits)\n109: \t} catch (_error) {\n110: \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n111: \t}\n112: }\n\n(End of file - total 112 lines)\n</content>",
+            "metadata": {
+              "preview": "import { NextResponse } from \"next/server\"\n\nexport async function GET() {\n\tconst token = process.env.GITHUB\n\n\tif (!token) {\n\t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n\t}\n\n\ttry {\n\t\tconst username = \"byrafael\"\n\n\t\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n\t\t\t{\n\t\t\t\theaders: {\n\t\t\t\t\tAuthorization: `Bearer ${token}`,\n\t\t\t\t\tAccept: \"application/vnd.github.v3+json\",",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271510232,
+              "end": 1780271510237
+            }
+          },
+          "id": "prt_e80737288002CpuVGB2eqIw0UM",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80736f22001isgDVQaP54v63E"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "type": "step-finish",
+          "tokens": {
+            "total": 34284,
+            "input": 128,
+            "output": 46,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 34110
+            }
+          },
+          "cost": 0.0036258,
+          "id": "prt_e80737346001YvMzVKhFprlNVy",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80736f22001isgDVQaP54v63E"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80732772001KBZgPUdh1a5NGx",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0047431,
+        "tokens": {
+          "total": 35600,
+          "input": 1154,
+          "output": 209,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 34237
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271510384,
+          "completed": 1780271513133
+        },
+        "finish": "stop",
+        "id": "msg_e80737370001iA8V8sy5rMRKVS",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "type": "step-start",
+          "id": "prt_e8073768f001RbJ22VLzTbd9Qv",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80737370001iA8V8sy5rMRKVS"
+        },
+        {
+          "type": "reasoning",
+          "text": "The changes look correct. The API route now limits to 5 commits at multiple points (API request per_page, extraction loop, and final slice), and the UI widget also slices to 5 for consistency.\n\nLet me summarize what was done for the user.",
+          "time": {
+            "start": 1780271511184,
+            "end": 1780271511767
+          },
+          "id": "prt_e80737690001nVMGqlAyp4LRSp",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80737370001iA8V8sy5rMRKVS"
+        },
+        {
+          "type": "text",
+          "text": "Done! I updated the GitHub API handler and the widget to limit commits to 5.\n\n**Changes made:**\n\n1. **`app/api/github/route.ts`**\n   - Changed `per_page=10` → `per_page=5` in the GitHub Commit Search API request\n   - Changed the deduplication loop break condition from `>= 10` to `>= 5`\n   - Changed the final `.slice(0, 10)` to `.slice(0, 5)`\n\n2. **`components/sections/widgets-grid.tsx`**\n   - Changed the UI slice from `.slice(0, 6)` to `.slice(0, 5)` for consistency\n\nThe Recent Commits widget will now display a maximum of **5 commits**.",
+          "time": {
+            "start": 1780271511769,
+            "end": 1780271513050
+          },
+          "id": "prt_e807378d9001JGNGekSu3zQUPu",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80737370001iA8V8sy5rMRKVS"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "type": "step-finish",
+          "tokens": {
+            "total": 35600,
+            "input": 1154,
+            "output": 209,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 34237
+            }
+          },
+          "cost": 0.0047431,
+          "id": "prt_e80737e0600187ZkbY0RfnHKxv",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80737370001iA8V8sy5rMRKVS"
+        }
+      ]
+    },
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1780271562381
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "opencode-go",
+          "modelID": "kimi-k2.5"
+        },
+        "summary": {
+          "diffs": [
+            {
+              "file": "app/api/github/route.ts",
+              "patch": "Index: app/api/github/route.ts\n===================================================================\n--- app/api/github/route.ts\t\n+++ app/api/github/route.ts\t\n@@ -1,112 +1,112 @@\n import { NextResponse } from \"next/server\"\n \n export async function GET() {\n \tconst token = process.env.GITHUB\n \n \tif (!token) {\n \t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n \t}\n \n \ttry {\n \t\tconst username = \"byrafael\"\n \n-\t\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n+\t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits\n \t\t// (Events API truncates past 90 days and often merges commits in payloads).\n \t\tconst searchResponse = await fetch(\n-\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n+\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n \t\t\t{\n \t\t\t\theaders: {\n \t\t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n \t\t\t\t},\n \t\t\t\tcache: \"no-store\",\n \t\t\t}\n \t\t)\n \n \t\tif (!searchResponse.ok) {\n \t\t\tconst _errorText = await searchResponse.text()\n \t\t\treturn NextResponse.json(\n \t\t\t\t{ error: \"Failed to search commits from GitHub\" },\n \t\t\t\t{ status: searchResponse.status }\n \t\t\t)\n \t\t}\n \n \t\tconst searchResult = await searchResponse.json()\n \n \t\tif (!searchResult.items || searchResult.items.length === 0) {\n \t\t\treturn NextResponse.json([])\n \t\t}\n \n-\t\t// Extract the 5 commits with tracking\n+\t\t// Extract the 10 commits with tracking\n \t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n \n \t\tfor (const item of searchResult.items) {\n \t\t\tconst sha = item.sha\n \t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n \t\t\t\tcommitMap.set(sha, {\n \t\t\t\t\trepo: item.repository.full_name,\n \t\t\t\t\tsha: sha,\n \t\t\t\t})\n \t\t\t}\n-\t\t\tif (commitMap.size >= 5) {\n+\t\t\tif (commitMap.size >= 10) {\n \t\t\t\tbreak\n \t\t\t}\n \t\t}\n \n \t\tif (commitMap.size === 0) {\n \t\t\treturn NextResponse.json([])\n \t\t}\n \n \t\t// Fetch detailed commit information with stats\n \t\tconst commitPromises = Array.from(commitMap.values()).map(({ repo, sha }) =>\n \t\t\tfetch(`https://api.github.com/repos/${repo}/commits/${sha}`, {\n \t\t\t\theaders: {\n \t\t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n \t\t\t\t},\n \t\t\t\tcache: \"no-store\",\n \t\t\t})\n \t\t\t\t.then((res) => res.json())\n \t\t\t\t.then((data) => ({ ...data, repoName: repo }))\n \t\t\t\t.catch((_err) => {\n \t\t\t\t\treturn null\n \t\t\t\t})\n \t\t)\n \n \t\tconst commitDetails = await Promise.all(commitPromises)\n \n \t\tinterface GitHubCommit {\n \t\t\tsha: string\n \t\t\tcommit: {\n \t\t\t\tmessage: string\n \t\t\t\tauthor: {\n \t\t\t\t\tdate: string\n \t\t\t\t}\n \t\t\t}\n \t\t\thtml_url: string\n \t\t\tstats: {\n \t\t\t\tadditions: number\n \t\t\t\tdeletions: number\n \t\t\t\ttotal: number\n \t\t\t}\n \t\t\trepoName: string\n \t\t}\n \n \t\tconst formattedCommits = commitDetails\n \t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n-\t\t\t.slice(0, 5)\n+\t\t\t.slice(0, 10)\n \t\t\t.map((commit) => ({\n \t\t\t\tid: commit.sha,\n \t\t\t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n \t\t\t\tmessage: commit.commit.message.split(\"\\n\")[0],\n \t\t\t\tdate: new Date(commit.commit.author.date).toLocaleDateString(),\n \t\t\t\turl: commit.html_url,\n \t\t\t\tadditions: commit.stats?.additions || 0,\n \t\t\t\tdeletions: commit.stats?.deletions || 0,\n \t\t\t}))\n \n \t\treturn NextResponse.json(formattedCommits)\n \t} catch (_error) {\n \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n \t}\n }\n",
+              "additions": 5,
+              "deletions": 5,
+              "status": "modified"
+            }
+          ]
+        },
+        "id": "msg_e80743e7c001Ch7UY8tRzv6xCn",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "Undo the mods in the github route. Instead, just modify it at the frontend/widgets grid level.",
+          "id": "prt_e80743e7d001222qLoFRbWTT6x",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743e7c001Ch7UY8tRzv6xCn"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80743e7c001Ch7UY8tRzv6xCn",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0099055,
+        "tokens": {
+          "total": 35905,
+          "input": 7990,
+          "output": 800,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 27115
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271562555,
+          "completed": 1780271568523
+        },
+        "finish": "tool-calls",
+        "id": "msg_e80743f3b001qPqVO3AYIe8n8P",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "type": "step-start",
+          "id": "prt_e807442420011PaabNJFvD4US4",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        },
+        {
+          "type": "reasoning",
+          "text": "The user wants me to:\n1. Revert all changes made to `app/api/github/route.ts`\n2. Only modify `components/sections/widgets-grid.tsx` to limit the commits to 5\n\nI need to restore the original values in the github route file:\n- `per_page=10`\n- `commitMap.size >= 10`\n- `.slice(0, 10)`\n\nAnd then the widgets-grid.tsx is already changed to `.slice(0, 5)` from my previous edit, but I should verify.\n\nLet me revert the route changes.",
+          "time": {
+            "start": 1780271563333,
+            "end": 1780271564083
+          },
+          "id": "prt_e807442450011jDTQiOavbxKP8",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:9",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+              "oldString": "\t\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,",
+              "newString": "\t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits\n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -9,12 +9,12 @@\n \n try {\n \tconst username = \"byrafael\"\n \n-\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n+\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits\n \t// (Events API truncates past 90 days and often merges commits in payloads).\n \tconst searchResponse = await fetch(\n-\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n+\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n \t\t{\n \t\t\theaders: {\n \t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\tAccept: \"application/vnd.github.v3+json\",\n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -9,12 +9,12 @@\n \n try {\n \tconst username = \"byrafael\"\n \n-\t// Use GitHub's Commit Search API instead of events to guarantee 5 recent public commits\n+\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits\n \t// (Events API truncates past 90 days and often merges commits in payloads).\n \tconst searchResponse = await fetch(\n-\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=5`,\n+\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n \t\t{\n \t\t\theaders: {\n \t\t\t\tAuthorization: `Bearer ${token}`,\n \t\t\t\tAccept: \"application/vnd.github.v3+json\",\n",
+                "additions": 2,
+                "deletions": 2
+              },
+              "truncated": false
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271565152,
+              "end": 1780271565155
+            }
+          },
+          "id": "prt_e80744535001wxFM73WHXAVvQu",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:10",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+              "oldString": "\t\t// Extract the 5 commits with tracking\n\t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n\n\t\tfor (const item of searchResult.items) {\n\t\t\tconst sha = item.sha\n\t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n\t\t\t\tcommitMap.set(sha, {\n\t\t\t\t\trepo: item.repository.full_name,\n\t\t\t\t\tsha: sha,\n\t\t\t\t})\n\t\t\t}\n\t\t\tif (commitMap.size >= 5) {\n\t\t\t\tbreak\n\t\t\t}\n\t\t}",
+              "newString": "\t\t// Extract the 10 commits with tracking\n\t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n\n\t\tfor (const item of searchResult.items) {\n\t\t\tconst sha = item.sha\n\t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n\t\t\t\tcommitMap.set(sha, {\n\t\t\t\t\trepo: item.repository.full_name,\n\t\t\t\t\tsha: sha,\n\t\t\t\t})\n\t\t\t}\n\t\t\tif (commitMap.size >= 10) {\n\t\t\t\tbreak\n\t\t\t}\n\t\t}"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -36,9 +36,9 @@\n if (!searchResult.items || searchResult.items.length === 0) {\n \treturn NextResponse.json([])\n }\n \n-// Extract the 5 commits with tracking\n+// Extract the 10 commits with tracking\n const commitMap = new Map<string, { repo: string; sha: string }>()\n \n for (const item of searchResult.items) {\n \tconst sha = item.sha\n@@ -47,9 +47,9 @@\n \t\t\trepo: item.repository.full_name,\n \t\t\tsha: sha,\n \t\t})\n \t}\n-\tif (commitMap.size >= 5) {\n+\tif (commitMap.size >= 10) {\n \t\tbreak\n \t}\n }\n \n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -36,9 +36,9 @@\n if (!searchResult.items || searchResult.items.length === 0) {\n \treturn NextResponse.json([])\n }\n \n-// Extract the 5 commits with tracking\n+// Extract the 10 commits with tracking\n const commitMap = new Map<string, { repo: string; sha: string }>()\n \n for (const item of searchResult.items) {\n \tconst sha = item.sha\n@@ -47,9 +47,9 @@\n \t\t\trepo: item.repository.full_name,\n \t\t\tsha: sha,\n \t\t})\n \t}\n-\tif (commitMap.size >= 5) {\n+\tif (commitMap.size >= 10) {\n \t\tbreak\n \t}\n }\n \n",
+                "additions": 2,
+                "deletions": 2
+              },
+              "truncated": false
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271566932,
+              "end": 1780271566935
+            }
+          },
+          "id": "prt_e80744973001HkOozjA5B20ATF",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:11",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+              "oldString": "\t\tconst formattedCommits = commitDetails\n\t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n\t\t\t.slice(0, 5)\n\t\t\t.map((commit) => ({",
+              "newString": "\t\tconst formattedCommits = commitDetails\n\t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n\t\t\t.slice(0, 10)\n\t\t\t.map((commit) => ({"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -93,9 +93,9 @@\n }\n \n const formattedCommits = commitDetails\n \t.filter((commit): commit is GitHubCommit => commit?.sha)\n-\t.slice(0, 5)\n+\t.slice(0, 10)\n \t.map((commit) => ({\n \t\tid: commit.sha,\n \t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n \t\tmessage: commit.commit.message.split(\"\\n\")[0],\n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n+++ /Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n@@ -93,9 +93,9 @@\n }\n \n const formattedCommits = commitDetails\n \t.filter((commit): commit is GitHubCommit => commit?.sha)\n-\t.slice(0, 5)\n+\t.slice(0, 10)\n \t.map((commit) => ({\n \t\tid: commit.sha,\n \t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n \t\tmessage: commit.commit.message.split(\"\\n\")[0],\n",
+                "additions": 1,
+                "deletions": 1
+              },
+              "truncated": false
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271568330,
+              "end": 1780271568333
+            }
+          },
+          "id": "prt_e8074506a001S3VsCYWuLAuKUC",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "20ac0df30a3e2ab9b59c2decb9f4fc73c19706c7",
+          "type": "step-finish",
+          "tokens": {
+            "total": 35905,
+            "input": 7990,
+            "output": 800,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27115
+            }
+          },
+          "cost": 0.0099055,
+          "id": "prt_e8074565700165bIfSOXRlqbi1",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        },
+        {
+          "type": "patch",
+          "hash": "11b73b7218a22ed491f49902c98ca561f4577186",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+          ],
+          "id": "prt_e8074568a001wm2rCQRK3JLqfC",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80743f3b001qPqVO3AYIe8n8P"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80743e7c001Ch7UY8tRzv6xCn",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0043348,
+        "tokens": {
+          "total": 36054,
+          "input": 844,
+          "output": 106,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 35104
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271568525,
+          "completed": 1780271570779
+        },
+        "finish": "tool-calls",
+        "id": "msg_e8074568d001bd3BLgjtwv0W7w",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "20ac0df30a3e2ab9b59c2decb9f4fc73c19706c7",
+          "type": "step-start",
+          "id": "prt_e80745c4c001IYmz8ojG14tSoA",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8074568d001bd3BLgjtwv0W7w"
+        },
+        {
+          "type": "reasoning",
+          "text": "The user asked me to undo the mods in the github route and just modify it at the frontend/widgets grid level. I reverted all three changes in the route file. The widgets-grid.tsx was already changed to `.slice(0, 5)` from my previous edit, so no further action is needed there.\n\nLet me verify the route file looks correct now.",
+          "time": {
+            "start": 1780271569998,
+            "end": 1780271570515
+          },
+          "id": "prt_e80745c4e0014zy0rIBwjS2wPh",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8074568d001bd3BLgjtwv0W7w"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:12",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts"
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts</path>\n<type>file</type>\n<content>\n1: import { NextResponse } from \"next/server\"\n2: \n3: export async function GET() {\n4: \tconst token = process.env.GITHUB\n5: \n6: \tif (!token) {\n7: \t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n8: \t}\n9: \n10: \ttry {\n11: \t\tconst username = \"byrafael\"\n12: \n13: \t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits\n14: \t\t// (Events API truncates past 90 days and often merges commits in payloads).\n15: \t\tconst searchResponse = await fetch(\n16: \t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n17: \t\t\t{\n18: \t\t\t\theaders: {\n19: \t\t\t\t\tAuthorization: `Bearer ${token}`,\n20: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n21: \t\t\t\t},\n22: \t\t\t\tcache: \"no-store\",\n23: \t\t\t}\n24: \t\t)\n25: \n26: \t\tif (!searchResponse.ok) {\n27: \t\t\tconst _errorText = await searchResponse.text()\n28: \t\t\treturn NextResponse.json(\n29: \t\t\t\t{ error: \"Failed to search commits from GitHub\" },\n30: \t\t\t\t{ status: searchResponse.status }\n31: \t\t\t)\n32: \t\t}\n33: \n34: \t\tconst searchResult = await searchResponse.json()\n35: \n36: \t\tif (!searchResult.items || searchResult.items.length === 0) {\n37: \t\t\treturn NextResponse.json([])\n38: \t\t}\n39: \n40: \t\t// Extract the 10 commits with tracking\n41: \t\tconst commitMap = new Map<string, { repo: string; sha: string }>()\n42: \n43: \t\tfor (const item of searchResult.items) {\n44: \t\t\tconst sha = item.sha\n45: \t\t\tif (!commitMap.has(sha) && item.repository?.full_name) {\n46: \t\t\t\tcommitMap.set(sha, {\n47: \t\t\t\t\trepo: item.repository.full_name,\n48: \t\t\t\t\tsha: sha,\n49: \t\t\t\t})\n50: \t\t\t}\n51: \t\t\tif (commitMap.size >= 10) {\n52: \t\t\t\tbreak\n53: \t\t\t}\n54: \t\t}\n55: \n56: \t\tif (commitMap.size === 0) {\n57: \t\t\treturn NextResponse.json([])\n58: \t\t}\n59: \n60: \t\t// Fetch detailed commit information with stats\n61: \t\tconst commitPromises = Array.from(commitMap.values()).map(({ repo, sha }) =>\n62: \t\t\tfetch(`https://api.github.com/repos/${repo}/commits/${sha}`, {\n63: \t\t\t\theaders: {\n64: \t\t\t\t\tAuthorization: `Bearer ${token}`,\n65: \t\t\t\t\tAccept: \"application/vnd.github.v3+json\",\n66: \t\t\t\t},\n67: \t\t\t\tcache: \"no-store\",\n68: \t\t\t})\n69: \t\t\t\t.then((res) => res.json())\n70: \t\t\t\t.then((data) => ({ ...data, repoName: repo }))\n71: \t\t\t\t.catch((_err) => {\n72: \t\t\t\t\treturn null\n73: \t\t\t\t})\n74: \t\t)\n75: \n76: \t\tconst commitDetails = await Promise.all(commitPromises)\n77: \n78: \t\tinterface GitHubCommit {\n79: \t\t\tsha: string\n80: \t\t\tcommit: {\n81: \t\t\t\tmessage: string\n82: \t\t\t\tauthor: {\n83: \t\t\t\t\tdate: string\n84: \t\t\t\t}\n85: \t\t\t}\n86: \t\t\thtml_url: string\n87: \t\t\tstats: {\n88: \t\t\t\tadditions: number\n89: \t\t\t\tdeletions: number\n90: \t\t\t\ttotal: number\n91: \t\t\t}\n92: \t\t\trepoName: string\n93: \t\t}\n94: \n95: \t\tconst formattedCommits = commitDetails\n96: \t\t\t.filter((commit): commit is GitHubCommit => commit?.sha)\n97: \t\t\t.slice(0, 10)\n98: \t\t\t.map((commit) => ({\n99: \t\t\t\tid: commit.sha,\n100: \t\t\t\trepo: commit.repoName.split(\"/\")[1] || commit.repoName,\n101: \t\t\t\tmessage: commit.commit.message.split(\"\\n\")[0],\n102: \t\t\t\tdate: new Date(commit.commit.author.date).toLocaleDateString(),\n103: \t\t\t\turl: commit.html_url,\n104: \t\t\t\tadditions: commit.stats?.additions || 0,\n105: \t\t\t\tdeletions: commit.stats?.deletions || 0,\n106: \t\t\t}))\n107: \n108: \t\treturn NextResponse.json(formattedCommits)\n109: \t} catch (_error) {\n110: \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n111: \t}\n112: }\n\n(End of file - total 112 lines)\n</content>",
+            "metadata": {
+              "preview": "import { NextResponse } from \"next/server\"\n\nexport async function GET() {\n\tconst token = process.env.GITHUB\n\n\tif (!token) {\n\t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n\t}\n\n\ttry {\n\t\tconst username = \"byrafael\"\n\n\t\t// Use GitHub's Commit Search API instead of events to guarantee 10 recent public commits\n\t\t// (Events API truncates past 90 days and often merges commits in payloads).\n\t\tconst searchResponse = await fetch(\n\t\t\t`https://api.github.com/search/commits?q=author:${username}&sort=author-date&order=desc&per_page=10`,\n\t\t\t{\n\t\t\t\theaders: {\n\t\t\t\t\tAuthorization: `Bearer ${token}`,\n\t\t\t\t\tAccept: \"application/vnd.github.v3+json\",",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "app/api/github/route.ts",
+            "time": {
+              "start": 1780271570635,
+              "end": 1780271570644
+            }
+          },
+          "id": "prt_e80745e540015qONCDA4zV0LlV",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8074568d001bd3BLgjtwv0W7w"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "20ac0df30a3e2ab9b59c2decb9f4fc73c19706c7",
+          "type": "step-finish",
+          "tokens": {
+            "total": 36054,
+            "input": 844,
+            "output": 106,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 35104
+            }
+          },
+          "cost": 0.0043348,
+          "id": "prt_e80745f35001p9G5ClhsgExz1Z",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e8074568d001bd3BLgjtwv0W7w"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e80743e7c001Ch7UY8tRzv6xCn",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0046861,
+        "tokens": {
+          "total": 37282,
+          "input": 1214,
+          "output": 121,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 35947
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271570781,
+          "completed": 1780271572445
+        },
+        "finish": "stop",
+        "id": "msg_e80745f5d001fHF5fWIf3KlqPM",
+        "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5"
+      },
+      "parts": [
+        {
+          "snapshot": "20ac0df30a3e2ab9b59c2decb9f4fc73c19706c7",
+          "type": "step-start",
+          "id": "prt_e807462bc001vHGLX1mgZRC6wR",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80745f5d001fHF5fWIf3KlqPM"
+        },
+        {
+          "type": "reasoning",
+          "text": "The github route file is now fully reverted to its original state. The widgets-grid.tsx already has `.slice(0, 5)` from my previous edit, which is exactly what the user wants - only the frontend is limiting to 5.",
+          "time": {
+            "start": 1780271571647,
+            "end": 1780271571920
+          },
+          "id": "prt_e807462bf001g3p5JRZI1hD12Z",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80745f5d001fHF5fWIf3KlqPM"
+        },
+        {
+          "type": "text",
+          "text": "Done! I reverted `app/api/github/route.ts` back to its original state (fetching up to 10 commits). The frontend limit in `components/sections/widgets-grid.tsx` remains at `.slice(0, 5)`, so only 5 commits will be shown in the widget while the API still returns more if needed elsewhere.",
+          "time": {
+            "start": 1780271571921,
+            "end": 1780271572354
+          },
+          "id": "prt_e807463d1001xQwgUSl1yojTYA",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80745f5d001fHF5fWIf3KlqPM"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "20ac0df30a3e2ab9b59c2decb9f4fc73c19706c7",
+          "type": "step-finish",
+          "tokens": {
+            "total": 37282,
+            "input": 1214,
+            "output": 121,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 35947
+            }
+          },
+          "cost": 0.0046861,
+          "id": "prt_e807465b10018XsV2oXtt7B4s6",
+          "sessionID": "ses_17f8cd897ffeQAsMnYG1qGtEV5",
+          "messageID": "msg_e80745f5d001fHF5fWIf3KlqPM"
+        }
+      ]
+    }
+  ]
+}

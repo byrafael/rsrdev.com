@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "d705ecff2e06",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "components/sections/widgets-grid.tsx"
+  ],
+  "sessions": [
+    {
+      "metadata": "/d7/05ecff2e06/0/metadata.json",
+      "transcript": "/d7/05ecff2e06/0/full.jsonl",
+      "content_hash": "/d7/05ecff2e06/0/content_hash.txt",
+      "prompt": "/d7/05ecff2e06/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 45339,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 358867,
+    "output_tokens": 2681,
+    "api_call_count": 12
+  }
+}

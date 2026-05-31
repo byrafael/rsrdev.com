@@ -13,23 +13,23 @@
     },
     "version": "1.15.13",
     "summary": {
-      "additions": 13,
+      "additions": 15,
       "deletions": 5,
       "files": 2
     },
-    "cost": 0.04732569999999999,
+    "cost": 0.062495199999999994,
     "tokens": {
-      "input": 29929,
-      "output": 1426,
+      "input": 31351,
+      "output": 2341,
       "reasoning": 0,
       "cache": {
-        "read": 250903,
+        "read": 366616,
         "write": 0
       }
     },
     "time": {
       "created": 1780271259802,
-      "updated": 1780271348873
+      "updated": 1780271360059
     }
   },
   "messages": [
@@ -929,8 +929,8 @@
           "diffs": [
             {
               "file": ".gitignore",
-              "patch": "Index: .gitignore\n===================================================================\n--- .gitignore\t\n+++ .gitignore\t\n@@ -1,31 +1,31 @@\n # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n \n # dependencies\n /node_modules\n \n # next.js\n /.next/\n /out/\n \n # production\n /build\n \n # debug\n npm-debug.log*\n yarn-debug.log*\n yarn-error.log*\n .pnpm-debug.log*\n \n # env files\n .env*\n \n # vercel\n .vercel\n \n # typescript\n *.tsbuildinfo\n next-env.d.ts\n \n # bun\n bun.lock\n-bun.lockb\n\\ No newline at end of file\n+bun.lockb.vscode/\n",
-              "additions": 1,
+              "patch": "Index: .gitignore\n===================================================================\n--- .gitignore\t\n+++ .gitignore\t\n@@ -1,31 +1,33 @@\n # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n \n # dependencies\n /node_modules\n \n # next.js\n /.next/\n /out/\n \n # production\n /build\n \n # debug\n npm-debug.log*\n yarn-debug.log*\n yarn-error.log*\n .pnpm-debug.log*\n \n # env files\n .env*\n \n # vercel\n .vercel\n \n # typescript\n *.tsbuildinfo\n next-env.d.ts\n \n # bun\n bun.lock\n-bun.lockb\n\\ No newline at end of file\n+bun.lockb\n+\n+.vscode/\n",
+              "additions": 3,
               "deletions": 1,
               "status": "modified"
             }
@@ -1190,21 +1190,24 @@
           "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
           "root": "/Users/rsoley/Dev/personal/rsrdev.com"
         },
-        "cost": 0,
+        "cost": 0.0042514,
         "tokens": {
-          "input": 0,
-          "output": 0,
+          "total": 29013,
+          "input": 212,
+          "output": 429,
           "reasoning": 0,
           "cache": {
-            "read": 0,
-            "write": 0
+            "write": 0,
+            "read": 28372
           }
         },
         "modelID": "kimi-k2.5",
         "providerID": "opencode-go",
         "time": {
-          "created": 1780271348776
+          "created": 1780271348776,
+          "completed": 1780271353636
         },
+        "finish": "tool-calls",
         "id": "msg_e8070fc28001m53Ecm4nk3A1nk",
         "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
       },
@@ -1232,22 +1235,481 @@
           "tool": "bash",
           "callID": "functions.bash:11",
           "state": {
-            "metadata": {
-              "output": "",
-              "description": "Commit gitignore change and check status"
-            },
-            "status": "running",
+            "status": "completed",
             "input": {
               "command": "git add .gitignore && git commit -m \"Add .vscode to gitignore\" && git status",
               "description": "Commit gitignore change and check status"
             },
+            "output": "[main 543e56ed] Add .vscode to gitignore\n 1 file changed, 1 insertion(+), 1 deletion(-)\nOn branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use \"git push\" to publish your local commits)\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t.vscode/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n",
+            "metadata": {
+              "output": "[main 543e56ed] Add .vscode to gitignore\n 1 file changed, 1 insertion(+), 1 deletion(-)\nOn branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use \"git push\" to publish your local commits)\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t.vscode/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n",
+              "exit": 0,
+              "description": "Commit gitignore change and check status",
+              "truncated": false
+            },
+            "title": "Commit gitignore change and check status",
             "time": {
-              "start": 1780271352133
+              "start": 1780271353557,
+              "end": 1780271353559
             }
           },
           "id": "prt_e8071089a001jmcJc0Wa56SO1s",
           "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
           "messageID": "msg_e8070fc28001m53Ecm4nk3A1nk"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "a100f347bca0587d8b0d882046c7c6b65d2b5ea5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 29013,
+            "input": 212,
+            "output": 429,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 28372
+            }
+          },
+          "cost": 0.0042514,
+          "id": "prt_e80710efd0013A9AKij85fB346",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070fc28001m53Ecm4nk3A1nk"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e8070ef7a001FNy6JS1ctHsiWG",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0040487,
+        "tokens": {
+          "total": 29423,
+          "input": 554,
+          "output": 286,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 28583
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271353638,
+          "completed": 1780271356129
+        },
+        "finish": "tool-calls",
+        "id": "msg_e80710f260010DuJI6mLGwn4uU",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "a100f347bca0587d8b0d882046c7c6b65d2b5ea5",
+          "type": "step-start",
+          "id": "prt_e807111cd0016tfxdnpfD7X4Cm",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e80710f260010DuJI6mLGwn4uU"
+        },
+        {
+          "type": "reasoning",
+          "text": "This is very strange. Even after committing the `.gitignore` change, `.vscode/` is still showing as untracked. \n\nWhy would `.vscode/` not be ignored?\n\n1. Maybe there is a negative pattern elsewhere? Like `!.vscode/` in another gitignore or `.git/info/exclude`?\n2. Maybe the directory name has weird characters or casing?\n3. Maybe `.vscode` is not actually a directory but something else? No, `git status` shows `.vscode/`.\n4. Maybe there's a global gitignore that overrides it? No, local `.gitignore` should take precedence for untracked files.\n\nLet me check:\n- `cat .gitignore` to see the exact line\n- `git check-ignore -v .vscode` to see why it's NOT ignored\n- Check `.git/info/exclude`\n- Check if there are nested `.gitignore` files with `!.vscode`\n\nLet me run `git check-ignore`.",
+          "time": {
+            "start": 1780271354318,
+            "end": 1780271355589
+          },
+          "id": "prt_e807111ce001iYMMT0SvcuMNVj",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e80710f260010DuJI6mLGwn4uU"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:12",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git check-ignore -v .vscode",
+              "description": "Check why .vscode is not ignored"
+            },
+            "output": "(no output)",
+            "metadata": {
+              "output": "(no output)",
+              "exit": 1,
+              "description": "Check why .vscode is not ignored",
+              "truncated": false
+            },
+            "title": "Check why .vscode is not ignored",
+            "time": {
+              "start": 1780271355704,
+              "end": 1780271355728
+            }
+          },
+          "id": "prt_e807116c7001y1e2RPjOaF8Yoz",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e80710f260010DuJI6mLGwn4uU"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:13",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "cat .gitignore",
+              "description": "Show exact gitignore content"
+            },
+            "output": "# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n\n# dependencies\n/node_modules\n\n# next.js\n/.next/\n/out/\n\n# production\n/build\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n.pnpm-debug.log*\n\n# env files\n.env*\n\n# vercel\n.vercel\n\n# typescript\n*.tsbuildinfo\nnext-env.d.ts\n\n# bun\nbun.lock\nbun.lockb.vscode/\n",
+            "metadata": {
+              "output": "# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n\n# dependencies\n/node_modules\n\n# next.js\n/.next/\n/out/\n\n# production\n/build\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n.pnpm-debug.log*\n\n# env files\n.env*\n\n# vercel\n.vercel\n\n# typescript\n*.tsbuildinfo\nnext-env.d.ts\n\n# bun\nbun.lock\nbun.lockb.vscode/\n",
+              "exit": 0,
+              "description": "Show exact gitignore content",
+              "truncated": false
+            },
+            "title": "Show exact gitignore content",
+            "time": {
+              "start": 1780271355840,
+              "end": 1780271355842
+            }
+          },
+          "id": "prt_e8071175f001MBQHqHK7gHyYNO",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e80710f260010DuJI6mLGwn4uU"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:14",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "cat .git/info/exclude",
+              "description": "Check local exclude file"
+            },
+            "output": "# git ls-files --others --exclude-from=.git/info/exclude\n# Lines that start with '#' are comments.\n# For a project mostly in C, the following would be a good set of\n# exclude patterns (uncomment them if you want to use them):\n# *.[oa]\n# *~\n",
+            "metadata": {
+              "output": "# git ls-files --others --exclude-from=.git/info/exclude\n# Lines that start with '#' are comments.\n# For a project mostly in C, the following would be a good set of\n# exclude patterns (uncomment them if you want to use them):\n# *.[oa]\n# *~\n",
+              "exit": 0,
+              "description": "Check local exclude file",
+              "truncated": false
+            },
+            "title": "Check local exclude file",
+            "time": {
+              "start": 1780271355991,
+              "end": 1780271355993
+            }
+          },
+          "id": "prt_e807117db001h0vUs7nGLoYlow",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e80710f260010DuJI6mLGwn4uU"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "a100f347bca0587d8b0d882046c7c6b65d2b5ea5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 29423,
+            "input": 554,
+            "output": 286,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 28583
+            }
+          },
+          "cost": 0.0040487,
+          "id": "prt_e807118b9001KIL3kPu5DlTU2h",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e80710f260010DuJI6mLGwn4uU"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e8070ef7a001FNy6JS1ctHsiWG",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0036618,
+        "tokens": {
+          "total": 29775,
+          "input": 487,
+          "output": 152,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 29136
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271356132,
+          "completed": 1780271358683
+        },
+        "finish": "tool-calls",
+        "id": "msg_e807118e40018gXkhG1D3dr2Eu",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "a100f347bca0587d8b0d882046c7c6b65d2b5ea5",
+          "type": "step-start",
+          "id": "prt_e80711e5c0018z7UH2z7aEiMA9",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807118e40018gXkhG1D3dr2Eu"
+        },
+        {
+          "type": "reasoning",
+          "text": "The problem is clear now. The `.gitignore` file shows `bun.lockb.vscode/` because there was no newline at the end of `.gitignore` before I appended. So instead of adding `.vscode/` on a new line, it was concatenated to the last line: `bun.lockb.vscode/`.\n\nI need to fix `.gitignore` by putting `.vscode/` on its own line.",
+          "time": {
+            "start": 1780271357534,
+            "end": 1780271358146
+          },
+          "id": "prt_e80711e5e001Azs2wV70E877y3",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807118e40018gXkhG1D3dr2Eu"
+        },
+        {
+          "type": "tool",
+          "tool": "edit",
+          "callID": "functions.edit:15",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/.gitignore",
+              "oldString": "bun.lock\nbun.lockb.vscode/",
+              "newString": "bun.lock\nbun.lockb\n\n.vscode/"
+            },
+            "output": "Edit applied successfully.",
+            "metadata": {
+              "diagnostics": {},
+              "diff": "Index: /Users/rsoley/Dev/personal/rsrdev.com/.gitignore\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/.gitignore\n+++ /Users/rsoley/Dev/personal/rsrdev.com/.gitignore\n@@ -27,5 +27,7 @@\n next-env.d.ts\n \n # bun\n bun.lock\n-bun.lockb.vscode/\n+bun.lockb\n+\n+.vscode/\n",
+              "filediff": {
+                "file": "/Users/rsoley/Dev/personal/rsrdev.com/.gitignore",
+                "patch": "Index: /Users/rsoley/Dev/personal/rsrdev.com/.gitignore\n===================================================================\n--- /Users/rsoley/Dev/personal/rsrdev.com/.gitignore\n+++ /Users/rsoley/Dev/personal/rsrdev.com/.gitignore\n@@ -27,5 +27,7 @@\n next-env.d.ts\n \n # bun\n bun.lock\n-bun.lockb.vscode/\n+bun.lockb\n+\n+.vscode/\n",
+                "additions": 3,
+                "deletions": 1
+              },
+              "truncated": false
+            },
+            "title": ".gitignore",
+            "time": {
+              "start": 1780271358495,
+              "end": 1780271358498
+            }
+          },
+          "id": "prt_e807120c4001OhniyM0BiWuaCp",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807118e40018gXkhG1D3dr2Eu"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 29775,
+            "input": 487,
+            "output": 152,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 29136
+            }
+          },
+          "cost": 0.0036618,
+          "id": "prt_e807122a8001zuRAIPT2xgeIvZ",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807118e40018gXkhG1D3dr2Eu"
+        },
+        {
+          "type": "patch",
+          "hash": "a100f347bca0587d8b0d882046c7c6b65d2b5ea5",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/.gitignore"
+          ],
+          "id": "prt_e807122d9001j6xNSw4gbnRrhZ",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807118e40018gXkhG1D3dr2Eu"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e8070ef7a001FNy6JS1ctHsiWG",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0032076,
+        "tokens": {
+          "total": 29839,
+          "input": 169,
+          "output": 48,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 29622
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271358684,
+          "completed": 1780271359959
+        },
+        "finish": "tool-calls",
+        "id": "msg_e807122dc001IyUsqxUVDJ91qG",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-start",
+          "id": "prt_e807126b0001gzUy6XXKHLW2Xm",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807122dc001IyUsqxUVDJ91qG"
+        },
+        {
+          "type": "reasoning",
+          "text": "The edit was applied. Now let me check git status to see if `.vscode/` is ignored.",
+          "time": {
+            "start": 1780271359666,
+            "end": 1780271359734
+          },
+          "id": "prt_e807126b2001ENtiLbrohwqeaq",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807122dc001IyUsqxUVDJ91qG"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:16",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git status",
+              "description": "Check if .vscode is now ignored"
+            },
+            "output": "On branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use \"git push\" to publish your local commits)\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   .gitignore\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n",
+            "metadata": {
+              "output": "On branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use \"git push\" to publish your local commits)\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   .gitignore\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n",
+              "exit": 0,
+              "description": "Check if .vscode is now ignored",
+              "truncated": false
+            },
+            "title": "Check if .vscode is now ignored",
+            "time": {
+              "start": 1780271359842,
+              "end": 1780271359845
+            }
+          },
+          "id": "prt_e807126f80014WgrsrUZWJ360i",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807122dc001IyUsqxUVDJ91qG"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 29839,
+            "input": 169,
+            "output": 48,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 29622
+            }
+          },
+          "cost": 0.0032076,
+          "id": "prt_e807127ac001s1SZqfeeOoHytS",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807122dc001IyUsqxUVDJ91qG"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e8070ef7a001FNy6JS1ctHsiWG",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0,
+        "tokens": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271359961
+        },
+        "id": "msg_e807127d9001Dakg274GSJJvt0",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "b9223f4691bf9cb431ad7cb1de793abdf90b67a5",
+          "type": "step-start",
+          "id": "prt_e80712b16001u3KN0zhtA8LXkv",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807127d9001Dakg274GSJJvt0"
+        },
+        {
+          "type": "reasoning",
+          "text": "Now `.vscode/` is gone from untracked files. The `.gitignore` file had a missing newline, so `.vscode/` got appended to `bun.lockb` making `bun.lockb.vscode/` which is why it wasn't ignored. I've fixed it. Now I should amend the previous commit or make a new commit to fix the `.gitignore`. Since the previous commit was just adding the broken `.gitignore` change, I should amend it.",
+          "time": {
+            "start": 1780271360793,
+            "end": 1780271361702
+          },
+          "id": "prt_e80712b19001BVxxc14ThVRe5a",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807127d9001Dakg274GSJJvt0"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:17",
+          "state": {
+            "metadata": {
+              "output": "",
+              "description": "Fix gitignore commit and check status"
+            },
+            "status": "running",
+            "input": {
+              "command": "git add .gitignore && git commit --amend --no-edit && git status",
+              "description": "Fix gitignore commit and check status"
+            },
+            "time": {
+              "start": 1780271361944
+            }
+          },
+          "id": "prt_e80712ea80013IfSNnRJM0iZwZ",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807127d9001Dakg274GSJJvt0"
         }
       ]
     }

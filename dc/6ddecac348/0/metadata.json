@@ -3,39 +3,21 @@
   "checkpoint_id": "dc6ddecac348",
   "session_id": "ses_17f905f65ffeIaO5bh6NdqP5TR",
   "strategy": "manual-commit",
-  "created_at": "2026-05-31T23:49:13.298247Z",
+  "created_at": "2026-05-31T23:49:23.106254Z",
   "branch": "main",
   "checkpoints_count": 1,
   "files_touched": [],
   "agent": "OpenCode",
   "model": "kimi-k2.5",
   "turn_id": "d8bc07b2c9f6",
-  "checkpoint_transcript_start": 4,
-  "transcript_lines_at_start": 4,
   "token_usage": {
-    "input_tokens": 2149,
+    "input_tokens": 31351,
     "cache_creation_tokens": 0,
-    "cache_read_tokens": 196201,
-    "output_tokens": 667,
-    "api_call_count": 8
+    "cache_read_tokens": 366616,
+    "output_tokens": 2341,
+    "api_call_count": 15
   },
   "session_metrics": {
     "turn_count": 1
-  },
-  "prompt_attributions": [
-    {
-      "checkpoint_number": 1,
-      "user_lines_added": 0,
-      "user_lines_removed": 0,
-      "agent_lines_added": 0,
-      "agent_lines_removed": 0
-    },
-    {
-      "checkpoint_number": 2,
-      "user_lines_added": 0,
-      "user_lines_removed": 0,
-      "agent_lines_added": 41,
-      "agent_lines_removed": 0
-    }
-  ]
+  }
 }

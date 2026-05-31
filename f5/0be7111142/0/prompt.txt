@@ -1,0 +1,1 @@
+In the "System Status" section, when some services are degraded, the frontend is showing a red pulsing glyph. Instead, that glyph should only be red when some services are down.

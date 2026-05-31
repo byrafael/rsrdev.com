@@ -354,7 +354,7 @@ function GithubWidget({ className }: WidgetProps) {
 					</div>
 				) : commitsList.length > 0 ? (
 					<ul className="flex-1 space-y-2 text-sm">
-						{commitsList.slice(0, 6).map((commit) => (
+						{commitsList.slice(0, 5).map((commit) => (
 							<li key={commit.id}>
 								<a
 									href={commit.url}

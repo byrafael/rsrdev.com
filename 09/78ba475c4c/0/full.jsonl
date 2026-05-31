@@ -5,7 +5,7 @@
     "projectID": "68f6b696b6e6971f82430bf9895e03fe566aad1f",
     "directory": "/Users/rsoley/Dev/personal/rsrdev.com",
     "path": "",
-    "title": "New session - 2026-05-31T23:47:39.802Z",
+    "title": "Removing gitignored .vscode from remote",
     "agent": "build",
     "model": {
       "id": "kimi-k2.5",
@@ -13,23 +13,23 @@
     },
     "version": "1.15.13",
     "summary": {
-      "additions": 0,
-      "deletions": 0,
-      "files": 0
+      "additions": 12,
+      "deletions": 4,
+      "files": 1
     },
-    "cost": 0.021287599999999997,
+    "cost": 0.04048399999999999,
     "tokens": {
-      "input": 27384,
-      "output": 712,
+      "input": 28660,
+      "output": 1235,
       "reasoning": 0,
       "cache": {
-        "read": 27212,
+        "read": 195830,
         "write": 0
       }
     },
     "time": {
       "created": 1780271259802,
-      "updated": 1780271269568
+      "updated": 1780271306377
     }
   },
   "messages": [
@@ -45,7 +45,15 @@
           "modelID": "kimi-k2.5"
         },
         "summary": {
-          "diffs": []
+          "diffs": [
+            {
+              "file": "lib/translations.ts",
+              "patch": "Index: lib/translations.ts\n===================================================================\n--- lib/translations.ts\t\n+++ lib/translations.ts\t\n@@ -1,975 +1,983 @@\n export const translations = {\n \ten: {\n \t\t// Navigation\n \t\tnav: {\n \t\t\tabout: \"About\",\n \t\t\ttechStack: \"Tech Stack\",\n \t\t\texperience: \"Experience\",\n \t\t\tprojects: \"Projects\",\n \t\t\teducation: \"Education\",\n \t\t\tcertificates: \"Certificates\",\n \t\t\tcredentials: \"Credentials\",\n \t\t\tresearch: \"Research\",\n \t\t\tcontact: \"Contact\",\n \t\t},\n \t\t// Hero Section\n \t\thero: {\n \t\t\tgreeting: \"Hey! I'm\",\n \t\t\tsubtitle: \"AI Systems & Backend Engineer\",\n \t\t\tdescription:\n \t\t\t\t\"I currently work at <a href='https://musclepoints.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>MUSCLE</a>, where I develop loyalty software for the banking industry, trusted by <a href='https://www.mastercard.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Mastercard</a>, <a href='https://www.hsbc.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>HSBC</a>, <a href='https://www.banamex.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banamex</a>, <a href='https://interbank.pe' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Interbank</a>, <a href='https://bgeneral.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banco General</a>, and many others. I have <span class='font-bold'>over 9 years of programming experience</span>, including 6 years as an independent contractor, during which I developed and scaled software for <span class='font-bold'>thousands of online communities</span> and over <span class='font-bold'>half a million active users</span>.\",\n \t\t\ttagline: \"Code. Data. Markets.\",\n \t\t},\n \t\t// About Section\n \t\tabout: {\n \t\t\tparagraph:\n \t\t\t\t\"I build software systems that model, analyze, and optimize complex environments, whether the complexity comes from markets, people, or large-scale operational constraints. I have eight years of programming experience and six years of contractor work developing backend systems, AI workflows, and quantitative tooling. Across all of my projects and work, my focus is the same: using code as a way to understand, simulate, and improve complex systems.\",\n \t\t\tstats: [\n \t\t\t\t{\n \t\t\t\t\tvalue: 6,\n \t\t\t\t\tsuffix: \"+\",\n \t\t\t\t\tlabel: \"Years Work Experience\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tvalue: 8,\n \t\t\t\t\tsuffix: \"+\",\n \t\t\t\t\tlabel: \"Years Programming Experience\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tvalue: 20,\n \t\t\t\t\tsuffix: \"+\",\n \t\t\t\t\tlabel: \"Technologies\",\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Tech Stack Section\n \t\ttechStack: {\n \t\t\ttitle: \"Technical Skills\",\n \t\t\tcategories: {\n \t\t\t\tlanguages: \"Languages\",\n \t\t\t\tmlData: \"ML & Data\",\n \t\t\t\ttrading: \"Trading\",\n \t\t\t\tinfrastructure: \"Infrastructure\",\n \t\t\t\tweb: \"Web\",\n \t\t\t\ttools: \"Tools\",\n \t\t\t\tsound: \"Sound Systems\",\n \t\t\t},\n \t\t},\n \t\t// WakaTime Section\n \t\twakatime: {\n \t\t\tmostUsedLanguages: \"Most used languages\",\n \t\t\tlast30Days: \"This month\",\n \t\t\tlast7Days: \"Last 7 days\",\n \t\t\tnoData: \"No language data available for this period.\",\n \t\t},\n \t\t// Experience Section\n \t\texperience: {\n \t\t\ttitle: \"Experience\",\n \t\t\tpresent: \"Present\",\n \t\t\tjobs: [\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Co-Founder & CTO\",\n \t\t\t\t\tcompany: \"Futuryze Consulting Group Ltd.\",\n \t\t\t\t\tperiod: { start: \"2025\", end: \"2026-03\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Architected and deployed AI voice-agent infrastructure for healthcare scheduling, triage, and patient communication across multiple countries.\",\n \t\t\t\t\t\t\"Led product vision, systems design, and technical execution for HIPAA-compliant, production-grade deployments.\",\n \t\t\t\t\t\t\"Engineered backend workflows and automation pipelines integrating OpenAI, Anthropic, ElevenLabs, and Deepgram.\",\n \t\t\t\t\t\t\"Scaled infrastructure to support high-volume clinical operations without requiring providers to write code.\",\n \t\t\t\t\t\t\"Directed cross-team coordination, compliance processes, and long-term technical strategy.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n \t\t\t\t\t\t\"Voice AI\",\n \t\t\t\t\t\t\"AI Systems\",\n \t\t\t\t\t\t\"AI Infrastructure\",\n \t\t\t\t\t\t\"Leadership\",\n \t\t\t\t\t\t\"Business Administration\",\n \t\t\t\t\t\t\"Compliance (GDPR / HIPAA)\",\n \t\t\t\t\t\t\"Team Management & Coordination\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tcompany: \"Global Youth Congress\",\n \t\t\t\t\troles: [\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\ttitle: \"Under-Secretary General for Delegate Relations\",\n \t\t\t\t\t\t\tperiod: { start: \"2025-11\" },\n \t\t\t\t\t\t\tdescription: [\n \t\t\t\t\t\t\t\t\"Leading year-round communications and onboarding operations for Global MUN 2026 across 2 online and 4 in-person conferences.\",\n \t\t\t\t\t\t\t\t\"Serving as the primary liaison between leadership and delegates, ensuring clarity, readiness, and timely delivery of materials.\",\n \t\t\t\t\t\t\t\t\"Overseeing registration, inquiry management, logistics distribution, and academic document flow.\",\n \t\t\t\t\t\t\t\t\"Coordinating with Chairs and Co-Chairs to maintain alignment across content, schedules, and delegation needs.\",\n \t\t\t\t\t\t\t\t\"Maintaining reliable remote presence during conferences to ensure a seamless delegate experience.\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t\thighlights: [\n \t\t\t\t\t\t\t\t\"Project Management\",\n \t\t\t\t\t\t\t\t\"Team Leadership\",\n \t\t\t\t\t\t\t\t\"Communication\",\n \t\t\t\t\t\t\t\t\"Youth Diplomacy\",\n \t\t\t\t\t\t\t\t\"Leadership\",\n \t\t\t\t\t\t\t\t\"Stakeholder Management\",\n \t\t\t\t\t\t\t\t\"Public Relations\",\n \t\t\t\t\t\t\t\t\"Business Relationship Management\",\n \t\t\t\t\t\t\t\t\"Team Coordination\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t},\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\ttitle: \"Public Relations Specialist\",\n \t\t\t\t\t\t\tperiod: { start: \"2024-11\", end: \"2025-11\" },\n \t\t\t\t\t\t\tdescription: [\n \t\t\t\t\t\t\t\t\"Managed communication with partner schools to drive delegate and institutional participation across conferences.\",\n \t\t\t\t\t\t\t\t\"Conducted outreach through email, WhatsApp, and digital platforms to boost registration.\",\n \t\t\t\t\t\t\t\t\"Contributed to promotional content, sales calls, and marketing initiatives.\",\n \t\t\t\t\t\t\t\t\"Supported event execution across two virtual conferences and one physical conference.\",\n \t\t\t\t\t\t\t\t\"Participated in staff coordination, meetings, and community engagement activities.\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t\thighlights: [\n \t\t\t\t\t\t\t\t\"Media Relations\",\n \t\t\t\t\t\t\t\t\"Content Creation\",\n \t\t\t\t\t\t\t\t\"Event Coordination\",\n \t\t\t\t\t\t\t\t\"Business Relationship Management\",\n \t\t\t\t\t\t\t\t\"Public Relations\",\n \t\t\t\t\t\t\t\t\"Marketing\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t},\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Contract Software Developer\",\n \t\t\t\t\tcompany: \"Independent Contractor\",\n \t\t\t\t\tperiod: { start: \"2019\", end: \"2025\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Delivered full-stack software solutions for online communities and small businesses across Costa Rica.\",\n \t\t\t\t\t\t\"Built backend systems integrated with the Discord Bot API for automation and community management.\",\n \t\t\t\t\t\t\"Lead the development and/or owned online bots, many with over 500,000 unique users, and over 1,000 guilds each. Many have even passed the Discord verification (both the legacy and modern verification).\",\n \t\t\t\t\t\t\"Scripted advanced systems for games in Roblox's LuaU as a senior scripter for independent clients and game studios, including GEN Interactive, Versify Studios, Mizal's Studio, and more.\",\n \t\t\t\t\t\t\"Developed custom websites and tools tailored to individual client needs.\",\n \t\t\t\t\t\t\"Managed the full development lifecycle including requirements, design, implementation, and deployment.\",\n \t\t\t\t\t\t\"Worked directly with clients to translate business objectives into technical systems.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n \t\t\t\t\t\t\"Full-Stack Web Development\",\n \t\t\t\t\t\t\"Backend Systems Design\",\n \t\t\t\t\t\t\"Discord Bot API Integration\",\n \t\t\t\t\t\t\"Client Communication\",\n \t\t\t\t\t\t\"Project Management\",\n \t\t\t\t\t\t\"Requirements Analysis\",\n \t\t\t\t\t\t\"Node.js / JavaScript\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Software Engineer\",\n \t\t\t\t\tcompany: \"MUSCLE\",\n \t\t\t\t\tperiod: { start: \"2026-01\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Acting as the Lead of multiple development projects within the company to onboard, configure/fine tune, and help banks manage/create strategies for their loyalty programs.\",\n \t\t\t\t\t\t\"Developing internal tooling to onboard and set up/configure banks on MUSCLE's new loyalty system.\",\n \t\t\t\t\t\t\"Developing bank-facing software for banks to manage strategies and monitor the performance of their loyalty infrastructure.\",\n \t\t\t\t\t\t\"In charge of code security and code/dependency vulnerability mitigation across all of MUSCLE's products and services.\",\n \t\t\t\t\t\t\"Developing DevOps/DevEx and CI/CD workflows, enabling secure development through automated code review, branch protection, governance, and continuous security scanning.\",\n \t\t\t\t\t\t\"Leveraging AI agents to optimize Software Development.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n-\t\t\t\t\t\t\"AI Systems\",\n+\t\t\t\t\t\t\"AI-Driven Development\",\n+\t\t\t\t\t\t\"Python\",\n \t\t\t\t\t\t\"TypeScript\",\n+\t\t\t\t\t\t\"JavaScript\",\n \t\t\t\t\t\t\"Bun\",\n \t\t\t\t\t\t\"NodeJS\",\n \t\t\t\t\t\t\"Full-Stack Development\",\n+\t\t\t\t\t\t\"Kubernetes\",\n+\t\t\t\t\t\t\"Docker\",\n \t\t\t\t\t\t\"GCP\",\n \t\t\t\t\t\t\"AWS\",\n-\t\t\t\t\t\t\"AI-Driven Development\",\n+\t\t\t\t\t\t\"EKS/GKE\",\n \t\t\t\t\t\t\"N8N\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"AI System Development Intern\",\n \t\t\t\t\tcompany: \"MUSCLE\",\n \t\t\t\t\tperiod: { start: \"2025-07\", end: \"2025-07\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Built AI agents and sentiment-analysis workflows inside n8n for high-volume support call automation.\",\n \t\t\t\t\t\t\"Implemented Node.js, LangChain, and Python components for real-time, production-ready deployments.\",\n \t\t\t\t\t\t\"Developed scalable integrations with HubSpot, Aircall, and internal R&D pipelines.\",\n \t\t\t\t\t\t\"Delivered automation systems capable of processing inbound and outbound calls at scale.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\"AI Systems\", \"Langchain / N8N\", \"JS / Python\", \"Hubspot / Aircall\"],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Student Sound Technician\",\n \t\t\t\t\tcompany: \"Tree Of Life International School\",\n \t\t\t\t\tperiod: { start: \"2022\", end: \"2025\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Directed audio production for assemblies, hearings, theatre productions, and school events.\",\n \t\t\t\t\t\t\"Engineered more than 100 hours of live sound across dozens of events and three major theatrical productions.\",\n \t\t\t\t\t\t\"Trained and led the Student Sound Tech team in technical skills and operational standards.\",\n \t\t\t\t\t\t\"Operated Yamaha DM3 mixers, Bose audio systems, wireless microphones, and stage monitoring setups.\",\n \t\t\t\t\t\t\"Performed live EQ, gain staging, signal processing, and rapid troubleshooting during events.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n \t\t\t\t\t\t\"Technical Direction\",\n \t\t\t\t\t\t\"Team Leadership & Training\",\n \t\t\t\t\t\t\"Yamaha Mixers\",\n \t\t\t\t\t\t\"Bose Sound Systems\",\n \t\t\t\t\t\t\"Live EQ, Gain, & Signal Processing\",\n \t\t\t\t\t\t\"Wireless Audio Systems\",\n \t\t\t\t\t\t\"Stage Audio Management\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Projects Section\n \t\tprojects: {\n \t\t\ttitle: \"Selected Projects\",\n \t\t\tdisclaimer:\n \t\t\t\t\"Most of these systems were originally developed proprietarily. I'm currently recreating most as open-source projects, so repositories may be empty or incomplete.\",\n \t\t\tviewAll: \"View all projects\",\n \t\t\tviewProject: \"View Project\",\n \t\t\tviewCode: \"View Code\",\n \t\t\tlist: [\n \t\t\t\t{\n \t\t\t\t\ttitle: \"EconSys\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Modular economic-simulation API platform powering virtual economies: models users, assets, markets and policy effects in real time.\",\n \t\t\t\t\ttags: [\"Node.js\", \"Express\", \"API\", \"MySQL\", \"Virtual Economy\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/EconSys\",\n \t\t\t\t\tpreview: \"https://econsys.rsrdev.com\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"QuantOps\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Python-based quantitative research and trading framework with CLI and built-in interactive dashboard: covers data ingestion, backtesting, portfolio optimisation.\",\n \t\t\t\t\ttags: [\"Python\", \"Quantitative Trading\", \"Backtesting\", \"CLI\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/QuantOps\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Schedulr\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Intelligent scheduling system that dynamically orchestrates classes, blocks, and teachers across multiple days.\",\n \t\t\t\t\ttags: [\"Next.js\", \"MySQL\", \"Education Tech\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/Schedulr\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Mosaic\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Your smarter operations platform — a unified tool for managing and automating operational workflows across your infrastructure and product stack.\",\n \t\t\t\t\ttags: [\"Node.js\", \"Microservices\", \"Operations Automation\", \"SaaS\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/Mosaic\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"EconDash\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Interactive analytics & visualization dashboard built atop EconSys—delivers real-time insights into market/user behaviour, policies and outcomes.\",\n \t\t\t\t\ttags: [\"React\", \"D3.js\", \"Dashboard\", \"Data Visualization\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/EconDash\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"ReconBot\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"A comprehensive economy engine built specifically for Emergency Response: Liberty County (ER:LC) role-play servers. Manages player banking, purchase-only vehicle ownership, business structures with revenue sharing, and real-time economy analytics.\",\n \t\t\t\t\ttags: [\"Node.js\", \"Discord.js\", \"Next.js\", \"React\", \"TailwindCSS\", \"OAuth2\"],\n \t\t\t\t\tpreview: \"https://reconbot.xyz\",\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Education Section\n \t\teducation: {\n \t\t\ttitle: \"Formal Education\",\n \t\t\tlist: [\n \t\t\t\t{\n \t\t\t\t\tdegree: \"High School Diploma\",\n \t\t\t\t\tschool:\n \t\t\t\t\t\t\"Ministerio de Educación Pública de Costa Rica (Costa Rican Ministry of Education)\",\n \t\t\t\t\tyear: \"Expected 2026\",\n \t\t\t\t\tdetails:\n \t\t\t\t\t\t\"Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program.\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tdegree: \"Next Gen Data Science\",\n \t\t\t\t\tschool: \"INCAE Business School\",\n \t\t\t\t\tyear: \"2025\",\n \t\t\t\t\tdetails:\n \t\t\t\t\t\t\"Participated in an INCAE Next Gen program, focused on data science and modelling in business contexts.\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tdegree: \"IGCSEs\",\n \t\t\t\t\tschool: \"Cambridge International Education\",\n \t\t\t\t\tyear: \"2023 - 2024\",\n \t\t\t\t\tdetails: [\"International Mathematics\", \"Computer Science\", \"English Language\", \"History\"],\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Certificates Section\n \t\tcertificates: {\n \t\t\ttitle: \"Credentials\",\n \t\t\tview: \"View\",\n \t\t\tlist: [\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Building with the Claude API\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/nymygpgu9cig\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Claude Code 101\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/dcnjpdo32tg9\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Claude Code in Action\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/jred5n9av5rb\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Introduction to agent skills\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/p29d2pxngtvg\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Model Context Protocol: Advanced Topics\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/fg2tydsas2mz\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Introduction to Model Context Protocol\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/q52ckhpxd9tz\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"ISC2 Candidate\",\n \t\t\t\t\tissuer: \"ISC2\",\n \t\t\t\t\tyear: \"2025\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Next Gen Data Science\",\n \t\t\t\t\tissuer: \"INCAE Business School\",\n \t\t\t\t\tyear: \"2025\",\n \t\t\t\t\tlink: \"https://www.credential.net/72c6488a-1a25-42f1-a271-964157db0ae1\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"IGCSE Computer Science\",\n \t\t\t\t\tissuer: \"University of Cambridge\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"IGCSE International Mathematics\",\n \t\t\t\t\tissuer: \"University of Cambridge\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"IGCSE First Language English\",\n \t\t\t\t\tissuer: \"University of Cambridge\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Prompt Engineering Fundamentals for Everyone\",\n \t\t\t\t\tissuer: \"IBM's Cognitive Class\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t\tlink: \"https://courses.cognitiveclass.ai/certificates/c1dee773b7174a78967dd85f6ccff5da\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Data Visualization with Python\",\n \t\t\t\t\tissuer: \"IBM's Cognitive Class\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t\tlink: \"https://courses.cognitiveclass.ai/certificates/b650fefa28cb41d88a9baa2c0af0ea1f\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Python & Statistics for Financial Analysis\",\n \t\t\t\t\tissuer: \"The Hong Kong University of Science and Technology\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Research Section\n \t\tresearch: {\n \t\t\ttitle: \"My Research\",\n \t\t\treadMore: \"Read More\",\n \t\t\tnoResearch: \"No published research at this time.\",\n \t\t\tdescription: \"Thoughts on systems, markets, and code.\",\n \t\t\tlist: [\n \t\t\t\t// {\n \t\t\t\t//   title: \"Building Low-Latency Trading Systems in 2024\",\n \t\t\t\t//   excerpt:\n \t\t\t\t//     \"A deep dive into modern approaches to sub-millisecond order execution and the trade-offs between latency and complexity.\",\n \t\t\t\t//   date: \"Nov 15, 2024\",\n \t\t\t\t//   link: \"https://cdn.rsrdev.com/papers/low-latency-trading-2024.pdf\",\n \t\t\t\t// },\n \t\t\t],\n \t\t},\n \t\t// About Page\n \t\taboutPage: {\n \t\t\ttitle: \"About Me\",\n \t\t\tsubtitle: \"I operate at the intersection of code, data, and markets.\",\n \t\t\tparagraph1:\n \t\t\t\t\"Based in San José, Costa Rica (and holding dual EU citizenship), I spend my days building high-performance systems, but my time away from the keyboard is dedicated to high-performance living. I’m deeply invested in the science of physical training, spending hours studying biomechanics and nutrition to fine-tune my own strength and calisthenics routines.\",\n \t\t\tparagraph2:\n \t\t\t\t\"Beyond the self-improvement, I focus heavily on my circle. I’m a dedicated dog dad to six, and I’m passionate about animal rescue work. Whether I’m reading up on the latest health research or spending time with my friends and dogs, I prioritize the offline connections that keep me grounded.\",\n \t\t\toutsideTerminal: {\n \t\t\t\ttitle: \"Outside the Terminal\",\n \t\t\t\tsound: {\n \t\t\t\t\ttitle: \"Sound Engineering\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"I treat sound engineering as a technical craft. I mix audio, troubleshoot acoustic issues, and manage full live-event setups. This includes stage management, configuring professional sound systems, handling signal flow, and working with vocal ranges to produce clean, reliable sound.\",\n \t\t\t\t},\n \t\t\t\ttraining: {\n \t\t\t\t\ttitle: \"Physical Training\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Strength training, and more recently, calisthenics, form the core of my physical improvement. While I'm still new to calisthenics, the progression and skill work push me in ways that weight lifting just doesn't. Strength training built my foundation of discipline and consistency, while calisthenics challenges my coordination and body control.\",\n \t\t\t\t},\n \t\t\t\tcommunity: {\n \t\t\t\t\ttitle: \"Community Service\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Community service is a long-term commitment for me, not a checkbox. I've accumulated more than 360 hours of volunteer work, focusing on creating visible, measurable improvements in the communities I serve.\",\n \t\t\t\t},\n \t\t\t},\n \t\t},\n \t\t// Footer\n \t\tfooter: {\n \t\t\tcontactTitle: \"Let's Get in Touch\",\n \t\t\tcopyright: `© ${new Date().getFullYear()} Rafael Soley.`,\n \t\t\tmadeWith: \"Made with\",\n \t\t\tand: \"and\",\n \t\t\tnextjs: \"NextJS\",\n \t\t},\n \t\t// Social Media Labels\n \t\tsocial: {\n \t\t\tlinkedin: \"LinkedIn\",\n \t\t\tgithub: \"GitHub\",\n \t\t\tx: \"X\",\n \t\t\temail: \"Email\",\n \t\t\torcid: \"ORCiD\",\n \t\t},\n \t\t// Floating Pills\n \t\tfloatingPills: {\n \t\t\tswitchToSpanish: \"Switch to Spanish\",\n \t\t\tswitchToEnglish: \"Switch to English\",\n \t\t\tlightMode: \"Switch to light mode\",\n \t\t\tdarkMode: \"Switch to dark mode\",\n \t\t\tcustomize: \"Customize look and feel\",\n \t\t\taccentColor: \"Accent Color\",\n \t\t\tbackgroundTint: \"Background Tint\",\n \t\t\treset: \"Reset to Defaults\",\n \t\t\tcolors: {\n \t\t\t\tpurple: \"Purple\",\n \t\t\t\tblue: \"Blue\",\n \t\t\t\tcyan: \"Cyan\",\n \t\t\t\tgreen: \"Green\",\n \t\t\t\torange: \"Orange\",\n \t\t\t\tred: \"Red\",\n \t\t\t\tpink: \"Pink\",\n \t\t\t},\n \t\t\ttints: {\n \t\t\t\twhite: \"Modern\",\n \t\t\t\tocean: \"Ocean\",\n \t\t\t\tforest: \"Forest\",\n \t\t\t\trose: \"Rose\",\n \t\t\t\tslate: \"Slate\",\n \t\t\t},\n \t\t},\n \t\t// Widgets\n \t\twidgets: {\n \t\t\trecentCommits: \"Recent Commits\",\n \t\t\tinspiredBy: \"Inspired by\",\n \t\t\tnoCommits: \"No recent public commits.\",\n \t\t\tpoweredBy: \"Uptime powered by\",\n \t\t\tcodingTime: \"Coding Time\",\n \t\t\tlast7Days: \"Last 7 Days\",\n \t\t\tlatestBuild: \"Latest Build\",\n \t\t\tsystemStatus: \"System Status\",\n \t\t\tconnections: \"Connections\",\n \t\t\tuptime: \"Uptime\",\n \t\t\tlatency: \"Latency\",\n \t\t\tallSystemsOperational: \"All systems operational\",\n \t\t\tsystemIssuesDetected: \"System issues detected\",\n \t\t},\n \t},\n \tes: {\n \t\t// Navigation\n \t\tnav: {\n \t\t\tabout: \"Sobre mí\",\n \t\t\ttechStack: \"Stack Técnico\",\n \t\t\texperience: \"Experiencia\",\n \t\t\tprojects: \"Proyectos\",\n \t\t\teducation: \"Educación\",\n \t\t\tcertificates: \"Certificados\",\n \t\t\tcredentials: \"Credenciales\",\n \t\t\tresearch: \"Investigación\",\n \t\t\tcontact: \"Contacto\",\n \t\t},\n \t\t// Hero Section\n \t\thero: {\n \t\t\tgreeting: \"¡Hola! Soy\",\n \t\t\tsubtitle: \"Ingeniero de Sistemas de IA y Backend\",\n \t\t\tdescription:\n \t\t\t\t\"Actualmente trabajo en <a href='https://musclepoints.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>MUSCLE</a>, donde desarrollo software de lealtad para la industria bancaria, en el que confían <a href='https://www.mastercard.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Mastercard</a>, <a href='https://www.hsbc.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>HSBC</a>, <a href='https://www.banamex.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banamex</a>, <a href='https://interbank.pe' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Interbank</a>, <a href='https://bgeneral.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banco General</a> y muchos otros. Tengo <span class='font-bold'>más de 9 años de experiencia en programación</span> y 6 años como desarrollador independiente, durante los cuales desarrollé y escalé software para <span class='font-bold'>miles de comunidades en línea</span> y más de <span class='font-bold'>medio millón de usuarios activos</span>.\",\n \t\t\ttagline: \"Código. Datos. Mercados.\",\n \t\t},\n \t\t// About Section\n \t\tabout: {\n \t\t\tparagraph:\n \t\t\t\t\"Construyo sistemas de software que modelan, analizan y optimizan entornos complejos, ya sea que la complejidad provenga de mercados, personas o restricciones operacionales a gran escala. Tengo ocho años de experiencia en programación y seis años de trabajo por contrato desarrollando sistemas backend, flujos de trabajo de IA y herramientas cuantitativas. En todos mis proyectos y trabajos, mi enfoque es el mismo: usar código como una forma de entender, simular y mejorar sistemas complejos.\",\n \t\t\tstats: [\n \t\t\t\t{\n \t\t\t\t\tvalue: 6,\n \t\t\t\t\tsuffix: \"+\",\n \t\t\t\t\tlabel: \"Años de Experiencia Laboral\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tvalue: 8,\n \t\t\t\t\tsuffix: \"+\",\n \t\t\t\t\tlabel: \"Años de Experiencia en Programación\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tvalue: 20,\n \t\t\t\t\tsuffix: \"+\",\n \t\t\t\t\tlabel: \"Tecnologías\",\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Tech Stack Section\n \t\ttechStack: {\n \t\t\ttitle: \"Habilidades Técnicas\",\n \t\t\tcategories: {\n \t\t\t\tlanguages: \"Lenguajes\",\n \t\t\t\tmlData: \"ML y Datos\",\n \t\t\t\ttrading: \"Trading\",\n \t\t\t\tinfrastructure: \"Infraestructura\",\n \t\t\t\tweb: \"Web\",\n \t\t\t\ttools: \"Herramientas\",\n \t\t\t\tsound: \"Sistemas de Sonido\",\n \t\t\t},\n \t\t},\n \t\t// WakaTime Section\n \t\twakatime: {\n \t\t\tmostUsedLanguages: \"Lenguajes más usados\",\n \t\t\tlast30Days: \"Últimos 30 días\",\n \t\t\tlast7Days: \"Últimos 7 días\",\n \t\t\tnoData: \"No hay datos de lenguajes disponibles para este período.\",\n \t\t},\n \t\t// Experience Section\n \t\texperience: {\n \t\t\ttitle: \"Experiencia\",\n \t\t\tpresent: \"Presente\",\n \t\t\tjobs: [\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Co-Fundador y CTO\",\n \t\t\t\t\tcompany: \"Futuryze Consulting Group Ltd.\",\n \t\t\t\t\tperiod: { start: \"2025\", end: \"2026-03\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Diseñé y desplegué infraestructura de agentes de voz con IA para programación, triaje y comunicación clínica en múltiples países.\",\n \t\t\t\t\t\t\"Dirigí la visión del producto, diseño de sistemas y ejecución técnica para implementaciones con cumplimiento HIPAA.\",\n \t\t\t\t\t\t\"Desarrollé flujos backend y automatizaciones integrando OpenAI, Anthropic, ElevenLabs y Deepgram.\",\n \t\t\t\t\t\t\"Escalé la infraestructura para soportar operaciones clínicas de alto volumen sin requerir código por parte del cliente.\",\n \t\t\t\t\t\t\"Coordiné equipos, procesos de cumplimiento y estrategia técnica a largo plazo.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n \t\t\t\t\t\t\"IA de Voz\",\n \t\t\t\t\t\t\"Sistemas de IA\",\n \t\t\t\t\t\t\"Infraestructura de IA\",\n \t\t\t\t\t\t\"Liderazgo\",\n \t\t\t\t\t\t\"Administración de Empresas\",\n \t\t\t\t\t\t\"Compliance (GDPR / HIPAA)\",\n \t\t\t\t\t\t\"Coordinación y Administración de Equipos\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tcompany: \"Global Youth Congress\",\n \t\t\t\t\troles: [\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\ttitle: \"Subsecretario General para Relaciones con Delegados\",\n \t\t\t\t\t\t\tperiod: { start: \"2025-11\" },\n \t\t\t\t\t\t\tdescription: [\n \t\t\t\t\t\t\t\t\"Liderando la comunicación y el proceso de incorporación para Global MUN 2026 en 2 conferencias virtuales y 4 presenciales.\",\n \t\t\t\t\t\t\t\t\"Sirviendo como enlace principal entre la dirección y los delegados, asegurando claridad, preparación y entrega puntual de materiales.\",\n \t\t\t\t\t\t\t\t\"Supervisando el registro, la gestión de consultas, la distribución logística y el flujo de documentos académicos.\",\n \t\t\t\t\t\t\t\t\"Coordinando con Chairs y Co-Chairs para mantener alineación en contenidos, horarios y necesidades delegacionales.\",\n \t\t\t\t\t\t\t\t\"Manteniendo presencia operativa remota durante las conferencias para asegurar una experiencia fluida.\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t\thighlights: [\n \t\t\t\t\t\t\t\t\"Gestión de Proyectos\",\n \t\t\t\t\t\t\t\t\"Dirección de Equipos\",\n \t\t\t\t\t\t\t\t\"Comunicación\",\n \t\t\t\t\t\t\t\t\"Diplomacia Juvenil\",\n \t\t\t\t\t\t\t\t\"Liderazgo\",\n \t\t\t\t\t\t\t\t\"Gestión de Partes Interesadas\",\n \t\t\t\t\t\t\t\t\"Relaciones Públicas\",\n \t\t\t\t\t\t\t\t\"Gestión de Relaciones Empresariales\",\n \t\t\t\t\t\t\t\t\"Coordinación de Equipos\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t},\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\ttitle: \"Especialista en Relaciones Públicas\",\n \t\t\t\t\t\t\tperiod: { start: \"2024-11\", end: \"2025-11\" },\n \t\t\t\t\t\t\tdescription: [\n \t\t\t\t\t\t\t\t\"Gestioné la comunicación con escuelas asociadas para impulsar la participación de delegados e instituciones.\",\n \t\t\t\t\t\t\t\t\"Realicé outreach mediante correo, WhatsApp y plataformas digitales para incrementar inscripciones.\",\n \t\t\t\t\t\t\t\t\"Apoyé la creación de contenido promocional, llamadas de ventas y acciones de marketing.\",\n \t\t\t\t\t\t\t\t\"Contribuí a la ejecución de dos conferencias virtuales y una presencial.\",\n \t\t\t\t\t\t\t\t\"Participé en coordinación de personal, reuniones y actividades comunitarias.\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t\thighlights: [\n \t\t\t\t\t\t\t\t\"Relaciones con Medios\",\n \t\t\t\t\t\t\t\t\"Creación de Contenido\",\n \t\t\t\t\t\t\t\t\"Coordinación de Eventos\",\n \t\t\t\t\t\t\t\t\"Gestión de Relaciones Empresariales\",\n \t\t\t\t\t\t\t\t\"Relaciones Públicas\",\n \t\t\t\t\t\t\t\t\"Marketing\",\n \t\t\t\t\t\t\t],\n \t\t\t\t\t\t},\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Desarrollador de Software por Contrato\",\n \t\t\t\t\tcompany: \"Contratista Independiente\",\n \t\t\t\t\tperiod: { start: \"2019\", end: \"2025\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Entregué soluciones de software full-stack para comunidades en línea y pequeñas empresas en Costa Rica.\",\n \t\t\t\t\t\t\"Construí sistemas backend integrados con la API de Discord para automatización y gestión comunitaria.\",\n \t\t\t\t\t\t\"Lideré el desarrollo, y fuí dueño de bots en línea, varios con más de 500,000 usuarios únicos y más de 1,000 servidores. Muchos incluso han pasado la verificación de Discord (tanto la verificación legacy como la moderna).\",\n \t\t\t\t\t\t\"Programé sistemas avanzados para juegos en LuaU de Roblox como scripter senior para clientes independientes y estudios de juegos, incluyendo GEN Interactive, Versify Studios, Mizal's Studio, y más.\",\n \t\t\t\t\t\t\"Desarrollé sitios web y herramientas personalizadas según las necesidades del cliente.\",\n \t\t\t\t\t\t\"Gestioné el ciclo completo de desarrollo: requisitos, diseño, implementación y despliegue.\",\n \t\t\t\t\t\t\"Trabajé directamente con clientes para traducir objetivos de negocio en sistemas técnicos.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n \t\t\t\t\t\t\"Desarrollo Web Full-Stack\",\n \t\t\t\t\t\t\"Diseño de Sistemas Backend\",\n \t\t\t\t\t\t\"Integración API Discord Bot\",\n \t\t\t\t\t\t\"Comunicación con Clientes\",\n \t\t\t\t\t\t\"Gestión de Proyectos\",\n \t\t\t\t\t\t\"Análisis de Requisitos\",\n \t\t\t\t\t\t\"Node.js / JavaScript\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Ingeniero de Software\",\n \t\t\t\t\tcompany: \"MUSCLE\",\n \t\t\t\t\tperiod: { start: \"2026-01\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Actuando como Lead de múltiples proyectos de desarrollo dentro de la empresa para incorporar, configurar/afinar y ayudar a los bancos a gestionar/crear estrategias para sus programas de lealtad.\",\n \t\t\t\t\t\t\"Desarrollando herramientas internas para incorporar y configurar a los bancos en el nuevo sistema de lealtad de MUSCLE.\",\n \t\t\t\t\t\t\"Desarrollando software de cara al banco para gestionar estrategias y monitorear el rendimiento de su infraestructura de lealtad.\",\n \t\t\t\t\t\t\"Encargado de la seguridad del código y de la mitigación de vulnerabilidades en código/dependencias en todos los productos y servicios de MUSCLE.\",\n \t\t\t\t\t\t\"Desarrollando DevOps/DevEx y flujos de CI/CD, habilitando desarrollo seguro mediante revisión automatizada de código, protección de ramas, gobernanza y escaneo continuo de seguridad.\",\n \t\t\t\t\t\t\"Aprovechando agentes de IA para optimizar el Desarrollo de Software.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n-\t\t\t\t\t\t\"Sistemas de IA\",\n+\t\t\t\t\t\t\"Desarrollo Impulsado por IA\",\n+\t\t\t\t\t\t\"Python\",\n \t\t\t\t\t\t\"TypeScript\",\n+\t\t\t\t\t\t\"JavaScript\",\n \t\t\t\t\t\t\"Bun\",\n \t\t\t\t\t\t\"NodeJS\",\n \t\t\t\t\t\t\"Desarrollo Full-Stack\",\n+\t\t\t\t\t\t\"Kubernetes\",\n+\t\t\t\t\t\t\"Docker\",\n \t\t\t\t\t\t\"GCP\",\n \t\t\t\t\t\t\"AWS\",\n-\t\t\t\t\t\t\"Desarrollo Impulsado por IA\",\n+\t\t\t\t\t\t\"EKS/GKE\",\n \t\t\t\t\t\t\"N8N\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Desarrollador Pasante de Sistemas de IA\",\n \t\t\t\t\tcompany: \"MUSCLE\",\n \t\t\t\t\tperiod: { start: \"2025-07\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Construí agentes de IA y flujos de análisis de sentimiento en n8n para automatizar llamadas de soporte de alto volumen.\",\n \t\t\t\t\t\t\"Implementé componentes en Node.js, LangChain y Python para despliegues en tiempo real y de calidad productiva.\",\n \t\t\t\t\t\t\"Desarrollé integraciones escalables con HubSpot, Aircall y los flujos internos de I+D.\",\n \t\t\t\t\t\t\"Entregué sistemas de automatización capaces de procesar llamadas entrantes y salientes a gran escala.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\"Sistemas de IA\", \"Langchain / N8N\", \"JS / Python\", \"Hubspot / Aircall\"],\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Técnico de Sonido Estudiantil\",\n \t\t\t\t\tcompany: \"Tree Of Life International School\",\n \t\t\t\t\tperiod: { start: \"2022\", end: \"2025\" },\n \t\t\t\t\tdescription: [\n \t\t\t\t\t\t\"Dirigí la producción de audio para asambleas, audiencias, obras teatrales y eventos escolares.\",\n \t\t\t\t\t\t\"Ejecuté más de 100 horas de sonido en vivo en decenas de eventos y tres producciones teatrales.\",\n \t\t\t\t\t\t\"Formé y lideré al equipo estudiantil de sonido en habilidades técnicas y estándares operativos.\",\n \t\t\t\t\t\t\"Operé mixers Yamaha DM3, sistemas Bose, micrófonos inalámbricos y monitores de escenario.\",\n \t\t\t\t\t\t\"Realicé EQ en vivo, ajuste de ganancia, procesamiento de señal y solución rápida de problemas.\",\n \t\t\t\t\t],\n \t\t\t\t\thighlights: [\n \t\t\t\t\t\t\"Dirección Técnica\",\n \t\t\t\t\t\t\"Liderazgo y Formación de Equipos\",\n \t\t\t\t\t\t\"Mixers Yamaha\",\n \t\t\t\t\t\t\"Sistemas de Sonido Bose\",\n \t\t\t\t\t\t\"EQ en Vivo, Ganancia y Procesamiento de Señal\",\n \t\t\t\t\t\t\"Sistemas de Audio Inalámbricos\",\n \t\t\t\t\t\t\"Gestión de Audio de Escenario\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Projects Section\n \t\tprojects: {\n \t\t\ttitle: \"Proyectos Seleccionados\",\n \t\t\tdisclaimer:\n \t\t\t\t\"La mayoría de estos sistemas fueron desarrollados originalmente de forma propietaria. Actualmente estoy recreando la mayoría como proyectos de código abierto, por lo que algunos repositorios pueden estar vacíos o incompletos.\",\n \t\t\tviewAll: \"Ver todos los proyectos\",\n \t\t\tviewProject: \"Ver Proyecto\",\n \t\t\tviewCode: \"Ver Código\",\n \t\t\tlist: [\n \t\t\t\t{\n \t\t\t\t\ttitle: \"EconSys\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Plataforma API modular de simulación económica que impulsa economías virtuales: modela usuarios, activos, mercados y efectos de políticas en tiempo real.\",\n \t\t\t\t\ttags: [\"Node.js\", \"Express\", \"API\", \"MySQL\", \"Economía Virtual\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/EconSys\",\n \t\t\t\t\tpreview: \"https://econsys.rsrdev.com\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"QuantOps\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Marco de investigación cuantitativa y trading basado en Python con CLI y panel interactivo integrado: cubre ingesta de datos, backtesting y optimización de cartera.\",\n \t\t\t\t\ttags: [\"Python\", \"Trading Cuantitativo\", \"Backtesting\", \"CLI\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/QuantOps\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Schedulr\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Sistema de programación inteligente que orquesta dinámicamente clases, bloques y profesores a través de múltiples días.\",\n \t\t\t\t\ttags: [\"Next.js\", \"MySQL\", \"Tecnología Educativa\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/Schedulr\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Mosaic\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Tu plataforma de operaciones más inteligente: una herramienta unificada para gestionar y automatizar flujos de trabajo operacionales en tu infraestructura y pila de productos.\",\n \t\t\t\t\ttags: [\"Node.js\", \"Microservicios\", \"Automatización de Operaciones\", \"SaaS\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/Mosaic\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"EconDash\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Panel de análisis y visualización interactivo construido sobre EconSys—entrega información en tiempo real sobre comportamiento de mercado/usuario, políticas y resultados.\",\n \t\t\t\t\ttags: [\"React\", \"D3.js\", \"Panel de Control\", \"Visualización de Datos\"],\n \t\t\t\t\tsource: \"https://github.com/byrafael/EconDash\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"ReconBot\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Un motor económico integral construido específicamente para servidores de juego de rol de Emergency Response: Liberty County (ER:LC). Gestiona banca de jugadores, propiedad de vehículos solo por compra, estructuras comerciales con reparto de ingresos y análisis económico en tiempo real.\",\n \t\t\t\t\ttags: [\"Node.js\", \"Discord.js\", \"Next.js\", \"React\", \"TailwindCSS\", \"OAuth2\"],\n \t\t\t\t\tpreview: \"https://reconbot.xyz\",\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Education Section\n \t\teducation: {\n \t\t\ttitle: \"Educación Formal\",\n \t\t\tlist: [\n \t\t\t\t{\n \t\t\t\t\tdegree: \"Bachiller en la Educación Media\",\n \t\t\t\t\tschool: \"Ministerio de Educación Pública de Costa Rica\",\n \t\t\t\t\tyear: \"Graduación Esperada 2026\",\n \t\t\t\t\tdetails:\n \t\t\t\t\t\t\"Cursando independientemente el bachillerato a través del programa de Educación Diversificada a Distancia (EDAD).\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tdegree: \"IGCSEs\",\n \t\t\t\t\tschool: \"Cambridge International Education\",\n \t\t\t\t\tyear: \"2023 - 2024\",\n \t\t\t\t\tdetails: [\n \t\t\t\t\t\t\"Matemáticas Internacionales\",\n \t\t\t\t\t\t\"Ciencias de la Computación\",\n \t\t\t\t\t\t\"Idioma Inglés\",\n \t\t\t\t\t\t\"Historia\",\n \t\t\t\t\t],\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Certificates Section\n \t\tcertificates: {\n \t\t\ttitle: \"Credenciales\",\n \t\t\tview: \"Ver\",\n \t\t\tlist: [\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Building with the Claude API\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/nymygpgu9cig\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Claude Code 101\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/dcnjpdo32tg9\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Claude Code in Action\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/jred5n9av5rb\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Introduction to agent skills\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/p29d2pxngtvg\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Model Context Protocol: Advanced Topics\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/fg2tydsas2mz\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Introduction to Model Context Protocol\",\n \t\t\t\t\tissuer: \"Anthropic\",\n \t\t\t\t\tyear: \"2026\",\n \t\t\t\t\tlink: \"https://verify.skilljar.com/c/q52ckhpxd9tz\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"ISC2 Candidate\",\n \t\t\t\t\tissuer: \"ISC2\",\n \t\t\t\t\tyear: \"2025\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Next Gen Data Science\",\n \t\t\t\t\tissuer: \"INCAE Business School\",\n \t\t\t\t\tyear: \"2025\",\n \t\t\t\t\tlink: \"https://www.credential.net/72c6488a-1a25-42f1-a271-964157db0ae1\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"IGCSE Computer Science\",\n \t\t\t\t\tissuer: \"University of Cambridge\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"IGCSE International Mathematics\",\n \t\t\t\t\tissuer: \"University of Cambridge\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"IGCSE First Language English\",\n \t\t\t\t\tissuer: \"University of Cambridge\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Prompt Engineering Fundamentals for Everyone\",\n \t\t\t\t\tissuer: \"IBM's Cognitive Class\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t\tlink: \"https://courses.cognitiveclass.ai/certificates/c1dee773b7174a78967dd85f6ccff5da\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Data Visualization with Python\",\n \t\t\t\t\tissuer: \"IBM's Cognitive Class\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t\tlink: \"https://courses.cognitiveclass.ai/certificates/b650fefa28cb41d88a9baa2c0af0ea1f\",\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\ttitle: \"Python & Statistics for Financial Analysis\",\n \t\t\t\t\tissuer: \"The Hong Kong University of Science and Technology\",\n \t\t\t\t\tyear: \"2024\",\n \t\t\t\t},\n \t\t\t],\n \t\t},\n \t\t// Research Section\n \t\tresearch: {\n \t\t\ttitle: \"Mi Investigación\",\n \t\t\treadMore: \"Leer Más\",\n \t\t\tnoResearch: \"No hay investigación publicada en este momento.\",\n \t\t\tdescription: \"Reflexiones sobre sistemas, mercados y código.\",\n \t\t\tlist: [\n \t\t\t\t// {\n \t\t\t\t//   title: \"Construyendo Sistemas de Trading de Baja Latencia en 2024\",\n \t\t\t\t//   excerpt:\n \t\t\t\t//     \"Una inmersión profunda en enfoques modernos para la ejecución de órdenes submilisegundos y las compensaciones entre latencia y complejidad.\",\n \t\t\t\t//   date: \"Nov 15, 2024\",\n \t\t\t\t//   link: \"https://cdn.rsrdev.com/papers/low-latency-trading-2024.pdf\",\n \t\t\t\t// },\n \t\t\t],\n \t\t},\n \t\t// About Page\n \t\taboutPage: {\n \t\t\ttitle: \"Sobre Mí\",\n \t\t\tsubtitle: \"Opero en la intersección de código, datos y mercados.\",\n \t\t\tparagraph1:\n \t\t\t\t\"Basado en San José, Costa Rica (y con doble ciudadanía europea), dedico mis días a construir sistemas de alto rendimiento, pero mi tiempo fuera del teclado está dedicado a vivir con alto rendimiento. Me involucro profundamente en la ciencia del entrenamiento físico, pasando horas estudiando biomecánica y nutrición para perfeccionar mis rutinas de fuerza y calistenia.\",\n \t\t\tparagraph2:\n \t\t\t\t\"Más allá de la mejora personal, pongo mucho énfasis en mi círculo cercano. Soy un dedicado 'papá' de seis perros y me apasiona el trabajo de rescate animal. Ya sea leyendo sobre las últimas investigaciones en salud o compartiendo tiempo con mis amigos y perros, priorizo las conexiones fuera de línea que me mantienen centrado.\",\n \t\t\toutsideTerminal: {\n \t\t\t\ttitle: \"Fuera de la Terminal\",\n \t\t\t\tsound: {\n \t\t\t\t\ttitle: \"Ingeniería de Sonido\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"Trato la ingeniería de sonido como un oficio técnico. Mezclo audio, soluciono problemas acústicos y gestiono configuraciones completas para eventos en vivo. Esto incluye la gestión de escenarios, la configuración de sistemas de sonido profesionales, el manejo del flujo de señales y el trabajo con rangos vocales para producir un sonido limpio y confiable.\",\n \t\t\t\t},\n \t\t\t\ttraining: {\n \t\t\t\t\ttitle: \"Entrenamiento Físico\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"El entrenamiento de fuerza y, más recientemente, la calistenia, forman el núcleo de mi mejora física. Aunque todavía soy nuevo en la calistenia, la progresión y el trabajo de habilidades me empujan de formas que el levantamiento de pesas simplemente no hace. El entrenamiento de fuerza construyó mi base de disciplina y consistencia, mientras que la calistenia desafía mi coordinación y control corporal.\",\n \t\t\t\t},\n \t\t\t\tcommunity: {\n \t\t\t\t\ttitle: \"Servicio Comunitario\",\n \t\t\t\t\tdescription:\n \t\t\t\t\t\t\"El servicio comunitario es un compromiso a largo plazo para mí, no una casilla que marcar. He acumulado más de 360 horas de trabajo voluntario, enfocándome en crear mejoras visibles y medibles en las comunidades a las que sirvo.\",\n \t\t\t\t},\n \t\t\t},\n \t\t},\n \t\t// Footer\n \t\tfooter: {\n \t\t\tcontactTitle: \"Pongámonos en Contacto\",\n \t\t\tcopyright: `© ${new Date().getFullYear()} Rafael Soley.`,\n \t\t\tmadeWith: \"Hecho con\",\n \t\t\tand: \"y\",\n \t\t\tnextjs: \"NextJS\",\n \t\t},\n \t\t// Social Media Labels\n \t\tsocial: {\n \t\t\tlinkedin: \"LinkedIn\",\n \t\t\tgithub: \"GitHub\",\n \t\t\tx: \"X\",\n \t\t\temail: \"Correo\",\n \t\t\torcid: \"ORCiD\",\n \t\t},\n \t\t// Floating Pills\n \t\tfloatingPills: {\n \t\t\tswitchToSpanish: \"Cambiar a español\",\n \t\t\tswitchToEnglish: \"Cambiar a inglés\",\n \t\t\tlightMode: \"Cambiar a modo claro\",\n \t\t\tdarkMode: \"Cambiar a modo oscuro\",\n \t\t\tcustomize: \"Personalizar apariencia\",\n \t\t\taccentColor: \"Color de Acento\",\n \t\t\tbackgroundTint: \"Tinte de Fondo\",\n \t\t\treset: \"Restablecer valores\",\n \t\t\tcolors: {\n \t\t\t\tpurple: \"Púrpura\",\n \t\t\t\tblue: \"Azul\",\n \t\t\t\tcyan: \"Cian\",\n \t\t\t\tgreen: \"Verde\",\n \t\t\t\torange: \"Naranja\",\n \t\t\t\tred: \"Rojo\",\n \t\t\t\tpink: \"Rosa\",\n \t\t\t},\n \t\t\ttints: {\n \t\t\t\twhite: \"Moderno\",\n \t\t\t\tocean: \"Océano\",\n \t\t\t\tforest: \"Bosque\",\n \t\t\t\trose: \"Rosa\",\n \t\t\t\tslate: \"Pizarra\",\n \t\t\t},\n \t\t},\n \t\t// Widgets\n \t\twidgets: {\n \t\t\trecentCommits: \"Commits Recientes\",\n \t\t\tinspiredBy: \"Inspirado por\",\n \t\t\tnoCommits: \"No hay commits públicos recientes.\",\n \t\t\tpoweredBy: \"Uptime impulsado por\",\n \t\t\tcodingTime: \"Tiempo Programando\",\n \t\t\tlast7Days: \"Últimos 7 Días\",\n \t\t\tlatestBuild: \"Última Build\",\n \t\t\tsystemStatus: \"Estado del Sistema\",\n \t\t\tconnections: \"Conexiones\",\n \t\t\tuptime: \"Uptime\",\n \t\t\tlatency: \"Latencia\",\n \t\t\tallSystemsOperational: \"Todos los sistemas operativos\",\n \t\t\tsystemIssuesDetected: \"Problemas del sistema detectados\",\n \t\t},\n \t},\n } as const\n \n export type TranslationKey = keyof typeof translations.en\n",
+              "additions": 12,
+              "deletions": 4,
+              "status": "modified"
+            }
+          ]
         },
         "id": "msg_e806fa0a2001T78cNJoLbQ842b",
         "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
@@ -321,21 +329,24 @@
           "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
           "root": "/Users/rsoley/Dev/personal/rsrdev.com"
         },
-        "cost": 0,
+        "cost": 0.0031276,
         "tokens": {
-          "input": 0,
-          "output": 0,
+          "total": 27933,
+          "input": 396,
+          "output": 47,
           "reasoning": 0,
           "cache": {
-            "read": 0,
-            "write": 0
+            "write": 0,
+            "read": 27490
           }
         },
         "modelID": "kimi-k2.5",
         "providerID": "opencode-go",
         "time": {
-          "created": 1780271269493
+          "created": 1780271269493,
+          "completed": 1780271275182
         },
+        "finish": "tool-calls",
         "id": "msg_e806fc675001nInD0iu1C0TIsm",
         "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
       },
@@ -363,22 +374,543 @@
           "tool": "bash",
           "callID": "functions.bash:3",
           "state": {
-            "metadata": {
-              "output": "",
-              "description": "Commit untracking of .vscode"
-            },
-            "status": "running",
+            "status": "completed",
             "input": {
               "command": "git commit -m \"Remove .vscode from tracking\"",
               "description": "Commit untracking of .vscode"
             },
+            "output": "[main cdebd5f6] Remove .vscode from tracking\n 2 files changed, 28 deletions(-)\n delete mode 100644 .vscode/extensions.json\n delete mode 100644 .vscode/settings.json\n",
+            "metadata": {
+              "output": "[main cdebd5f6] Remove .vscode from tracking\n 2 files changed, 28 deletions(-)\n delete mode 100644 .vscode/extensions.json\n delete mode 100644 .vscode/settings.json\n",
+              "exit": 0,
+              "description": "Commit untracking of .vscode",
+              "truncated": false
+            },
+            "title": "Commit untracking of .vscode",
             "time": {
-              "start": 1780271270665
+              "start": 1780271275085,
+              "end": 1780271275088
             }
           },
           "id": "prt_e806fca46002MwonFLwejiBSTh",
           "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
           "messageID": "msg_e806fc675001nInD0iu1C0TIsm"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "type": "step-finish",
+          "tokens": {
+            "total": 27933,
+            "input": 396,
+            "output": 47,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27490
+            }
+          },
+          "cost": 0.0031276,
+          "id": "prt_e806fdc87001pid7fdN8ck7Gew",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fc675001nInD0iu1C0TIsm"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e806fa0a2001T78cNJoLbQ842b",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0029751,
+        "tokens": {
+          "total": 28036,
+          "input": 111,
+          "output": 40,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 27885
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271275184,
+          "completed": 1780271283992
+        },
+        "finish": "tool-calls",
+        "id": "msg_e806fdcb0001Vu6eKG95tFQKyn",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "type": "step-start",
+          "id": "prt_e806fdf3e001DNGjHanDYPl0M3",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fdcb0001Vu6eKG95tFQKyn"
+        },
+        {
+          "type": "reasoning",
+          "text": "Now I need to push to remove it from the remote.",
+          "time": {
+            "start": 1780271275839,
+            "end": 1780271276002
+          },
+          "id": "prt_e806fdf3f002L2sMGyqMlXdM6t",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fdcb0001Vu6eKG95tFQKyn"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:4",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git push",
+              "description": "Push to remote to remove .vscode"
+            },
+            "output": "[entire] Pushing entire/checkpoints/v1 to origin.... done\nTo github.com:byrafael/rsrdev.com.git\n ! [rejected]          main -> main (fetch first)\nerror: failed to push some refs to 'github.com:byrafael/rsrdev.com.git'\nhint: Updates were rejected because the remote contains work that you do\nhint: not have locally. This is usually caused by another repository pushing\nhint: to the same ref. You may want to first integrate the remote changes\nhint: (e.g., 'git pull ...') before pushing again.\nhint: See the 'Note about fast-forwards' in 'git push --help' for details.\n",
+            "metadata": {
+              "output": "[entire] Pushing entire/checkpoints/v1 to origin.... done\nTo github.com:byrafael/rsrdev.com.git\n ! [rejected]          main -> main (fetch first)\nerror: failed to push some refs to 'github.com:byrafael/rsrdev.com.git'\nhint: Updates were rejected because the remote contains work that you do\nhint: not have locally. This is usually caused by another repository pushing\nhint: to the same ref. You may want to first integrate the remote changes\nhint: (e.g., 'git pull ...') before pushing again.\nhint: See the 'Note about fast-forwards' in 'git push --help' for details.\n",
+              "exit": 1,
+              "description": "Push to remote to remove .vscode",
+              "truncated": false
+            },
+            "title": "Push to remote to remove .vscode",
+            "time": {
+              "start": 1780271283904,
+              "end": 1780271283907
+            }
+          },
+          "id": "prt_e806fdfe4001NEEKlNzhUlXLuo",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fdcb0001Vu6eKG95tFQKyn"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "type": "step-finish",
+          "tokens": {
+            "total": 28036,
+            "input": 111,
+            "output": 40,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27885
+            }
+          },
+          "cost": 0.0029751,
+          "id": "prt_e806ffef1001q6JT2NszC62M6W",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fdcb0001Vu6eKG95tFQKyn"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e806fa0a2001T78cNJoLbQ842b",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0031205,
+        "tokens": {
+          "total": 28266,
+          "input": 205,
+          "output": 66,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 27995
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271283994,
+          "completed": 1780271286600
+        },
+        "finish": "tool-calls",
+        "id": "msg_e806fff1a001CXNsZnNjfoEkKO",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "type": "step-start",
+          "id": "prt_e807001fa0012uWIVeklkQJdzp",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fff1a001CXNsZnNjfoEkKO"
+        },
+        {
+          "type": "reasoning",
+          "text": "The push was rejected because the remote has work that I don't have locally. I need to pull first, then push. I should do `git pull` and then `git push`.",
+          "time": {
+            "start": 1780271284733,
+            "end": 1780271285005
+          },
+          "id": "prt_e807001fd001a0sHzt9F5LjvyV",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fff1a001CXNsZnNjfoEkKO"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:5",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git pull --rebase",
+              "description": "Pull remote changes before pushing"
+            },
+            "output": "From github.com:byrafael/rsrdev.com\n   c45ff116..3573e80c  main       -> origin/main\n * [new branch]        copilot/add-highlights-to-muscle-experience -> origin/copilot/add-highlights-to-muscle-experience\nerror: The following untracked working tree files would be overwritten by checkout:\n\t.vscode/extensions.json\n\t.vscode/settings.json\nPlease move or remove them before you switch branches.\nAborting\nerror: could not detach HEAD\n",
+            "metadata": {
+              "output": "From github.com:byrafael/rsrdev.com\n   c45ff116..3573e80c  main       -> origin/main\n * [new branch]        copilot/add-highlights-to-muscle-experience -> origin/copilot/add-highlights-to-muscle-experience\nerror: The following untracked working tree files would be overwritten by checkout:\n\t.vscode/extensions.json\n\t.vscode/settings.json\nPlease move or remove them before you switch branches.\nAborting\nerror: could not detach HEAD\n",
+              "exit": 1,
+              "description": "Pull remote changes before pushing",
+              "truncated": false
+            },
+            "title": "Pull remote changes before pushing",
+            "time": {
+              "start": 1780271286518,
+              "end": 1780271286520
+            }
+          },
+          "id": "prt_e8070030e001d0qAdliWkZxvRN",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fff1a001CXNsZnNjfoEkKO"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "type": "step-finish",
+          "tokens": {
+            "total": 28266,
+            "input": 205,
+            "output": 66,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27995
+            }
+          },
+          "cost": 0.0031205,
+          "id": "prt_e80700922001XYyF7voJw4napV",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e806fff1a001CXNsZnNjfoEkKO"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e806fa0a2001T78cNJoLbQ842b",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0036203,
+        "tokens": {
+          "total": 28621,
+          "input": 194,
+          "output": 228,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 28199
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271286602,
+          "completed": 1780271298295
+        },
+        "finish": "tool-calls",
+        "id": "msg_e8070094a001xVjw8NbLL6e6Eq",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "type": "step-start",
+          "id": "prt_e80700d290016huYyUrf7j95fN",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070094a001xVjw8NbLL6e6Eq"
+        },
+        {
+          "type": "reasoning",
+          "text": "The `.vscode` files exist locally and are untracked now (since we removed them from index, but `.gitignore` is supposed to ignore them). The `git pull --rebase` is trying to check out the remote's version which still has `.vscode` tracked. Since the files exist locally, git aborts.\n\nI need to either:\n1. Temporarily move the `.vscode` directory, pull, then restore it.\n2. Or use `git pull --rebase` with some strategy, but the simplest is to move the dir out, pull, then move it back.\n\nWait, the files are in `.gitignore` already. But git pull rebase is trying to write them because they are tracked in the remote commit history. Since they exist locally as untracked files, git refuses to overwrite them.\n\nI should temporarily move `.vscode` out, do the pull, then move it back.",
+          "time": {
+            "start": 1780271287595,
+            "end": 1780271288876
+          },
+          "id": "prt_e80700d2b001zUgP3M476X3BKJ",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070094a001xVjw8NbLL6e6Eq"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:6",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "mv .vscode /tmp/vscode-backup && git pull --rebase",
+              "description": "Backup .vscode and pull remote changes"
+            },
+            "output": "Rebasing (1/1)\r\r\u001b[KSuccessfully rebased and updated refs/heads/main.\n",
+            "metadata": {
+              "output": "Rebasing (1/1)\r\r\u001b[KSuccessfully rebased and updated refs/heads/main.\n",
+              "exit": 0,
+              "description": "Backup .vscode and pull remote changes",
+              "truncated": false
+            },
+            "title": "Backup .vscode and pull remote changes",
+            "time": {
+              "start": 1780271298164,
+              "end": 1780271298167
+            }
+          },
+          "id": "prt_e8070122e001BzTdEGb5jz9z4L",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070094a001xVjw8NbLL6e6Eq"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "1566ef372ef5784b0483562e0c04a83d7672ec35",
+          "type": "step-finish",
+          "tokens": {
+            "total": 28621,
+            "input": 194,
+            "output": 228,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 28199
+            }
+          },
+          "cost": 0.0036203,
+          "id": "prt_e807036c4001rvazi7B7rWimtT",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070094a001xVjw8NbLL6e6Eq"
+        },
+        {
+          "type": "patch",
+          "hash": "cee26f40c981f375cd9c115a51f8a7a4458d088c",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/.vscode/extensions.json",
+            "/Users/rsoley/Dev/personal/rsrdev.com/.vscode/settings.json",
+            "/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts"
+          ],
+          "id": "prt_e807036f5001OBcZTf9Vczb9FI",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070094a001xVjw8NbLL6e6Eq"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e806fa0a2001T78cNJoLbQ842b",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0031608,
+        "tokens": {
+          "total": 28712,
+          "input": 266,
+          "output": 54,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 28392
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271298297,
+          "completed": 1780271306276
+        },
+        "finish": "tool-calls",
+        "id": "msg_e807036f9001W01pWXMHVpf5XH",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "1566ef372ef5784b0483562e0c04a83d7672ec35",
+          "type": "step-start",
+          "id": "prt_e80703c23001rhLYOUG4LEwRUr",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807036f9001W01pWXMHVpf5XH"
+        },
+        {
+          "type": "reasoning",
+          "text": "Good. Now I need to move the `.vscode` directory back and push.",
+          "time": {
+            "start": 1780271299620,
+            "end": 1780271299799
+          },
+          "id": "prt_e80703c24001DkQCZvDEhw9mff",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807036f9001W01pWXMHVpf5XH"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:7",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "mv /tmp/vscode-backup .vscode && git push",
+              "description": "Restore .vscode and push to remote"
+            },
+            "output": "To github.com:byrafael/rsrdev.com.git\n   3573e80c..14e7335d  main -> main\n",
+            "metadata": {
+              "output": "To github.com:byrafael/rsrdev.com.git\n   3573e80c..14e7335d  main -> main\n",
+              "exit": 0,
+              "description": "Restore .vscode and push to remote",
+              "truncated": false
+            },
+            "title": "Restore .vscode and push to remote",
+            "time": {
+              "start": 1780271306126,
+              "end": 1780271306138
+            }
+          },
+          "id": "prt_e80703cd9001QJd0jfI93WhEdf",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807036f9001W01pWXMHVpf5XH"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "28efd3a1f5767692d349a9063ece8456509e2199",
+          "type": "step-finish",
+          "tokens": {
+            "total": 28712,
+            "input": 266,
+            "output": 54,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 28392
+            }
+          },
+          "cost": 0.0031608,
+          "id": "prt_e807055f2001xNo1pG9H7hLGwC",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807036f9001W01pWXMHVpf5XH"
+        },
+        {
+          "type": "patch",
+          "hash": "1566ef372ef5784b0483562e0c04a83d7672ec35",
+          "files": [
+            "/Users/rsoley/Dev/personal/rsrdev.com/.vscode/extensions.json",
+            "/Users/rsoley/Dev/personal/rsrdev.com/.vscode/settings.json"
+          ],
+          "id": "prt_e80705622001VJqOtiTmv01Mjy",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e807036f9001W01pWXMHVpf5XH"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e806fa0a2001T78cNJoLbQ842b",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0031921,
+        "tokens": {
+          "total": 28849,
+          "input": 104,
+          "output": 88,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 28657
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780271306278,
+          "completed": 1780271308273
+        },
+        "finish": "stop",
+        "id": "msg_e8070562600193Dxmkg4gIhlJD",
+        "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR"
+      },
+      "parts": [
+        {
+          "snapshot": "28efd3a1f5767692d349a9063ece8456509e2199",
+          "type": "step-start",
+          "id": "prt_e80705a150010ib990pQarHNQj",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070562600193Dxmkg4gIhlJD"
+        },
+        {
+          "type": "reasoning",
+          "text": "Great, the push succeeded. The `.vscode` directory is now removed from the remote repository but kept locally.",
+          "time": {
+            "start": 1780271307288,
+            "end": 1780271307640
+          },
+          "id": "prt_e80705a18001git7j6KJTHS654",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070562600193Dxmkg4gIhlJD"
+        },
+        {
+          "type": "text",
+          "text": "Done. `.vscode` has been removed from the remote repository but is preserved locally. I had to resolve a conflict because the remote had newer commits — I temporarily moved your local `.vscode` folder to complete the rebase, then restored it and pushed. Your `.gitignore` will keep it from being tracked again.",
+          "time": {
+            "start": 1780271307642,
+            "end": 1780271308186
+          },
+          "id": "prt_e80705b7a001OpwZBLEodeCZxi",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070562600193Dxmkg4gIhlJD"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "28efd3a1f5767692d349a9063ece8456509e2199",
+          "type": "step-finish",
+          "tokens": {
+            "total": 28849,
+            "input": 104,
+            "output": 88,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 28657
+            }
+          },
+          "cost": 0.0031921,
+          "id": "prt_e80705dc9001BkPXB007NTftCn",
+          "sessionID": "ses_17f905f65ffeIaO5bh6NdqP5TR",
+          "messageID": "msg_e8070562600193Dxmkg4gIhlJD"
         }
       ]
     }

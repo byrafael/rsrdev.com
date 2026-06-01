@@ -1,0 +1,13 @@
+For the System Status widget, use the BetterStack Uptime API instead. There's a BETTERUPTIME secret in your environment to hit it.
+
+Check their API docs at: https://betterstack.com/docs/uptime/api/list-all-existing-monitors/
+
+System Status should support the three statuses: All systems operational (green pulse), Some systems degraded (amber pulse), and Some services down (red pulse). If you could get a count of what is down, even better lmfao. Or a count of what is up. And when clicking the uptime number, redirect to https://status.rsrdev.com/. Also add like a view button or something, like the one GH one in the Recent Commits but with a different icon, that redirects to the status.rsrdev.com status page.
+
+---
+
+Check again.
+
+---
+
+Check env again, it's there.

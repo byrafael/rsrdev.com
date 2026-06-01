@@ -1,4 +1,3 @@
-import { translate } from "google-translate-api-x"
 import { NextResponse } from "next/server"
 
 export const revalidate = 300 // Cache for 5 minutes
@@ -32,30 +31,36 @@ export async function GET() {
 
 		let opsData = { connections: 0, ping: 0 }
 		if (opsResponse.ok) {
-			opsData = await opsResponse.json()
+			try {
+				opsData = await opsResponse.json()
+			} catch {
+				opsData = { connections: 0, ping: 0 }
+			}
 		}
 
 		let upCount = 0
 		let downCount = 0
 		let totalCount = 0
 		let status = "issue"
-		let statusText: string | undefined
-		let statusTextEs: string | undefined
 		let uptime = "0%"
 
 		if (monitorsResponse.ok) {
-			const monitorsData = await monitorsResponse.json()
-			const monitors = monitorsData.data || []
-			totalCount = monitors.length
-			upCount = monitors.filter((m: any) => m.attributes?.status === "up").length
-			downCount = monitors.filter((m: any) => m.attributes?.status === "down").length
+			try {
+				const monitorsData = await monitorsResponse.json()
+				const monitors = monitorsData.data || []
+				totalCount = monitors.length
+				upCount = monitors.filter((m: any) => m.attributes?.status === "up").length
+				downCount = monitors.filter((m: any) => m.attributes?.status === "down").length
 
-			if (downCount > 0) {
-				status = "issue"
-			} else if (upCount === totalCount && totalCount > 0) {
-				status = "ok"
-			} else if (totalCount > 0) {
-				status = "degraded"
+				if (downCount > 0) {
+					status = "issue"
+				} else if (upCount === totalCount && totalCount > 0) {
+					status = "ok"
+				} else if (totalCount > 0) {
+					status = "degraded"
+				}
+			} catch {
+				/* ignore malformed monitor response */
 			}
 		}
 
@@ -82,11 +87,13 @@ export async function GET() {
 			connections: opsData.connections,
 			ping: opsData.ping,
 			status,
-			statusText,
-			statusTextEs,
 			uptime,
 		})
-	} catch (_error) {
-		return NextResponse.json({ error: "Failed to fetch stats" }, { status: 500 })
+	} catch (error) {
+		console.error("[api/ops/stats] Failed to fetch stats:", error)
+		return NextResponse.json(
+			{ error: "Failed to fetch stats", details: error instanceof Error ? error.message : String(error) },
+			{ status: 500 }
+		)
 	}
 }

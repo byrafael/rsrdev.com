@@ -10,6 +10,7 @@ import {
 	CloudMoon,
 	CloudRain,
 	CloudSun,
+	ExternalLink,
 	Github,
 	Info,
 	MapPin,
@@ -23,6 +24,7 @@ import { useEffect, useRef, useState } from "react"
 import Container from "@/components/container"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTranslation } from "@/hooks/use-translation"
 import { useLanguage } from "@/lib/language-context"
 import { cn } from "@/lib/utils"
@@ -464,6 +466,28 @@ function UptimeWidget({ className }: WidgetProps) {
 	const stats = opsStats
 
 	const isOperational = stats?.status === "ok"
+	const isDegraded = stats?.status === "degraded"
+	const isDown = stats?.status === "issue"
+
+	const pulseColor = isOperational
+		? "bg-green-400"
+		: isDegraded
+			? "bg-amber-400"
+			: "bg-red-400"
+	const dotColor = isOperational
+		? "bg-green-500"
+		: isDegraded
+			? "bg-amber-500"
+			: "bg-red-500"
+
+	const statusLabel =
+		(language === "es" ? stats?.statusTextEs : stats?.statusText) ||
+		stats?.statusText ||
+		(isOperational
+			? t.widgets.allSystemsOperational
+			: isDegraded
+				? t.widgets.someSystemsDegraded
+				: t.widgets.systemIssuesDetected)
 
 	return (
 		<Card className={cn("flex h-full flex-col", className)}>
@@ -472,31 +496,42 @@ function UptimeWidget({ className }: WidgetProps) {
 					<CardTitle className="flex items-center gap-2 font-medium text-sm">
 						<Activity className="h-4 w-4" /> {t.widgets.systemStatus}
 					</CardTitle>
-					<Popover>
-						<PopoverTrigger asChild>
-							<button
-								type="button"
-								className="text-muted-foreground transition-colors hover:text-primary"
-							>
-								<Info className="h-4 w-4" />
-								<span className="sr-only">Info</span>
-							</button>
-						</PopoverTrigger>
-						<PopoverContent className="w-auto max-w-[220px] p-2 text-xs" align="end">
-							<p>
-								{t.widgets.poweredBy}{" "}
-								<a
-									href="https://betterstack.com/uptime"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="underline hover:text-primary"
+					<div className="flex items-center gap-2">
+						<a
+							href="https://status.rsrdev.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-muted-foreground transition-colors hover:text-primary"
+						>
+							<ExternalLink className="h-4 w-4" />
+							<span className="sr-only">{t.widgets.viewStatus}</span>
+						</a>
+						<Popover>
+							<PopoverTrigger asChild>
+								<button
+									type="button"
+									className="text-muted-foreground transition-colors hover:text-primary"
 								>
-									BetterStack
-								</a>
-								.
-							</p>
-						</PopoverContent>
-					</Popover>
+									<Info className="h-4 w-4" />
+									<span className="sr-only">Info</span>
+								</button>
+							</PopoverTrigger>
+							<PopoverContent className="w-auto max-w-[220px] p-2 text-xs" align="end">
+								<p>
+									{t.widgets.poweredBy}{" "}
+									<a
+										href="https://betterstack.com/uptime"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="underline hover:text-primary"
+									>
+										BetterStack
+									</a>
+									.
+								</p>
+							</PopoverContent>
+						</Popover>
+					</div>
 				</div>
 			</CardHeader>
 			<CardContent className="flex flex-1 flex-col justify-between gap-4">
@@ -505,21 +540,17 @@ function UptimeWidget({ className }: WidgetProps) {
 						<span
 							className={cn(
 								"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75",
-								isOperational ? "bg-green-400" : "bg-red-400"
+								pulseColor
 							)}
 						/>
 						<span
 							className={cn(
 								"relative inline-flex h-3 w-3 rounded-full",
-								isOperational ? "bg-green-500" : "bg-red-500"
+								dotColor
 							)}
 						/>
 					</div>
-					<span className="font-medium text-sm">
-						{(language === "es" ? stats?.statusTextEs : stats?.statusText) ||
-							stats?.statusText ||
-							(isOperational ? t.widgets.allSystemsOperational : t.widgets.systemIssuesDetected)}
-					</span>
+					<span className="font-medium text-sm">{statusLabel}</span>
 				</div>
 
 				<div className="grid grid-cols-3 gap-4">
@@ -532,21 +563,42 @@ function UptimeWidget({ className }: WidgetProps) {
 						)}
 					</div>
 					<div className="flex flex-col gap-1">
-						<span className="text-muted-foreground text-xs">{t.widgets.uptime}</span>
-						{loading.opsStats ? (
-							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
-						) : (
-							<span className="font-bold text-xl">
-								{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : "0%"}
-							</span>
-						)}
-					</div>
-					<div className="flex flex-col gap-1">
 						<span className="text-muted-foreground text-xs">{t.widgets.latency}</span>
 						{loading.opsStats ? (
 							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
 						) : (
-							<span className="font-bold text-xl">{stats?.ping || 0}ms</span>
+							<TooltipProvider delayDuration={100}>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<span className="decoration-foreground/30 cursor-help font-bold text-xl underline decoration-dashed underline-offset-4">
+											{stats?.ping || 0}ms
+										</span>
+									</TooltipTrigger>
+									<TooltipContent
+										side="top"
+										sideOffset={6}
+										showArrow={false}
+										className="max-w-[220px] border bg-popover text-center text-popover-foreground"
+									>
+										<p>{t.widgets.latencyTooltip}</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+						)}
+					</div>
+					<div className="flex flex-col gap-1">
+						<span className="text-muted-foreground text-xs">{t.widgets.uptime}</span>
+						{loading.opsStats ? (
+							<div className="h-6 w-16 animate-pulse rounded bg-muted" />
+						) : (
+							<a
+								href="https://status.rsrdev.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="font-bold text-xl transition-colors hover:text-primary"
+							>
+								{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : "0%"}
+							</a>
 						)}
 					</div>
 				</div>

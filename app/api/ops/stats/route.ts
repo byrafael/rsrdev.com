@@ -8,12 +8,18 @@ export async function GET() {
 	const timeoutId = setTimeout(() => controller.abort(), 25000)
 
 	try {
-		const [opsResponse, betterStackOverviewResponse, betterStackPageResponse] = await Promise.all([
+		const token = process.env.BETTERUPTIME
+		if (!token) {
+			return NextResponse.json({ error: "Missing BETTERUPTIME token" }, { status: 500 })
+		}
+
+		const [opsResponse, monitorsResponse, betterStackPageResponse] = await Promise.all([
 			fetch("https://cdn.rsrdev.com/ops/core/status", {
 				next: { revalidate: 300 },
 				signal: controller.signal,
 			}),
-			fetch("https://status.rsrdev.com/overview", {
+			fetch("https://uptime.betterstack.com/api/v2/monitors", {
+				headers: { Authorization: `Bearer ${token}` },
 				next: { revalidate: 300 },
 				signal: controller.signal,
 			}),
@@ -29,27 +35,27 @@ export async function GET() {
 			opsData = await opsResponse.json()
 		}
 
+		let upCount = 0
+		let downCount = 0
+		let totalCount = 0
 		let status = "issue"
 		let statusText: string | undefined
 		let statusTextEs: string | undefined
 		let uptime = "0%"
 
-		if (betterStackOverviewResponse.ok) {
-			const overviewText = await betterStackOverviewResponse.text()
-			if (overviewText.includes("All services are online")) {
+		if (monitorsResponse.ok) {
+			const monitorsData = await monitorsResponse.json()
+			const monitors = monitorsData.data || []
+			totalCount = monitors.length
+			upCount = monitors.filter((m: any) => m.attributes?.status === "up").length
+			downCount = monitors.filter((m: any) => m.attributes?.status === "down").length
+
+			if (downCount > 0) {
+				status = "issue"
+			} else if (upCount === totalCount && totalCount > 0) {
 				status = "ok"
-			} else {
-				// Try to extract the actual status message from the H1 tag
-				const h1Match = overviewText.match(
-					/<h1[^>]*class='[^']*heading-large[^']*'[^>]*>(.*?)<\/h1>/
-				)
-				if (h1Match?.[1]) {
-					statusText = h1Match[1].trim()
-					try {
-						const res = await translate(statusText, { to: "es" })
-						statusTextEs = res.text
-					} catch (_e) {}
-				}
+			} else if (totalCount > 0) {
+				status = "degraded"
 			}
 		}
 

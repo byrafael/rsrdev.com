@@ -1,0 +1,53 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "1e153c2efa76",
+  "session_id": "ses_17f630fe0ffeGwwcbj43PXnyCt",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-01T00:41:51.626683Z",
+  "branch": "dev/debug-betterstack",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "app/api/ops/stats/route.ts"
+  ],
+  "agent": "OpenCode",
+  "model": "kimi-k2.5",
+  "turn_id": "90603ab995b5",
+  "token_usage": {
+    "input_tokens": 49221,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 357678,
+    "output_tokens": 7948,
+    "api_call_count": 13
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-01T00:41:51.622818Z",
+    "agent_lines": 26,
+    "agent_removed": 19,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 26,
+    "total_lines_changed": 45,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 26,
+      "agent_lines_removed": 19
+    }
+  ]
+}

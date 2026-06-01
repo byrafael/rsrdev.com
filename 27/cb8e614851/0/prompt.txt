@@ -1,1 +1,6 @@
-Commit and push to a new branch, dev/debug-betterstack, based on main
+Access to fetch at 'https://cdn.rsrdev.com/ops/core/status' from origin 'https://rsrdev-6s392vkhe-rafaelsoleymultiple-2374s-projects.vercel.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+VM497:1  GET https://cdn.rsrdev.com/ops/core/status net::ERR_FAILED 200 (OK)
+(anonymous) @ VM497:1
+VM497:1   Uncaught (in promise) TypeError: Failed to fetch
+    at <anonymous>:1:1
+(anonymous) @ VM497:1

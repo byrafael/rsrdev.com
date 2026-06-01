@@ -17,19 +17,19 @@
       "deletions": 0,
       "files": 0
     },
-    "cost": 0.0079252,
+    "cost": 0.0149311,
     "tokens": {
-      "input": 9775,
-      "output": 109,
+      "input": 10345,
+      "output": 518,
       "reasoning": 0,
       "cache": {
-        "read": 17332,
+        "read": 71701,
         "write": 0
       }
     },
     "time": {
       "created": 1780273873858,
-      "updated": 1780273883728
+      "updated": 1780273890652
     }
   },
   "messages": [
@@ -196,21 +196,24 @@
           "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
           "root": "/Users/rsoley/Dev/personal/rsrdev.com"
         },
-        "cost": 0,
+        "cost": 0.0038014,
         "tokens": {
-          "input": 0,
-          "output": 0,
+          "total": 27596,
+          "input": 158,
+          "output": 332,
           "reasoning": 0,
           "cache": {
-            "read": 0,
-            "write": 0
+            "write": 0,
+            "read": 27106
           }
         },
         "modelID": "kimi-k2.5",
         "providerID": "opencode-go",
         "time": {
-          "created": 1780273883649
+          "created": 1780273883649,
+          "completed": 1780273890573
         },
+        "finish": "tool-calls",
         "id": "msg_e8097aa01001QIiNlrO6wwaxxJ",
         "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi"
       },
@@ -238,22 +241,128 @@
           "tool": "bash",
           "callID": "functions.bash:1",
           "state": {
-            "metadata": {
-              "output": "",
-              "description": "Amend commit to remove checkpoint line"
-            },
-            "status": "running",
+            "status": "completed",
             "input": {
               "command": "git commit --amend -m \"refactor(widgets): make System Status widget actually reliable and be fetched from the BetterUptime API.\"",
               "description": "Amend commit to remove checkpoint line"
             },
+            "output": "[main db692fcb] refactor(widgets): make System Status widget actually reliable and be fetched from the BetterUptime API.\n Date: Sun May 31 18:30:41 2026 -0600\n 3 files changed, 124 insertions(+), 56 deletions(-)\n",
+            "metadata": {
+              "output": "[main db692fcb] refactor(widgets): make System Status widget actually reliable and be fetched from the BetterUptime API.\n Date: Sun May 31 18:30:41 2026 -0600\n 3 files changed, 124 insertions(+), 56 deletions(-)\n",
+              "exit": 0,
+              "description": "Amend commit to remove checkpoint line",
+              "truncated": false
+            },
+            "title": "Amend commit to remove checkpoint line",
             "time": {
-              "start": 1780273888191
+              "start": 1780273890490,
+              "end": 1780273890493
             }
           },
           "id": "prt_e8097ba480019bjNGHva4BozpO",
           "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi",
           "messageID": "msg_e8097aa01001QIiNlrO6wwaxxJ"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-finish",
+          "tokens": {
+            "total": 27596,
+            "input": 158,
+            "output": 332,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27106
+            }
+          },
+          "cost": 0.0038014,
+          "id": "prt_e8097c4e50011DLZjcFvKjLtxE",
+          "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi",
+          "messageID": "msg_e8097aa01001QIiNlrO6wwaxxJ"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e809783cd0010nKjFKrrr0hfDJ",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.0032045,
+        "tokens": {
+          "total": 27752,
+          "input": 412,
+          "output": 77,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 27263
+          }
+        },
+        "modelID": "kimi-k2.5",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780273890575,
+          "completed": 1780273892069
+        },
+        "finish": "stop",
+        "id": "msg_e8097c50f001miSkPkrpRJUIes",
+        "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi"
+      },
+      "parts": [
+        {
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-start",
+          "id": "prt_e8097c843001ImHwDRclnfbXX8",
+          "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi",
+          "messageID": "msg_e8097c50f001miSkPkrpRJUIes"
+        },
+        {
+          "type": "reasoning",
+          "text": "The commit has been successfully amended. The \"Entire-Checkpoint\" line has been removed. I should confirm this with the user.",
+          "time": {
+            "start": 1780273891396,
+            "end": 1780273891574
+          },
+          "id": "prt_e8097c844001bi1I8GQhQPGSk8",
+          "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi",
+          "messageID": "msg_e8097c50f001miSkPkrpRJUIes"
+        },
+        {
+          "type": "text",
+          "text": "Done. The latest commit message has been amended to remove the `Entire-Checkpoint` line. The commit is now:\n\n```\nrefactor(widgets): make System Status widget actually reliable and be fetched from the BetterUptime API.\n```",
+          "time": {
+            "start": 1780273891575,
+            "end": 1780273891983
+          },
+          "id": "prt_e8097c8f7001LhcjRxF6yQLBql",
+          "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi",
+          "messageID": "msg_e8097c50f001miSkPkrpRJUIes"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-finish",
+          "tokens": {
+            "total": 27752,
+            "input": 412,
+            "output": 77,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 27263
+            }
+          },
+          "cost": 0.0032045,
+          "id": "prt_e8097cabb0014EjqGf02D6w96d",
+          "sessionID": "ses_17f687c3dffeiddizPkPdSWMdi",
+          "messageID": "msg_e8097c50f001miSkPkrpRJUIes"
         }
       ]
     }

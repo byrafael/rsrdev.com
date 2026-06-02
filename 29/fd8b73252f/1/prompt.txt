@@ -1,1 +1,1 @@
-Do #1. Since the actual betteruptime logic worked. it was just the cdn failing on it
+Also, default should be All services operational, not Some services are down

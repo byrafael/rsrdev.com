@@ -1,1 +1,1 @@
-{"connections":0,"ping":0,"status":"degraded","uptime":"100.000%","errors":[{"source":"cdn","reason":"Expected JSON, got text/html; charset=UTF-8 (body: <!DOCTYPE html> <html> <head> <title>Human verification</title> <meta name=\"robots\" content=\"noindex)","status":200}]}
+Do #1. Since the actual betteruptime logic worked. it was just the cdn failing on it

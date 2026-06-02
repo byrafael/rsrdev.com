@@ -17,19 +17,19 @@
       "deletions": 111,
       "files": 4
     },
-    "cost": 0.9128125800000002,
+    "cost": 0.9493813800000003,
     "tokens": {
-      "input": 122134,
-      "output": 38927,
+      "input": 122886,
+      "output": 39449,
       "reasoning": 0,
       "cache": {
-        "read": 4006733,
+        "read": 4217773,
         "write": 0
       }
     },
     "time": {
       "created": 1780358949626,
-      "updated": 1780359881910
+      "updated": 1780359900010
     }
   },
   "messages": [
@@ -8850,21 +8850,24 @@
           "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
           "root": "/Users/rsoley/Dev/personal/rsrdev.com"
         },
-        "cost": 0,
+        "cost": 0.01241404,
         "tokens": {
-          "input": 0,
-          "output": 0,
+          "total": 70591,
+          "input": 372,
+          "output": 215,
           "reasoning": 0,
           "cache": {
-            "read": 0,
-            "write": 0
+            "write": 0,
+            "read": 70004
           }
         },
         "modelID": "kimi-k2.6",
         "providerID": "opencode-go",
         "time": {
-          "created": 1780359881805
+          "created": 1780359881805,
+          "completed": 1780359890788
         },
+        "finish": "tool-calls",
         "id": "msg_e85b7e44d001zv4wWOXivXHSth",
         "sessionID": "ses_17a565505ffe3n4FtMivtZj51O"
       },
@@ -8892,22 +8895,226 @@
           "tool": "bash",
           "callID": "functions.bash:77",
           "state": {
-            "metadata": {
-              "output": "",
-              "description": "Stage and commit split architecture"
-            },
-            "status": "running",
+            "status": "completed",
             "input": {
               "command": "git add -A && git commit -m \"fix(ops): restore BetterStack monitor aggregation via /api/ops/monitors\n\nThe CDN WAF blocks server-side fetches, so we split the data sources:\n\n- Client fetches CDN directly for connections + ping + core status\n- Client also fetches /api/ops/monitors proxy for:\n  - BetterStack monitor aggregation (up/down counts across all services)\n  - Status page uptime percentage scraping\n\nThis restores the uptime percentage and cross-service status that was\nlost when we deleted the monolithic /api/ops/stats proxy.\"",
               "description": "Stage and commit split architecture"
             },
+            "output": "[main cfad31eb] fix(ops): restore BetterStack monitor aggregation via /api/ops/monitors\n 2 files changed, 122 insertions(+), 19 deletions(-)\n create mode 100644 app/api/ops/monitors/route.ts\n",
+            "metadata": {
+              "output": "[main cfad31eb] fix(ops): restore BetterStack monitor aggregation via /api/ops/monitors\n 2 files changed, 122 insertions(+), 19 deletions(-)\n create mode 100644 app/api/ops/monitors/route.ts\n",
+              "exit": 0,
+              "description": "Stage and commit split architecture",
+              "truncated": false
+            },
+            "title": "Stage and commit split architecture",
             "time": {
-              "start": 1780359884198
+              "start": 1780359890706,
+              "end": 1780359890708
             }
           },
           "id": "prt_e85b7e958001YWifIanjFuA3Ze",
           "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
           "messageID": "msg_e85b7e44d001zv4wWOXivXHSth"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "1634be91e4bfc1a685ca6b654debcf3a20e1c491",
+          "type": "step-finish",
+          "tokens": {
+            "total": 70591,
+            "input": 372,
+            "output": 215,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 70004
+            }
+          },
+          "cost": 0.01241404,
+          "id": "prt_e85b8073a001CwJh2z4dgr3ado",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b7e44d001zv4wWOXivXHSth"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e85b6da38001dwp95yZcnmHe1B",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.01165265,
+        "tokens": {
+          "total": 70692,
+          "input": 287,
+          "output": 30,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 70375
+          }
+        },
+        "modelID": "kimi-k2.6",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780359890792,
+          "completed": 1780359899904
+        },
+        "finish": "tool-calls",
+        "id": "msg_e85b80768001gnrxpc53VdJiNN",
+        "sessionID": "ses_17a565505ffe3n4FtMivtZj51O"
+      },
+      "parts": [
+        {
+          "snapshot": "1634be91e4bfc1a685ca6b654debcf3a20e1c491",
+          "type": "step-start",
+          "id": "prt_e85b80a87001cmFWB0obs5DwUp",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b80768001gnrxpc53VdJiNN"
+        },
+        {
+          "type": "reasoning",
+          "text": "Let me push now.",
+          "time": {
+            "start": 1780359891596,
+            "end": 1780359891644
+          },
+          "id": "prt_e85b80a8c001oQto2jz5E6kqNC",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b80768001gnrxpc53VdJiNN"
+        },
+        {
+          "type": "tool",
+          "tool": "bash",
+          "callID": "functions.bash:78",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git push",
+              "description": "Push split architecture commit"
+            },
+            "output": "[entire] Pushing entire/checkpoints/v1 to origin.... done\nTo github.com:byrafael/rsrdev.com.git\n   92aba591..cfad31eb  main -> main\n",
+            "metadata": {
+              "output": "[entire] Pushing entire/checkpoints/v1 to origin.... done\nTo github.com:byrafael/rsrdev.com.git\n   92aba591..cfad31eb  main -> main\n",
+              "exit": 0,
+              "description": "Push split architecture commit",
+              "truncated": false
+            },
+            "title": "Push split architecture commit",
+            "time": {
+              "start": 1780359899820,
+              "end": 1780359899822
+            }
+          },
+          "id": "prt_e85b80abd002D0Gc0E3GGYdL5z",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b80768001gnrxpc53VdJiNN"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "1634be91e4bfc1a685ca6b654debcf3a20e1c491",
+          "type": "step-finish",
+          "tokens": {
+            "total": 70692,
+            "input": 287,
+            "output": 30,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 70375
+            }
+          },
+          "cost": 0.01165265,
+          "id": "prt_e85b82ad8001nzMMgYYPxzMvLL",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b80768001gnrxpc53VdJiNN"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e85b6da38001dwp95yZcnmHe1B",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.01250211,
+        "tokens": {
+          "total": 71031,
+          "input": 93,
+          "output": 277,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 70661
+          }
+        },
+        "modelID": "kimi-k2.6",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780359899907,
+          "completed": 1780359902571
+        },
+        "finish": "stop",
+        "id": "msg_e85b82b030017Ux9PnRmT1u6tz",
+        "sessionID": "ses_17a565505ffe3n4FtMivtZj51O"
+      },
+      "parts": [
+        {
+          "snapshot": "1634be91e4bfc1a685ca6b654debcf3a20e1c491",
+          "type": "step-start",
+          "id": "prt_e85b82f190019LTrM1cuHcbSlL",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b82b030017Ux9PnRmT1u6tz"
+        },
+        {
+          "type": "reasoning",
+          "text": "The push was successful. Let me summarize what was done.",
+          "time": {
+            "start": 1780359900955,
+            "end": 1780359900981
+          },
+          "id": "prt_e85b82f1b001mlmcDPlatn7ga9",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b82b030017Ux9PnRmT1u6tz"
+        },
+        {
+          "type": "text",
+          "text": "Done. Pushed `cfad31eb`.\n\n**Architecture is now split:**\n\n| Source | Endpoint | Fetched by | Provides |\n|--------|----------|-----------|----------|\n| **CDN** | `https://cdn.rsrdev.com/ops/core/status` | Browser directly | `connections`, `ping`, `status` |\n| **Proxy** | `/api/ops/monitors` | Browser → Next.js | `status` (aggregated from all BetterStack monitors), `uptime` (scraped from status page) |\n\n**Why this works:** The WAF only blocks server-side requests. The browser's `fetch` to the CDN is indistinguishable from a normal user, so it gets JSON. The proxy only hits BetterStack + your status page — neither of those have WAF issues.\n\n**Client merge logic:**\n1. Start with CDN data (connections, ping, core status)\n2. If `/api/ops/monitors` succeeds, override `status` with the comprehensive monitor-based one and set `uptime`\n3. If the proxy fails, keep CDN data and show \"View status page\" for uptime\n\nYou now have connections, latency, and uptime percentage back — and the status indicator reflects all your BetterStack monitors, not just the CDN's core infra.",
+          "time": {
+            "start": 1780359900982,
+            "end": 1780359902483
+          },
+          "id": "prt_e85b82f36002emQLD4UWPSAKgr",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b82b030017Ux9PnRmT1u6tz"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "1634be91e4bfc1a685ca6b654debcf3a20e1c491",
+          "type": "step-finish",
+          "tokens": {
+            "total": 71031,
+            "input": 93,
+            "output": 277,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 70661
+            }
+          },
+          "cost": 0.01250211,
+          "id": "prt_e85b83542001nDKnQj17rFGaKt",
+          "sessionID": "ses_17a565505ffe3n4FtMivtZj51O",
+          "messageID": "msg_e85b82b030017Ux9PnRmT1u6tz"
         }
       ]
     }

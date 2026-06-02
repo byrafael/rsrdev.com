@@ -1,0 +1,6 @@
+Find the implementation of `/api/ops/stats` or similar stats endpoint in this codebase. Look for:
+1. API route definitions (probably in src/app/api/ or similar)
+2. Any code related to "ops", "stats", "connections", "latency", "ping", "status"
+3. The frontend code that calls this endpoint
+
+Search thoroughly - check app router API routes, page router API routes, and any utility files. Return the file paths and relevant code snippets.

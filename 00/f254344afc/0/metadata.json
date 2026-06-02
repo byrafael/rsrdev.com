@@ -1,0 +1,44 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "00f254344afc",
+  "session_id": "ses_17a563f10ffeDzseh3E41LhsGN",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-02T00:24:47.479368Z",
+  "branch": "main",
+  "checkpoints_count": 0,
+  "files_touched": [
+    "app/api/ops/monitors/route.ts",
+    "lib/widget-data-context.tsx"
+  ],
+  "agent": "OpenCode",
+  "model": "",
+  "turn_id": "f49e95da189f",
+  "token_usage": {
+    "input_tokens": 12721,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 18887,
+    "output_tokens": 2746,
+    "api_call_count": 4
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-02T00:24:47.476318Z",
+    "agent_lines": 122,
+    "agent_removed": 19,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 122,
+    "total_lines_changed": 141,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    }
+  ]
+}

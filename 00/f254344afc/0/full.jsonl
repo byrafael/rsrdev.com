@@ -1,0 +1,554 @@
+{
+  "info": {
+    "id": "ses_17a563f10ffeDzseh3E41LhsGN",
+    "slug": "lucky-tiger",
+    "projectID": "68f6b696b6e6971f82430bf9895e03fe566aad1f",
+    "directory": "/Users/rsoley/Dev/personal/rsrdev.com",
+    "path": "",
+    "parentID": "ses_17a565505ffe3n4FtMivtZj51O",
+    "title": "Find ops stats endpoint (@explore subagent)",
+    "agent": "explore",
+    "model": {
+      "id": "kimi-k2.6",
+      "providerID": "opencode-go",
+      "variant": "default"
+    },
+    "version": "1.15.13",
+    "summary": {
+      "additions": 0,
+      "deletions": 0,
+      "files": 0
+    },
+    "cost": 0.026090870000000002,
+    "tokens": {
+      "input": 12721,
+      "output": 2746,
+      "reasoning": 0,
+      "cache": {
+        "read": 18887,
+        "write": 0
+      }
+    },
+    "permission": [
+      {
+        "permission": "todowrite",
+        "action": "deny",
+        "pattern": "*"
+      },
+      {
+        "permission": "task",
+        "action": "deny",
+        "pattern": "*"
+      }
+    ],
+    "time": {
+      "created": 1780358955247,
+      "updated": 1780358985084
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1780358955254
+        },
+        "tools": {
+          "todowrite": false,
+          "task": false
+        },
+        "agent": "explore",
+        "model": {
+          "providerID": "opencode-go",
+          "modelID": "kimi-k2.6"
+        },
+        "summary": {
+          "diffs": []
+        },
+        "id": "msg_e85a9c0f5001HHUq9Tllh3AMU7",
+        "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "Find the implementation of `/api/ops/stats` or similar stats endpoint in this codebase. Look for:\n1. API route definitions (probably in src/app/api/ or similar)\n2. Any code related to \"ops\", \"stats\", \"connections\", \"latency\", \"ping\", \"status\"\n3. The frontend code that calls this endpoint\n\nSearch thoroughly - check app router API routes, page router API routes, and any utility files. Return the file paths and relevant code snippets.",
+          "id": "prt_e85a9c0fb001ZY4FSZ6SoJmRZf",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c0f5001HHUq9Tllh3AMU7"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e85a9c0f5001HHUq9Tllh3AMU7",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.00321128,
+        "tokens": {
+          "total": 2950,
+          "input": 2680,
+          "output": 162,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 108
+          }
+        },
+        "modelID": "kimi-k2.6",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780358955394,
+          "completed": 1780358957821
+        },
+        "finish": "tool-calls",
+        "id": "msg_e85a9c182001S9uEmlsetcDbS2",
+        "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN"
+      },
+      "parts": [
+        {
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-start",
+          "id": "prt_e85a9c4190010HZQYFTSHfxyUj",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c182001S9uEmlsetcDbS2"
+        },
+        {
+          "type": "reasoning",
+          "text": "The user wants me to find the implementation of an API endpoint related to stats/ops in the codebase. I need to search thoroughly for:\n1. API route definitions (in app router or pages router)\n2. Code related to \"ops\", \"stats\", \"connections\", \"latency\", \"ping\", \"status\"\n3. Frontend code that calls this endpoint\n\nLet me start by exploring the project structure and then searching for relevant files and code.",
+          "time": {
+            "start": 1780358956059,
+            "end": 1780358956750
+          },
+          "id": "prt_e85a9c41b001xrql17dfuMiVRh",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c182001S9uEmlsetcDbS2"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "functions.glob:0",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/api/**"
+            },
+            "output": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/wakatime/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/weather/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/status/route.ts",
+            "metadata": {
+              "count": 5,
+              "truncated": false
+            },
+            "title": "",
+            "time": {
+              "start": 1780358957140,
+              "end": 1780358957168
+            }
+          },
+          "id": "prt_e85a9c6d0001Nt2MEZ7zjiF8ht",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c182001S9uEmlsetcDbS2"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "functions.glob:1",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/app/**"
+            },
+            "output": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/experience/experience-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/layout.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/[slug]/project-content.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/project-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/not-found.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/globals.css\n/Users/rsoley/Dev/personal/rsrdev.com/app/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/education/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/education/education-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/projects/[slug]/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/experience/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/credentials/page.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/credentials/credentials-list.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/wakatime/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/apple-icon.tsx\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/weather/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/status/route.ts\n/Users/rsoley/Dev/personal/rsrdev.com/app/about/page.tsx",
+            "metadata": {
+              "count": 21,
+              "truncated": false
+            },
+            "title": "",
+            "time": {
+              "start": 1780358957315,
+              "end": 1780358957327
+            }
+          },
+          "id": "prt_e85a9c884001dHeptrvfvGB8e9",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c182001S9uEmlsetcDbS2"
+        },
+        {
+          "type": "tool",
+          "tool": "grep",
+          "callID": "functions.grep:2",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "ops|stats|connections|latency|ping|status",
+              "include": "*.{ts,tsx,js,jsx}"
+            },
+            "output": "Found 912 matches (showing first 100)\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts:\n  Line 13: \t\t\treturn NextResponse.json({ error: \"Missing BETTERUPTIME token\" }, { status: 500 })\n\n  Line 16: \t\tconst [opsResponse, monitorsResponse, betterStackPageResponse] = await Promise.all([\n\n  Line 17: \t\t\tfetch(\"https://cdn.rsrdev.com/ops/core/status\", {\n\n  Line 26: \t\t\tfetch(\"https://status.rsrdev.com\", {\n\n  Line 33: \t\tlet opsData = { connections: 0, ping: 0 }\n\n  Line 34: \t\tif (opsResponse.ok) {\n\n  Line 35: \t\t\topsData = await opsResponse.json()\n\n  Line 41: \t\tlet status = \"issue\"\n\n  Line 42: \t\tlet statusText: string | undefined\n\n  Line 43: \t\tlet statusTextEs: string | undefined\n\n  Line 50: \t\t\tupCount = monitors.filter((m: any) => m.attributes?.status === \"up\").length\n\n  Line 51: \t\t\tdownCount = monitors.filter((m: any) => m.attributes?.status === \"down\").length\n\n  Line 54: \t\t\t\tstatus = \"issue\"\n\n  Line 56: \t\t\t\tstatus = \"ok\"\n\n  Line 58: \t\t\t\tstatus = \"degraded\"\n\n  Line 82: \t\t\tconnections: opsData.connections,\n\n  Line 83: \t\t\tping: opsData.ping,\n\n  Line 84: \t\t\tstatus,\n\n  Line 85: \t\t\tstatusText,\n\n  Line 86: \t\t\tstatusTextEs,\n\n  Line 90: \t\treturn NextResponse.json({ error: \"Failed to fetch stats\" }, { status: 500 })\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx:\n  Line 33: interface WidgetProps {\n\n  Line 38: function WakaTimeWidget({ className }: WidgetProps) {\n\n  Line 68: function LocationWidget({ className }: WidgetProps) {\n\n  Line 300: function GithubWidget({ className }: WidgetProps) {\n\n  Line 396: function BuildStatusWidget({ className }: WidgetProps) {\n\n  Line 400: \tconst status = buildStatus\n\n  Line 402: \tconst isSuccess = status?.conclusion === \"success\"\n\n  Line 403: \tconst isFailure = status?.conclusion === \"failure\"\n\n  Line 404: \tconst isInProgress = status?.status === \"in_progress\" || status?.status === \"queued\"\n\n  Line 419: \t\t\t\t) : status ? (\n\n  Line 423: \t\t\t\t\t\t\t\t<span className=\"absolute -inset-1 inline-flex h-6 w-6 animate-ping rounded-full bg-yellow-400 opacity-75\" />\n\n  Line 435: \t\t\t\t\t\t\t\thref={status.url}\n\n  Line 440: \t\t\t\t\t\t\t\t{status.name || \"unknown-build\"}\n\n  Line 445: \t\t\t\t\t\t\t\t\t{formatDistanceToNow(new Date(status.updated_at), {\n\n  Line 462: function UptimeWidget({ className }: WidgetProps) {\n\n  Line 465: \tconst { opsStats, loading } = useWidgetData()\n\n  Line 466: \tconst stats = opsStats\n\n  Line 468: \tconst isOperational = stats?.status === \"ok\"\n\n  Line 469: \tconst isDegraded = stats?.status === \"degraded\"\n\n  Line 470: \tconst isDown = stats?.status === \"issue\"\n\n  Line 483: \tconst statusLabel =\n\n  Line 484: \t\t(language === \"es\" ? stats?.statusTextEs : stats?.statusText) ||\n\n  Line 485: \t\tstats?.statusText ||\n\n  Line 501: \t\t\t\t\t\t\thref=\"https://status.rsrdev.com/\"\n\n  Line 542: \t\t\t\t\t\t\t\t\"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75\",\n\n  Line 553: \t\t\t\t\t<span className=\"font-medium text-sm\">{statusLabel}</span>\n\n  Line 558: \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.connections}</span>\n\n  Line 559: \t\t\t\t\t\t{loading.opsStats ? (\n\n  Line 562: \t\t\t\t\t\t\t<span className=\"font-bold text-xl\">{stats?.connections || 0}</span>\n\n  Line 566: \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.latency}</span>\n\n  Line 567: \t\t\t\t\t\t{loading.opsStats ? (\n\n  Line 574: \t\t\t\t\t\t\t\t\t\t\t{stats?.ping || 0}ms\n\n  Line 583: \t\t\t\t\t\t\t\t\t\t<p>{t.widgets.latencyTooltip}</p>\n\n  Line 591: \t\t\t\t\t\t{loading.opsStats ? (\n\n  Line 595: \t\t\t\t\t\t\t\thref=\"https://status.rsrdev.com/\"\n\n  Line 600: \t\t\t\t\t\t\t\t{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : \"0%\"}\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts:\n  Line 26: \t\t\t\t\"I build software systems that model, analyze, and optimize complex environments, whether the complexity comes from markets, people, or large-scale operational constraints. I have eight years of programming experience and six years of contractor work developing backend systems, AI workflows, and quantitative tooling. Across all of my projects and work, my focus is the same: using code as a way to understand, simulate, and improve complex systems.\",\n\n  Line 27: \t\t\tstats: [\n\n  Line 166: \t\t\t\t\t\t\"Developing internal tooling to onboard and set up/configure banks on MUSCLE's new loyalty system.\",\n\n  Line 167: \t\t\t\t\t\t\"Developing bank-facing software for banks to manage strategies and monitor the performance of their loyalty infrastructure.\",\n\n  Line 169: \t\t\t\t\t\t\"Developing DevOps/DevEx and CI/CD workflows, enabling secure development through automated code review, branch protection, governance, and continuous security scanning.\",\n\n  Line 400: \t\t\t\t//     \"A deep dive into modern approaches to sub-millisecond order execution and the trade-offs between latency and complexity.\",\n\n  Line 402: \t\t\t\t//   link: \"https://cdn.rsrdev.com/papers/low-latency-trading-2024.pdf\",\n\n  Line 413: \t\t\t\t\"Beyond the self-improvement, I focus heavily on my circle. I’m a dedicated dog dad to six, and I’m passionate about animal rescue work. Whether I’m reading up on the latest health research or spending time with my friends and dogs, I prioritize the offline connections that keep me grounded.\",\n\n  Line 486: \t\t\tconnections: \"Connections\",\n\n  Line 488: \t\t\tlatency: \"Latency\",\n\n  Line 494: \t\t\tviewStatus: \"View status page\",\n\n  Line 495: \t\t\tlatencyTooltip: \"Internal server-to-server latency, not client-to-server.\",\n\n  Line 523: \t\t\tstats: [\n\n  Line 895: \t\t\t\t//   link: \"https://cdn.rsrdev.com/papers/low-latency-trading-2024.pdf\",\n\n  Line 979: \t\t\tconnections: \"Conexiones\",\n\n  Line 981: \t\t\tlatency: \"Latencia\",\n\n  Line 988: \t\t\tlatencyTooltip: \"Latencia interna servidor-a-servidor, no cliente-a-servidor.\",\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx:\n  Line 30: \tstatus: string\n\n  Line 40: \tconnections: number\n\n  Line 41: \tping: number\n\n  Line 42: \tstatus: string\n\n  Line 43: \tstatusText?: string\n\n  Line 44: \tstatusTextEs?: string\n\n  Line 53: \topsStats: OpsStats | null\n\n  Line 59: \t\topsStats: boolean\n\n  Line 71: \t\topsStats: null,\n\n  Line 77: \t\t\topsStats: true,\n\n  Line 160: \t\t\t\tconst response = await fetch(\"/api/github/status\")\n\n  Line 185: \t\t\t\tconst response = await fetch(\"/api/ops/stats\")\n\n  Line 187: \t\t\t\t\tconst opsStats = await response.json()\n\n  Line 190: \t\t\t\t\t\topsStats,\n\n  Line 191: \t\t\t\t\t\tloading: { ...prev.loading, opsStats: false },\n\n  Line 196: \t\t\t\t\t\tloading: { ...prev.loading, opsStats: false },\n\n  Line 202: \t\t\t\t\tloading: { ...prev.loading, opsStats: false },\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/app/api/github/route.ts:\n  Line 7: \t\treturn NextResponse.json({ error: \"GITHUB token is not defined\" }, { status: 500 })\n\n  Line 30: \t\t\t\t{ status: searchResponse.status }\n\n  Line 60: \t\t// Fetch detailed commit information with stats\n\n  Line 87: \t\t\tstats: {\n\n  Line 104: \t\t\t\tadditions: commit.stats?.additions || 0,\n\n  Line 105: \t\t\t\tdeletions: commit.stats?.deletions || 0,\n\n  Line 110: \t\treturn NextResponse.json({ error: \"Failed to fetch GitHub commits\" }, { status: 500 })\n\n\n/Users/rsoley/Dev/personal/rsrdev.com/.opencode/plugins/entire.ts:\n  Line 157:           case \"session.status\": {\n\n  Line 158:             // session.status fires in both TUI and non-interactive (run) mode.\n\n\n(Results truncated: showing 100 of 912 matches (812 hidden). Consider using a more specific path or pattern.)",
+            "metadata": {
+              "matches": 912,
+              "truncated": true
+            },
+            "title": "ops|stats|connections|latency|ping|status",
+            "time": {
+              "start": 1780358957670,
+              "end": 1780358957707
+            }
+          },
+          "id": "prt_e85a9c94c001bh7KetKeuEu1IP",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c182001S9uEmlsetcDbS2"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-finish",
+          "tokens": {
+            "total": 2950,
+            "input": 2680,
+            "output": 162,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 108
+            }
+          },
+          "cost": 0.00321128,
+          "id": "prt_e85a9cad6001RqgljPvqCwd1zu",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9c182001S9uEmlsetcDbS2"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e85a9c0f5001HHUq9Tllh3AMU7",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.00390477,
+        "tokens": {
+          "total": 5728,
+          "input": 2723,
+          "output": 218,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 2787
+          }
+        },
+        "modelID": "kimi-k2.6",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780358957823,
+          "completed": 1780358960375
+        },
+        "finish": "tool-calls",
+        "id": "msg_e85a9caff0015p2g6Diu2l6O64",
+        "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN"
+      },
+      "parts": [
+        {
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-start",
+          "id": "prt_e85a9cd90001tTKQRUNZP1HP1X",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9caff0015p2g6Diu2l6O64"
+        },
+        {
+          "type": "reasoning",
+          "text": "I found the relevant files. Let me read them to get the full implementation details:\n1. `/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts` - The API route\n2. `/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx` - The frontend context that fetches this data\n3. `/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx` - The widget component that displays the data\n\nLet me read these files.",
+          "time": {
+            "start": 1780358958482,
+            "end": 1780358959599
+          },
+          "id": "prt_e85a9cd92001KbTbuK8VFInsDi",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9caff0015p2g6Diu2l6O64"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:3",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts"
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts</path>\n<type>file</type>\n<content>\n1: import { translate } from \"google-translate-api-x\"\n2: import { NextResponse } from \"next/server\"\n3: \n4: export const revalidate = 300 // Cache for 5 minutes\n5: \n6: export async function GET() {\n7: \tconst controller = new AbortController()\n8: \tconst timeoutId = setTimeout(() => controller.abort(), 25000)\n9: \n10: \ttry {\n11: \t\tconst token = process.env.BETTERUPTIME\n12: \t\tif (!token) {\n13: \t\t\treturn NextResponse.json({ error: \"Missing BETTERUPTIME token\" }, { status: 500 })\n14: \t\t}\n15: \n16: \t\tconst [opsResponse, monitorsResponse, betterStackPageResponse] = await Promise.all([\n17: \t\t\tfetch(\"https://cdn.rsrdev.com/ops/core/status\", {\n18: \t\t\t\tnext: { revalidate: 300 },\n19: \t\t\t\tsignal: controller.signal,\n20: \t\t\t}),\n21: \t\t\tfetch(\"https://uptime.betterstack.com/api/v2/monitors\", {\n22: \t\t\t\theaders: { Authorization: `Bearer ${token}` },\n23: \t\t\t\tnext: { revalidate: 300 },\n24: \t\t\t\tsignal: controller.signal,\n25: \t\t\t}),\n26: \t\t\tfetch(\"https://status.rsrdev.com\", {\n27: \t\t\t\tnext: { revalidate: 300 },\n28: \t\t\t\tsignal: controller.signal,\n29: \t\t\t}),\n30: \t\t])\n31: \t\tclearTimeout(timeoutId)\n32: \n33: \t\tlet opsData = { connections: 0, ping: 0 }\n34: \t\tif (opsResponse.ok) {\n35: \t\t\topsData = await opsResponse.json()\n36: \t\t}\n37: \n38: \t\tlet upCount = 0\n39: \t\tlet downCount = 0\n40: \t\tlet totalCount = 0\n41: \t\tlet status = \"issue\"\n42: \t\tlet statusText: string | undefined\n43: \t\tlet statusTextEs: string | undefined\n44: \t\tlet uptime = \"0%\"\n45: \n46: \t\tif (monitorsResponse.ok) {\n47: \t\t\tconst monitorsData = await monitorsResponse.json()\n48: \t\t\tconst monitors = monitorsData.data || []\n49: \t\t\ttotalCount = monitors.length\n50: \t\t\tupCount = monitors.filter((m: any) => m.attributes?.status === \"up\").length\n51: \t\t\tdownCount = monitors.filter((m: any) => m.attributes?.status === \"down\").length\n52: \n53: \t\t\tif (downCount > 0) {\n54: \t\t\t\tstatus = \"issue\"\n55: \t\t\t} else if (upCount === totalCount && totalCount > 0) {\n56: \t\t\t\tstatus = \"ok\"\n57: \t\t\t} else if (totalCount > 0) {\n58: \t\t\t\tstatus = \"degraded\"\n59: \t\t\t}\n60: \t\t}\n61: \n62: \t\tif (betterStackPageResponse.ok) {\n63: \t\t\tconst pageText = await betterStackPageResponse.text()\n64: \n65: \t\t\t// Match both \"100% uptime\" and \"99.995% uptime\".\n66: \t\t\tconst uptimeRegex = /(\\d{1,3}(?:\\.\\d+)?)% uptime/g\n67: \t\t\tlet match: RegExpExecArray | null\n68: \t\t\tlet totalUptime = 0\n69: \t\t\tlet count = 0\n70: \t\t\t// biome-ignore lint/suspicious/noAssignInExpressions: regex loop\n71: \t\t\twhile ((match = uptimeRegex.exec(pageText)) !== null) {\n72: \t\t\t\ttotalUptime += parseFloat(match[1])\n73: \t\t\t\tcount++\n74: \t\t\t}\n75: \n76: \t\t\tif (count > 0) {\n77: \t\t\t\tuptime = `${(totalUptime / count).toFixed(3)}%`\n78: \t\t\t}\n79: \t\t}\n80: \n81: \t\treturn NextResponse.json({\n82: \t\t\tconnections: opsData.connections,\n83: \t\t\tping: opsData.ping,\n84: \t\t\tstatus,\n85: \t\t\tstatusText,\n86: \t\t\tstatusTextEs,\n87: \t\t\tuptime,\n88: \t\t})\n89: \t} catch (_error) {\n90: \t\treturn NextResponse.json({ error: \"Failed to fetch stats\" }, { status: 500 })\n91: \t}\n92: }\n\n(End of file - total 92 lines)\n</content>",
+            "metadata": {
+              "preview": "import { translate } from \"google-translate-api-x\"\nimport { NextResponse } from \"next/server\"\n\nexport const revalidate = 300 // Cache for 5 minutes\n\nexport async function GET() {\n\tconst controller = new AbortController()\n\tconst timeoutId = setTimeout(() => controller.abort(), 25000)\n\n\ttry {\n\t\tconst token = process.env.BETTERUPTIME\n\t\tif (!token) {\n\t\t\treturn NextResponse.json({ error: \"Missing BETTERUPTIME token\" }, { status: 500 })\n\t\t}\n\n\t\tconst [opsResponse, monitorsResponse, betterStackPageResponse] = await Promise.all([\n\t\t\tfetch(\"https://cdn.rsrdev.com/ops/core/status\", {\n\t\t\t\tnext: { revalidate: 300 },\n\t\t\t\tsignal: controller.signal,\n\t\t\t}),",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "app/api/ops/stats/route.ts",
+            "time": {
+              "start": 1780358959753,
+              "end": 1780358959763
+            }
+          },
+          "id": "prt_e85a9d1f2001T5jinpJnORtInD",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9caff0015p2g6Diu2l6O64"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:4",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx"
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx</path>\n<type>file</type>\n<content>\n1: \"use client\"\n2: \n3: import { createContext, type ReactNode, useContext, useEffect, useState } from \"react\"\n4: \n5: interface WakaTimeData {\n6: \ttext: string\n7: \trange: string\n8: \tlanguages: Array<{\n9: \t\tname: string\n10: \t\tpercent: number\n11: \t\tseconds: number\n12: \t}>\n13: }\n14: \n15: interface WeatherData {\n16: \ttemperature: number\n17: \tweatherCode: number\n18: }\n19: \n20: interface Commit {\n21: \tid: string\n22: \turl: string\n23: \trepo: string\n24: \tmessage: string\n25: \tadditions?: number\n26: \tdeletions?: number\n27: }\n28: \n29: interface BuildStatus {\n30: \tstatus: string\n31: \tconclusion: string | null\n32: \tbranch: string\n33: \tupdated_at: string\n34: \tname?: string\n35: \turl?: string\n36: \tcommit_message?: string\n37: }\n38: \n39: interface OpsStats {\n40: \tconnections: number\n41: \tping: number\n42: \tstatus: string\n43: \tstatusText?: string\n44: \tstatusTextEs?: string\n45: \tuptime?: string\n46: }\n47: \n48: interface WidgetData {\n49: \twakatime: WakaTimeData | null\n50: \tweather: WeatherData | null\n51: \tcommits: Commit[] | null\n52: \tbuildStatus: BuildStatus | null\n53: \topsStats: OpsStats | null\n54: \tloading: {\n55: \t\twakatime: boolean\n56: \t\tweather: boolean\n57: \t\tcommits: boolean\n58: \t\tbuildStatus: boolean\n59: \t\topsStats: boolean\n60: \t}\n61: }\n62: \n63: const WidgetDataContext = createContext<WidgetData | undefined>(undefined)\n64: \n65: export function WidgetDataProvider({ children }: { children: ReactNode }) {\n66: \tconst [data, setData] = useState<WidgetData>({\n67: \t\twakatime: null,\n68: \t\tweather: null,\n69: \t\tcommits: null,\n70: \t\tbuildStatus: null,\n71: \t\topsStats: null,\n72: \t\tloading: {\n73: \t\t\twakatime: true,\n74: \t\t\tweather: true,\n75: \t\t\tcommits: true,\n76: \t\t\tbuildStatus: true,\n77: \t\t\topsStats: true,\n78: \t\t},\n79: \t})\n80: \n81: \tuseEffect(() => {\n82: \t\t// Fetch WakaTime data\n83: \t\tconst fetchWakaTime = async () => {\n84: \t\t\ttry {\n85: \t\t\t\tconst response = await fetch(\"/api/wakatime\")\n86: \t\t\t\tif (response.ok) {\n87: \t\t\t\t\tconst wakatime = await response.json()\n88: \t\t\t\t\tsetData((prev) => ({\n89: \t\t\t\t\t\t...prev,\n90: \t\t\t\t\t\twakatime,\n91: \t\t\t\t\t\tloading: { ...prev.loading, wakatime: false },\n92: \t\t\t\t\t}))\n93: \t\t\t\t} else {\n94: \t\t\t\t\tsetData((prev) => ({\n95: \t\t\t\t\t\t...prev,\n96: \t\t\t\t\t\tloading: { ...prev.loading, wakatime: false },\n97: \t\t\t\t\t}))\n98: \t\t\t\t}\n99: \t\t\t} catch (_error) {\n100: \t\t\t\tsetData((prev) => ({\n101: \t\t\t\t\t...prev,\n102: \t\t\t\t\tloading: { ...prev.loading, wakatime: false },\n103: \t\t\t\t}))\n104: \t\t\t}\n105: \t\t}\n106: \n107: \t\t// Fetch Weather data\n108: \t\tconst fetchWeather = async () => {\n109: \t\t\ttry {\n110: \t\t\t\tconst response = await fetch(\"/api/weather\")\n111: \t\t\t\tif (response.ok) {\n112: \t\t\t\t\tconst weather = await response.json()\n113: \t\t\t\t\tsetData((prev) => ({\n114: \t\t\t\t\t\t...prev,\n115: \t\t\t\t\t\tweather,\n116: \t\t\t\t\t\tloading: { ...prev.loading, weather: false },\n117: \t\t\t\t\t}))\n118: \t\t\t\t} else {\n119: \t\t\t\t\tsetData((prev) => ({\n120: \t\t\t\t\t\t...prev,\n121: \t\t\t\t\t\tloading: { ...prev.loading, weather: false },\n122: \t\t\t\t\t}))\n123: \t\t\t\t}\n124: \t\t\t} catch (_error) {\n125: \t\t\t\tsetData((prev) => ({\n126: \t\t\t\t\t...prev,\n127: \t\t\t\t\tloading: { ...prev.loading, weather: false },\n128: \t\t\t\t}))\n129: \t\t\t}\n130: \t\t}\n131: \n132: \t\t// Fetch GitHub commits\n133: \t\tconst fetchCommits = async () => {\n134: \t\t\ttry {\n135: \t\t\t\tconst response = await fetch(\"/api/github\")\n136: \t\t\t\tif (response.ok) {\n137: \t\t\t\t\tconst commits = await response.json()\n138: \t\t\t\t\tsetData((prev) => ({\n139: \t\t\t\t\t\t...prev,\n140: \t\t\t\t\t\tcommits,\n141: \t\t\t\t\t\tloading: { ...prev.loading, commits: false },\n142: \t\t\t\t\t}))\n143: \t\t\t\t} else {\n144: \t\t\t\t\tsetData((prev) => ({\n145: \t\t\t\t\t\t...prev,\n146: \t\t\t\t\t\tloading: { ...prev.loading, commits: false },\n147: \t\t\t\t\t}))\n148: \t\t\t\t}\n149: \t\t\t} catch (_error) {\n150: \t\t\t\tsetData((prev) => ({\n151: \t\t\t\t\t...prev,\n152: \t\t\t\t\tloading: { ...prev.loading, commits: false },\n153: \t\t\t\t}))\n154: \t\t\t}\n155: \t\t}\n156: \n157: \t\t// Fetch Build Status\n158: \t\tconst fetchBuildStatus = async () => {\n159: \t\t\ttry {\n160: \t\t\t\tconst response = await fetch(\"/api/github/status\")\n161: \t\t\t\tif (response.ok) {\n162: \t\t\t\t\tconst buildStatus = await response.json()\n163: \t\t\t\t\tsetData((prev) => ({\n164: \t\t\t\t\t\t...prev,\n165: \t\t\t\t\t\tbuildStatus,\n166: \t\t\t\t\t\tloading: { ...prev.loading, buildStatus: false },\n167: \t\t\t\t\t}))\n168: \t\t\t\t} else {\n169: \t\t\t\t\tsetData((prev) => ({\n170: \t\t\t\t\t\t...prev,\n171: \t\t\t\t\t\tloading: { ...prev.loading, buildStatus: false },\n172: \t\t\t\t\t}))\n173: \t\t\t\t}\n174: \t\t\t} catch (_error) {\n175: \t\t\t\tsetData((prev) => ({\n176: \t\t\t\t\t...prev,\n177: \t\t\t\t\tloading: { ...prev.loading, buildStatus: false },\n178: \t\t\t\t}))\n179: \t\t\t}\n180: \t\t}\n181: \n182: \t\t// Fetch Ops Stats\n183: \t\tconst fetchOpsStats = async () => {\n184: \t\t\ttry {\n185: \t\t\t\tconst response = await fetch(\"/api/ops/stats\")\n186: \t\t\t\tif (response.ok) {\n187: \t\t\t\t\tconst opsStats = await response.json()\n188: \t\t\t\t\tsetData((prev) => ({\n189: \t\t\t\t\t\t...prev,\n190: \t\t\t\t\t\topsStats,\n191: \t\t\t\t\t\tloading: { ...prev.loading, opsStats: false },\n192: \t\t\t\t\t}))\n193: \t\t\t\t} else {\n194: \t\t\t\t\tsetData((prev) => ({\n195: \t\t\t\t\t\t...prev,\n196: \t\t\t\t\t\tloading: { ...prev.loading, opsStats: false },\n197: \t\t\t\t\t}))\n198: \t\t\t\t}\n199: \t\t\t} catch (_error) {\n200: \t\t\t\tsetData((prev) => ({\n201: \t\t\t\t\t...prev,\n202: \t\t\t\t\tloading: { ...prev.loading, opsStats: false },\n203: \t\t\t\t}))\n204: \t\t\t}\n205: \t\t}\n206: \n207: \t\t// Fetch all data on mount\n208: \t\tfetchWakaTime()\n209: \t\tfetchWeather()\n210: \t\tfetchCommits()\n211: \t\tfetchBuildStatus()\n212: \t\tfetchOpsStats()\n213: \t}, [])\n214: \n215: \treturn <WidgetDataContext.Provider value={data}>{children}</WidgetDataContext.Provider>\n216: }\n217: \n218: export function useWidgetData() {\n219: \tconst context = useContext(WidgetDataContext)\n220: \tif (context === undefined) {\n221: \t\tthrow new Error(\"useWidgetData must be used within a WidgetDataProvider\")\n222: \t}\n223: \treturn context\n224: }\n\n(End of file - total 224 lines)\n</content>",
+            "metadata": {
+              "preview": "\"use client\"\n\nimport { createContext, type ReactNode, useContext, useEffect, useState } from \"react\"\n\ninterface WakaTimeData {\n\ttext: string\n\trange: string\n\tlanguages: Array<{\n\t\tname: string\n\t\tpercent: number\n\t\tseconds: number\n\t}>\n}\n\ninterface WeatherData {\n\ttemperature: number\n\tweatherCode: number\n}\n\ninterface Commit {",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "lib/widget-data-context.tsx",
+            "time": {
+              "start": 1780358959939,
+              "end": 1780358959944
+            }
+          },
+          "id": "prt_e85a9d2bc0010NB8eYdWo3BOA2",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9caff0015p2g6Diu2l6O64"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:5",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx",
+              "offset": 460,
+              "limit": 160
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx</path>\n<type>file</type>\n<content>\n460: \n461: // Uptime Widget\n462: function UptimeWidget({ className }: WidgetProps) {\n463: \tconst t = useTranslation()\n464: \tconst { language } = useLanguage()\n465: \tconst { opsStats, loading } = useWidgetData()\n466: \tconst stats = opsStats\n467: \n468: \tconst isOperational = stats?.status === \"ok\"\n469: \tconst isDegraded = stats?.status === \"degraded\"\n470: \tconst isDown = stats?.status === \"issue\"\n471: \n472: \tconst pulseColor = isOperational\n473: \t\t? \"bg-green-400\"\n474: \t\t: isDegraded\n475: \t\t\t? \"bg-amber-400\"\n476: \t\t\t: \"bg-red-400\"\n477: \tconst dotColor = isOperational\n478: \t\t? \"bg-green-500\"\n479: \t\t: isDegraded\n480: \t\t\t? \"bg-amber-500\"\n481: \t\t\t: \"bg-red-500\"\n482: \n483: \tconst statusLabel =\n484: \t\t(language === \"es\" ? stats?.statusTextEs : stats?.statusText) ||\n485: \t\tstats?.statusText ||\n486: \t\t(isOperational\n487: \t\t\t? t.widgets.allSystemsOperational\n488: \t\t\t: isDegraded\n489: \t\t\t\t? t.widgets.someSystemsDegraded\n490: \t\t\t\t: t.widgets.systemIssuesDetected)\n491: \n492: \treturn (\n493: \t\t<Card className={cn(\"flex h-full flex-col\", className)}>\n494: \t\t\t<CardHeader className=\"pb-2\">\n495: \t\t\t\t<div className=\"flex items-center justify-between\">\n496: \t\t\t\t\t<CardTitle className=\"flex items-center gap-2 font-medium text-sm\">\n497: \t\t\t\t\t\t<Activity className=\"h-4 w-4\" /> {t.widgets.systemStatus}\n498: \t\t\t\t\t</CardTitle>\n499: \t\t\t\t\t<div className=\"flex items-center gap-2\">\n500: \t\t\t\t\t\t<a\n501: \t\t\t\t\t\t\thref=\"https://status.rsrdev.com/\"\n502: \t\t\t\t\t\t\ttarget=\"_blank\"\n503: \t\t\t\t\t\t\trel=\"noopener noreferrer\"\n504: \t\t\t\t\t\t\tclassName=\"text-muted-foreground transition-colors hover:text-primary\"\n505: \t\t\t\t\t\t>\n506: \t\t\t\t\t\t\t<ExternalLink className=\"h-4 w-4\" />\n507: \t\t\t\t\t\t\t<span className=\"sr-only\">{t.widgets.viewStatus}</span>\n508: \t\t\t\t\t\t</a>\n509: \t\t\t\t\t\t<Popover>\n510: \t\t\t\t\t\t\t<PopoverTrigger asChild>\n511: \t\t\t\t\t\t\t\t<button\n512: \t\t\t\t\t\t\t\t\ttype=\"button\"\n513: \t\t\t\t\t\t\t\t\tclassName=\"text-muted-foreground transition-colors hover:text-primary\"\n514: \t\t\t\t\t\t\t\t>\n515: \t\t\t\t\t\t\t\t\t<Info className=\"h-4 w-4\" />\n516: \t\t\t\t\t\t\t\t\t<span className=\"sr-only\">Info</span>\n517: \t\t\t\t\t\t\t\t</button>\n518: \t\t\t\t\t\t\t</PopoverTrigger>\n519: \t\t\t\t\t\t\t<PopoverContent className=\"w-auto max-w-[220px] p-2 text-xs\" align=\"end\">\n520: \t\t\t\t\t\t\t\t<p>\n521: \t\t\t\t\t\t\t\t\t{t.widgets.poweredBy}{\" \"}\n522: \t\t\t\t\t\t\t\t\t<a\n523: \t\t\t\t\t\t\t\t\t\thref=\"https://betterstack.com/uptime\"\n524: \t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n525: \t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer\"\n526: \t\t\t\t\t\t\t\t\t\tclassName=\"underline hover:text-primary\"\n527: \t\t\t\t\t\t\t\t\t>\n528: \t\t\t\t\t\t\t\t\t\tBetterStack\n529: \t\t\t\t\t\t\t\t\t</a>\n530: \t\t\t\t\t\t\t\t\t.\n531: \t\t\t\t\t\t\t\t</p>\n532: \t\t\t\t\t\t\t</PopoverContent>\n533: \t\t\t\t\t\t</Popover>\n534: \t\t\t\t\t</div>\n535: \t\t\t\t</div>\n536: \t\t\t</CardHeader>\n537: \t\t\t<CardContent className=\"flex flex-1 flex-col justify-between gap-4\">\n538: \t\t\t\t<div className=\"flex items-center gap-2\">\n539: \t\t\t\t\t<div className=\"relative flex h-3 w-3\">\n540: \t\t\t\t\t\t<span\n541: \t\t\t\t\t\t\tclassName={cn(\n542: \t\t\t\t\t\t\t\t\"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75\",\n543: \t\t\t\t\t\t\t\tpulseColor\n544: \t\t\t\t\t\t\t)}\n545: \t\t\t\t\t\t/>\n546: \t\t\t\t\t\t<span\n547: \t\t\t\t\t\t\tclassName={cn(\n548: \t\t\t\t\t\t\t\t\"relative inline-flex h-3 w-3 rounded-full\",\n549: \t\t\t\t\t\t\t\tdotColor\n550: \t\t\t\t\t\t\t)}\n551: \t\t\t\t\t\t/>\n552: \t\t\t\t\t</div>\n553: \t\t\t\t\t<span className=\"font-medium text-sm\">{statusLabel}</span>\n554: \t\t\t\t</div>\n555: \n556: \t\t\t\t<div className=\"grid grid-cols-3 gap-4\">\n557: \t\t\t\t\t<div className=\"flex flex-col gap-1\">\n558: \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.connections}</span>\n559: \t\t\t\t\t\t{loading.opsStats ? (\n560: \t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n561: \t\t\t\t\t\t) : (\n562: \t\t\t\t\t\t\t<span className=\"font-bold text-xl\">{stats?.connections || 0}</span>\n563: \t\t\t\t\t\t)}\n564: \t\t\t\t\t</div>\n565: \t\t\t\t\t<div className=\"flex flex-col gap-1\">\n566: \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.latency}</span>\n567: \t\t\t\t\t\t{loading.opsStats ? (\n568: \t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n569: \t\t\t\t\t\t) : (\n570: \t\t\t\t\t\t\t<TooltipProvider delayDuration={100}>\n571: \t\t\t\t\t\t\t\t<Tooltip>\n572: \t\t\t\t\t\t\t\t\t<TooltipTrigger asChild>\n573: \t\t\t\t\t\t\t\t\t\t<span className=\"decoration-foreground/30 cursor-help font-bold text-xl underline decoration-dashed underline-offset-4\">\n574: \t\t\t\t\t\t\t\t\t\t\t{stats?.ping || 0}ms\n575: \t\t\t\t\t\t\t\t\t\t</span>\n576: \t\t\t\t\t\t\t\t\t</TooltipTrigger>\n577: \t\t\t\t\t\t\t\t\t<TooltipContent\n578: \t\t\t\t\t\t\t\t\t\tside=\"top\"\n579: \t\t\t\t\t\t\t\t\t\tsideOffset={6}\n580: \t\t\t\t\t\t\t\t\t\tshowArrow={false}\n581: \t\t\t\t\t\t\t\t\t\tclassName=\"max-w-[220px] border bg-popover text-center text-popover-foreground\"\n582: \t\t\t\t\t\t\t\t\t>\n583: \t\t\t\t\t\t\t\t\t\t<p>{t.widgets.latencyTooltip}</p>\n584: \t\t\t\t\t\t\t\t\t</TooltipContent>\n585: \t\t\t\t\t\t\t\t</Tooltip>\n586: \t\t\t\t\t\t\t</TooltipProvider>\n587: \t\t\t\t\t\t)}\n588: \t\t\t\t\t</div>\n589: \t\t\t\t\t<div className=\"flex flex-col gap-1\">\n590: \t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.uptime}</span>\n591: \t\t\t\t\t\t{loading.opsStats ? (\n592: \t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n593: \t\t\t\t\t\t) : (\n594: \t\t\t\t\t\t\t<a\n595: \t\t\t\t\t\t\t\thref=\"https://status.rsrdev.com/\"\n596: \t\t\t\t\t\t\t\ttarget=\"_blank\"\n597: \t\t\t\t\t\t\t\trel=\"noopener noreferrer\"\n598: \t\t\t\t\t\t\t\tclassName=\"font-bold text-xl transition-colors hover:text-primary\"\n599: \t\t\t\t\t\t\t>\n600: \t\t\t\t\t\t\t\t{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : \"0%\"}\n601: \t\t\t\t\t\t\t</a>\n602: \t\t\t\t\t\t)}\n603: \t\t\t\t\t</div>\n604: \t\t\t\t</div>\n605: \t\t\t</CardContent>\n606: \t\t</Card>\n607: \t)\n608: }\n609: \n610: export default function WidgetsGrid() {\n611: \tconst gridRef = useRef<HTMLDivElement>(null)\n612: \tconst [isMounted, setIsMounted] = useState(false)\n613: \n614: \tuseEffect(() => {\n615: \t\tsetIsMounted(true)\n616: \t}, [])\n617: \n618: \tuseEffect(() => {\n619: \t\tif (!isMounted) {\n\n(Showing lines 460-619 of 705. Use offset=620 to continue.)\n</content>",
+            "metadata": {
+              "preview": "\n// Uptime Widget\nfunction UptimeWidget({ className }: WidgetProps) {\n\tconst t = useTranslation()\n\tconst { language } = useLanguage()\n\tconst { opsStats, loading } = useWidgetData()\n\tconst stats = opsStats\n\n\tconst isOperational = stats?.status === \"ok\"\n\tconst isDegraded = stats?.status === \"degraded\"\n\tconst isDown = stats?.status === \"issue\"\n\n\tconst pulseColor = isOperational\n\t\t? \"bg-green-400\"\n\t\t: isDegraded\n\t\t\t? \"bg-amber-400\"\n\t\t\t: \"bg-red-400\"\n\tconst dotColor = isOperational\n\t\t? \"bg-green-500\"\n\t\t: isDegraded",
+              "truncated": true,
+              "loaded": []
+            },
+            "title": "components/sections/widgets-grid.tsx",
+            "time": {
+              "start": 1780358960222,
+              "end": 1780358960228
+            }
+          },
+          "id": "prt_e85a9d36b0016s70OlucARdn1t",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9caff0015p2g6Diu2l6O64"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-finish",
+          "tokens": {
+            "total": 5728,
+            "input": 2723,
+            "output": 218,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 2787
+            }
+          },
+          "cost": 0.00390477,
+          "id": "prt_e85a9d4cc0016bVSlWkcvADWsW",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9caff0015p2g6Diu2l6O64"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e85a9c0f5001HHUq9Tllh3AMU7",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.00601969,
+        "tokens": {
+          "total": 10587,
+          "input": 4975,
+          "output": 103,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 5509
+          }
+        },
+        "modelID": "kimi-k2.6",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780358960377,
+          "completed": 1780358962304
+        },
+        "finish": "tool-calls",
+        "id": "msg_e85a9d4f9001NaWco14UH082XV",
+        "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN"
+      },
+      "parts": [
+        {
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-start",
+          "id": "prt_e85a9d77d001TOrc3TpaJs3hGy",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9d4f9001NaWco14UH082XV"
+        },
+        {
+          "type": "reasoning",
+          "text": "I have found all the relevant files. Let me also check if there are any other references to this endpoint or related files. I already have the API route, the widget data context, and the UptimeWidget component. Let me also check the translation file for the widget strings to be thorough.",
+          "time": {
+            "start": 1780358961022,
+            "end": 1780358961578
+          },
+          "id": "prt_e85a9d77e0022uvwV7u957fpaA",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9d4f9001NaWco14UH082XV"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "functions.read:6",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts",
+              "offset": 475,
+              "limit": 130
+            },
+            "output": "<path>/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts</path>\n<type>file</type>\n<content>\n475: \t\t},\n476: \t\t// Widgets\n477: \t\twidgets: {\n478: \t\t\trecentCommits: \"Recent Commits\",\n479: \t\t\tinspiredBy: \"Inspired by\",\n480: \t\t\tnoCommits: \"No recent public commits.\",\n481: \t\t\tpoweredBy: \"Uptime powered by\",\n482: \t\t\tcodingTime: \"Coding Time\",\n483: \t\t\tlast7Days: \"Last 7 Days\",\n484: \t\t\tlatestBuild: \"Latest Build\",\n485: \t\t\tsystemStatus: \"System Status\",\n486: \t\t\tconnections: \"Connections\",\n487: \t\t\tuptime: \"Uptime\",\n488: \t\t\tlatency: \"Latency\",\n489: \t\t\tallSystemsOperational: \"All systems operational\",\n490: \t\t\tsomeSystemsDegraded: \"Some systems degraded\",\n491: \t\t\tsystemIssuesDetected: \"Some services down\",\n492: \t\t\tup: \"Up\",\n493: \t\t\tdown: \"Down\",\n494: \t\t\tviewStatus: \"View status page\",\n495: \t\t\tlatencyTooltip: \"Internal server-to-server latency, not client-to-server.\",\n496: \t\t},\n497: \t},\n498: \tes: {\n499: \t\t// Navigation\n500: \t\tnav: {\n501: \t\t\tabout: \"Sobre mí\",\n502: \t\t\ttechStack: \"Stack Técnico\",\n503: \t\t\texperience: \"Experiencia\",\n504: \t\t\tprojects: \"Proyectos\",\n505: \t\t\teducation: \"Educación\",\n506: \t\t\tcertificates: \"Certificados\",\n507: \t\t\tcredentials: \"Credenciales\",\n508: \t\t\tresearch: \"Investigación\",\n509: \t\t\tcontact: \"Contacto\",\n510: \t\t},\n511: \t\t// Hero Section\n512: \t\thero: {\n513: \t\t\tgreeting: \"¡Hola! Soy\",\n514: \t\t\tsubtitle: \"Ingeniero de Sistemas de IA y Backend\",\n515: \t\t\tdescription:\n516: \t\t\t\t\"Actualmente trabajo en <a href='https://musclepoints.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>MUSCLE</a>, donde desarrollo software de lealtad para la industria bancaria, en el que confían <a href='https://www.mastercard.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Mastercard</a>, <a href='https://www.hsbc.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>HSBC</a>, <a href='https://www.banamex.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banamex</a>, <a href='https://interbank.pe' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Interbank</a>, <a href='https://bgeneral.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banco General</a> y muchos otros. Tengo <span class='font-bold'>más de 9 años de experiencia en programación</span> y 6 años como desarrollador indepen... (line truncated to 2000 chars)\n517: \t\t\ttagline: \"Código. Datos. Mercados.\",\n518: \t\t},\n519: \t\t// About Section\n520: \t\tabout: {\n521: \t\t\tparagraph:\n522: \t\t\t\t\"Construyo sistemas de software que modelan, analizan y optimizan entornos complejos, ya sea que la complejidad provenga de mercados, personas o restricciones operacionales a gran escala. Tengo ocho años de experiencia en programación y seis años de trabajo por contrato desarrollando sistemas backend, flujos de trabajo de IA y herramientas cuantitativas. En todos mis proyectos y trabajos, mi enfoque es el mismo: usar código como una forma de entender, simular y mejorar sistemas complejos.\",\n523: \t\t\tstats: [\n524: \t\t\t\t{\n525: \t\t\t\t\tvalue: 6,\n526: \t\t\t\t\tsuffix: \"+\",\n527: \t\t\t\t\tlabel: \"Años de Experiencia Laboral\",\n528: \t\t\t\t},\n529: \t\t\t\t{\n530: \t\t\t\t\tvalue: 8,\n531: \t\t\t\t\tsuffix: \"+\",\n532: \t\t\t\t\tlabel: \"Años de Experiencia en Programación\",\n533: \t\t\t\t},\n534: \t\t\t\t{\n535: \t\t\t\t\tvalue: 20,\n536: \t\t\t\t\tsuffix: \"+\",\n537: \t\t\t\t\tlabel: \"Tecnologías\",\n538: \t\t\t\t},\n539: \t\t\t],\n540: \t\t},\n541: \t\t// Tech Stack Section\n542: \t\ttechStack: {\n543: \t\t\ttitle: \"Habilidades Técnicas\",\n544: \t\t\tcategories: {\n545: \t\t\t\tlanguages: \"Lenguajes\",\n546: \t\t\t\tmlData: \"ML y Datos\",\n547: \t\t\t\ttrading: \"Trading\",\n548: \t\t\t\tinfrastructure: \"Infraestructura\",\n549: \t\t\t\tweb: \"Web\",\n550: \t\t\t\ttools: \"Herramientas\",\n551: \t\t\t\tsound: \"Sistemas de Sonido\",\n552: \t\t\t},\n553: \t\t},\n554: \t\t// WakaTime Section\n555: \t\twakatime: {\n556: \t\t\tmostUsedLanguages: \"Lenguajes más usados\",\n557: \t\t\tlast30Days: \"Últimos 30 días\",\n558: \t\t\tlast7Days: \"Últimos 7 días\",\n559: \t\t\tnoData: \"No hay datos de lenguajes disponibles para este período.\",\n560: \t\t},\n561: \t\t// Experience Section\n562: \t\texperience: {\n563: \t\t\ttitle: \"Experiencia\",\n564: \t\t\tpresent: \"Presente\",\n565: \t\t\tjobs: [\n566: \t\t\t\t{\n567: \t\t\t\t\ttitle: \"Co-Fundador y CTO\",\n568: \t\t\t\t\tcompany: \"Futuryze Consulting Group Ltd.\",\n569: \t\t\t\t\tperiod: { start: \"2025\", end: \"2026-03\" },\n570: \t\t\t\t\tdescription: [\n571: \t\t\t\t\t\t\"Diseñé y desplegué infraestructura de agentes de voz con IA para programación, triaje y comunicación clínica en múltiples países.\",\n572: \t\t\t\t\t\t\"Dirigí la visión del producto, diseño de sistemas y ejecución técnica para implementaciones con cumplimiento HIPAA.\",\n573: \t\t\t\t\t\t\"Desarrollé flujos backend y automatizaciones integrando OpenAI, Anthropic, ElevenLabs y Deepgram.\",\n574: \t\t\t\t\t\t\"Escalé la infraestructura para soportar operaciones clínicas de alto volumen sin requerir código por parte del cliente.\",\n575: \t\t\t\t\t\t\"Coordiné equipos, procesos de cumplimiento y estrategia técnica a largo plazo.\",\n576: \t\t\t\t\t],\n577: \t\t\t\t\thighlights: [\n578: \t\t\t\t\t\t\"IA de Voz\",\n579: \t\t\t\t\t\t\"Sistemas de IA\",\n580: \t\t\t\t\t\t\"Infraestructura de IA\",\n581: \t\t\t\t\t\t\"Liderazgo\",\n582: \t\t\t\t\t\t\"Administración de Empresas\",\n583: \t\t\t\t\t\t\"Compliance (GDPR / HIPAA)\",\n584: \t\t\t\t\t\t\"Coordinación y Administración de Equipos\",\n585: \t\t\t\t\t],\n586: \t\t\t\t},\n587: \t\t\t\t{\n588: \t\t\t\t\tcompany: \"Global Youth Congress\",\n589: \t\t\t\t\troles: [\n590: \t\t\t\t\t\t{\n591: \t\t\t\t\t\t\ttitle: \"Subsecretario General para Relaciones con Delegados\",\n592: \t\t\t\t\t\t\tperiod: { start: \"2025-11\" },\n593: \t\t\t\t\t\t\tdescription: [\n594: \t\t\t\t\t\t\t\t\"Liderando la comunicación y el proceso de incorporación para Global MUN 2026 en 2 conferencias virtuales y 4 presenciales.\",\n595: \t\t\t\t\t\t\t\t\"Sirviendo como enlace principal entre la dirección y los delegados, asegurando claridad, preparación y entrega puntual de materiales.\",\n596: \t\t\t\t\t\t\t\t\"Supervisando el registro, la gestión de consultas, la distribución logística y el flujo de documentos académicos.\",\n597: \t\t\t\t\t\t\t\t\"Coordinando con Chairs y Co-Chairs para mantener alineación en contenidos, horarios y necesidades delegacionales.\",\n598: \t\t\t\t\t\t\t\t\"Manteniendo presencia operativa remota durante las conferencias para asegurar una experiencia fluida.\",\n599: \t\t\t\t\t\t\t],\n600: \t\t\t\t\t\t\thighlights: [\n601: \t\t\t\t\t\t\t\t\"Gestión de Proyectos\",\n602: \t\t\t\t\t\t\t\t\"Dirección de Equipos\",\n603: \t\t\t\t\t\t\t\t\"Comunicación\",\n604: \t\t\t\t\t\t\t\t\"Diplomacia Juvenil\",\n\n(Showing lines 475-604 of 993. Use offset=605 to continue.)\n</content>",
+            "metadata": {
+              "preview": "\t\t},\n\t\t// Widgets\n\t\twidgets: {\n\t\t\trecentCommits: \"Recent Commits\",\n\t\t\tinspiredBy: \"Inspired by\",\n\t\t\tnoCommits: \"No recent public commits.\",\n\t\t\tpoweredBy: \"Uptime powered by\",\n\t\t\tcodingTime: \"Coding Time\",\n\t\t\tlast7Days: \"Last 7 Days\",\n\t\t\tlatestBuild: \"Latest Build\",\n\t\t\tsystemStatus: \"System Status\",\n\t\t\tconnections: \"Connections\",\n\t\t\tuptime: \"Uptime\",\n\t\t\tlatency: \"Latency\",\n\t\t\tallSystemsOperational: \"All systems operational\",\n\t\t\tsomeSystemsDegraded: \"Some systems degraded\",\n\t\t\tsystemIssuesDetected: \"Some services down\",\n\t\t\tup: \"Up\",\n\t\t\tdown: \"Down\",\n\t\t\tviewStatus: \"View status page\",",
+              "truncated": true,
+              "loaded": []
+            },
+            "title": "lib/translations.ts",
+            "time": {
+              "start": 1780358962156,
+              "end": 1780358962167
+            }
+          },
+          "id": "prt_e85a9d9ab001p0hHd9fMMvaWPV",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9d4f9001NaWco14UH082XV"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-finish",
+          "tokens": {
+            "total": 10587,
+            "input": 4975,
+            "output": 103,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 5509
+            }
+          },
+          "cost": 0.00601969,
+          "id": "prt_e85a9dc59001MC39XC44iyL6eW",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9d4f9001NaWco14UH082XV"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e85a9c0f5001HHUq9Tllh3AMU7",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/rsoley/Dev/personal/rsrdev.com",
+          "root": "/Users/rsoley/Dev/personal/rsrdev.com"
+        },
+        "cost": 0.01295513,
+        "tokens": {
+          "total": 15089,
+          "input": 2343,
+          "output": 2263,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 10483
+          }
+        },
+        "modelID": "kimi-k2.6",
+        "providerID": "opencode-go",
+        "time": {
+          "created": 1780358962306,
+          "completed": 1780358983689
+        },
+        "finish": "stop",
+        "id": "msg_e85a9dc82001luJj1anZg4HB6b",
+        "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN"
+      },
+      "parts": [
+        {
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-start",
+          "id": "prt_e85a9dfde001NBu5K8vlEqoWuZ",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9dc82001luJj1anZg4HB6b"
+        },
+        {
+          "type": "reasoning",
+          "text": "I have all the information needed. Let me compile a clear response with the file paths and relevant code snippets.",
+          "time": {
+            "start": 1780358963168,
+            "end": 1780358963412
+          },
+          "id": "prt_e85a9dfe0001GCpM22kel8iblq",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9dc82001luJj1anZg4HB6b"
+        },
+        {
+          "type": "text",
+          "text": "Here are the findings for the `/api/ops/stats` endpoint and related code:\n\n---\n\n### 1. API Route Implementation\n\n**File:** `/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts`\n\nThis is an App Router API route (Next.js) that aggregates operational stats from three external sources and returns a unified response.\n\n```typescript\nimport { translate } from \"google-translate-api-x\"\nimport { NextResponse } from \"next/server\"\n\nexport const revalidate = 300 // Cache for 5 minutes\n\nexport async function GET() {\n\tconst controller = new AbortController()\n\tconst timeoutId = setTimeout(() => controller.abort(), 25000)\n\n\ttry {\n\t\tconst token = process.env.BETTERUPTIME\n\t\tif (!token) {\n\t\t\treturn NextResponse.json({ error: \"Missing BETTERUPTIME token\" }, { status: 500 })\n\t\t}\n\n\t\tconst [opsResponse, monitorsResponse, betterStackPageResponse] = await Promise.all([\n\t\t\tfetch(\"https://cdn.rsrdev.com/ops/core/status\", {\n\t\t\t\tnext: { revalidate: 300 },\n\t\t\t\tsignal: controller.signal,\n\t\t\t}),\n\t\t\tfetch(\"https://uptime.betterstack.com/api/v2/monitors\", {\n\t\t\t\theaders: { Authorization: `Bearer ${token}` },\n\t\t\t\tnext: { revalidate: 300 },\n\t\t\t\tsignal: controller.signal,\n\t\t\t}),\n\t\t\tfetch(\"https://status.rsrdev.com\", {\n\t\t\t\tnext: { revalidate: 300 },\n\t\t\t\tsignal: controller.signal,\n\t\t\t}),\n\t\t])\n\t\tclearTimeout(timeoutId)\n\n\t\tlet opsData = { connections: 0, ping: 0 }\n\t\tif (opsResponse.ok) {\n\t\t\topsData = await opsResponse.json()\n\t\t}\n\n\t\tlet upCount = 0\n\t\tlet downCount = 0\n\t\tlet totalCount = 0\n\t\tlet status = \"issue\"\n\t\tlet statusText: string | undefined\n\t\tlet statusTextEs: string | undefined\n\t\tlet uptime = \"0%\"\n\n\t\tif (monitorsResponse.ok) {\n\t\t\tconst monitorsData = await monitorsResponse.json()\n\t\t\tconst monitors = monitorsData.data || []\n\t\t\ttotalCount = monitors.length\n\t\t\tupCount = monitors.filter((m: any) => m.attributes?.status === \"up\").length\n\t\t\tdownCount = monitors.filter((m: any) => m.attributes?.status === \"down\").length\n\n\t\t\tif (downCount > 0) {\n\t\t\t\tstatus = \"issue\"\n\t\t\t} else if (upCount === totalCount && totalCount > 0) {\n\t\t\t\tstatus = \"ok\"\n\t\t\t} else if (totalCount > 0) {\n\t\t\t\tstatus = \"degraded\"\n\t\t\t}\n\t\t}\n\n\t\tif (betterStackPageResponse.ok) {\n\t\t\tconst pageText = await betterStackPageResponse.text()\n\n\t\t\tconst uptimeRegex = /(\\d{1,3}(?:\\.\\d+)?)% uptime/g\n\t\t\tlet match: RegExpExecArray | null\n\t\t\tlet totalUptime = 0\n\t\t\tlet count = 0\n\t\t\twhile ((match = uptimeRegex.exec(pageText)) !== null) {\n\t\t\t\ttotalUptime += parseFloat(match[1])\n\t\t\t\tcount++\n\t\t\t}\n\n\t\t\tif (count > 0) {\n\t\t\t\tuptime = `${(totalUptime / count).toFixed(3)}%`\n\t\t\t}\n\t\t}\n\n\t\treturn NextResponse.json({\n\t\t\tconnections: opsData.connections,\n\t\t\tping: opsData.ping,\n\t\t\tstatus,\n\t\t\tstatusText,\n\t\t\tstatusTextEs,\n\t\t\tuptime,\n\t\t})\n\t} catch (_error) {\n\t\treturn NextResponse.json({ error: \"Failed to fetch stats\" }, { status: 500 })\n\t}\n}\n```\n\n---\n\n### 2. Frontend Data Fetching (Context)\n\n**File:** `/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx`\n\nThe frontend calls `/api/ops/stats` inside a React context provider on mount.\n\n```typescript\ninterface OpsStats {\n\tconnections: number\n\tping: number\n\tstatus: string\n\tstatusText?: string\n\tstatusTextEs?: string\n\tuptime?: string\n}\n\n// ... inside WidgetDataProvider ...\n\n// Fetch Ops Stats\nconst fetchOpsStats = async () => {\n\ttry {\n\t\tconst response = await fetch(\"/api/ops/stats\")\n\t\tif (response.ok) {\n\t\t\tconst opsStats = await response.json()\n\t\t\tsetData((prev) => ({\n\t\t\t\t...prev,\n\t\t\t\topsStats,\n\t\t\t\tloading: { ...prev.loading, opsStats: false },\n\t\t\t}))\n\t\t} else {\n\t\t\tsetData((prev) => ({\n\t\t\t\t...prev,\n\t\t\t\tloading: { ...prev.loading, opsStats: false },\n\t\t\t}))\n\t\t}\n\t} catch (_error) {\n\t\tsetData((prev) => ({\n\t\t\t...prev,\n\t\t\tloading: { ...prev.loading, opsStats: false },\n\t\t}))\n\t}\n}\n```\n\n---\n\n### 3. Frontend UI Component (Uptime Widget)\n\n**File:** `/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx`\n\nThe `UptimeWidget` component consumes `opsStats` from the context and renders the status indicator, connections count, latency, and uptime.\n\n```typescript\nfunction UptimeWidget({ className }: WidgetProps) {\n\tconst t = useTranslation()\n\tconst { language } = useLanguage()\n\tconst { opsStats, loading } = useWidgetData()\n\tconst stats = opsStats\n\n\tconst isOperational = stats?.status === \"ok\"\n\tconst isDegraded = stats?.status === \"degraded\"\n\tconst isDown = stats?.status === \"issue\"\n\n\tconst pulseColor = isOperational\n\t\t? \"bg-green-400\"\n\t\t: isDegraded\n\t\t\t? \"bg-amber-400\"\n\t\t\t: \"bg-red-400\"\n\tconst dotColor = isOperational\n\t\t? \"bg-green-500\"\n\t\t: isDegraded\n\t\t\t? \"bg-amber-500\"\n\t\t\t: \"bg-red-500\"\n\n\tconst statusLabel =\n\t\t(language === \"es\" ? stats?.statusTextEs : stats?.statusText) ||\n\t\tstats?.statusText ||\n\t\t(isOperational\n\t\t\t? t.widgets.allSystemsOperational\n\t\t\t: isDegraded\n\t\t\t\t? t.widgets.someSystemsDegraded\n\t\t\t\t: t.widgets.systemIssuesDetected)\n\n\treturn (\n\t\t<<Card className={cn(\"flex h-full flex-col\", className)}>\n\t\t\t{/* ... header with status dot and external link ... */}\n\t\t\t<<CardContent className=\"flex flex-1 flex-col justify-between gap-4\">\n\t\t\t\t<div className=\"flex items-center gap-2\">\n\t\t\t\t\t{/* Animated status pulse dot */}\n\t\t\t\t\t<div className=\"relative flex h-3 w-3\">\n\t\t\t\t\t\t<span className={cn(\"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75\", pulseColor)} />\n\t\t\t\t\t\t<span className={cn(\"relative inline-flex h-3 w-3 rounded-full\", dotColor)} />\n\t\t\t\t\t</div>\n\t\t\t\t\t<span className=\"font-medium text-sm\">{statusLabel}</span>\n\t\t\t\t</div>\n\n\t\t\t\t<div className=\"grid grid-cols-3 gap-4\">\n\t\t\t\t\t<div className=\"flex flex-col gap-1\">\n\t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.connections}</span>\n\t\t\t\t\t\t{loading.opsStats ? (\n\t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n\t\t\t\t\t\t) : (\n\t\t\t\t\t\t\t<span className=\"font-bold text-xl\">{stats?.connections || 0}</span>\n\t\t\t\t\t\t)}\n\t\t\t\t\t</div>\n\t\t\t\t\t<div className=\"flex flex-col gap-1\">\n\t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.latency}</span>\n\t\t\t\t\t\t{loading.opsStats ? (\n\t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n\t\t\t\t\t\t) : (\n\t\t\t\t\t\t\t<TooltipProvider delayDuration={100}>\n\t\t\t\t\t\t\t\t<Tooltip>\n\t\t\t\t\t\t\t\t\t<TooltipTrigger asChild>\n\t\t\t\t\t\t\t\t\t\t<span className=\"decoration-foreground/30 cursor-help font-bold text-xl underline decoration-dashed underline-offset-4\">\n\t\t\t\t\t\t\t\t\t\t\t{stats?.ping || 0}ms\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t</TooltipTrigger>\n\t\t\t\t\t\t\t\t\t<TooltipContent ...>\n\t\t\t\t\t\t\t\t\t\t<p>{t.widgets.latencyTooltip}</p>\n\t\t\t\t\t\t\t\t\t</TooltipContent>\n\t\t\t\t\t\t\t\t</Tooltip>\n\t\t\t\t\t\t\t</TooltipProvider>\n\t\t\t\t\t\t)}\n\t\t\t\t\t</div>\n\t\t\t\t\t<div className=\"flex flex-col gap-1\">\n\t\t\t\t\t\t<span className=\"text-muted-foreground text-xs\">{t.widgets.uptime}</span>\n\t\t\t\t\t\t{loading.opsStats ? (\n\t\t\t\t\t\t\t<div className=\"h-6 w-16 animate-pulse rounded bg-muted\" />\n\t\t\t\t\t\t) : (\n\t\t\t\t\t\t\t<a href=\"https://status.rsrdev.com/\" ...>\n\t\t\t\t\t\t\t\t{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : \"0%\"}\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t)}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</CardContent>\n\t\t</Card>\n\t)\n}\n```\n\n---\n\n### 4. Translation Strings\n\n**File:** `/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts`\n\nLabels for the widget (English and Spanish):\n\n```typescript\nwidgets: {\n\t// ...\n\tsystemStatus: \"System Status\",\n\tconnections: \"Connections\",\n\tuptime: \"Uptime\",\n\tlatency: \"Latency\",\n\tallSystemsOperational: \"All systems operational\",\n\tsomeSystemsDegraded: \"Some systems degraded\",\n\tsystemIssuesDetected: \"Some services down\",\n\tviewStatus: \"View status page\",\n\tlatencyTooltip: \"Internal server-to-server latency, not client-to-server.\",\n},\n```\n\n---\n\n### Summary of Files Found\n\n| Purpose | Absolute Path |\n|---|---|\n| API Route (App Router) | `/Users/rsoley/Dev/personal/rsrdev.com/app/api/ops/stats/route.ts` |\n| Data Context / Fetcher | `/Users/rsoley/Dev/personal/rsrdev.com/lib/widget-data-context.tsx` |\n| UI Component (UptimeWidget) | `/Users/rsoley/Dev/personal/rsrdev.com/components/sections/widgets-grid.tsx` |\n| i18n Labels | `/Users/rsoley/Dev/personal/rsrdev.com/lib/translations.ts` |\n\nNo Pages Router API routes (`pages/api/...`) were found for this endpoint; it is implemented exclusively via the App Router at `app/api/ops/stats/route.ts`.",
+          "time": {
+            "start": 1780358963413,
+            "end": 1780358983592
+          },
+          "id": "prt_e85a9e0d5001llSv6algwAtsrH",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9dc82001luJj1anZg4HB6b"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "dca0dba424436d1e726d7cb46880ad385a122910",
+          "type": "step-finish",
+          "tokens": {
+            "total": 15089,
+            "input": 2343,
+            "output": 2263,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 10483
+            }
+          },
+          "cost": 0.01295513,
+          "id": "prt_e85aa2fe2001lhXEZ600qqp9AI",
+          "sessionID": "ses_17a563f10ffeDzseh3E41LhsGN",
+          "messageID": "msg_e85a9dc82001luJj1anZg4HB6b"
+        }
+      ]
+    }
+  ]
+}

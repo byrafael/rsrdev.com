@@ -179,34 +179,43 @@ export function WidgetDataProvider({ children }: { children: ReactNode }) {
 			}
 		}
 
-		// Fetch Ops Stats directly from CDN
+		// Fetch Ops Stats: CDN for connections/latency, proxy for monitor status + uptime
 		const fetchOpsStats = async () => {
+			let opsStats: OpsStats = { connections: 0, ping: 0, status: "issue" }
+
+			// 1. CDN — connections, ping, core status
 			try {
-				const response = await fetch("https://cdn.rsrdev.com/ops/core/status")
-				if (response.ok) {
-					const data = await response.json()
-					const opsStats: OpsStats = {
+				const cdnRes = await fetch("https://cdn.rsrdev.com/ops/core/status")
+				if (cdnRes.ok) {
+					const data = await cdnRes.json()
+					opsStats = {
 						connections: data.connections ?? 0,
 						ping: data.ping ?? 0,
 						status: data.status ?? "issue",
 					}
-					setData((prev) => ({
-						...prev,
-						opsStats,
-						loading: { ...prev.loading, opsStats: false },
-					}))
-				} else {
-					setData((prev) => ({
-						...prev,
-						loading: { ...prev.loading, opsStats: false },
-					}))
 				}
 			} catch (_error) {
-				setData((prev) => ({
-					...prev,
-					loading: { ...prev.loading, opsStats: false },
-				}))
+				// Keep defaults
 			}
+
+			// 2. Proxy — aggregate monitor status + uptime percentage
+			try {
+				const monitorsRes = await fetch("/api/ops/monitors")
+				if (monitorsRes.ok) {
+					const monitorsData = await monitorsRes.json()
+					// Override status with the more comprehensive monitor-based one
+					opsStats.status = monitorsData.status ?? opsStats.status
+					opsStats.uptime = monitorsData.uptime
+				}
+			} catch (_error) {
+				// Keep CDN data, uptime stays undefined → shows "View status page"
+			}
+
+			setData((prev) => ({
+				...prev,
+				opsStats,
+				loading: { ...prev.loading, opsStats: false },
+			}))
 		}
 
 		// Fetch all data on mount

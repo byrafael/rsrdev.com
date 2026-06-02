@@ -465,9 +465,11 @@ function UptimeWidget({ className }: WidgetProps) {
 	const { opsStats, loading } = useWidgetData()
 	const stats = opsStats
 
-	const isOperational = stats?.status === "ok"
-	const isDegraded = stats?.status === "degraded"
-	const isDown = stats?.status === "issue"
+	// Default to "ok" when no data yet so the widget doesn't flash red on load
+	const status = stats?.status ?? "ok"
+	const isOperational = status === "ok"
+	const isDegraded = status === "degraded"
+	const isDown = status === "issue"
 
 	const pulseColor = isOperational
 		? "bg-green-400"

@@ -1,0 +1,1 @@
+/api/ops/stats is giving {"error":"Failed to fetch stats"} (500) and so connections and latency are 0 and 0ms. Why are we even doing that /api/ops/stats proxy instead of just hitting the cdn path and parsing that data? For reference, cdn path returns (https://cdn.rsrdev.com/ops/core/status): {"ping":99,"connections":1048,"status":"ok","timestamp":"2026-06-01T19:09:02-05:00"}

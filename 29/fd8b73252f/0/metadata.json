@@ -1,0 +1,36 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "29fd8b73252f",
+  "session_id": "ses_17a563f10ffeDzseh3E41LhsGN",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-02T00:30:03.42217Z",
+  "branch": "main",
+  "checkpoints_count": 0,
+  "files_touched": [
+    "components/sections/widgets-grid.tsx"
+  ],
+  "agent": "OpenCode",
+  "model": "",
+  "turn_id": "f49e95da189f",
+  "checkpoint_transcript_start": 5,
+  "transcript_lines_at_start": 5,
+  "token_usage": {
+    "input_tokens": 0,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 0,
+    "api_call_count": 0
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-02T00:30:03.419733Z",
+    "agent_lines": 5,
+    "agent_removed": 3,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 5,
+    "total_lines_changed": 8,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}

@@ -21,12 +21,28 @@ export async function GET() {
 		let opsData = { connections: 0, ping: 0 }
 		try {
 			const opsRes = await fetch("https://cdn.rsrdev.com/ops/core/status", {
-				next: { revalidate: 300 },
+				headers: {
+					Accept: "application/json",
+					"User-Agent": "rsrdev-ops-stats/1.0",
+				},
+				// Don't cache external CDN responses — a bad HTML response could get stuck
+				cache: "no-store",
 			})
 			if (!opsRes.ok) {
 				errors.push({ source: "cdn", reason: `HTTP ${opsRes.status}`, status: opsRes.status })
 			} else {
-				opsData = await opsRes.json()
+				const contentType = opsRes.headers.get("content-type") || ""
+				if (!contentType.includes("application/json")) {
+					const body = await opsRes.text()
+					const preview = body.slice(0, 120).replace(/\s+/g, " ")
+					errors.push({
+						source: "cdn",
+						reason: `Expected JSON, got ${contentType || "unknown"} (body: ${preview})`,
+						status: opsRes.status,
+					})
+				} else {
+					opsData = await opsRes.json()
+				}
 			}
 		} catch (err) {
 			const msg = errorMessage(err)
@@ -47,7 +63,7 @@ export async function GET() {
 			try {
 				const monitorsRes = await fetch("https://uptime.betterstack.com/api/v2/monitors", {
 					headers: { Authorization: `Bearer ${token}` },
-					next: { revalidate: 300 },
+					cache: "no-store",
 				})
 				if (!monitorsRes.ok) {
 					errors.push({
@@ -81,7 +97,7 @@ export async function GET() {
 		let uptime = "0%"
 		try {
 			const pageRes = await fetch("https://status.rsrdev.com", {
-				next: { revalidate: 300 },
+				cache: "no-store",
 			})
 			if (!pageRes.ok) {
 				errors.push({

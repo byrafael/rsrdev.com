@@ -1,0 +1,59 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "3caf2ac2280a",
+  "session_id": "ses_17a565505ffe3n4FtMivtZj51O",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-02T00:20:21.984953Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "app/api/ops/stats/route.ts"
+  ],
+  "agent": "OpenCode",
+  "model": "kimi-k2.6",
+  "turn_id": "c593e6b8748a",
+  "token_usage": {
+    "input_tokens": 104361,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 2871186,
+    "output_tokens": 29000,
+    "api_call_count": 66
+  },
+  "session_metrics": {
+    "turn_count": 4
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-02T00:20:21.977269Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 16,
+    "human_modified": 4,
+    "human_removed": 0,
+    "total_committed": 16,
+    "total_lines_changed": 20,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 20,
+      "user_lines_removed": 4,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "app/api/ops/stats/route.ts": 20
+      },
+      "user_removed_per_file": {
+        "app/api/ops/stats/route.ts": 4
+      }
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 20,
+      "agent_lines_removed": 4
+    }
+  ]
+}

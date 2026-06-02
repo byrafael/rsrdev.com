@@ -597,7 +597,7 @@ function UptimeWidget({ className }: WidgetProps) {
 								rel="noopener noreferrer"
 								className="font-bold text-xl transition-colors hover:text-primary"
 							>
-								{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : "0%"}
+								{stats?.uptime ? `${Number.parseFloat(stats.uptime).toFixed(2)}%` : t.widgets.viewStatus}
 							</a>
 						)}
 					</div>

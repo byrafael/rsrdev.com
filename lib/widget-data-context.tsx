@@ -179,12 +179,17 @@ export function WidgetDataProvider({ children }: { children: ReactNode }) {
 			}
 		}
 
-		// Fetch Ops Stats
+		// Fetch Ops Stats directly from CDN
 		const fetchOpsStats = async () => {
 			try {
-				const response = await fetch("/api/ops/stats")
+				const response = await fetch("https://cdn.rsrdev.com/ops/core/status")
 				if (response.ok) {
-					const opsStats = await response.json()
+					const data = await response.json()
+					const opsStats: OpsStats = {
+						connections: data.connections ?? 0,
+						ping: data.ping ?? 0,
+						status: data.status ?? "issue",
+					}
 					setData((prev) => ({
 						...prev,
 						opsStats,

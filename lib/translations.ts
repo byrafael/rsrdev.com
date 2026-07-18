@@ -15,7 +15,7 @@ export const translations = {
 		// Hero Section
 		hero: {
 			greeting: "Hey! I'm",
-			subtitle: "AI Systems & Backend Engineer",
+			subtitle: "Senior Software Engineer (Full-Stack and Platform)",
 			description:
 				"I currently work at <a href='https://musclepoints.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>MUSCLE</a>, where I develop loyalty software for the banking industry, trusted by <a href='https://www.mastercard.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Mastercard</a>, <a href='https://www.hsbc.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>HSBC</a>, <a href='https://www.banamex.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banamex</a>, <a href='https://interbank.pe' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Interbank</a>, <a href='https://bgeneral.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banco General</a>, and many others. I have <span class='font-bold'>over 9 years of programming experience</span>, including 6 years as an independent contractor, during which I developed and scaled software for <span class='font-bold'>thousands of online communities</span> and over <span class='font-bold'>half a million active users</span>.",
 			tagline: "Code. Data. Markets.",
@@ -284,7 +284,7 @@ export const translations = {
 						"Ministerio de Educación Pública de Costa Rica (Costa Rican Ministry of Education)",
 					year: "Expected 2026",
 					details:
-						"Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program.",
+						"Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program after dropping out of High School.",
 				},
 				{
 					degree: "Next Gen Data Science",
@@ -511,7 +511,7 @@ export const translations = {
 		// Hero Section
 		hero: {
 			greeting: "¡Hola! Soy",
-			subtitle: "Ingeniero de Sistemas de IA y Backend",
+			subtitle: "Ingeniero de Software Senior (Full-Stack y Plataforma)",
 			description:
 				"Actualmente trabajo en <a href='https://musclepoints.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>MUSCLE</a>, donde desarrollo software de lealtad para la industria bancaria, en el que confían <a href='https://www.mastercard.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Mastercard</a>, <a href='https://www.hsbc.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>HSBC</a>, <a href='https://www.banamex.com/' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banamex</a>, <a href='https://interbank.pe' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Interbank</a>, <a href='https://bgeneral.com' target='_blank' rel='noopener noreferrer' class='font-bold underline decoration-foreground/40 decoration-2 underline-offset-4 hover:bg-brand-accent/20 hover:text-brand-accent hover:no-underline transition-all duration-200 rounded-md px-1 -mx-1'>Banco General</a> y muchos otros. Tengo <span class='font-bold'>más de 9 años de experiencia en programación</span> y 6 años como desarrollador independiente, durante los cuales desarrollé y escalé software para <span class='font-bold'>miles de comunidades en línea</span> y más de <span class='font-bold'>medio millón de usuarios activos</span>.",
 			tagline: "Código. Datos. Mercados.",
@@ -779,7 +779,7 @@ export const translations = {
 					school: "Ministerio de Educación Pública de Costa Rica",
 					year: "Graduación Esperada 2026",
 					details:
-						"Cursando independientemente el bachillerato a través del programa de Educación Diversificada a Distancia (EDAD).",
+						"Cursando independientemente el bachillerato a través del programa de Educación Diversificada a Distancia (EDAD) posterior a abandonar la secundaria.",
 				},
 				{
 					degree: "IGCSEs",

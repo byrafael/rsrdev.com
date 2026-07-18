@@ -158,7 +158,7 @@ export const translations = {
 					],
 				},
 				{
-					title: "Software Engineer",
+					title: "Senior Software Engineer",
 					company: "MUSCLE",
 					period: { start: "2026-01" },
 					description: [
@@ -654,7 +654,7 @@ export const translations = {
 					],
 				},
 				{
-					title: "Ingeniero de Software",
+					title: "Ingeniero de Software Senior",
 					company: "MUSCLE",
 					period: { start: "2026-01" },
 					description: [

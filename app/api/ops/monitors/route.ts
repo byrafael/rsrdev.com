@@ -36,7 +36,10 @@ export async function GET() {
 			} else {
 				const data = await res.json()
 				const monitors = data.data || []
-				const upCount = monitors.filter((m: any) => m.attributes?.status === "up").length
+				// Treat paused monitors as up — they're intentionally offline, not degraded
+				const upCount = monitors.filter(
+					(m: any) => m.attributes?.status === "up" || m.attributes?.status === "paused",
+				).length
 				const downCount = monitors.filter((m: any) => m.attributes?.status === "down").length
 				const totalCount = monitors.length
 

@@ -9,6 +9,7 @@ export const translations = {
 			education: "Education",
 			certificates: "Certificates",
 			credentials: "Credentials",
+			community: "Community",
 			research: "Research",
 			contact: "Contact",
 		},
@@ -93,7 +94,7 @@ export const translations = {
 					roles: [
 						{
 							title: "Under-Secretary General for Delegate Relations",
-							period: { start: "2025-11" },
+							period: { start: "2025-11", end: "2026-05" },
 							description: [
 								"Leading year-round communications and onboarding operations for Global MUN 2026 across 2 online and 4 in-person conferences.",
 								"Serving as the primary liaison between leadership and delegates, ensuring clarity, readiness, and timely delivery of materials.",
@@ -198,7 +199,7 @@ export const translations = {
 					highlights: ["AI Systems", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
 				},
 				{
-					title: "Student Sound Technician",
+					title: "Lead Student Sound Technician",
 					company: "Tree Of Life International School",
 					period: { start: "2022", end: "2025" },
 					description: [
@@ -282,7 +283,7 @@ export const translations = {
 					degree: "High School Diploma",
 					school:
 						"Ministerio de Educación Pública de Costa Rica (Costa Rican Ministry of Education)",
-					year: "Expected 2026",
+					year: "2026",
 					details:
 						"Independently pursuing high school diploma through the Educación Diversificada a Distancia (EDAD) program after dropping out of High School.",
 				},
@@ -427,8 +428,43 @@ export const translations = {
 					title: "Community Service",
 					description:
 						"Community service is a long-term commitment for me, not a checkbox. I've accumulated more than 360 hours of volunteer work, focusing on creating visible, measurable improvements in the communities I serve.",
+					link: "See my volunteer work →",
 				},
 			},
+		},
+		// Community Page
+		communityPage: {
+			title: "Community Service",
+			subtitle:
+				"More than 360 hours of volunteer work, focused on creating visible, measurable improvements in the communities I serve — here's what I've done and what I'm working on now.",
+			ongoing: "Ongoing",
+			stats: [
+				{ value: "360+", label: "Volunteer Hours" },
+				{ value: "TODO", label: "Organizations" },
+				{ value: "TODO →", label: "Active Since" },
+			],
+			// PLACEHOLDER ENTRIES — replace with real organizations and events.
+			// Same shape as experience.jobs: single-role entries use title/period/description,
+			// multi-role organizations use a roles array. No end date = shows as Ongoing.
+			entries: [
+				{
+					company: "PLACEHOLDER: Ongoing Organization",
+					title: "Volunteer",
+					period: { start: "2023-01" },
+					description: [
+						"What you do there, stated as concrete outcomes.",
+						"A second bullet for another responsibility or result.",
+					],
+					highlights: ["Animal Rescue", "Logistics"],
+				},
+				{
+					company: "PLACEHOLDER: One-off Event",
+					title: "Sound Engineer",
+					period: { start: "2022-06", end: "2022-06" },
+					description: "One-off events work too — a single sentence is enough.",
+					highlights: ["Live Sound"],
+				},
+			],
 		},
 		// Footer
 		footer: {
@@ -505,6 +541,7 @@ export const translations = {
 			education: "Educación",
 			certificates: "Certificados",
 			credentials: "Credenciales",
+			community: "Comunidad",
 			research: "Investigación",
 			contact: "Contacto",
 		},
@@ -589,7 +626,7 @@ export const translations = {
 					roles: [
 						{
 							title: "Subsecretario General para Relaciones con Delegados",
-							period: { start: "2025-11" },
+							period: { start: "2025-11", end: "2026-05" },
 							description: [
 								"Liderando la comunicación y el proceso de incorporación para Global MUN 2026 en 2 conferencias virtuales y 4 presenciales.",
 								"Sirviendo como enlace principal entre la dirección y los delegados, asegurando claridad, preparación y entrega puntual de materiales.",
@@ -694,7 +731,7 @@ export const translations = {
 					highlights: ["Sistemas de IA", "Langchain / N8N", "JS / Python", "Hubspot / Aircall"],
 				},
 				{
-					title: "Técnico de Sonido Estudiantil",
+					title: "Líder Técnico de Sonido Estudiantil",
 					company: "Tree Of Life International School",
 					period: { start: "2022", end: "2025" },
 					description: [
@@ -777,7 +814,7 @@ export const translations = {
 				{
 					degree: "Bachiller en la Educación Media",
 					school: "Ministerio de Educación Pública de Costa Rica",
-					year: "Graduación Esperada 2026",
+					year: "2026",
 					details:
 						"Cursando independientemente el bachillerato a través del programa de Educación Diversificada a Distancia (EDAD) posterior a abandonar la secundaria.",
 				},
@@ -920,8 +957,42 @@ export const translations = {
 					title: "Servicio Comunitario",
 					description:
 						"El servicio comunitario es un compromiso a largo plazo para mí, no una casilla que marcar. He acumulado más de 360 horas de trabajo voluntario, enfocándome en crear mejoras visibles y medibles en las comunidades a las que sirvo.",
+					link: "Ver mi trabajo voluntario →",
 				},
 			},
+		},
+		// Community Page
+		communityPage: {
+			title: "Servicio Comunitario",
+			subtitle:
+				"Más de 360 horas de trabajo voluntario, enfocadas en crear mejoras visibles y medibles en las comunidades a las que sirvo — esto es lo que he hecho y en lo que estoy trabajando ahora.",
+			ongoing: "Activo",
+			stats: [
+				{ value: "360+", label: "Horas de Voluntariado" },
+				{ value: "TODO", label: "Organizaciones" },
+				{ value: "TODO →", label: "Activo Desde" },
+			],
+			// ENTRADAS DE EJEMPLO — reemplazar con organizaciones y eventos reales.
+			// Misma estructura que experience.jobs. Sin fecha de fin = se muestra como Activo.
+			entries: [
+				{
+					company: "PLACEHOLDER: Organización Activa",
+					title: "Voluntario",
+					period: { start: "2023-01" },
+					description: [
+						"Lo que haces ahí, expresado como resultados concretos.",
+						"Un segundo punto para otra responsabilidad o logro.",
+					],
+					highlights: ["Rescate Animal", "Logística"],
+				},
+				{
+					company: "PLACEHOLDER: Evento Puntual",
+					title: "Ingeniero de Sonido",
+					period: { start: "2022-06", end: "2022-06" },
+					description: "Los eventos puntuales también funcionan — una sola oración es suficiente.",
+					highlights: ["Sonido en Vivo"],
+				},
+			],
 		},
 		// Footer
 		footer: {

@@ -1,0 +1,51 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "6d24932e047b",
+  "session_id": "ff239fc8-713a-4602-8135-898f6cdeec26",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-25T17:32:38.023808Z",
+  "branch": "main",
+  "checkpoints_count": 0,
+  "files_touched": [
+    "lib/translations.ts"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-fable-5",
+  "turn_id": "8d59c67e7d15",
+  "token_usage": {
+    "input_tokens": 55,
+    "cache_creation_tokens": 64529,
+    "cache_read_tokens": 1882916,
+    "output_tokens": 22250,
+    "api_call_count": 29
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-25T17:32:38.017809Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 65,
+    "human_modified": 6,
+    "human_removed": 0,
+    "total_committed": 65,
+    "total_lines_changed": 71,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 7,
+      "user_lines_removed": 7,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "components/sections/tech-stack.tsx": 1,
+        "lib/translations.ts": 6
+      },
+      "user_removed_per_file": {
+        "components/sections/tech-stack.tsx": 1,
+        "lib/translations.ts": 6
+      }
+    }
+  ]
+}

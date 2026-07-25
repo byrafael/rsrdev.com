@@ -20,6 +20,7 @@ export default function Navigation() {
 		{ label: t.nav.projects, href: "/projects" },
 		{ label: t.nav.education, href: "/education" },
 		{ label: t.nav.credentials, href: "/credentials" },
+		{ label: t.nav.community, href: "/community" },
 	]
 
 	return (

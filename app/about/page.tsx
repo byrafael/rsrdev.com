@@ -2,6 +2,7 @@
 
 import { Dumbbell, HeartHandshake, Music, Tent, User } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import Container from "@/components/container"
 import TechStack from "@/components/sections/tech-stack"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -86,10 +87,16 @@ export default function AboutPage() {
 										<HeartHandshake className="mb-4 h-10 w-10 text-brand-accent" />
 										<CardTitle>{t.aboutPage.outsideTerminal.community.title}</CardTitle>
 									</CardHeader>
-									<CardContent className="flex-1">
-										<p className="text-muted-foreground">
+									<CardContent className="flex flex-1 flex-col">
+										<p className="flex-1 text-muted-foreground">
 											{t.aboutPage.outsideTerminal.community.description}
 										</p>
+										<Link
+											href="/community"
+											className="mt-4 font-medium text-brand-accent text-sm transition-colors hover:text-brand-accent/80"
+										>
+											{t.aboutPage.outsideTerminal.community.link}
+										</Link>
 									</CardContent>
 								</Card>
 							</div>

@@ -162,14 +162,7 @@ export const translations = {
 					title: "Senior Software Engineer",
 					company: "MUSCLE",
 					period: { start: "2026-01" },
-					description: [
-						"Acting as the Lead of multiple development projects within the company to onboard, configure/fine tune, and help banks manage/create strategies for their loyalty programs.",
-						"Developing internal tooling to onboard and set up/configure banks on MUSCLE's new loyalty system.",
-						"Developing bank-facing software for banks to manage strategies and monitor the performance of their loyalty infrastructure.",
-						"In charge of code security and code/dependency vulnerability mitigation across all of MUSCLE's products and services.",
-						"Developing DevOps/DevEx and CI/CD workflows, enabling secure development through automated code review, branch protection, governance, and continuous security scanning.",
-						"Leveraging AI agents to optimize Software Development.",
-					],
+					description: "I help our engineers build better and faster with AI.",
 					highlights: [
 						"AI-Driven Development",
 						"Python",
@@ -694,14 +687,7 @@ export const translations = {
 					title: "Ingeniero de Software Senior",
 					company: "MUSCLE",
 					period: { start: "2026-01" },
-					description: [
-						"Actuando como Lead de múltiples proyectos de desarrollo dentro de la empresa para incorporar, configurar/afinar y ayudar a los bancos a gestionar/crear estrategias para sus programas de lealtad.",
-						"Desarrollando herramientas internas para incorporar y configurar a los bancos en el nuevo sistema de lealtad de MUSCLE.",
-						"Desarrollando software de cara al banco para gestionar estrategias y monitorear el rendimiento de su infraestructura de lealtad.",
-						"Encargado de la seguridad del código y de la mitigación de vulnerabilidades en código/dependencias en todos los productos y servicios de MUSCLE.",
-						"Desarrollando DevOps/DevEx y flujos de CI/CD, habilitando desarrollo seguro mediante revisión automatizada de código, protección de ramas, gobernanza y escaneo continuo de seguridad.",
-						"Aprovechando agentes de IA para optimizar el Desarrollo de Software.",
-					],
+					description: "Ayudo a nuestros ingenieros a construir mejor y más rápido con IA.",
 					highlights: [
 						"Desarrollo Impulsado por IA",
 						"Python",
